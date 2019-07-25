@@ -1,0 +1,45 @@
+
+<div id="demo-container" class="container-fluid">
+    <h2>{{title}}</h2>
+    <div class="subtitle" [innerHTML]="subTitle"></div>
+
+    <div class="row">
+        <div class="col-sm-8">
+          <div class="alert alert-success">
+            <strong>(single select) Selected Row:</strong>
+            <span [innerHTML]="selectedTitle"></span>
+          </div>
+        </div>
+    </div>
+
+    <angular-slickgrid gridId="grid1"
+        gridHeight="200"
+        gridWidth="800"
+        [columnDefinitions]="columnDefinitions1"
+        [gridOptions]="gridOptions1"
+        [dataset]="dataset1"
+        (onAngularGridCreated)="angularGridReady1($event)"
+        (sgOnSelectedRowsChanged)="handleSelectedRowsChanged1($event.detail.eventData, $event.detail.args)">
+    </angular-slickgrid>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-8">
+          <div class="alert alert-success">
+            <strong>(multi-select) Selected Row(s):</strong>
+            <span [innerHTML]="selectedTitles"></span>
+          </div>
+        </div>
+    </div>
+
+    <angular-slickgrid gridId="grid2"
+        gridHeight="200"
+        gridWidth="800"
+        [columnDefinitions]="columnDefinitions2"
+        [gridOptions]="gridOptions2"
+        [dataset]="dataset2"
+        (onAngularGridCreated)="angularGridReady2($event)"
+        (sgOnSelectedRowsChanged)="handleSelectedRowsChanged2($event.detail.eventData, $event.detail.args)">
+    </angular-slickgrid>
+  </div>
