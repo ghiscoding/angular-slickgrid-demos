@@ -42,7 +42,7 @@
             "type": "shell",
             "command": "yarn run build-demo",
             "options": {
-                "cwd": "${workspaceFolder}/bootstrap3-demo",
+                "cwd": "${workspaceFolder}/bootstrap3-demo-with-locales",
             },
             "problemMatcher": []
         },
@@ -51,7 +51,7 @@
             "type": "shell",
             "command": "yarn start",
             "options": {
-                "cwd": "${workspaceFolder}/bootstrap3-demo",
+                "cwd": "${workspaceFolder}/bootstrap3-demo-with-locales",
             },
             "problemMatcher": []
         },

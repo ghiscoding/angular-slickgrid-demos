@@ -10,9 +10,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-demo": "npm-run-all build del-ghpage copy-ghpage:dist",
-    "copy-ghpage:dist": "cross-env copyfiles --up 1 dist-demo/**/*.* ../../angular-slickgrid-bs4-GhPages",
+    "copy-ghpage:dist": "cross-env copyfiles --up 1 dist-demo/**/*.* ../../angular-slickgrid-demos-bs4-GhPages",
     "copy:i18n": "cross-env copyfiles -f node_modules/angular-slickgrid/i18n/*.json src/assets/i18n",
-    "del-ghpage": "cross-env rimraf ../../angular-slickgrid-bs4-GhPages/**/*.*"
+    "del-ghpage": "cross-env rimraf ../../angular-slickgrid-demos-bs4-GhPages/**/*.*"
   },
   "private": true,
   "dependencies": {
