@@ -1,5 +1,11 @@
-# [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid) library - Multiple Demos
-### All demos are made with the Angular-CLI
+# Angular-Slickgrid Demos
+## Multiple Demos of the [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid) library
+#### All demos are made with the Angular-CLI
+
+### Installation
+Choose the theme and feature you want, they are separated into 2 theme (Bootstrap 3 or 4) and there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other demos are all with `ngx-translate` (dynamically switch language on the fly).
+
+#### VScode
 If you use Visual Studio Code, you can also run each of the demo through the multiple VSCode Tasks.
 
 ## Bootstrap 3 - with `ngx-translate`
