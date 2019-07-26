@@ -6,7 +6,7 @@
             "type": "shell",
             "command": "yarn start build",
             "options": {
-                "cwd": "${workspaceFolder}/bootstrap3-demo",
+                "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
             },
             "problemMatcher": []
         },
@@ -15,7 +15,7 @@
             "type": "shell",
             "command": "yarn run build-demo",
             "options": {
-                "cwd": "${workspaceFolder}/bootstrap3-demo",
+                "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
             },
             "problemMatcher": []
         },
@@ -24,7 +24,7 @@
             "type": "shell",
             "command": "yarn start",
             "options": {
-                "cwd": "${workspaceFolder}/bootstrap3-demo",
+                "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
             },
             "problemMatcher": []
         },
@@ -33,7 +33,7 @@
             "type": "shell",
             "command": "yarn start build",
             "options": {
-                "cwd": "${workspaceFolder}/bootstrap3-demo",
+                "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
             },
             "problemMatcher": []
         },
@@ -60,7 +60,7 @@
             "type": "shell",
             "command": "yarn start build",
             "options": {
-                "cwd": "${workspaceFolder}/bootstrap4-demo",
+                "cwd": "${workspaceFolder}/bootstrap4-demo-with-translate",
             },
             "problemMatcher": []
         },
@@ -69,7 +69,7 @@
             "type": "shell",
             "command": "yarn run build-demo",
             "options": {
-                "cwd": "${workspaceFolder}/bootstrap4-demo",
+                "cwd": "${workspaceFolder}/bootstrap4-demo-with-translate",
             },
             "problemMatcher": []
         },
@@ -78,7 +78,7 @@
             "type": "shell",
             "command": "yarn start",
             "options": {
-                "cwd": "${workspaceFolder}/bootstrap4-demo",
+                "cwd": "${workspaceFolder}/bootstrap4-demo-with-translate",
             },
             "problemMatcher": []
         }

@@ -1,4 +1,4 @@
-# Angular-Slickgrid - Multiple Demos
+# [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid) library - Multiple Demos
 ### All demos are made with the Angular-CLI
 If you use Visual Studio Code, you can also run each of the demo through the multiple VSCode Tasks.
 
@@ -8,7 +8,7 @@ Common Bootstrap 3 demo using `ngx-translate` that allows for using multiple lan
 ##### Install and Start Demo
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap3-demo
+cd bootstrap3-demo-with-translate
 npm install # OR yarn install
 npm start # OR yarn start
 ```
@@ -40,7 +40,7 @@ Common Bootstrap 4 demo using `ngx-translate` that allows for using multiple lan
 ##### Install and Start Demo
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap4-demo
+cd bootstrap4-demo-with-translate
 npm install # OR yarn install
 npm start # OR yarn start
 ```
