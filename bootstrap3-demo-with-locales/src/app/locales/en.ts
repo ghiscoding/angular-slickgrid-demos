@@ -1,4 +1,5 @@
 export const localeEnglish = {
+  // required texts
   TEXT_ALL_SELECTED: 'All Selected',
   TEXT_CANCEL: 'Cancel',
   TEXT_CLEAR_ALL_FILTERS: 'Clear All Filters',
@@ -22,7 +23,7 @@ export const localeEnglish = {
   TEXT_STARTS_WITH: 'Starts With',
   TEXT_X_OF_Y_SELECTED: '# of % selected',
 
-  // optional
+  // optional locale texts (depending on which features of the grid you use, you might (or not) need them or not)
   TEXT_EXPORT_IN_TEXT_FORMAT: 'Export in Text format (Tab delimited)',
   TEXT_ITEMS: 'items',
   TEXT_ITEMS_PER_PAGE: 'items per page',

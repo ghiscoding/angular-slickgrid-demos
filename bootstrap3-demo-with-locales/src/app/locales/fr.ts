@@ -1,4 +1,5 @@
 export const localeFrench = {
+  // textes requis
   TEXT_ALL_SELECTED: 'Tout sélectionnés',
   TEXT_CANCEL: 'Annuler',
   TEXT_CLEAR_ALL_FILTERS: 'Supprimer tous les filtres',
@@ -22,7 +23,7 @@ export const localeFrench = {
   TEXT_STARTS_WITH: 'Commence par',
   TEXT_X_OF_Y_SELECTED: '# de % sélectionné',
 
-  // optional
+  // texte optionnel pour la locale (dépendement de quelles functionalitées vous utilisez, vous aurez peut-être (ou pas) besoin des textes suivants)
   TEXT_EXPORT_IN_TEXT_FORMAT: 'Exporter en format texte (tabulation)',
   TEXT_ITEMS: 'éléments',
   TEXT_ITEMS_PER_PAGE: 'éléments par page',

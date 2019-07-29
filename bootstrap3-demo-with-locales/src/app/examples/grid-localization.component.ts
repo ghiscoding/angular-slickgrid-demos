@@ -26,9 +26,12 @@ const exportBooleanFormatter: Formatter = (row: number, cell: number, value: any
 @Injectable()
 export class GridLocalizationComponent implements OnInit {
   title = 'Example 12: Localization with Locales - French Locale displayed';
-  subTitle = `Support Custom Locales (through the "locales" grid option), following these steps (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Localization" target="_blank">Wiki docs</a>)
-    <li>For more info about "Download to File", read the <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Export-to-File" target="_blank">Wiki page</a></li>
-    </ol>
+  subTitle = `This Examples uses French Locales but you could use your own custom locales
+    <ul>
+      <li>Defining your own Custom Locales must include all necessary text, see the default (<a href="https://github.com/ghiscoding/angular-slickgrid-demos/blob/master/bootstrap3-demo-with-locales/src/app/locales/en.ts" target="_blank">English Custom Locales</a>)</li>
+      <li>Support Custom Locales (through the "locales" grid option), following these steps (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Localization-with-Custom-Locales" target="_blank">Wiki docs</a>)
+      <li>For more info about "Download to File", read the <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Export-to-File" target="_blank">Wiki page</a></li>
+    </ul>
   `;
 
   angularGrid: AngularGridInstance;
@@ -38,7 +41,7 @@ export class GridLocalizationComponent implements OnInit {
   selectedLanguage = `localeFrench.ts`;
   duplicateTitleHeaderCount = 1;
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.columnDefinitions = [
@@ -115,7 +118,7 @@ export class GridLocalizationComponent implements OnInit {
   }
 
   dynamicallyAddTitleHeader() {
-    const newCol = { id: `title${this.duplicateTitleHeaderCount++}`, field: 'id', sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true } };
+    const newCol = { id: `title${this.duplicateTitleHeaderCount++}`, field: 'id', name: 'Titre', sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true } };
     this.columnDefinitions.push(newCol);
     this.columnDefinitions = this.columnDefinitions.slice();
   }
