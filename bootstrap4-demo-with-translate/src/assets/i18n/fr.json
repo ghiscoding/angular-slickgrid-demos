@@ -34,7 +34,6 @@
   "TOGGLE_FILTER_ROW": "Basculer la ligne des filtres",
   "TOGGLE_PRE_HEADER_ROW": "Basculer la ligne de pré-en-tête",
   "X_OF_Y_SELECTED": "# de % sélectionné",
-
   "BILLING": {
     "ADDRESS": {
       "STREET": "Adresse de facturation",
@@ -51,7 +50,8 @@
   "GENDER": "Sexe",
   "HELP": "Aide",
   "MALE": "Masculin",
-  "NAME": "Name",
+  "NAME": "Nom",
+  "PERCENT_COMPLETE": "% Achevée",
   "START": "Début",
   "TASK_X": "Tâche {{x}}",
   "TITLE": "Titre",

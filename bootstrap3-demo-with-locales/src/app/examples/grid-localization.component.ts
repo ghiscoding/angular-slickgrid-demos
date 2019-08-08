@@ -71,6 +71,7 @@ export class GridLocalizationComponent implements OnInit {
         }
       }
     ];
+
     this.gridOptions = {
       autoResize: {
         containerId: 'demo-container',

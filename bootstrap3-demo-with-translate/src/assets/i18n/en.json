@@ -32,7 +32,6 @@
   "TOGGLE_FILTER_ROW": "Toggle Filter Row",
   "TOGGLE_PRE_HEADER_ROW": "Toggle Pre-Header Row",
   "X_OF_Y_SELECTED": "# of % selected",
-
   "BILLING": {
     "ADDRESS": {
       "STREET": "Billing Address Street",
@@ -50,6 +49,7 @@
   "HELP": "Help",
   "MALE": "Male",
   "NAME": "Name",
+  "PERCENT_COMPLETE": "% Complete",
   "START": "Start",
   "TASK_X": "Task {{x}}",
   "TITLE": "Title",
