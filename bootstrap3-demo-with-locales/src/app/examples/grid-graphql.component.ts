@@ -16,6 +16,7 @@ import {
 } from 'angular-slickgrid';
 import { localeFrench } from '../locales/fr';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment-mini';
 
 const defaultPageSize = 20;
 const GRAPHQL_QUERY_DATASET_NAME = 'users';
@@ -90,7 +91,18 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         },
         formatter: Formatters.complexObject
       },
+      {
+        id: 'finish', field: 'finish', name: 'Date', formatter: Formatters.dateIso, sortable: true, minWidth: 90, width: 120, exportWithFormatter: true,
+        type: FieldType.date,
+        filterable: true,
+        filter: {
+          model: Filters.dateRange,
+        }
+      },
     ];
+
+    const presetLowestDay = moment().add(-2, 'days').format('YYYY-MM-DD');
+    const presetHighestDay = moment().add(20, 'days').format('YYYY-MM-DD');
 
     this.gridOptions = {
       enableAutoResize: false,
@@ -124,11 +136,22 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         totalItems: 0
       },
       presets: {
-        // you can also type operator as string, e.g.: operator: 'EQ'
+        columns: [
+          { columnId: 'name', width: 100 },
+          { columnId: 'gender', width: 55 },
+          { columnId: 'company' },
+          { columnId: 'billing.address.zip' }, // flip column position of Street/Zip to Zip/Street
+          { columnId: 'billing.address.street', width: 120 },
+          { columnId: 'finish', width: 130 },
+        ],
         filters: [
+          // you can use OperatorType or type them as string, e.g.: operator: 'EQ'
           { columnId: 'gender', searchTerms: ['male'], operator: OperatorType.equal },
           { columnId: 'name', searchTerms: ['John Doe'], operator: OperatorType.contains },
-          { columnId: 'company', searchTerms: ['xyz'], operator: 'IN' }
+          { columnId: 'company', searchTerms: ['xyz'], operator: 'IN' },
+
+          // use a date range with 2 searchTerms values
+          { columnId: 'finish', searchTerms: [presetLowestDay, presetHighestDay], operator: OperatorType.rangeInclusive },
         ],
         sorters: [
           // direction can written as 'asc' (uppercase or lowercase) and/or use the SortDirection type

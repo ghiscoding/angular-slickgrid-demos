@@ -29,6 +29,7 @@ import { GridHeaderButtonComponent } from './examples/grid-headerbutton.componen
 import { GridLocalizationComponent } from './examples/grid-localization.component';
 import { GridMenuComponent } from './examples/grid-menu.component';
 import { GridOdataComponent } from './examples/grid-odata.component';
+import { GridRangeComponent } from './examples/grid-range.component';
 import { GridRemoteComponent } from './examples/grid-remote.component';
 import { GridRowDetailComponent } from './examples/grid-rowdetail.component';
 import { GridRowMoveComponent } from './examples/grid-rowmove.component';
@@ -93,6 +94,7 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     GridLocalizationComponent,
     GridMenuComponent,
     GridOdataComponent,
+    GridRangeComponent,
     GridRemoteComponent,
     GridRowDetailComponent,
     GridRowMoveComponent,
