@@ -1,31 +1,37 @@
 <div class="container-fluid">
     <h2>{{title}}</h2>
-    <div class="subtitle row" [innerHTML]="subTitle"></div>
+    <div class="subtitle row"
+        [innerHTML]="subTitle"></div>
 
     <div class="row">
         <div class="col-sm-5">
-            <div [class]="status.class" role="alert">
+            <div [class]="status.class"
+                role="alert">
                 <strong>Status: </strong> {{status.text}}
                 <span [hidden]="!processing">
                     <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
                 </span>
             </div>
 
-            <br/>
+            <br />
 
-            <button class="btn btn-default btn-sm" (click)="clearAllFiltersAndSorts()" title="Clear all Filters & Sorts">
+            <button class="btn btn-default btn-sm"
+                (click)="clearAllFiltersAndSorts()"
+                title="Clear all Filters & Sorts">
                 <i class="fa fa-filter text-danger"></i>
                 Clear all Filter & Sorts
             </button>
-            <button class="btn btn-default btn-sm" (click)="switchLanguage()">
+            <button class="btn btn-default btn-sm"
+                (click)="switchLanguage()">
                 <i class="fa fa-language"></i>
                 Switch Language
             </button>
             <b>Locale:</b>
             <span style="font-style: italic">{{selectedLanguage + '.json'}}</span>
-            <br/>
+            <br />
             <span *ngIf="statistics">
-                <b>Statistics:</b> {{statistics.endTime | date: 'yyyy-MM-dd HH:mm aaaaa\'m\''}} | {{statistics.executionTime}}ms | {{statistics.totalItemCount}} items
+                <b>Statistics:</b> {{statistics.endTime | date: 'yyyy-MM-dd HH:mm aaaaa\'m\''}} |
+                {{statistics.executionTime}}ms | {{statistics.totalItemCount}} items
             </span>
         </div>
         <div class="col-sm-7">
@@ -36,9 +42,9 @@
         </div>
     </div>
 
-    <angular-slickgrid gridId="grid4"
+    <angular-slickgrid gridId="grid6"
         [gridHeight]="250"
-        [gridWidth]="800"
+        [gridWidth]="900"
         [columnDefinitions]="columnDefinitions"
         [gridOptions]="gridOptions"
         [dataset]="dataset"
