@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import {
   AngularGridInstance,
   Column,
@@ -40,9 +39,7 @@ export class GridStateComponent implements OnInit {
   dataset: any[];
   selectedLanguage: string;
 
-  constructor(private translate: TranslateService) {
-    this.selectedLanguage = this.translate.getDefaultLang();
-  }
+  constructor() { }
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
@@ -76,7 +73,6 @@ export class GridStateComponent implements OnInit {
         id: 'title',
         name: 'Title',
         field: 'title',
-        headerKey: 'TITLE',
         filterable: true,
         sortable: true,
         type: FieldType.string,
@@ -95,7 +91,6 @@ export class GridStateComponent implements OnInit {
       {
         id: 'duration', name: 'Duration (days)', field: 'duration', sortable: true, type: FieldType.number, exportCsvForceToKeepAsString: true,
         minWidth: 55, width: 100,
-        headerKey: 'DURATION',
         filterable: true,
         filter: {
           collection: multiSelectFilterArray,
@@ -113,11 +108,11 @@ export class GridStateComponent implements OnInit {
         formatter: Formatters.percentCompleteBar, filterable: true, filter: { model: Filters.slider, operator: '>' }
       },
       {
-        id: 'start', name: 'Start', field: 'start', headerKey: 'START', formatter: Formatters.dateIso, sortable: true, minWidth: 75, exportWithFormatter: true, width: 100,
+        id: 'start', name: 'Start', field: 'start', formatter: Formatters.dateIso, sortable: true, minWidth: 75, exportWithFormatter: true, width: 100,
         type: FieldType.date, filterable: true, filter: { model: Filters.compoundDate }
       },
       {
-        id: 'completed', field: 'completed', headerKey: 'COMPLETED', minWidth: 85, maxWidth: 85, formatter: Formatters.checkmark, width: 100,
+        id: 'completed', field: 'completed', name: 'Completed', minWidth: 85, maxWidth: 85, formatter: Formatters.checkmark, width: 100,
         type: FieldType.boolean,
         sortable: true,
         filterable: true,
@@ -140,8 +135,6 @@ export class GridStateComponent implements OnInit {
       },
       enableCheckboxSelector: true,
       enableFiltering: true,
-      enableTranslate: true,
-      i18n: this.translate
     };
 
     // reload the Grid State with the grid options presets
@@ -193,11 +186,6 @@ export class GridStateComponent implements OnInit {
     const gridState: GridState = this.angularGrid.gridStateService.getCurrentGridState();
     console.log('Client sample, last Grid State:: ', gridState);
     localStorage[LOCAL_STORAGE_KEY] = JSON.stringify(gridState);
-  }
-
-  switchLanguage() {
-    this.selectedLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
-    this.translate.use(this.selectedLanguage);
   }
 
   useDefaultPresets() {
