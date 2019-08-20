@@ -1,6 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatters, GridOption, OperatorType } from 'angular-slickgrid';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './grid-menu.component.html'
@@ -28,13 +27,11 @@ export class GridMenuComponent implements OnInit {
   selectedLanguage: string;
   visibleColumns: Column[];
 
-  constructor(private translate: TranslateService) {
-    this.selectedLanguage = this.translate.getDefaultLang();
-  }
+  constructor() { }
 
   ngOnInit(): void {
     this.columnDefinitions = [
-      { id: 'title', name: 'Title', field: 'title', headerKey: 'TITLE', filterable: true, type: FieldType.string },
+      { id: 'title', name: 'Title', field: 'title', filterable: true, type: FieldType.string },
       {
         id: 'phone', name: 'Phone Number using mask', field: 'phone',
         filterable: true, sortable: true, minWidth: 100,
@@ -45,17 +42,17 @@ export class GridMenuComponent implements OnInit {
           operator: OperatorType.startsWith
         }
       },
-      { id: 'duration', name: 'Duration', field: 'duration', headerKey: 'DURATION', sortable: true, filterable: true, type: FieldType.string },
+      { id: 'duration', name: 'Duration', field: 'duration', sortable: true, filterable: true, type: FieldType.string },
       {
         id: '%', name: '% Complete', field: 'percentComplete', sortable: true, filterable: true,
         type: FieldType.number,
         formatter: Formatters.percentCompleteBar,
         filter: { model: Filters.compoundSlider, params: { hideSliderNumber: false } }
       },
-      { id: 'start', name: 'Start', field: 'start', headerKey: 'START', filterable: true, type: FieldType.string },
-      { id: 'finish', name: 'Finish', field: 'finish', headerKey: 'FINISH', filterable: true, type: FieldType.string },
+      { id: 'start', name: 'Start', field: 'start', filterable: true, type: FieldType.string },
+      { id: 'finish', name: 'Finish', field: 'finish', filterable: true, type: FieldType.string },
       {
-        id: 'effort-driven', name: 'Completed', field: 'effortDriven', headerKey: 'COMPLETED', maxWidth: 80, formatter: Formatters.checkmark,
+        id: 'effort-driven', name: 'Completed', field: 'effortDriven', maxWidth: 80, formatter: Formatters.checkmark,
         type: FieldType.boolean,
         minWidth: 100,
         sortable: true,
@@ -88,7 +85,7 @@ export class GridMenuComponent implements OnInit {
       gridMenu: {
         // all titles optionally support translation keys, if you wish to use that feature then use the title properties finishing by 'Key'
         // example "customTitle" for a plain string OR "customTitleKey" to use a translation key
-        customTitleKey: 'CUSTOM_COMMANDS',
+        customTitle: 'Custom Commands',
         iconCssClass: 'fa fa-ellipsis-v',
         hideForceFitButton: true,
         hideSyncResizeButton: true,
@@ -102,7 +99,7 @@ export class GridMenuComponent implements OnInit {
           // if you want yours at the bottom then start with 61, below 50 will make your command(s) on top
           {
             iconCssClass: 'fa fa-question-circle',
-            titleKey: 'HELP',
+            title: 'Help',
             disabled: false,
             command: 'help',
             positionOrder: 99
@@ -129,8 +126,6 @@ export class GridMenuComponent implements OnInit {
           console.log('Column selection changed from Grid Menu, visible columns: ', args.columns);
         }
       },
-      enableTranslate: true,
-      i18n: this.translate
     };
 
     this.getData();
@@ -164,11 +159,6 @@ export class GridMenuComponent implements OnInit {
       phone += Math.round(Math.random() * 9) + '';
     }
     return phone;
-  }
-
-  switchLanguage() {
-    this.selectedLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
-    this.translate.use(this.selectedLanguage);
   }
 
   toggleGridMenu(e) {
