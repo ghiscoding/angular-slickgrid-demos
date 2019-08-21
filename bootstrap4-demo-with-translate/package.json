@@ -20,7 +20,7 @@
     "> 1%",
     "maintained node versions",
     "not dead",
-    "IE 9-11"
+    "IE 11"
   ],
   "dependencies": {
     "@angular/animations": "^8.2.2",
