@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild, ModuleWithProviders, NgModule, ViewContainerRef, ComponentFactoryResolver, OnChanges, AfterContentInit, AfterViewChecked, ElementRef, Renderer, EventEmitter,
-    Output, AfterViewInit, Injectable} from '@angular/core';
+import {
+    Component, OnInit, ViewChild, ModuleWithProviders, NgModule, ViewContainerRef, ComponentFactoryResolver, OnChanges, AfterContentInit, AfterViewChecked, ElementRef, Renderer, EventEmitter,
+    Output, AfterViewInit, Injectable
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 
-import {SwtCommonGridComponent} from './swt-common-grid.component';
-import {SwtCommonGridPaginationComponent} from './swt-common-grid-pagination.component';
+import { SwtCommonGridComponent } from './swt-common-grid.component';
+import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
 import { FilterChangedArgs, PaginationChangedArgs, SortChangedArgs } from 'angular-slickgrid';
 
 import { Logger } from './swt-logger.service';
@@ -14,8 +16,8 @@ import { Logger } from './swt-logger.service';
  * @author Saber Chebka, saber.chebka@gmail.com
  */
 @Component({
-  selector: 'swt-common-grid-test',
-  templateUrl: './swt-common-grid-test.component.html'
+    selector: 'swt-common-grid-test',
+    templateUrl: './swt-common-grid-test.component.html'
 })
 @Injectable()
 export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
@@ -29,8 +31,8 @@ export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
     private logger: Logger = null;
 
     constructor(private httpClient: HttpClient,
-            private viewContainerRef: ViewContainerRef,
-            private componentFactoryResolver: ComponentFactoryResolver) {
+        private viewContainerRef: ViewContainerRef,
+        private componentFactoryResolver: ComponentFactoryResolver) {
         this.logger = new Logger('test', null);
 
     }
@@ -44,31 +46,31 @@ export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-      this.logger.info('method [ngAfterViewInit] - START');
+        this.logger.info('method [ngAfterViewInit] - START');
 
-      setTimeout(() => {
-        // Init datagrid example:
-        this.commonGridPag.processing = true;
+        setTimeout(() => {
+            // Init datagrid example:
+            this.commonGridPag.processing = true;
 
-        // Real HTTP call
-        this.currentUrl = this.testurl + '&currentPage=1';
-        /*
-        this.httpClient.get(this.currentUrl).subscribe(
-            (data: any) => {
-                this.commonGrid.CustomGrid(data.suspectManagement.grid.metadata);
-                this.commonGrid.gridData = data.suspectManagement.grid.rows;
-                this.commonGridPag.pageCount = data.suspectManagement.singletons.maxpage;
-                this.commonGridPag.processing = false;
-            }
-        );
-        */
-        this.commonGrid.CustomGrid(data_sample.pagination_samples.grid.metadata);
-        this.commonGrid.gridData = data_sample.pagination_samples.grid.rows;
-        this.commonGridPag.pageCount = data_sample.pagination_samples.grid.rows.maxpage;
+            // Real HTTP call
+            this.currentUrl = this.testurl + '&currentPage=1';
+            /*
+            this.httpClient.get(this.currentUrl).subscribe(
+                (data: any) => {
+                    this.commonGrid.CustomGrid(data.suspectManagement.grid.metadata);
+                    this.commonGrid.gridData = data.suspectManagement.grid.rows;
+                    this.commonGridPag.pageCount = data.suspectManagement.singletons.maxpage;
+                    this.commonGridPag.processing = false;
+                }
+            );
+            */
+            this.commonGrid.CustomGrid(data_sample.pagination_samples.grid.metadata);
+            this.commonGrid.gridData = data_sample.pagination_samples.grid.rows;
+            this.commonGridPag.pageCount = data_sample.pagination_samples.grid.rows.maxpage;
 
-        this.commonGridPag.processing = false;
-      }, 0);
-      this.logger.info('method [ngAfterViewInit] - END');
+            this.commonGridPag.processing = false;
+        }, 0);
+        this.logger.info('method [ngAfterViewInit] - END');
     }
 
     filterChanged(event: FilterChangedArgs) {

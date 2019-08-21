@@ -1,11 +1,15 @@
-import { Component, OnInit, Injectable, ViewContainerRef, ComponentFactoryResolver,
-         ComponentFactory, ComponentRef, AfterContentChecked, AfterViewChecked,
-         AfterViewInit, Input, EventEmitter, Output, ViewChild ,
-         ElementRef, Renderer} from '@angular/core';
+import {
+    Component, OnInit, Injectable, ViewContainerRef, ComponentFactoryResolver,
+    ComponentFactory, ComponentRef, AfterContentChecked, AfterViewChecked,
+    AfterViewInit, Input, EventEmitter, Output, ViewChild,
+    ElementRef, Renderer
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularSlickgridComponent, Column, FieldType, Formatter, Formatters,
-         GridOption, OnEventArgs, BackendService,
-         BackendServiceOption, FilterChangedArgs, PaginationChangedArgs, SortChangedArgs, Pagination} from 'angular-slickgrid';
+import {
+    AngularSlickgridComponent, Column, FieldType, Formatter, Formatters,
+    GridOption, OnEventArgs, BackendService,
+    BackendServiceOption, FilterChangedArgs, PaginationChangedArgs, SortChangedArgs, Pagination
+} from 'angular-slickgrid';
 import { TranslateService } from '@ngx-translate/core';
 import { Logger } from './swt-logger.service';
 import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
@@ -20,8 +24,8 @@ let timer: any;
 const DEFAULT_FILTER_TYPING_DEBOUNCE = 750;
 
 @Component({
-  selector: 'swt-common-grid',
-  template: `<angular-slickgrid gridId='common-grid'
+    selector: 'swt-common-grid',
+    template: `<angular-slickgrid gridId='common-grid'
                       #angularSlickGrid
                       (onDataviewCreated)="dataviewReady($event)"
                       (onGridCreated)="gridReady($event)"
@@ -30,7 +34,7 @@ const DEFAULT_FILTER_TYPING_DEBOUNCE = 750;
                       [dataset]="dataset"
                       >
                       </angular-slickgrid>`,
-  styles: [`
+    styles: [`
        :host ::ng-deep .gridPane{
             width: 100%!important;
         }
@@ -98,15 +102,15 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
         asyncEditorLoading: false,
         autoEdit: this.isAutoEdit,
         autoResize: {
-          containerId: 'common-grid-container',
-          sidePadding: 15
+            containerId: 'common-grid-container',
+            sidePadding: 15
         },
         // locale: 'fr',
         enableColumnPicker: true,
         enableCellNavigation: true,
         enableRowSelection: true,
         enableCheckboxSelector: false,
-        enableFiltering: true ,
+        enableFiltering: true,
         rowHeight: 23,
         forceFitColumns: true,
         enableAutoTooltip: true,
@@ -116,22 +120,22 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
 
     // Initialized to a fake pagination object
     private _paginationComponent: any = {
-         processing: false,
-         realPagination: false
+        processing: false,
+        realPagination: false
     };
 
     @Input('pagination')
     set paginationComponent(value: SwtCommonGridPaginationComponent) {
-        this.logger.info('method [pagination] - START, assigned datagrid pagination object: ', value.realPagination );
+        this.logger.info('method [pagination] - START, assigned datagrid pagination object: ', value.realPagination);
         if (value.realPagination) {
             this._paginationComponent = value;
             this.gridOptions.backendServiceApi = {
-              service: this,
-              preProcess: () => {},
-              process: (query) => {
-                return null;
-              },
-              postProcess: (response) => {}
+                service: this,
+                preProcess: () => { },
+                process: (query) => {
+                    return null;
+                },
+                postProcess: (response) => { }
             };
             this._paginationComponent.gridPaginationOptions = this.gridOptions;
             this.angularSlickGrid.createBackendApiInternalPostProcessCallback(this.gridOptions);
@@ -150,7 +154,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
      * @param httpClient
      */
     constructor(private httpClient: HttpClient, private translate: TranslateService,
-            private el: ElementRef, private renderer: Renderer) {
+        private el: ElementRef, private renderer: Renderer) {
         this.logger = new Logger('grid', httpClient);
 
         this.logger.info('method [constructor] - START/END');
@@ -172,7 +176,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
      *
      */
     ngAfterViewInit() {
-       this.logger.info('method [ngAfterViewInit] - START/END');
+        this.logger.info('method [ngAfterViewInit] - START/END');
     }
 
     /**
@@ -191,33 +195,34 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
         const rowData: any = [];
 
         // check if allcolumns tag contains any children
-        if (this.metaData.columns.column  ) {
+        if (this.metaData.columns.column) {
 
             // set columnsData and columnDefinitions
-            this.columnData = this.metaData.columns.column ;
+            this.columnData = this.metaData.columns.column;
 
             for (let index = 0; index < this.columnData.length; index++) {
 
-                const type       = FieldType.string;
-                const editor     = null;
-                const formatter  = null;
-                const filter     = null;
+                const type = FieldType.string;
+                const editor = null;
+                const formatter = null;
+                const filter = null;
                 const outputType = null;
-                const params     = null;
+                const params = null;
 
-                const col = {    id:         this.columnData[index].dataelement,
-                                 name:       this.columnData[index].heading,
-                                 field:      this.columnData[index].dataelement,
-                                 sortable:   this.columnData[index].sort,
-                                 filterable: this.columnData[index].filterable,
-                                 type,
-                                 editor,
-                                 formatter,
-                                 filter,
-                                 outputType,
-                                 params ,
-                                 width:      this.columnData[index].width
-                             };
+                const col = {
+                    id: this.columnData[index].dataelement,
+                    name: this.columnData[index].heading,
+                    field: this.columnData[index].dataelement,
+                    sortable: this.columnData[index].sort,
+                    filterable: this.columnData[index].filterable,
+                    type,
+                    editor,
+                    formatter,
+                    filter,
+                    outputType,
+                    params,
+                    width: this.columnData[index].width
+                };
 
                 this.columnDefinitions.push(col);
                 rowData[col.id] = '';
@@ -238,20 +243,20 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
         this.logger.info('method [CustomGrid] - END, this.columnDefinitions=', this.columnDefinitions);
     }
 
-   /**
-    * CommonGrid constructor
-    * @param columnsData
-    * @param lockedColumnCount
-    * @param uniqueColumn
-    * @param baseURL
-    * @param programId
-    * @param componentId
-    * @param enableRenders
-    * @param colValidationMap
-    * @param checkHeader
-    * @param cboLinked
-    */
-    CommonGrid(columnsData: any, lockedColumnCount: number, uniqueColumn: string, baseURL: string, programId: string, componentId: string, enableRenders: boolean= true, colValidationMap: any= null, checkHeader: boolean= false, cboLinked: boolean= false) {
+    /**
+     * CommonGrid constructor
+     * @param columnsData
+     * @param lockedColumnCount
+     * @param uniqueColumn
+     * @param baseURL
+     * @param programId
+     * @param componentId
+     * @param enableRenders
+     * @param colValidationMap
+     * @param checkHeader
+     * @param cboLinked
+     */
+    CommonGrid(columnsData: any, lockedColumnCount: number, uniqueColumn: string, baseURL: string, programId: string, componentId: string, enableRenders: boolean = true, colValidationMap: any = null, checkHeader: boolean = false, cboLinked: boolean = false) {
     }
 
 
@@ -260,9 +265,9 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
         const dataProvider: any = [];
 
         for (let index = 0; rawData.row && index < rawData.row.length; index++) {
-            const row = <Object> rawData.row[index];
+            const row = <Object>rawData.row[index];
             const idObj = {
-               id : index
+                id: index
             };
 
             let key: string;
@@ -312,7 +317,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
         return 'buildQuery...';
     }
 
-    init( serviceOptions: BackendServiceOption, pagination?: Pagination ): void {
+    init(serviceOptions: BackendServiceOption, pagination?: Pagination): void {
         this.options = serviceOptions;
         this.pagination = pagination;
     }
@@ -322,7 +327,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
 
     }
 
-    updateOptions( serviceOptions?: BackendServiceOption ) {
+    updateOptions(serviceOptions?: BackendServiceOption) {
         this.options = { ...this.options, ...serviceOptions };
     }
 
@@ -332,7 +337,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
      * @param event
      * @param args
      */
-    processOnFilterChanged( event: Event, args: FilterChangedArgs ): Promise<string> {
+    processOnFilterChanged(event: Event, args: FilterChangedArgs): Promise<string> {
         this.logger.info('method [onFilterChanged] - START', args);
         this.filteredGridColumns = '';
         let timing = 0;
@@ -369,7 +374,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
      * @param event
      * @param args
      */
-    processOnPaginationChanged( event: Event, args: PaginationChangedArgs ) {
+    processOnPaginationChanged(event: Event, args: PaginationChangedArgs) {
         this.logger.info('method [onPaginationChanged] - START');
         this.currentPage = args.newPage;
         this.onPaginationChanged_.emit(args);
@@ -382,7 +387,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
      * @param event
      * @param args
      */
-    processOnSortChanged( event: Event, args: SortChangedArgs ) {
+    processOnSortChanged(event: Event, args: SortChangedArgs) {
         this.logger.info('method [onSortChanged] - START');
         this.sortedGridColumn = '';
         const sortDirection = '|' + args.sortCols[0].sortAsc + '|';
