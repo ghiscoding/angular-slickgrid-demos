@@ -55,7 +55,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
     gridHeightString: string;
     gridWidthString: string;
 
-    @ViewChild('angularSlickGrid', { static: true }) angularSlickGrid: AngularSlickgridComponent;
+    @ViewChild('angularSlickGrid') angularSlickGrid: AngularSlickgridComponent;
 
     columnDefinitions: Column[] = [];
     dataset: any[];
