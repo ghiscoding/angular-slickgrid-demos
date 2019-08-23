@@ -1,22 +1,29 @@
-
-<div id="demo-container" class="container-fluid">
+<div class="container-fluid">
     <h2>{{title}}</h2>
-    <div class="subtitle" [innerHTML]="subTitle"></div>
+    <div class="subtitle"
+        [innerHTML]="subTitle"></div>
 
     <span>
+        <button class="btn btn-outline-secondary btn-sm"
+            (click)="closeAllRowDetail()">
+            Close All Row Details
+        </button>
+        &nbsp;&nbsp;
         <label for="">Detail View Rows Shown: </label>
-        <input type="number" [(ngModel)]="detailViewRowCount">
-        <button class="btn btn-outline-secondary btn-xs" (click)="changeDetailViewRowCount()">
+        <input type="number"
+            [(ngModel)]="detailViewRowCount">
+        <button class="btn btn-outline-secondary btn-xs"
+            (click)="changeDetailViewRowCount()">
             Set
         </button>
     </span>
 
-    <div class="col-sm-12">
-        <angular-slickgrid gridId="grid21"
-            (onAngularGridCreated)="angularGridReady($event)"
-            [columnDefinitions]="columnDefinitions"
-            [gridOptions]="gridOptions"
-            [dataset]="dataset">
-        </angular-slickgrid>
-    </div>
+    <hr />
+
+    <angular-slickgrid gridId="grid21"
+        [columnDefinitions]="columnDefinitions"
+        [gridOptions]="gridOptions"
+        [dataset]="dataset"
+        (onAngularGridCreated)="angularGridReady($event)">
+    </angular-slickgrid>
 </div>

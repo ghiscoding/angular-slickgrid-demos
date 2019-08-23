@@ -21,7 +21,7 @@ export const localeFrench = {
   TEXT_SORT_ASCENDING: 'Trier par ordre croissant',
   TEXT_SORT_DESCENDING: 'Trier par ordre décroissant',
   TEXT_STARTS_WITH: 'Commence par',
-  TEXT_X_OF_Y_SELECTED: '# de % sélectionné',
+  TEXT_X_OF_Y_SELECTED: '# de % sélectionnés',
 
   // texte optionnel pour la locale (dépendement de quelles functionalitées vous utilisez, vous aurez peut-être (ou pas) besoin des textes suivants)
   TEXT_EXPORT_IN_TEXT_FORMAT: 'Exporter en format texte (tabulation)',

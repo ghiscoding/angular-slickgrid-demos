@@ -19,10 +19,11 @@ const NB_ITEMS = 500;
 export class GridRowDetailComponent implements OnInit {
   title = 'Example 21: Row Detail View';
   subTitle = `
-    Add functionality to show extra information with a Row Detail View
+    Add functionality to show extra information with a Row Detail View, (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Row-Detail" target="_blank">Wiki docs</a>)
     <ul>
       <li>Click on the row "+" icon or anywhere on the row to open it (the latter can be changed via property "useRowClick: false")</li>
       <li>Pass a View/Model as a Template to the Row Detail</li>
+      <li>You can use "expandableOverride()" callback to override logic to display expand icon on every row (for example only show it every 2nd row)</li>
     </ul>
   `;
 
@@ -34,6 +35,10 @@ export class GridRowDetailComponent implements OnInit {
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
+  }
+
+  get rowDetailInstance(): any {
+    return this.angularGrid && this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.rowDetailView) || {};
   }
 
   ngOnInit(): void {
@@ -77,12 +82,15 @@ export class GridRowDetailComponent implements OnInit {
         selectActiveRow: true
       },
       rowDetailView: {
-        // We can load the "process" asynchronously in 3 different ways (aurelia-http-client, aurelia-fetch-client OR even Promise)
+        // We can load the "process" asynchronously in 2 different ways (httpClient OR even Promise)
         process: (item) => this.simulateServerAsyncCall(item),
-        // process: this.httpFetch.fetch(`api/item/${item.id}`),
+        // process: (item) => this.http.get(`api/item/${item.id}`),
 
         // load only once and reuse the same item detail without calling process method
         loadOnce: true,
+
+        // limit expanded row to only 1 at a time
+        singleRowExpand: false,
 
         // false by default, clicking anywhere on the row will open the detail view
         // when set to false, only the "+" icon would open the row detail
@@ -94,10 +102,14 @@ export class GridRowDetailComponent implements OnInit {
         // so if you choose 4 panelRows, the display will in fact use 5 rows
         panelRows: this.detailViewRowCount,
 
-        // Preload View Template
+        // you can override the logic for showing (or not) the expand icon
+        // for example, display the expand icon only on every 2nd row
+        // expandableOverride: (row: number, dataContext: any, grid: any) => (dataContext.id % 2 === 1),
+
+        // Preload View Component
         preloadComponent: RowDetailPreloadComponent,
 
-        // ViewModel Template to load when row detail data is ready
+        // View Component to load when row detail data is ready
         viewComponent: RowDetailViewComponent,
       }
     };
@@ -130,10 +142,17 @@ export class GridRowDetailComponent implements OnInit {
 
   changeDetailViewRowCount() {
     if (this.angularGrid && this.angularGrid.extensionService) {
-      const rowDetailInstance = this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.rowDetailView);
-      const options = rowDetailInstance.getOptions();
-      options.panelRows = this.detailViewRowCount; // change number of rows dynamically
-      rowDetailInstance.setOptions(options);
+      const options = this.rowDetailInstance.getOptions();
+      if (options && options.panelRows) {
+        options.panelRows = this.detailViewRowCount; // change number of rows dynamically
+        this.rowDetailInstance.setOptions(options);
+      }
+    }
+  }
+
+  closeAllRowDetail() {
+    if (this.angularGrid && this.angularGrid.extensionService) {
+      this.rowDetailInstance.collapseAll();
     }
   }
 
