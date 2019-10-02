@@ -5,14 +5,13 @@ import {
   Column,
   FieldType,
   Filters,
-  Formatter,
   Formatters,
   GridOption,
   GridStateChange,
   JQueryUiSliderOption,
+  Metrics,
   MultipleSelectOption,
   OperatorType,
-  Statistic,
 } from 'angular-slickgrid';
 import * as moment from 'moment-mini';
 
@@ -51,7 +50,7 @@ export class GridRangeComponent implements OnInit {
   gridOptions: GridOption;
   dataset: any[];
   selectedLanguage: string;
-  statistics: Statistic;
+  metrics: Metrics;
 
   constructor() { }
 
@@ -194,10 +193,10 @@ export class GridRangeComponent implements OnInit {
     console.log('Client sample, last Grid State:: ', this.angularGrid.gridStateService.getCurrentGridState());
   }
 
-  refreshStatistics(e, args) {
+  refreshMetrics(e, args) {
     if (args && args.current > 0) {
       setTimeout(() => {
-        this.statistics = {
+        this.metrics = {
           startTime: new Date(),
           itemCount: args && args.current,
           totalItemCount: this.dataset.length

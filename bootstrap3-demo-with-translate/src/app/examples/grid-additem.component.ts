@@ -24,6 +24,7 @@ export class GridAddItemComponent implements OnInit {
     <li>You can also add CSS class(es) on the fly (or on page load) on rows with certain criteria, (e.g. click on last button)
     <ul>
       <li>Example, click on button "Highlight Rows with Duration over 50" to see row styling changing. <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Dynamically-Add-CSS-Classes-to-Item-Rows" target="_blank">Wiki doc</a></li>
+    </ul>
   </ul>
   `;
 
@@ -36,7 +37,7 @@ export class GridAddItemComponent implements OnInit {
   dataset: any[];
   updatedObject: any;
 
-  constructor() {}
+  constructor() { }
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
@@ -158,7 +159,7 @@ export class GridAddItemComponent implements OnInit {
     this.dataset = mockedDataset;
   }
 
-  addNewItem() {
+  addNewItem(insertPosition?: 'top' | 'bottom') {
     const newId = this.dataset.length;
     const randomYear = 2000 + Math.floor(Math.random() * 10);
     const randomMonth = Math.floor(Math.random() * 11);
@@ -175,7 +176,7 @@ export class GridAddItemComponent implements OnInit {
       finish: new Date(randomYear, (randomMonth + 2), randomDay),
       effortDriven: true
     };
-    this.angularGrid.gridService.addItemToDatagrid(newItem);
+    this.angularGrid.gridService.addItem(newItem, { position: insertPosition });
   }
 
   highlighFifthRow() {
@@ -224,10 +225,10 @@ export class GridAddItemComponent implements OnInit {
   updateSecondItem() {
     const updatedItem = this.angularGrid.gridService.getDataItemByRowNumber(1);
     updatedItem.duration = Math.round(Math.random() * 100);
-    this.angularGrid.gridService.updateDataGridItem(updatedItem);
+    this.angularGrid.gridService.updateItem(updatedItem);
 
     // OR by id
-    // this.angularGrid.gridService.updateDataGridItemById(updatedItem.id, updatedItem);
+    // this.angularGrid.gridService.updateItemById(updatedItem.id, updatedItem);
 
     // OR multiple changes
     /*
@@ -235,7 +236,7 @@ export class GridAddItemComponent implements OnInit {
     const updatedItem2 = this.angularGrid.gridService.getDataItemByRowNumber(2);
     updatedItem1.duration = Math.round(Math.random() * 100);
     updatedItem2.duration = Math.round(Math.random() * 100);
-    this.angularGrid.gridService.updateDataGridItems([updatedItem1, updatedItem2], true);
+    this.angularGrid.gridService.updateItems([updatedItem1, updatedItem2], true);
     */
   }
 }

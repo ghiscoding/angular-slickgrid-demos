@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularGridInstance, Column, FieldType, Filters, Formatters, GridOption, GridStateChange, OperatorType, Statistic } from 'angular-slickgrid';
+import { AngularGridInstance, Column, FieldType, Filters, Formatters, GridOption, GridStateChange, Metrics, OperatorType } from 'angular-slickgrid';
 import { CustomInputFilter } from './custom-inputFilter';
 
 function randomBetween(min, max) {
@@ -38,7 +38,7 @@ export class GridClientSideComponent implements OnInit {
   columnDefinitions: Column[];
   gridOptions: GridOption;
   dataset: any[];
-  statistics: Statistic;
+  metrics: Metrics;
 
   constructor(private http: HttpClient) { }
 
@@ -235,10 +235,10 @@ export class GridClientSideComponent implements OnInit {
     console.log('Client sample, last Grid State:: ', this.angularGrid.gridStateService.getCurrentGridState());
   }
 
-  refreshStatistics(e, args) {
+  refreshMetrics(e, args) {
     if (args && args.current > 0) {
       setTimeout(() => {
-        this.statistics = {
+        this.metrics = {
           startTime: new Date(),
           itemCount: args && args.current,
           totalItemCount: this.dataset.length

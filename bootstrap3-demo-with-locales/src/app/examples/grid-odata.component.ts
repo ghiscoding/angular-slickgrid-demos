@@ -8,8 +8,9 @@ import {
   GridOdataService,
   GridOption,
   GridStateChange,
-  Statistic,
-  OperatorType
+  Metrics,
+  OdataOption,
+  OperatorType,
 } from 'angular-slickgrid';
 
 const defaultPageSize = 20;
@@ -40,8 +41,9 @@ export class GridOdataComponent implements OnInit {
   columnDefinitions: Column[];
   gridOptions: GridOption;
   dataset = [];
-  statistics: Statistic;
+  metrics: Metrics;
 
+  isCountEnabled = true;
   odataVersion = 2;
   odataQuery = '';
   processing = true;
@@ -69,7 +71,7 @@ export class GridOdataComponent implements OnInit {
           collection: [{ value: '', label: '' }, { value: 'male', label: 'male' }, { value: 'female', label: 'female' }]
         }
       },
-      { id: 'company', name: 'Company', field: 'company' }
+      { id: 'company', name: 'Company', field: 'company' },
     ];
 
     this.gridOptions = {
@@ -105,11 +107,14 @@ export class GridOdataComponent implements OnInit {
       },
       backendServiceApi: {
         service: new GridOdataService(),
-        options: { version: this.odataVersion }, // defaults to 2, the query string is slightly different between OData 2 and 4
+        options: {
+          enableCount: this.isCountEnabled, // add the count in the OData query, which will return a property named "odata.count" (v2) or "@odata.count" (v4)
+          version: this.odataVersion        // defaults to 2, the query string is slightly different between OData 2 and 4
+        } as OdataOption,
         preProcess: () => this.displaySpinner(true),
         process: (query) => this.getCustomerApiCall(query),
         postProcess: (response) => {
-          this.statistics = response.statistics;
+          this.metrics = response.metrics;
           this.displaySpinner(false);
           this.getCustomerCallback(response);
         }
@@ -127,9 +132,13 @@ export class GridOdataComponent implements OnInit {
   getCustomerCallback(data) {
     // totalItems property needs to be filled for pagination to work correctly
     // however we need to force Angular to do a dirty check, doing a clone object will do just that
-    this.gridOptions.pagination.totalItems = data['totalRecordCount'];
-    if (this.statistics) {
-      this.statistics.totalItemCount = data['totalRecordCount'];
+    let countPropName = 'totalRecordCount'; // you can use "totalRecordCount" or any name or "odata.count" when "enableCount" is set
+    if (this.isCountEnabled) {
+      countPropName = (this.odataVersion === 4) ? '@odata.count' : 'odata.count';
+    }
+    this.gridOptions.pagination.totalItems = data[countPropName];
+    if (this.metrics) {
+      this.metrics.totalItemCount = data[countPropName];
     }
     this.gridOptions = Object.assign({}, this.gridOptions);
 
@@ -181,8 +190,10 @@ export class GridOdataComponent implements OnInit {
           }
           if (filterBy.includes('eq')) {
             const filterMatch = filterBy.match(/([a-zA-Z ]*) eq '(.*?)'/);
-            const fieldName = filterMatch[1].trim();
-            columnFilters[fieldName] = { type: 'equal', term: filterMatch[2].trim() };
+            if (Array.isArray(filterMatch)) {
+              const fieldName = filterMatch[1].trim();
+              columnFilters[fieldName] = { type: 'equal', term: filterMatch[2].trim() };
+            }
           }
           if (filterBy.includes('startswith')) {
             const filterMatch = filterBy.match(/startswith\(([a-zA-Z ]*),\s?'(.*?)'/);
@@ -250,8 +261,14 @@ export class GridOdataComponent implements OnInit {
         const updatedData = filteredData.slice(firstRow, firstRow + top);
 
         setTimeout(() => {
-          resolve({ items: updatedData, totalRecordCount: countTotalItems, query });
-        }, 500);
+          let countPropName = 'totalRecordCount';
+          if (this.isCountEnabled) {
+            countPropName = (this.odataVersion === 4) ? '@odata.count' : 'odata.count';
+          }
+          const backendResult = { items: updatedData, [countPropName]: countTotalItems, query };
+          console.log('Backend Result', backendResult);
+          resolve(backendResult);
+        }, 250);
       });
     });
   }
@@ -261,12 +278,25 @@ export class GridOdataComponent implements OnInit {
     console.log('Client sample, Grid State changed:: ', gridStateChanges);
   }
 
-  // THIS IS ONLY FOR DEMO PURPOSES DO NOT USE THIS CODE
+  // THE FOLLOWING METHODS ARE ONLY FOR DEMO PURPOSES DO NOT USE THIS CODE
+  // ---
+
+  changeCountEnableFlag() {
+    this.isCountEnabled = !this.isCountEnabled;
+    const odataService = this.gridOptions.backendServiceApi.service;
+
+    // @ts-ignore
+    odataService.updateOptions({ enableCount: this.isCountEnabled } as OdataOption);
+    odataService.clearFilters();
+    this.angularGrid.filterService.clearFilters();
+    return true;
+  }
+
   setOdataVersion(version: number) {
     this.odataVersion = version;
     const odataService = this.gridOptions.backendServiceApi.service;
     // @ts-ignore
-    odataService.updateOptions({ version: this.odataVersion });
+    odataService.updateOptions({ version: this.odataVersion } as OdataOption);
     odataService.clearFilters();
     this.angularGrid.filterService.clearFilters();
     return true;
