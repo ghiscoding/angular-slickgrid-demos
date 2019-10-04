@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div id="demo-container" class="container-fluid">
   <h2>{{title}}</h2>
-  <div class="subtitle row" [innerHTML]="subTitle"></div>
+  <div class="subtitle" [innerHTML]="subTitle"></div>
 
   <div class="row">
     <div class="col-sm-4">
@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="row col-md-12">
-    <label>Programmatically go to first/last page:</label>
+    <span>Programmatically go to first/last page:</span>
     <button class="btn btn-outline-secondary btn-xs" (click)="goToFirstPage()">
       <i class="fa fa-caret-left fa-lg"></i>
     </button>
