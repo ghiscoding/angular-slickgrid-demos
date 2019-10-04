@@ -1,4 +1,5 @@
 import { Component, Injectable, OnInit, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
   AngularGridInstance,
   Column,
@@ -10,13 +11,13 @@ import {
   GraphqlServiceOption,
   GridOption,
   GridStateChange,
-  OperatorType,
   Metrics,
+  MultipleSelectOption,
+  OperatorType,
   SortDirection,
 } from 'angular-slickgrid';
-import { localeFrench } from '../locales/fr';
-import { Subscription } from 'rxjs';
 import * as moment from 'moment-mini';
+import { Subscription } from 'rxjs';
 
 const defaultPageSize = 20;
 const GRAPHQL_QUERY_DATASET_NAME = 'users';
@@ -55,22 +56,26 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   selectedLanguage: string;
   gridStateSub: Subscription;
 
+  constructor(private translate: TranslateService) {
+    this.selectedLanguage = this.translate.getDefaultLang();
+  }
+
   ngOnDestroy() {
     this.gridStateSub.unsubscribe();
   }
 
   ngOnInit(): void {
     this.columnDefinitions = [
-      { id: 'name', field: 'name', name: 'Name', filterable: true, sortable: true, type: FieldType.string, width: 60 },
+      { id: 'name', field: 'name', headerKey: 'NAME', filterable: true, sortable: true, type: FieldType.string, width: 60 },
       {
-        id: 'gender', field: 'gender', name: 'Gender', filterable: true, sortable: true, width: 60,
+        id: 'gender', field: 'gender', headerKey: 'GENDER', filterable: true, sortable: true, width: 60,
         filter: {
           model: Filters.singleSelect,
-          collection: [{ value: '', label: '' }, { value: 'male', label: 'Male' }, { value: 'female', label: 'Female' }]
+          collection: [{ value: '', label: '' }, { value: 'male', label: 'male', labelKey: 'MALE' }, { value: 'female', label: 'female', labelKey: 'FEMALE' }]
         }
       },
       {
-        id: 'company', field: 'company', name: 'Company', width: 60,
+        id: 'company', field: 'company', headerKey: 'COMPANY', width: 60,
         sortable: true,
         filterable: true,
         filter: {
@@ -78,18 +83,18 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
           collection: [{ value: 'acme', label: 'Acme' }, { value: 'abc', label: 'Company ABC' }, { value: 'xyz', label: 'Company XYZ' }],
           filterOptions: {
             filter: true // adds a filter on top of the multi-select dropdown
-          }
+          } as MultipleSelectOption
         }
       },
-      { id: 'billing.address.street', field: 'billing.address.street', name: 'Billing Address Street', width: 60, filterable: true, sortable: true },
+      { id: 'billing.address.street', field: 'billing.address.street', headerKey: 'BILLING.ADDRESS.STREET', width: 60, filterable: true, sortable: true },
       {
-        id: 'billing.address.zip', field: 'billing.address.zip', name: 'Billing Address Zip', width: 60,
+        id: 'billing.address.zip', field: 'billing.address.zip', headerKey: 'BILLING.ADDRESS.ZIP', width: 60,
         type: FieldType.number,
         filterable: true, sortable: true,
         filter: {
           model: Filters.compoundInput
         },
-        formatter: Formatters.complexObject
+        formatter: Formatters.multiple, params: { formatters: [Formatters.complexObject, Formatters.translate] }
       },
       {
         id: 'finish', field: 'finish', name: 'Date', formatter: Formatters.dateIso, sortable: true, minWidth: 90, width: 120, exportWithFormatter: true,
@@ -105,11 +110,10 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
     const presetHighestDay = moment().add(20, 'days').format('YYYY-MM-DD');
 
     this.gridOptions = {
-      enableAutoResize: false,
       enableFiltering: true,
       enableCellNavigation: true,
-      enableCheckboxSelector: true,
-      enableRowSelection: true,
+      enableTranslate: true,
+      i18n: this.translate,
       gridMenu: {
         resizeOnShowHeaderRow: true,
         customItems: [
@@ -128,8 +132,6 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
           }
         }
       },
-      // Provide a custom locales set
-      locales: localeFrench,
       pagination: {
         pageSizes: [10, 15, 20, 25, 30, 40, 50, 75, 100],
         pageSize: defaultPageSize,
@@ -233,8 +235,16 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.graphqlQuery = this.angularGrid.backendService.buildQuery();
         resolve(mockedResult);
-      }, 500);
+      }, 250);
     });
+  }
+
+  goToFirstPage() {
+    this.angularGrid.paginationService.goToFirstPage();
+  }
+
+  goToLastPage() {
+    this.angularGrid.paginationService.goToLastPage();
   }
 
   /** Dispatched event of a Grid State Changed event */
@@ -252,5 +262,10 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   /** Save current Filters, Sorters in LocaleStorage or DB */
   saveCurrentGridState(grid) {
     console.log('GraphQL current grid state', this.angularGrid.gridStateService.getCurrentGridState());
+  }
+
+  switchLanguage() {
+    this.selectedLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
+    this.translate.use(this.selectedLanguage);
   }
 }
