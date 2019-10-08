@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
+import { CustomActionFormatterComponent } from './examples/custom-actionFormatter.component';
 import { CustomTitleFormatterComponent } from './examples/custom-titleFormatter.component';
 import { EditorNgSelectComponent } from './examples/editor-ng-select.component';
 import { FilterNgSelectComponent } from './examples/filter-ng-select.component';
@@ -49,6 +50,7 @@ import { localeFrench } from './locales/fr';
 @NgModule({
   declarations: [
     AppComponent,
+    CustomActionFormatterComponent,
     CustomTitleFormatterComponent,
     EditorNgSelectComponent,
     FilterNgSelectComponent,
@@ -104,6 +106,7 @@ import { localeFrench } from './locales/fr';
   ],
   entryComponents: [
     // dynamically created components
+    CustomActionFormatterComponent,
     CustomTitleFormatterComponent,
     EditorNgSelectComponent,
     FilterNgSelectComponent,
