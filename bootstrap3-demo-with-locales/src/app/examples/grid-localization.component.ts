@@ -151,6 +151,13 @@ export class GridLocalizationComponent implements OnInit {
     this.columnDefinitions = this.columnDefinitions.slice();
   }
 
+  exportToExcel() {
+    this.angularGrid.excelExportService.exportToExcel({
+      filename: 'Export',
+      format: FileType.xlsx
+    });
+  }
+
   exportToFile(type = 'csv') {
     this.angularGrid.exportService.exportToFile({
       delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,

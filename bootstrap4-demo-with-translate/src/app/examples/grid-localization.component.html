@@ -1,9 +1,8 @@
-
 <div id="demo-container" class="container-fluid">
     <h2>{{title}}</h2>
     <div class="subtitle" [innerHTML]="subTitle"></div>
 
-    <hr/>
+    <hr />
 
     <div class="row col-sm-12">
         <button class="btn btn-outline-secondary btn-sm" (click)="switchLanguage()">
@@ -21,6 +20,10 @@
                 <i class="fa fa-download"></i>
                 Download to Text
             </button>
+            <button class="btn btn-default btn-sm" (click)="exportToExcel()">
+                <i class="fa fa-file-excel-o text-success"></i>
+                Download to Excel
+            </button>
             <button class="btn btn-outline-secondary btn-sm" (click)="dynamicallyAddTitleHeader()">
                 <i class="fa fa-plus"></i>
                 Dynamically Duplicate Title Column
@@ -30,10 +33,10 @@
 
     <div class="col-sm-12">
         <angular-slickgrid gridId="grid12"
-            (onAngularGridCreated)="angularGridReady($event)"
-            [columnDefinitions]="columnDefinitions"
-            [gridOptions]="gridOptions"
-            [dataset]="dataset">
+                           (onAngularGridCreated)="angularGridReady($event)"
+                           [columnDefinitions]="columnDefinitions"
+                           [gridOptions]="gridOptions"
+                           [dataset]="dataset">
         </angular-slickgrid>
     </div>
 </div>
