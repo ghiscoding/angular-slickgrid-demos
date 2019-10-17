@@ -3,11 +3,11 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   AngularGridInstance,
   AngularUtilService,
+  BsDropDownService,
   Column,
   Editors,
   FieldType,
   Filters,
-  Formatter,
   Formatters,
   GridOption,
   OnEventArgs,
@@ -24,17 +24,6 @@ declare var Slick: any;
 declare var $: any;
 
 const NB_ITEMS = 100;
-
-const customActionFormatter: Formatter = (row: number, cell: number, value: any, columnDef: Column, dataContext: any, grid: any) => {
-  // use the same button text "Action" as the "CustomActionFormatterComponent" button text
-  // we basically recreate a dropdown on top of this one here which is just an empty one to show something in the grid
-  return `<div id="myDrop-r${row}-c${cell}" class="dropdown">
-    <button class="btn btn-outline-secondary btn-xs dropdown-toggle" type="button">
-      Action
-      <span class="caret"></span>
-    </button>
-  </div>`;
-};
 
 @Component({
   templateUrl: './grid-angular.component.html',
@@ -82,7 +71,7 @@ export class GridAngularComponent implements OnInit {
     { id: '3', name: 'Paul' },
   ];
 
-  constructor(private angularUtilService: AngularUtilService, private translate: TranslateService) { }
+  constructor(private angularUtilService: AngularUtilService, private bsDropdown: BsDropDownService, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.prepareGrid();
@@ -232,7 +221,22 @@ export class GridAngularComponent implements OnInit {
           model: Editors.date
         },
       },
-      { id: 'action', name: 'Action', field: 'id', formatter: customActionFormatter, width: 70 }
+      {
+        id: 'action',
+        name: 'Action',
+        field: 'id',
+        formatter: Formatters.bsDropdown,
+        params: { label: 'Action' },
+        onCellClick: (e: Event, args: OnEventArgs) => {
+          this.bsDropdown.render({
+            component: CustomActionFormatterComponent,
+            args,
+            offsetLeft: 65,
+            offsetDropupBottom: 15,
+            parent: this, // provide this object to the child component so we can call a method from here if we wish
+          });
+        }
+      }
     ];
 
     this.gridOptions = {
@@ -294,8 +298,6 @@ export class GridAngularComponent implements OnInit {
   }
 
   onCellClicked(e, args) {
-    $('#myDrop').remove(); // make sure to remove previous Action dropdown, you don't want to have 100 after a 100 clicks...
-
     const metadata = this.angularGrid.gridService.getColumnFromEventArguments(args);
     console.log(metadata);
 
@@ -351,44 +353,8 @@ export class GridAngularComponent implements OnInit {
   }
 
   /* Create an Action Dropdown Menu */
-
   deleteCell(rowNumber: number) {
     const item = this.angularGrid.dataView.getItem(rowNumber);
     this.angularGrid.gridService.deleteItemById(item.id);
-    $('#myDrop').remove();
-  }
-
-  onActiveCellChanged(event, args) {
-    $('#myDrop').remove(); // make sure to remove previous Action dropdown, you don't want to have 100 after a 100 clicks...
-
-    if (args.cell !== 6) {
-      return; // don't do anything unless it's the Action column which is at position 6 in this grid
-    }
-
-    const cell = args.cell;
-    const row = args.row;
-
-    // hide the dropdown we created as a Formatter, we'll redisplay it later
-    const formatterElm = $(`#myDrop-r${row}-c${cell}`);
-    const cellPos = formatterElm.offset();
-
-    const componentOutput = this.angularUtilService.createAngularComponent(CustomActionFormatterComponent);
-
-    // pass "this" and the row number to the Component instance (CustomActionFormatter) so that we can call "parent.deleteCell(row)" with (click)
-    Object.assign(componentOutput.componentRef.instance, { parent: this, row: args.row });
-
-    // use a delay to make sure Angular ran at least a full cycle and make sure it finished rendering the Component before using it
-    setTimeout(() => {
-      const elm = $(componentOutput.domElement);
-      elm.appendTo('body');
-      elm.css('position', 'absolute');
-      elm.css('top', cellPos.top + 3);
-      elm.css('left', cellPos.left);
-      $('#myDrop').dropdown('show');
-
-      $('#myDrop').on('hidden.bs.dropdown', () => {
-        formatterElm.show();
-      });
-    });
   }
 }

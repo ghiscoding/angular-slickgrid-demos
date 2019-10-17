@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "excel-builder-webpack": "^1.0.3",
+    "jszip": "^3.2.2",
+    "lodash": "^4.17.15"
+  }
+}

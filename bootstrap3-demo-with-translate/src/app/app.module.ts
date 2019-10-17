@@ -132,7 +132,7 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
         containerId: 'demo-container',
         sidePadding: 15
       }
-    })
+    }),
   ],
   entryComponents: [
     // dynamically created components

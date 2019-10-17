@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Injectable } from '@angular/core';
 import {
   AngularGridInstance,
@@ -54,7 +53,11 @@ export class GridLocalizationComponent implements OnInit {
         filterable: true,
         filter: { model: Filters.compoundSlider, operator: '>=' }
       },
-      { id: 'start', name: 'Début', field: 'start', formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, minWidth: 100, filterable: true, filter: { model: Filters.compoundDate } },
+      {
+        id: 'start', name: 'Start', field: 'start', headerKey: 'START', minWidth: 100,
+        formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, exportWithFormatter: true,
+        filterable: true, filter: { model: Filters.compoundDate }
+      },
       { id: 'finish', name: 'Fin', field: 'finish', formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, minWidth: 100, filterable: true, filter: { model: Filters.compoundDate } },
       {
         id: 'completedBool', name: 'Complétée', field: 'completedBool', minWidth: 100,
@@ -79,7 +82,32 @@ export class GridLocalizationComponent implements OnInit {
       },
       enableAutoResize: true,
       enableExcelCopyBuffer: true,
+      enableExcelExport: true,
+      enableExport: true,
       enableFiltering: true,
+      excelExportOptions: {
+        // optionally pass a custom header to the Excel Sheet
+        // a lot of the info can be found on Web Archive of Excel-Builder
+        // http://web.archive.org/web/20160907052007/http://excelbuilderjs.com/cookbook/fontsAndColors.html
+        customExcelHeader: (workbook, sheet) => {
+          const stylesheet = workbook.getStyleSheet();
+          const aFormatDefn = {
+            'font': { 'size': 12, 'fontName': 'Calibri', 'bold': true, color: 'FF0000FF' }, // every color starts with FF, then regular HTML color
+            'alignment': { 'wrapText': true }
+          };
+          const formatterId = stylesheet.createFormat(aFormatDefn);
+          sheet.setRowInstructions(0, { height: 30 }); // change height of row 0
+
+          // excel cells start with A1 which is upper left corner
+          sheet.mergeCells('B1', 'D1');
+          const cols = [];
+          // push empty data on A1
+          cols.push({ value: '' });
+          // push data in B1 cell with metadata formatter
+          cols.push({ value: 'Titre qui est suffisament long pour être coupé', metadata: { style: formatterId.id } });
+          sheet.data.push(cols);
+        }
+      },
       exportOptions: {
         // set at the grid option level, meaning all column will evaluate the Formatter (when it has a Formatter defined)
         exportWithFormatter: true,
@@ -88,17 +116,16 @@ export class GridLocalizationComponent implements OnInit {
       gridMenu: {
         hideExportCsvCommand: false,           // false by default, so it's optional
         hideExportTextDelimitedCommand: false  // true by default, so if you want it, you will need to disable the flag
-      },
-      locales: localeFrench
+      }
     };
 
-    this.loadData();
+    this.loadData(1000);
   }
 
   // mock a dataset
-  loadData() {
+  loadData(count: number) {
     this.dataset = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < count; i++) {
       const randomYear = 2000 + Math.floor(Math.random() * 30);
       const randomMonth = Math.floor(Math.random() * 11);
       const randomDay = Math.floor((Math.random() * 29));

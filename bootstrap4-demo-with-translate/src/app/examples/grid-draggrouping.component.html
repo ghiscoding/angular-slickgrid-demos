@@ -1,52 +1,51 @@
 <div id="demo-container"
-  class="container-fluid">
+     class="container-fluid">
   <h2>{{title}}</h2>
   <div class="subtitle"
-    [innerHTML]="subTitle"></div>
+       [innerHTML]="subTitle"></div>
 
   <form class="form-inline">
     <div class="row col-sm-12">
       <button class="btn btn-outline-secondary btn-xs"
-        (click)="loadData(500)">
+              (click)="loadData(500)">
         500 rows
       </button>
       <button class="btn btn-outline-secondary btn-xs"
-        (click)="loadData(50000)">
+              (click)="loadData(50000)">
         50k rows
       </button>
       <button class="btn btn-outline-secondary btn-xs"
-        (click)="clearGroupsAndSelects()">
+              (click)="clearGroupsAndSelects()">
         <i class="fa fa-times"></i> Clear grouping
       </button>
       <button class="btn btn-outline-secondary btn-xs"
-        (click)="collapseAllGroups()">
+              (click)="collapseAllGroups()">
         <i class="fa fa-compress"></i> Collapse all groups
       </button>
       <button class="btn btn-outline-secondary btn-xs"
-        (click)="expandAllGroups()">
+              (click)="expandAllGroups()">
         <i class="fa fa-expand"></i> Expand all groups
       </button>
       <button class="btn btn-outline-secondary btn-xs"
-        (click)="toggleDraggableGroupingRow()">
+              (click)="toggleDraggableGroupingRow()">
         Toggle Draggable Grouping Row
       </button>
-      <button class="btn btn-outline-secondary btn-xs"
-        (click)="exportToCsv('csv')">
-        <i class="fa fa-download"></i> Export to CSV
+      <button class="btn btn-default btn-xs" (click)="exportToExcel()">
+        <i class="fa fa-file-excel-o text-success"></i> Export to Excel
       </button>
     </div>
 
     <div class="row col-sm-12">
       <button class="btn btn-outline-secondary btn-xs"
-        (click)="groupByDurationOrderByCount(false)">
+              (click)="groupByDurationOrderByCount(false)">
         Group by duration &amp; sort groups by value
       </button>
       <button class="btn btn-outline-secondary btn-xs"
-        (click)="groupByDurationOrderByCount(true)">
+              (click)="groupByDurationOrderByCount(true)">
         Group by duration &amp; sort groups by count
       </button>
       <button class="btn btn-outline-secondary btn-xs"
-        (click)="groupByDurationEffortDriven()">
+              (click)="groupByDurationEffortDriven()">
         Group by Duration &amp; then Effort-Driven
       </button>
     </div>
@@ -59,16 +58,16 @@
       <div class="form-row">
         <div class="form-group">
           <label for="field1"
-            class="col-sm-3 mb-2">Group by field(s)</label>
+                 class="col-sm-3 mb-2">Group by field(s)</label>
           <div class="form-group col-md-3"
-            *ngFor="let groupField of selectedGroupingFields; let i = index; trackBy: selectTrackByFn">
+               *ngFor="let groupField of selectedGroupingFields; let i = index; trackBy: selectTrackByFn">
             <select class="form-control"
-              name="groupField{{i}}"
-              [(ngModel)]="selectedGroupingFields[i]"
-              (ngModelChange)="groupByFieldName($event, i)">
+                    name="groupField{{i}}"
+                    [(ngModel)]="selectedGroupingFields[i]"
+                    (ngModelChange)="groupByFieldName($event, i)">
               <option value=""></option>
               <option [ngValue]="field.id"
-                *ngFor="let field of columnDefinitions">{{field.name}}</option>
+                      *ngFor="let field of columnDefinitions">{{field.name}}</option>
             </select>
           </div>
         </div>
@@ -81,9 +80,9 @@
   </div>
 
   <angular-slickgrid gridId="grid19"
-    [dataset]="dataset"
-    [columnDefinitions]="columnDefinitions"
-    [gridOptions]="gridOptions"
-    (onAngularGridCreated)="angularGridReady($event)">
+                     [dataset]="dataset"
+                     [columnDefinitions]="columnDefinitions"
+                     [gridOptions]="gridOptions"
+                     (onAngularGridCreated)="angularGridReady($event)">
   </angular-slickgrid>
 </div>
