@@ -1,32 +1,25 @@
 <div class="container-fluid">
   <h2>{{title}}</h2>
-  <div class="subtitle"
-       [innerHTML]="subTitle"></div>
+  <div class="subtitle" [innerHTML]="subTitle"></div>
 
   <form>
     <div class="row col-sm-12">
-      <button class="btn btn-default btn-xs"
-              (click)="loadData(500)">
+      <button class="btn btn-default btn-xs" (click)="loadData(500)">
         500 rows
       </button>
-      <button class="btn btn-default btn-xs"
-              (click)="loadData(50000)">
+      <button class="btn btn-default btn-xs" (click)="loadData(50000)">
         50k rows
       </button>
-      <button class="btn btn-default btn-xs"
-              (click)="clearGroupsAndSelects()">
+      <button class="btn btn-default btn-xs" (click)="clearGroupsAndSelects()">
         <i class="fa fa-times"></i> Clear grouping
       </button>
-      <button class="btn btn-default btn-xs"
-              (click)="collapseAllGroups()">
+      <button class="btn btn-default btn-xs" (click)="collapseAllGroups()">
         <i class="fa fa-compress"></i> Collapse all groups
       </button>
-      <button class="btn btn-default btn-xs"
-              (click)="expandAllGroups()">
+      <button class="btn btn-default btn-xs" (click)="expandAllGroups()">
         <i class="fa fa-expand"></i> Expand all groups
       </button>
-      <button class="btn btn-default btn-xs"
-              (click)="toggleDraggableGroupingRow()">
+      <button class="btn btn-default btn-xs" (click)="toggleDraggableGroupingRow()">
         Toggle Draggable Grouping Row
       </button>
       <button class="btn btn-default btn-xs" (click)="exportToExcel()">
@@ -35,17 +28,17 @@
     </div>
 
     <div class="row col-sm-12">
-      <button class="btn btn-default btn-xs"
-              (click)="groupByDurationOrderByCount(false)">
+      <button class="btn btn-default btn-xs" (click)="groupByDurationOrderByCount(false)">
         Group by duration &amp; sort groups by value
       </button>
-      <button class="btn btn-default btn-xs"
-              (click)="groupByDurationOrderByCount(true)">
+      <button class="btn btn-default btn-xs" (click)="groupByDurationOrderByCount(true)">
         Group by duration &amp; sort groups by count
       </button>
-      <button class="btn btn-default btn-xs"
-              (click)="groupByDurationEffortDriven()">
+      <button class="btn btn-default btn-xs" (click)="groupByDurationEffortDriven()">
         Group by Duration then Effort-Driven
+      </button>
+      <button class="btn btn-default btn-xs" data-test="set-dynamic-filter" (click)="setFiltersDynamically()">
+        Set Filters Dynamically
       </button>
     </div>
     <div class="col-sm-12">
@@ -53,17 +46,13 @@
     </div>
     <div class="row col-sm-12">
       <div class="form-group">
-        <label for="field1"
-               class="col-sm-2 control-label">Group by field(s)</label>
+        <label for="field1" class="col-sm-2 control-label">Group by field(s)</label>
         <div class="col-sm-3"
-             *ngFor="let groupField of selectedGroupingFields; let i = index; trackBy: selectTrackByFn">
-          <select class="form-control col-sm-6"
-                  name="groupField{{i}}"
-                  [(ngModel)]="selectedGroupingFields[i]"
-                  (ngModelChange)="groupByFieldName($event, i)">
+          *ngFor="let groupField of selectedGroupingFields; let i = index; trackBy: selectTrackByFn">
+          <select class="form-control col-sm-6" name="groupField{{i}}" [(ngModel)]="selectedGroupingFields[i]"
+            (ngModelChange)="groupByFieldName($event, i)">
             <option value=""></option>
-            <option [ngValue]="field.id"
-                    *ngFor="let field of columnDefinitions">{{field.name}}</option>
+            <option [ngValue]="field.id" *ngFor="let field of columnDefinitions">{{field.name}}</option>
           </select>
         </div>
       </div>
@@ -74,10 +63,7 @@
     <hr>
   </div>
 
-  <angular-slickgrid gridId="grid19"
-                     [dataset]="dataset"
-                     [columnDefinitions]="columnDefinitions"
-                     [gridOptions]="gridOptions"
-                     (onAngularGridCreated)="angularGridReady($event)">
+  <angular-slickgrid gridId="grid19" [dataset]="dataset" [columnDefinitions]="columnDefinitions"
+    [gridOptions]="gridOptions" (onAngularGridCreated)="angularGridReady($event)">
   </angular-slickgrid>
 </div>
