@@ -280,4 +280,12 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       { columnId: 'finish', searchTerms: [presetLowestDay, presetHighestDay], operator: OperatorType.rangeInclusive },
     ]);
   }
+
+  setSortingDynamically() {
+    this.angularGrid.sortService.updateSorting([
+      // orders matter, whichever is first in array will be the first sorted column
+      { columnId: 'billingAddressZip', direction: 'DESC' },
+      { columnId: 'company', direction: 'ASC' },
+    ]);
+  }
 }

@@ -236,6 +236,14 @@ export class GridRangeComponent implements OnInit {
     ]);
   }
 
+  setSortingDynamically() {
+    this.angularGrid.sortService.updateSorting([
+      // orders matter, whichever is first in array will be the first sorted column
+      { columnId: 'start', direction: 'DESC' },
+      { columnId: 'complete', direction: 'ASC' },
+    ]);
+  }
+
   switchLanguage() {
     const nextLocale = (this.selectedLanguage === 'en') ? 'fr' : 'en';
     this.translate.use(nextLocale).subscribe(() => this.selectedLanguage = nextLocale);

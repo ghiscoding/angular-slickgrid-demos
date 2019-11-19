@@ -193,6 +193,18 @@ export class GridRangeComponent implements OnInit {
     console.log('Client sample, last Grid State:: ', this.angularGrid.gridStateService.getCurrentGridState());
   }
 
+  refreshMetrics(e, args) {
+    if (args && args.current >= 0) {
+      setTimeout(() => {
+        this.metrics = {
+          startTime: new Date(),
+          itemCount: args && args.current || 0,
+          totalItemCount: this.dataset.length || 0
+        };
+      });
+    }
+  }
+
   setFiltersDynamically() {
     const presetLowestDay = moment().add(-5, 'days').format('YYYY-MM-DD');
     const presetHighestDay = moment().add(25, 'days').format('YYYY-MM-DD');
@@ -205,15 +217,12 @@ export class GridRangeComponent implements OnInit {
     ]);
   }
 
-  refreshMetrics(e, args) {
-    if (args && args.current >= 0) {
-      setTimeout(() => {
-        this.metrics = {
-          startTime: new Date(),
-          itemCount: args && args.current || 0,
-          totalItemCount: this.dataset.length || 0
-        };
-      });
-    }
+  setSortingDynamically() {
+    this.angularGrid.sortService.updateSorting([
+      // orders matter, whichever is first in array will be the first sorted column
+      { columnId: 'start', direction: 'DESC' },
+      { columnId: 'complete', direction: 'ASC' },
+    ]);
   }
+
 }

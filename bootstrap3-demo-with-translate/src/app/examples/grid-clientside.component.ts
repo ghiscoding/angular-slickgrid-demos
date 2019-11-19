@@ -237,16 +237,6 @@ export class GridClientSideComponent implements OnInit {
     console.log('Client sample, last Grid State:: ', this.angularGrid.gridStateService.getCurrentGridState());
   }
 
-  setFiltersDynamically() {
-    // we can Set Filters Dynamically (or different filters) afterward through the FilterService
-    this.angularGrid.filterService.updateFilters([
-      { columnId: 'duration', searchTerms: [2, 25, 48, 50] },
-      { columnId: 'complete', searchTerms: [95], operator: '<' },
-      { columnId: 'effort-driven', searchTerms: [true] },
-      { columnId: 'start', operator: '>=', searchTerms: ['2001-02-28'] },
-    ]);
-  }
-
   refreshMetrics(e, args) {
     if (args && args.current >= 0) {
       setTimeout(() => {
@@ -257,5 +247,23 @@ export class GridClientSideComponent implements OnInit {
         };
       });
     }
+  }
+
+  setFiltersDynamically() {
+    // we can Set Filters Dynamically (or different filters) afterward through the FilterService
+    this.angularGrid.filterService.updateFilters([
+      { columnId: 'duration', searchTerms: [2, 25, 48, 50] },
+      { columnId: 'complete', searchTerms: [95], operator: '<' },
+      { columnId: 'effort-driven', searchTerms: [true] },
+      { columnId: 'start', operator: '>=', searchTerms: ['2001-02-28'] },
+    ]);
+  }
+
+  setSortingDynamically() {
+    this.angularGrid.sortService.updateSorting([
+      // orders matter, whichever is first in array will be the first sorted column
+      { columnId: 'duration', direction: 'ASC' },
+      { columnId: 'start', direction: 'DESC' },
+    ]);
   }
 }

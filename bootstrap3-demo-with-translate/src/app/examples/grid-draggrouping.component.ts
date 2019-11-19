@@ -369,6 +369,13 @@ export class GridDraggableGroupingComponent implements OnInit {
     ]);
   }
 
+  setSortingDynamically() {
+    this.angularGrid.sortService.updateSorting([
+      // orders matter, whichever is first in array will be the first sorted column
+      { columnId: 'percentComplete', direction: 'ASC' },
+    ]);
+  }
+
   toggleDraggableGroupingRow() {
     this.clearGrouping();
     this.gridObj.setPreHeaderPanelVisibility(!this.gridObj.getOptions().showPreHeaderPanel);

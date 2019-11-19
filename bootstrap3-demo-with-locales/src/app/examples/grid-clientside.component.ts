@@ -230,6 +230,18 @@ export class GridClientSideComponent implements OnInit {
     console.log('Client sample, Grid State changed:: ', gridState);
   }
 
+  refreshMetrics(e, args) {
+    if (args && args.current >= 0) {
+      setTimeout(() => {
+        this.metrics = {
+          startTime: new Date(),
+          itemCount: args && args.current || 0,
+          totalItemCount: this.dataset.length || 0
+        };
+      });
+    }
+  }
+
   /** Save current Filters, Sorters in LocaleStorage or DB */
   saveCurrentGridState(grid) {
     console.log('Client sample, last Grid State:: ', this.angularGrid.gridStateService.getCurrentGridState());
@@ -245,15 +257,11 @@ export class GridClientSideComponent implements OnInit {
     ]);
   }
 
-  refreshMetrics(e, args) {
-    if (args && args.current >= 0) {
-      setTimeout(() => {
-        this.metrics = {
-          startTime: new Date(),
-          itemCount: args && args.current || 0,
-          totalItemCount: this.dataset.length || 0
-        };
-      });
-    }
+  setSortingDynamically() {
+    this.angularGrid.sortService.updateSorting([
+      // orders matter, whichever is first in array will be the first sorted column
+      { columnId: 'duration', direction: 'ASC' },
+      { columnId: 'start', direction: 'DESC' },
+    ]);
   }
 }
