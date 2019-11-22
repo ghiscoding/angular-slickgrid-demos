@@ -10,13 +10,18 @@
           <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
         </span>
       </div>
+      <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-filter" (click)="setFiltersDynamically()">
+        Set Filters Dynamically
+      </button>
+      <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-sorting"
+        (click)="setSortingDynamically()">
+        Set Sorting Dynamically
+      </button>
+      <br>
       <span *ngIf="metrics">
         <b>Metrics:</b> {{metrics.endTime | date: 'yyyy-MM-dd HH:mm aaaaa\'m\''}} | {{metrics.executionTime}}ms
         | {{metrics.totalItemCount}} items
       </span>
-      <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-filter" (click)="setFiltersDynamically()">
-        Set Filters Dynamically
-      </button>
     </div>
     <div class="col-sm-8">
       <div class="alert alert-info" data-test="alert-odata-query">
@@ -43,14 +48,11 @@
   </div>
   <div class="row col-md-12">
     <span>Programmatically go to first/last page:</span>
-    <button class="btn btn-outline-secondary btn-xs" (click)="goToFirstPage()">
+    <button class="btn btn-outline-secondary btn-xs" data-test="goto-first-page" (click)="goToFirstPage()">
       <i class="fa fa-caret-left fa-lg"></i>
     </button>
-    <button class="btn btn-outline-secondary btn-xs" (click)="goToLastPage()">
+    <button class="btn btn-outline-secondary btn-xs" data-test="goto-last-page" (click)="goToLastPage()">
       <i class="fa fa-caret-right fa-lg"></i>
-    </button>
-    <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-sorting" (click)="setSortingDynamically()">
-      Set Sorting Dynamically
     </button>
   </div>
 
