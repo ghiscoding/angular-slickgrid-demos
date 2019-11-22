@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { CustomInputFilter } from './custom-inputFilter';
 import {
   AngularGridInstance,
   Column,
   FieldType,
   Filters,
+  Formatter,
   Formatters,
   GridOption,
   GridStateChange,
@@ -20,6 +22,14 @@ const NB_ITEMS = 1500;
 function randomBetween(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+// create a custom translate Formatter (typically you would move that a separate file, for separation of concerns)
+const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
+  const gridOptions = (grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {};
+  const translate = gridOptions.i18n;
+
+  return translate.instant('TASK_X', { x: value });
+};
 
 @Component({
   templateUrl: './grid-range.component.html'
@@ -49,15 +59,21 @@ export class GridRangeComponent implements OnInit {
   columnDefinitions: Column[];
   gridOptions: GridOption;
   dataset: any[];
-  selectedLanguage: string;
   metrics: Metrics;
+  filterList = [
+    { value: '', label: '' },
+    { value: 'currentYearTasks', label: 'Current Year Completed Tasks' },
+    { value: 'nextYearTasks', label: 'Next Year Active Tasks' }
+  ];
+  selectedPredefinedFilter: { value: string; label: string; };
 
   constructor() { }
 
   ngOnInit(): void {
     this.columnDefinitions = [
       {
-        id: 'title', name: 'Title', field: 'id', minWidth: 100,
+        id: 'title', name: 'Title', field: 'id', headerKey: 'TITLE', minWidth: 100,
+        formatter: taskTranslateFormatter,
         sortable: true,
         filterable: true,
         params: { useFormatterOuputToFilter: true }
@@ -71,7 +87,7 @@ export class GridRangeComponent implements OnInit {
         }
       },
       {
-        id: 'complete', name: '% Complete', field: 'percentComplete', minWidth: 120,
+        id: 'percentComplete', name: '% Complete', field: 'percentComplete', headerKey: 'PERCENT_COMPLETE', minWidth: 120,
         sortable: true,
         formatter: Formatters.progressBar,
         type: FieldType.number,
@@ -85,11 +101,11 @@ export class GridRangeComponent implements OnInit {
         }
       },
       {
-        id: 'start', name: 'Start', field: 'start', formatter: Formatters.dateIso, sortable: true, minWidth: 75, width: 100, exportWithFormatter: true,
+        id: 'start', name: 'Start', field: 'start', headerKey: 'START', formatter: Formatters.dateIso, sortable: true, minWidth: 75, width: 100, exportWithFormatter: true,
         type: FieldType.date, filterable: true, filter: { model: Filters.compoundDate }
       },
       {
-        id: 'finish', name: 'Finish', field: 'finish', formatter: Formatters.dateIso, sortable: true, minWidth: 75, width: 120, exportWithFormatter: true,
+        id: 'finish', name: 'Finish', field: 'finish', headerKey: 'FINISH', formatter: Formatters.dateIso, sortable: true, minWidth: 75, width: 120, exportWithFormatter: true,
         type: FieldType.date,
         filterable: true,
         filter: {
@@ -97,7 +113,7 @@ export class GridRangeComponent implements OnInit {
         }
       },
       {
-        id: 'duration', field: 'duration', maxWidth: 90,
+        id: 'duration', field: 'duration', headerKey: 'DURATION', maxWidth: 90,
         type: FieldType.number,
         sortable: true,
         filterable: true, filter: {
@@ -106,7 +122,7 @@ export class GridRangeComponent implements OnInit {
         }
       },
       {
-        id: 'completed', name: 'Completed', field: 'completed', minWidth: 85, maxWidth: 90,
+        id: 'completed', name: 'Completed', field: 'completed', headerKey: 'COMPLETED', minWidth: 85, maxWidth: 90,
         formatter: Formatters.checkmark,
         exportWithFormatter: true, // you can set this property in the column definition OR in the grid options, column def has priority over grid options
         filterable: true,
@@ -128,22 +144,25 @@ export class GridRangeComponent implements OnInit {
       },
       enableExcelCopyBuffer: true,
       enableFiltering: true,
+      // enableFilterTrimWhiteSpace: true,
+      enableTranslate: true,
+      i18n: this.translate,
 
       // use columnDef searchTerms OR use presets as shown below
       presets: {
         filters: [
           //  you can use the 2 dots separator on all Filters which support ranges
           { columnId: 'duration', searchTerms: ['4..88'] },
-          // { columnId: 'complete', searchTerms: ['5..80'] }, // without operator will default to 'RangeExclusive'
+          // { columnId: 'percentComplete', searchTerms: ['5..80'] }, // without operator will default to 'RangeExclusive'
           // { columnId: 'finish', operator: 'RangeInclusive', searchTerms: [`${presetLowestDay}..${presetHighestDay}`] },
 
           // or you could also use 2 searchTerms values, instead of using the 2 dots (only works with SliderRange & DateRange Filters)
           // BUT make sure to provide the operator, else the filter service won't know that this is really a range
-          { columnId: 'complete', operator: 'RangeInclusive', searchTerms: [5, 80] }, // same result with searchTerms: ['5..80']
+          { columnId: 'percentComplete', operator: 'RangeInclusive', searchTerms: [5, 80] }, // same result with searchTerms: ['5..80']
           { columnId: 'finish', operator: 'RangeInclusive', searchTerms: [presetLowestDay, presetHighestDay] },
         ],
         sorters: [
-          { columnId: 'complete', direction: 'DESC' },
+          { columnId: 'percentComplete', direction: 'DESC' },
           { columnId: 'duration', direction: 'ASC' },
         ],
       }
@@ -183,6 +202,11 @@ export class GridRangeComponent implements OnInit {
     return tempDataset;
   }
 
+  clearFilters() {
+    this.selectedPredefinedFilter = { value: '', label: '' };
+    this.angularGrid.filterService.clearFilters();
+  }
+
   /** Dispatched event of a Grid State Changed event */
   gridStateChanged(gridState: GridStateChange) {
     console.log('Client sample, Grid State changed:: ', gridState);
@@ -212,7 +236,7 @@ export class GridRangeComponent implements OnInit {
     // we can Set Filters Dynamically (or different filters) afterward through the FilterService
     this.angularGrid.filterService.updateFilters([
       { columnId: 'duration', searchTerms: ['14..78'], operator: 'RangeInclusive' },
-      { columnId: 'complete', operator: 'RangeExclusive', searchTerms: [12, 82] },
+      { columnId: 'complete', operator: 'RangeExclusive', searchTerms: [15, 85] },
       { columnId: 'finish', operator: 'RangeInclusive', searchTerms: [presetLowestDay, presetHighestDay] },
     ]);
   }
@@ -220,9 +244,26 @@ export class GridRangeComponent implements OnInit {
   setSortingDynamically() {
     this.angularGrid.sortService.updateSorting([
       // orders matter, whichever is first in array will be the first sorted column
-      { columnId: 'start', direction: 'DESC' },
+      { columnId: 'finish', direction: 'DESC' },
       { columnId: 'complete', direction: 'ASC' },
     ]);
   }
 
+  usePredefinedFilter(filterValue) {
+    let filters = [];
+    const currentYear = moment().year();
+
+    switch (filterValue) {
+      case 'currentYearTasks':
+        filters = [
+          { columnId: 'finish', operator: OperatorType.rangeInclusive, searchTerms: [`${currentYear}-01-01`, `${currentYear}-12-31`] },
+          { columnId: 'completed', operator: OperatorType.equal, searchTerms: [true] },
+        ];
+        break;
+      case 'nextYearTasks':
+        filters = [{ columnId: 'start', operator: '>=', searchTerms: [`${currentYear}-01-01`] }];
+        break;
+    }
+    this.angularGrid.filterService.updateFilters(filters);
+  }
 }
