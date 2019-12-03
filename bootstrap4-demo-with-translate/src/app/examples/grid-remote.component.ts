@@ -2,7 +2,7 @@ import 'slickgrid/lib/jquery.jsonp-2.4.min';
 import 'slickgrid/slick.remotemodel'; // SlickGrid Remote Plugin
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularGridInstance, Column, Formatter, GridOption  } from 'angular-slickgrid';
+import { AngularGridInstance, Column, Formatter, GridOption } from 'angular-slickgrid';
 
 declare var Slick: any;
 
@@ -29,7 +29,7 @@ export class GridRemoteComponent implements OnDestroy, OnInit {
     This example demonstrates how to use "slick.remotemodel.js" or any Remote implementation through an external Remote Service
     <ul>
       <li>
-        Your browser (Chrome) might block access to the Octopart query, if you get "block content" then just unblock it 
+        Your browser (Chrome) might block access to the Octopart query, if you get "block content" then just unblock it
         or try with different browser like Firefox or Edge
       </li>
       <li>If the demo throws some errors, try again later (there's a limit per day).</li>
@@ -81,7 +81,10 @@ export class GridRemoteComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.defineGrid();
     this.hookAllLoaderEvents();
-    this.loaderDataView.setSearch(this.search);
+
+    // set default search
+    // this.search = 'switch';
+    // this.loaderDataView.setSearch(this.search);
   }
 
   defineGrid() {
