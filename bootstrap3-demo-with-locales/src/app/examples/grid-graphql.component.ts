@@ -6,6 +6,7 @@ import {
   Filters,
   Formatters,
   GraphqlResult,
+  GraphqlPaginatedResult,
   GraphqlService,
   GraphqlServiceOption,
   GridOption,
@@ -99,7 +100,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         filter: {
           model: Filters.compoundInput
         },
-        formatter: Formatters.multiple, params: { formatters: [Formatters.complexObject] }
+        formatter: Formatters.complexObject
       },
       {
         id: 'finish', field: 'finish', name: 'Date', formatter: Formatters.dateIso, sortable: true, minWidth: 90, width: 120, exportWithFormatter: true,
@@ -172,7 +173,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         // onInit: (query) => this.getCustomerApiCall(query)
         preProcess: () => this.displaySpinner(true),
         process: (query) => this.getCustomerApiCall(query),
-        postProcess: (result: GraphqlResult) => {
+        postProcess: (result: GraphqlResult | GraphqlPaginatedResult) => {
           this.metrics = result.metrics;
           this.displaySpinner(false);
         }
@@ -212,12 +213,12 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Calling your GraphQL backend server should always return a Promise or Observable of type GraphqlResult
+   * Calling your GraphQL backend server should always return a Promise or Observable of type GraphqlPaginatedResult (or GraphqlResult)
    *
    * @param query
-   * @return Promise<GraphqlResult> | Observable<GraphqlResult>
+   * @return Promise<GraphqlPaginatedResult> | Observable<GraphqlPaginatedResult>
    */
-  getCustomerApiCall(query: string): Promise<GraphqlResult> {
+  getCustomerApiCall(query: string): Promise<GraphqlResult | GraphqlPaginatedResult> {
     // in your case, you will call your WebAPI function (wich needs to return a Promise)
     // for the demo purpose, we will call a mock WebAPI function
     const mockedResult = {

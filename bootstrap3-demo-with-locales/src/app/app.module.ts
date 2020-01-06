@@ -16,6 +16,7 @@ import { GridAutoHeightComponent } from './examples/grid-autoheight.component';
 import { GridBasicComponent } from './examples/grid-basic.component';
 import { GridClientSideComponent } from './examples/grid-clientside.component';
 import { GridColspanComponent } from './examples/grid-colspan.component';
+import { GridContextMenuComponent } from './examples/grid-contextmenu.component';
 import { GridDraggableGroupingComponent } from './examples/grid-draggrouping.component';
 import { GridEditorComponent } from './examples/grid-editor.component';
 import { GridFormatterComponent } from './examples/grid-formatter.component';
@@ -60,6 +61,7 @@ import { localeFrench } from './locales/fr';
     GridBasicComponent,
     GridClientSideComponent,
     GridColspanComponent,
+    GridContextMenuComponent,
     GridEditorComponent,
     GridDraggableGroupingComponent,
     GridFormatterComponent,
@@ -101,7 +103,7 @@ import { localeFrench } from './locales/fr';
         sidePadding: 15
       },
       // Provide a custom locales set
-      // locales: localeFrench, 
+      // locales: localeFrench,
     })
   ],
   entryComponents: [

@@ -311,13 +311,18 @@ export class GridDraggableGroupingComponent implements OnInit {
     }
   }
 
-  groupByDurationOrderByCount(isOrderingByCount = false) {
-    this.durationOrderByCount = isOrderingByCount;
+  groupByDurationOrderByCount(sortedByCount = false) {
+    this.durationOrderByCount = sortedByCount;
     this.clearGrouping();
     this.groupByDuration();
+
+    // you need to manually add the sort icon(s) in UI
+    const sortColumns = sortedByCount ? [] : [{ columnId: 'duration', sortAsc: true }];
+    this.angularGrid.slickGrid.setSortColumns(sortColumns);
   }
 
   groupByDurationEffortDriven() {
+    this.angularGrid.slickGrid.setSortColumns([]);
     this.clearGrouping();
     if (this.draggableGroupingPlugin && this.draggableGroupingPlugin.setDroppedGroups) {
       this.showPreHeader();

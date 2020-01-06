@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { CustomInputFilter } from './custom-inputFilter';
 import {
   AngularGridInstance,
@@ -23,12 +22,8 @@ function randomBetween(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// create a custom translate Formatter (typically you would move that a separate file, for separation of concerns)
-const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
-  const gridOptions = (grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {};
-  const translate = gridOptions.i18n;
-
-  return translate.instant('TASK_X', { x: value });
+const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
+  return value !== undefined ? `Title ${value}` : '';
 };
 
 @Component({
@@ -73,7 +68,7 @@ export class GridRangeComponent implements OnInit {
     this.columnDefinitions = [
       {
         id: 'title', name: 'Title', field: 'id', headerKey: 'TITLE', minWidth: 100,
-        formatter: taskTranslateFormatter,
+        formatter: taskFormatter,
         sortable: true,
         filterable: true,
         params: { useFormatterOuputToFilter: true }
@@ -145,7 +140,6 @@ export class GridRangeComponent implements OnInit {
       enableExcelCopyBuffer: true,
       enableFiltering: true,
       // enableFilterTrimWhiteSpace: true,
-      enableTranslate: true,
 
       // use columnDef searchTerms OR use presets as shown below
       presets: {
@@ -181,7 +175,7 @@ export class GridRangeComponent implements OnInit {
     for (let i = startingIndex; i < (startingIndex + itemCount); i++) {
       const randomDuration = randomBetween(0, 365);
       const randomYear = randomBetween(moment().year(), moment().year() + 1);
-      const randomMonth = randomBetween(1, 12);
+      const randomMonth = randomBetween(0, 12);
       const randomDay = randomBetween(10, 28);
       const randomPercent = randomBetween(0, 100);
 
@@ -193,7 +187,7 @@ export class GridRangeComponent implements OnInit {
         percentComplete: randomPercent,
         percentCompleteNumber: randomPercent,
         start: (i % 4) ? null : new Date(randomYear, randomMonth, randomDay),          // provide a Date format
-        finish: new Date(randomYear, (randomMonth + 1), randomDay),
+        finish: new Date(randomYear, randomMonth, randomDay),
         completed: (randomPercent === 100) ? true : false,
       });
     }

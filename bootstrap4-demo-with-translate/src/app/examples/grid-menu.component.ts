@@ -1,9 +1,11 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatters, GridOption, OperatorType } from 'angular-slickgrid';
+import { Component, Injectable, OnInit, ViewEncapsulation } from '@angular/core';
+import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatters, GridOption } from 'angular-slickgrid';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  templateUrl: './grid-menu.component.html'
+  templateUrl: './grid-menu.component.html',
+  styleUrls: ['./grid-menu.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 @Injectable()
 export class GridMenuComponent implements OnInit {
@@ -17,6 +19,7 @@ export class GridMenuComponent implements OnInit {
       <li>By default the Grid Menu shows all columns which you can show/hide them</li>
       <li>You can configure multiple custom "commands" to show up in the Grid Menu and use the "onGridMenuCommand()" callback</li>
       <li>Doing a "right + click" over any column header will also provide a way to show/hide a column (via the Column Picker Plugin)</li>
+      <li>You can change the icons of both picker via SASS variables as shown in this demo (check all SASS variables)</li>
       <li><i class="fa fa-arrow-down"></i> You can also show the Grid Menu anywhere on your page</li>
     </ul>
   `;
@@ -26,28 +29,20 @@ export class GridMenuComponent implements OnInit {
   gridOptions: GridOption;
   dataset: any[];
   selectedLanguage: string;
-  visibleColumns: Column[];
 
   constructor(private translate: TranslateService) {
-    this.selectedLanguage = this.translate.getDefaultLang();
+    // always start with English for Cypress E2E tests to be consistent
+    const defaultLang = 'en';
+    this.translate.use(defaultLang);
+    this.selectedLanguage = defaultLang;
   }
 
   ngOnInit(): void {
     this.columnDefinitions = [
       { id: 'title', name: 'Title', field: 'title', headerKey: 'TITLE', filterable: true, type: FieldType.string },
-      {
-        id: 'phone', name: 'Phone Number using mask', field: 'phone',
-        filterable: true, sortable: true, minWidth: 100,
-        type: FieldType.string, // because we use a mask filter, we should always assume the value is a string for it to behave correctly
-        formatter: Formatters.mask, params: { mask: '(000) 000-0000' },
-        filter: {
-          model: Filters.inputMask,
-          operator: OperatorType.startsWith
-        }
-      },
       { id: 'duration', name: 'Duration', field: 'duration', headerKey: 'DURATION', sortable: true, filterable: true, type: FieldType.string },
       {
-        id: '%', name: '% Complete', field: 'percentComplete', sortable: true, filterable: true,
+        id: 'percentComplete', name: '% Complete', field: 'percentComplete', headerKey: 'PERCENT_COMPLETE', sortable: true, filterable: true,
         type: FieldType.number,
         formatter: Formatters.percentCompleteBar,
         filter: { model: Filters.compoundSlider, params: { hideSliderNumber: false } }
@@ -67,8 +62,6 @@ export class GridMenuComponent implements OnInit {
       }
     ];
 
-    this.visibleColumns = this.columnDefinitions;
-
     this.gridOptions = {
       columnPicker: {
         hideForceFitButton: true,
@@ -86,20 +79,20 @@ export class GridMenuComponent implements OnInit {
       enableFiltering: true,
       enableCellNavigation: true,
       gridMenu: {
-        // all titles optionally support translation keys, if you wish to use that feature then use the title properties finishing by 'Key'
+        // all titles optionally support translation keys, if you wish to use that feature then use the title properties with the 'Key' suffix (e.g: titleKey)
         // example "customTitle" for a plain string OR "customTitleKey" to use a translation key
         customTitleKey: 'CUSTOM_COMMANDS',
-        iconCssClass: 'fa fa-ellipsis-v',
+        iconCssClass: 'fa fa-ellipsis-v', // defaults to "fa-bars"
         hideForceFitButton: true,
         hideSyncResizeButton: true,
         hideToggleFilterCommand: false, // show/hide internal custom commands
         menuWidth: 17,
         resizeOnShowHeaderRow: true,
         customItems: [
-          // add Custom Items Commands at the bottom of the already existing internal custom items
+          // add Custom Items Commands which will be appended to the existing internal custom items
           // you cannot override an internal items but you can hide them and create your own
           // also note that the internal custom commands are in the positionOrder range of 50-60,
-          // if you want yours at the bottom then start with 61, below 50 will make your command(s) on top
+          // if you want yours at the bottom then start with 61, below 50 will make your command(s) show on top
           {
             iconCssClass: 'fa fa-question-circle',
             titleKey: 'HELP',
@@ -167,8 +160,8 @@ export class GridMenuComponent implements OnInit {
   }
 
   switchLanguage() {
-    this.selectedLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
-    this.translate.use(this.selectedLanguage);
+    const nextLocale = (this.selectedLanguage === 'en') ? 'fr' : 'en';
+    this.translate.use(nextLocale).subscribe(() => this.selectedLanguage = nextLocale);
   }
 
   toggleGridMenu(e) {
