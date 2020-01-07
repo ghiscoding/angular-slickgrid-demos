@@ -380,6 +380,8 @@ export class GridEditorComponent implements OnInit {
         minWidth: 100,
         filterable: true,
         formatter: taskFormatter,
+        exportWithFormatter: true,
+        sanitizeDataExport: true,
         sortable: true,
         type: FieldType.string,
         editor: {
