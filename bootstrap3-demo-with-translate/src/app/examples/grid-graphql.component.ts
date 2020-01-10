@@ -181,7 +181,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         // onInit: (query) => this.getCustomerApiCall(query)
         preProcess: () => this.displaySpinner(true),
         process: (query) => this.getCustomerApiCall(query),
-        postProcess: (result: GraphqlResult | GraphqlPaginatedResult) => {
+        postProcess: (result: GraphqlPaginatedResult) => {
           this.metrics = result.metrics;
           this.displaySpinner(false);
         }
@@ -226,7 +226,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
    * @param query
    * @return Promise<GraphqlPaginatedResult> | Observable<GraphqlPaginatedResult>
    */
-  getCustomerApiCall(query: string): Promise<GraphqlResult | GraphqlPaginatedResult> {
+  getCustomerApiCall(query: string): Promise<GraphqlPaginatedResult> {
     // in your case, you will call your WebAPI function (wich needs to return a Promise)
     // for the demo purpose, we will call a mock WebAPI function
     const mockedResult = {
@@ -235,9 +235,6 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       data: {
         [GRAPHQL_QUERY_DATASET_NAME]: {
           nodes: [],
-          pageInfo: {
-            hasNextPage: true
-          },
           totalCount: 100
         }
       }

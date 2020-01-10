@@ -92,13 +92,44 @@ export class GridMenuComponent implements OnInit {
             titleKey: 'HELP',
             disabled: false,
             command: 'help',
-            positionOrder: 99
+            positionOrder: 90,
+            cssClass: 'bold',     // container css class
+            textCssClass: 'blue'  // just the text css class
           },
-          // you can also add divider between commands (command is a required property but you can set it to empty string)
+          // you can pass divider as a string or an object with a boolean (if sorting by position, then use the object)
+          // note you should use the "divider" string only when items array is already sorted and positionOrder are not specified
+          { divider: true, command: '', positionOrder: 89 },
+          // 'divider',
           {
-            divider: true,
-            command: '',
-            positionOrder: 98
+            title: 'Command 1',
+            command: 'command1',
+            positionOrder: 91,
+            cssClass: 'orange',
+            iconCssClass: 'fa fa-warning',
+            // you can use the "action" callback and/or use "onCallback" callback from the grid options, they both have the same arguments
+            action: (e, args) => alert(args.command),
+            itemUsabilityOverride: (args) => {
+              // for example disable the command if there's any hidden column(s)
+              if (args && Array.isArray(args.columns)) {
+                return args.columns.length === args.visibleColumns.length;
+              }
+              return true;
+            },
+          },
+          {
+            title: 'Command 2',
+            command: 'command2',
+            positionOrder: 92,
+            cssClass: 'red',        // container css class
+            textCssClass: 'italic', // just the text css class
+            action: (e, args) => alert(args.command),
+            itemVisibilityOverride: (args) => {
+              // for example hide this command from the menu if there's any filter entered
+              if (this.angularGrid) {
+                return this.isObjectEmpty(this.angularGrid.filterService.getColumnFilters());
+              }
+              return true;
+            },
           },
           {
             title: 'Disabled command',
@@ -156,5 +187,14 @@ export class GridMenuComponent implements OnInit {
       const gridMenuInstance = this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.gridMenu);
       gridMenuInstance.showGridMenu(e);
     }
+  }
+
+  private isObjectEmpty(obj) {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key) && obj[key] !== '') {
+        return false;
+      }
+    }
+    return true;
   }
 }
