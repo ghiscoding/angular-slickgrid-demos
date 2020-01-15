@@ -22,6 +22,7 @@ import { GridEditorComponent } from './examples/grid-editor.component';
 import { GridFormatterComponent } from './examples/grid-formatter.component';
 import { GridFrozenComponent } from './examples/grid-frozen.component';
 import { GridGraphqlComponent } from './examples/grid-graphql.component';
+import { GridGraphqlWithoutPaginationComponent } from './examples/grid-graphql-nopage.component';
 import { GridGroupingComponent } from './examples/grid-grouping.component';
 import { GridHeaderMenuComponent } from './examples/grid-headermenu.component';
 import { GridHeaderButtonComponent } from './examples/grid-headerbutton.component';
@@ -67,6 +68,7 @@ import { localeFrench } from './locales/fr';
     GridFormatterComponent,
     GridFrozenComponent,
     GridGraphqlComponent,
+    GridGraphqlWithoutPaginationComponent,
     GridGroupingComponent,
     GridHeaderButtonComponent,
     GridHeaderMenuComponent,

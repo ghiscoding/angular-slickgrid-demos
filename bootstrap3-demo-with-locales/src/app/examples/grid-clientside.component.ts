@@ -165,6 +165,7 @@ export class GridClientSideComponent implements OnInit {
       },
       enableExcelCopyBuffer: true,
       enableFiltering: true,
+      showCustomFooter: true, // display some metrics in the bottom custom footer
 
       // use columnDef searchTerms OR use presets as shown below
       presets: {

@@ -1,35 +1,24 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand"
-    href="https://github.com/ghiscoding/Angular-Slickgrid">
+  <a class="navbar-brand" href="https://github.com/ghiscoding/Angular-Slickgrid">
     <i class="fa fa-github"></i>
     <span>{{title}}</span>
   </a>
-  <button class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarContent"
-    aria-controls="navbarContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="navbar-collapse collapse"
-    id="navbarContent">
+  <div class="navbar-collapse collapse" id="navbarContent">
     <ul class="navbar-nav mr-auto">
       <li>
-        <span class="nav-link"
-          style="position: relative; top: 5px">
-          <iframe allowtransparency="true"
-            scrolling="no"
-            frameborder="0"
+        <span class="nav-link" style="position: relative; top: 5px">
+          <iframe allowtransparency="true" scrolling="no" frameborder="0"
             src="https://buttons.github.io/buttons.html#href=https%3A%2F%2Fgithub.com%2Fghiscoding%2FAngular-Slickgrid&amp;aria-label=Star%20ghiscoding%2FAngular-Slickgrid%20on%20GitHub&amp;data-icon=octicon-star&amp;data-text=Star&amp;data-show-count=true"
             style="width: 90px; height: 20px; border: none;"></iframe>
         </span>
       </li>
       <li class="nav-item">
-        <a class="nav-link"
-          [routerLink]="['/home']">
+        <a class="nav-link" [routerLink]="['/home']">
           <i class="fa fa-lg fa-home"></i> Home
         </a>
       </li>
@@ -39,143 +28,94 @@
 
 <div class="container-fluid">
   <div class="panel-wm">
-    <section id="panel-left"
-      class="panel-wm-left">
+    <section id="panel-left" class="panel-wm-left">
       <ul class="well nav nav-pills nav-stacked">
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/basic']">1- Basic Grid / 2 Grids</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/basic']">1- Basic Grid / 2 Grids</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/formatter']">2- Formatters</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/formatter']">2- Formatters</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/editor']">3- Editors</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/editor']">3- Editors</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/clientside']">4- Client Side Sort/Filter</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/clientside']">4- Client Side Sort/Filter</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/odata']">5- Backend Server with OData</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/odata']">5- Backend Server with OData</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/gridgraphql']">6- Backend Server with
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/gridgraphql']">6- Backend Server with
             GraphQL</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/headerbutton']">7- Header Button Plugin</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/headerbutton']">7- Header Button Plugin</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/headermenu']">8- Header Menu Plugin</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/headermenu']">8- Header Menu Plugin</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/gridmenu']">9- Grid Menu (hamburger menu)</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/gridmenu']">9- Grid Menu (hamburger menu)</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/selection']">10- Row Selection / 2 Grids</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/selection']">10- Row Selection / 2 Grids</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/additem']">11- Add/Update/Highlight Datagrid
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/additem']">11- Add/Update/Highlight Datagrid
             Item</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/localization']">12- Localization (i18n)</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/localization']">12- Localization (i18n)</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/swt']">13- Backend Server Custom Paging</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/swt']">13- Backend Server Custom Paging</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/grouping']">14- Grouping &amp; Aggregator</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/grouping']">14- Grouping &amp; Aggregator</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/colspan']">15- Column Span</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/colspan']">15- Column Span</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/gridstate']">16- Grid State &amp; Local
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/gridstate']">16- Grid State &amp; Local
             Storage</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/rowmove']">17- Row Move</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/rowmove']">17- Row Move</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/remote']">18- Remote Model</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/remote']">18- Remote Model</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/draggrouping']">19- Draggable Grouping</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/draggrouping']">19- Draggable Grouping</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/frozen']">20- Frozen Columns/Rows</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/frozen']">20- Frozen Columns/Rows</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/rowdetail']">21- Row Detail View</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/rowdetail']">21- Row Detail View</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/angular-components']">22- Use of Angular
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/angular-components']">22- Use of Angular
             Components</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/autoheight']">23- Grid AutoHeight (full
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/autoheight']">23- Grid AutoHeight (full
             height)</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/gridtabs']">24- within Bootstrap Tabs</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/gridtabs']">24- within Bootstrap Tabs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/range']">25- Filter by Range of Values</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/range']">25- Filter by Range of Values</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"
-            routerLinkActive="active"
-            [routerLink]="['/context']">26- Cell & Context Menu</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/context']">26- Cell & Context Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/graphql-nopage']">27- GraphQL without
+            Pagination</a>
         </li>
       </ul>
     </section>

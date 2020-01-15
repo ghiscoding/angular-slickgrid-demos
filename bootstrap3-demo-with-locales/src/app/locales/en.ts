@@ -33,6 +33,7 @@ export const localeEnglish = {
   // optional locale texts (depending on which features of the grid you use, you might (or not) need them or not)
   TEXT_ITEMS: 'items',
   TEXT_ITEMS_PER_PAGE: 'items per page',
+  TEXT_LAST_UPDATE: 'Last Update',
   TEXT_OF: 'of',
   TEXT_PAGE: 'Page',
   TEXT_REFRESH_DATASET: 'Refresh Dataset',

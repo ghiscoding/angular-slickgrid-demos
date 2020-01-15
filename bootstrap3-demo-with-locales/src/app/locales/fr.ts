@@ -33,6 +33,7 @@ export const localeFrench = {
   // texte optionnel pour la locale (dépendement de quelles functionalitées vous utilisez, vous aurez peut-être (ou pas) besoin des textes suivants)
   TEXT_ITEMS: 'éléments',
   TEXT_ITEMS_PER_PAGE: 'éléments par page',
+  TEXT_LAST_UPDATE: 'Dernière mise à jour',
   TEXT_OF: 'de',
   TEXT_PAGE: 'Page',
   TEXT_REFRESH_DATASET: 'Rafraîchir les données',
