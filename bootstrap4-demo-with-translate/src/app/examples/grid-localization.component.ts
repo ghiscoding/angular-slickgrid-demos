@@ -147,7 +147,7 @@ export class GridLocalizationComponent implements OnInit {
           ofKey: 'OF',
           lastUpdateKey: 'LAST_UPDATE',
         },
-        dateFormat: 'yyyy-MM-dd HH:mm aaaaa\'m\'',
+        dateFormat: 'yyyy-MM-dd hh:mm aaaaa\'m\'',
         hideTotalItemCount: false,
         hideLastUpdateTimestamp: false,
       },
