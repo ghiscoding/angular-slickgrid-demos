@@ -12,6 +12,8 @@ import {
   GridOption
 } from 'angular-slickgrid';
 
+const NB_ITEMS = 1500;
+
 // create a custom translate Formatter (typically you would move that a separate file, for separation of concerns)
 const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
   const gridOptions = (grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {};
@@ -60,7 +62,10 @@ export class GridLocalizationComponent implements OnInit {
   duplicateTitleHeaderCount = 1;
 
   constructor(private translate: TranslateService) {
-    this.selectedLanguage = this.translate.getDefaultLang();
+    // always start with English for Cypress E2E tests to be consistent
+    const defaultLang = 'en';
+    this.translate.use(defaultLang);
+    this.selectedLanguage = defaultLang;
   }
 
   ngOnInit(): void {
@@ -136,8 +141,6 @@ export class GridLocalizationComponent implements OnInit {
       i18n: this.translate,
       showCustomFooter: true, // display some metrics in the bottom custom footer
       customFooterOptions: {
-        // optionally display some text on the left footer container
-        // leftFooterText: 'custom text shown on left container',
         metricTexts: {
           // default text displayed in the metrics section on the right
           // all texts optionally support translation keys,
@@ -186,7 +189,7 @@ export class GridLocalizationComponent implements OnInit {
       }
     };
 
-    this.loadData(1000);
+    this.loadData(NB_ITEMS);
   }
 
   // mock a dataset

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularGridInstance, Column, FieldType, Formatter, Formatters, GridOption, SelectedRange } from 'angular-slickgrid';
 
 // create my custom Formatter with the Formatter type
-// you can return a string of a object (of type FormatterResultObject), the 2 types are shown below
 const myCustomCheckmarkFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
+  // you can return a string of a object (of type FormatterResultObject), the 2 types are shown below
   return value ? `<i class="fa fa-fire red" aria-hidden="true"></i>` : { text: '<i class="fa fa-snowflake-o" aria-hidden="true"></i>', addClasses: 'lightblue', toolTip: 'Freezing' };
 };
 
@@ -69,16 +69,24 @@ export class GridFormatterComponent implements OnInit {
       },
       enableAutoResize: true,
       enableCellNavigation: true,
+      showCustomFooter: true, // display some metrics in the bottom custom footer
+      customFooterOptions: {
+        // optionally display some text on the left footer container
+        leftFooterText: 'custom footer text',
+        hideTotalItemCount: true,
+        hideLastUpdateTimestamp: true
+      },
 
       // you customize all formatter at once certain options through "formatterOptions" in the Grid Options
       // or independently through the column definition "params", the option names are the same
       /*
       formatterOptions: {
         dateSeparator: '.',
+        decimalSeparator: ',',
         displayNegativeNumberWithParentheses: true,
         minDecimal: 0,
         maxDecimal: 2,
-        thousandSeparator: ','
+        thousandSeparator: '_'
       },
       */
 

@@ -7,7 +7,8 @@ import {
   Formatters,
   GridOption,
   GridState,
-  GridStateChange
+  GridStateChange,
+  MultipleSelectOption
 } from 'angular-slickgrid';
 
 function randomBetween(min, max) {
@@ -15,6 +16,7 @@ function randomBetween(min, max) {
 }
 const LOCAL_STORAGE_KEY = 'gridState';
 const NB_ITEMS = 500;
+const DEFAULT_PAGE_SIZE = 25;
 
 @Component({
   templateUrl: './grid-state.component.html'
@@ -48,9 +50,8 @@ export class GridStateComponent implements OnInit {
   ngOnInit(): void {
     const presets = JSON.parse(localStorage[LOCAL_STORAGE_KEY] || null);
 
-    // use some Grid State preset defaults if you wish
+    // use some Grid State preset defaults if you wish or just restore from Locale Storage
     // presets = presets || this.useDefaultPresets();
-
     this.defineGrid(presets);
   }
 
@@ -58,6 +59,7 @@ export class GridStateComponent implements OnInit {
   clearGridStateFromLocalStorage() {
     localStorage[LOCAL_STORAGE_KEY] = null;
     this.angularGrid.gridService.resetGrid(this.columnDefinitions);
+    this.angularGrid.paginationService.changeItemPerPage(DEFAULT_PAGE_SIZE);
   }
 
   /* Define grid Options and Columns */
@@ -95,12 +97,11 @@ export class GridStateComponent implements OnInit {
         filter: {
           collection: multiSelectFilterArray,
           model: Filters.multipleSelect,
-          searchTerms: [1, 33, 44, 50, 66], // default selection
           // we could add certain option(s) to the "multiple-select" plugin
           filterOptions: {
             maxHeight: 250,
             width: 175
-          }
+          } as MultipleSelectOption
         }
       },
       {
@@ -121,9 +122,7 @@ export class GridStateComponent implements OnInit {
           model: Filters.singleSelect,
 
           // we could add certain option(s) to the "multiple-select" plugin
-          filterOptions: {
-            autoDropWidth: true
-          },
+          filterOptions: { autoDropWidth: true } as MultipleSelectOption,
         }
       }
     ];
@@ -135,6 +134,17 @@ export class GridStateComponent implements OnInit {
       },
       enableCheckboxSelector: true,
       enableFiltering: true,
+      columnPicker: {
+        hideForceFitButton: true
+      },
+      gridMenu: {
+        hideForceFitButton: true
+      },
+      enablePagination: true,
+      pagination: {
+        pageSizes: [5, 10, 15, 20, 25, 30, 40, 50, 75, 100],
+        pageSize: DEFAULT_PAGE_SIZE
+      },
     };
 
     // reload the Grid State with the grid options presets
@@ -142,13 +152,13 @@ export class GridStateComponent implements OnInit {
       this.gridOptions.presets = gridStatePresets;
     }
 
-    this.getData();
+    this.dataset = this.getData(NB_ITEMS);
   }
 
-  getData() {
+  getData(count: number) {
     // mock a dataset
-    this.dataset = [];
-    for (let i = 0; i < NB_ITEMS; i++) {
+    const tmpData = [];
+    for (let i = 0; i < count; i++) {
       const randomDuration = Math.round(Math.random() * 100);
       const randomYear = randomBetween(2000, 2025);
       const randomYearShort = randomBetween(10, 25);
@@ -159,7 +169,7 @@ export class GridStateComponent implements OnInit {
       const randomHour = randomBetween(10, 23);
       const randomTime = randomBetween(10, 59);
 
-      this.dataset[i] = {
+      tmpData[i] = {
         id: i,
         title: 'Task ' + i,
         etc: 'Something hidden ' + i,
@@ -173,6 +183,7 @@ export class GridStateComponent implements OnInit {
         completed: (i % 3 === 0)
       };
     }
+    return tmpData;
   }
 
   /** Dispatched event of a Grid State Changed event */
@@ -211,6 +222,6 @@ export class GridStateComponent implements OnInit {
         { columnId: 'duration', direction: 'DESC' },
         { columnId: 'complete', direction: 'ASC' }
       ],
-    };
+    } as GridState;
   }
 }

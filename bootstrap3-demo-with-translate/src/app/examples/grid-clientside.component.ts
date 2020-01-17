@@ -1,8 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
-import { AngularGridInstance, Column, FieldType, Filters, Formatters, GridOption, GridStateChange, Metrics, OperatorType } from 'angular-slickgrid';
 import { CustomInputFilter } from './custom-inputFilter';
+import {
+  AngularGridInstance,
+  Column,
+  FieldType,
+  Filters,
+  FlatpickrOption,
+  Formatters,
+  GridOption,
+  GridStateChange,
+  Metrics,
+  MultipleSelectOption,
+  OperatorType,
+} from 'angular-slickgrid';
 
 function randomBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -19,15 +31,18 @@ export class GridClientSideComponent implements OnInit {
     Sort/Filter on client side only using SlickGrid DataView (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Sorting" target="_blank">Wiki docs</a>)
     <br/>
     <ul class="small">
-      <li>Support multi-sort (by default), hold "Shift" key and click on the next column to sort.
-      <li>All column types support the following operators: (>, >=, <, <=, <>, !=, =, ==, *)
+      <li>Support multi-sort (by default), hold "Shift" key and click on the next column to sort.</li>
+      <li>All column types support the following operators: (>, >=, <, <=, <>, !=, =, ==, *)</li>
       <ul>
         <li>Example: >100 ... >=2001-01-01 ... >02/28/17</li>
         <li><b>Note:</b> For filters to work properly (default is string), make sure to provide a FieldType (type is against the dataset, not the Formatter)</li>
       </ul>
       <li>Date Filters</li>
       <ul>
-        <li>FieldType of dateUtc/date (from dataset) can use an extra option of "filterSearchType" to let user filter more easily. For example, in the "UTC Date" field below, you can type "&gt;02/28/2017", also when dealing with UTC you have to take the time difference in consideration.</li>
+        <li>
+          FieldType of dateUtc/date (from dataset) can use an extra option of "filterSearchType" to let user filter more easily.
+          For example, in the "UTC Date" field below, you can type "&gt;02/28/2017", also when dealing with UTC you have to take the time difference in consideration.
+        </li>
       </ul>
       <li>On String filters, (*) can be used as startsWith (Hello* => matches "Hello Word") ... endsWith (*Doe => matches: "John Doe")</li>
       <li>Custom Filter are now possible, "Description" column below, is a customized InputFilter with different placeholder. See <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Custom-Filter" target="_blank">Wiki - Custom Filter</a>
@@ -54,7 +69,7 @@ export class GridClientSideComponent implements OnInit {
         type: FieldType.string,
         filter: {
           model: new CustomInputFilter(), // create a new instance to make each Filter independent from each other
-          enableTrimWhiteSpace: true
+          enableTrimWhiteSpace: true // or use global "enableFilterTrimWhiteSpace" to trim on all Filters
         }
       },
       {
@@ -99,7 +114,7 @@ export class GridClientSideComponent implements OnInit {
             // if we want to display shorter text as the selected text (on the select filter itself, parent element)
             // we can use "useSelectOptionLabel" or "useSelectOptionLabelToHtml" the latter will parse html
             useSelectOptionLabelToHtml: true
-          }
+          } as MultipleSelectOption
         }
       },
       {
@@ -107,7 +122,7 @@ export class GridClientSideComponent implements OnInit {
         filterable: true, filter: { model: Filters.compoundInputNumber }
       },
       {
-        id: 'start', name: 'Start', field: 'start', formatter: Formatters.dateIso, sortable: true, minWidth: 75, exportWithFormatter: true,
+        id: 'start', name: 'Start', field: 'start', formatter: Formatters.dateIso, sortable: true, minWidth: 75, exportWithFormatter: false,
         type: FieldType.date, filterable: true, filter: { model: Filters.compoundDate }
       },
       {
@@ -121,9 +136,7 @@ export class GridClientSideComponent implements OnInit {
           model: Filters.compoundDate,
           // override any of the Flatpickr options through "filterOptions"
           // please note that there's no TSlint on this property since it's generic for any filter, so make sure you entered the correct filter option(s)
-          filterOptions: {
-            minDate: 'today'
-          }
+          filterOptions: { minDate: 'today' } as FlatpickrOption
         }
       },
       {
@@ -152,9 +165,7 @@ export class GridClientSideComponent implements OnInit {
           model: Filters.singleSelect,
 
           // we could add certain option(s) to the "multiple-select" plugin
-          filterOptions: {
-            autoDropWidth: true
-          },
+          filterOptions: { autoDropWidth: true } as MultipleSelectOption,
         }
       }
     ];
@@ -164,24 +175,26 @@ export class GridClientSideComponent implements OnInit {
         containerId: 'demo-container',
         sidePadding: 15
       },
+      enableExcelExport: true,
       enableExcelCopyBuffer: true,
       enableFiltering: true,
+      // enableFilterTrimWhiteSpace: true,
       i18n: this.translate,
       showCustomFooter: true, // display some metrics in the bottom custom footer
 
       // use columnDef searchTerms OR use presets as shown below
       presets: {
         filters: [
-          { columnId: 'duration', searchTerms: [10, 220] },
+          { columnId: 'duration', searchTerms: [10, 98] },
           // { columnId: 'complete', searchTerms: ['5'], operator: '>' },
           { columnId: 'usDateShort', operator: '<', searchTerms: ['4/20/25'] },
-          // { columnId: 'effort-driven', searchTerms: [true] }
+          // { columnId: 'effort-driven', searchTerms: [true] },
         ],
         sorters: [
           { columnId: 'duration', direction: 'DESC' },
           { columnId: 'complete', direction: 'ASC' }
         ],
-      }
+      },
     };
 
     // mock a dataset
@@ -197,8 +210,8 @@ export class GridClientSideComponent implements OnInit {
     const tempDataset = [];
     for (let i = startingIndex; i < (startingIndex + itemCount); i++) {
       const randomDuration = Math.round(Math.random() * 100);
-      const randomYear = randomBetween(2000, 2025);
-      const randomYearShort = randomBetween(10, 25);
+      const randomYear = randomBetween(2000, 2035);
+      const randomYearShort = randomBetween(10, 35);
       const randomMonth = randomBetween(1, 12);
       const randomMonthStr = (randomMonth < 10) ? `0${randomMonth}` : randomMonth;
       const randomDay = randomBetween(10, 28);
@@ -224,7 +237,6 @@ export class GridClientSideComponent implements OnInit {
         }
       });
     }
-
     return tempDataset;
   }
 
@@ -236,18 +248,6 @@ export class GridClientSideComponent implements OnInit {
   /** Save current Filters, Sorters in LocaleStorage or DB */
   saveCurrentGridState(grid) {
     console.log('Client sample, last Grid State:: ', this.angularGrid.gridStateService.getCurrentGridState());
-  }
-
-  refreshMetrics(e, args) {
-    if (args && args.current >= 0) {
-      setTimeout(() => {
-        this.metrics = {
-          startTime: new Date(),
-          itemCount: args && args.current || 0,
-          totalItemCount: this.dataset.length || 0
-        };
-      });
-    }
   }
 
   setFiltersDynamically() {
@@ -266,5 +266,18 @@ export class GridClientSideComponent implements OnInit {
       { columnId: 'duration', direction: 'ASC' },
       { columnId: 'start', direction: 'DESC' },
     ]);
+  }
+
+  refreshMetrics(e, args) {
+    if (args && args.current >= 0) {
+      setTimeout(() => {
+        this.metrics = {
+          startTime: new Date(),
+          endTime: new Date(),
+          itemCount: args && args.current || 0,
+          totalItemCount: this.dataset.length || 0
+        };
+      });
+    }
   }
 }
