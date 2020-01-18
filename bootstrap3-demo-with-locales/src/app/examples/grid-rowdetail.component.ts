@@ -31,7 +31,11 @@ export class GridRowDetailComponent implements OnInit {
   columnDefinitions: Column[];
   gridOptions: GridOption;
   dataset: any[];
-  detailViewRowCount = 10;
+  detailViewRowCount = 9;
+  message: string;
+  flashAlertType = 'info';
+
+  constructor() { }
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
@@ -111,6 +115,9 @@ export class GridRowDetailComponent implements OnInit {
 
         // View Component to load when row detail data is ready
         viewComponent: RowDetailViewComponent,
+
+        // Optionally pass your Parent Component reference to your Child Component (row detail component)
+        parent: this
       }
     };
 
@@ -154,6 +161,11 @@ export class GridRowDetailComponent implements OnInit {
     if (this.angularGrid && this.angularGrid.extensionService) {
       this.rowDetailInstance.collapseAll();
     }
+  }
+
+  showFlashMessage(message: string, alertType = 'info') {
+    this.message = message;
+    this.flashAlertType = alertType;
   }
 
   /** Just for demo purposes, we will simulate an async server call and return more details on the selected row item */
