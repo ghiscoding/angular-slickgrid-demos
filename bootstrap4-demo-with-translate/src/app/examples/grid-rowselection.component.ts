@@ -10,7 +10,7 @@ import {
 
 @Component({
   templateUrl: './grid-rowselection.component.html',
-  styles: ['.alert { padding: 8px; margin-bottom: 10px }', '.col-sm-1{ max-width: 70px }'],
+  styles: ['.alert { padding: 8px; margin-bottom: 10px }', '.col-sm-1{ max-width: 80px }'],
 })
 @Injectable()
 export class GridRowSelectionComponent implements OnInit {
