@@ -8,7 +8,7 @@ import {
   GraphqlResult,
   GraphqlPaginatedResult,
   GraphqlService,
-  GraphqlServiceOption,
+  GraphqlServiceApi,
   GridOption,
   GridStateChange,
   Metrics,
@@ -65,8 +65,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.columnDefinitions = [
       {
-        id: 'name', field: 'name', name: 'Name', width: 60,
-        columnGroup: 'Customer',
+        id: 'name', field: 'name', name: 'Name', width: 60, columnGroup: 'Customer Information',
         type: FieldType.string,
         sortable: true,
         filterable: true,
@@ -75,18 +74,15 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         }
       },
       {
-        id: 'gender', field: 'gender', name: 'Gender', filterable: true, sortable: true, width: 60,
-        columnGroup: 'Customer',
+        id: 'gender', field: 'gender', name: 'Gender', filterable: true, sortable: true, width: 60, columnGroup: 'Customer Information',
         filter: {
           model: Filters.singleSelect,
-          collection: [{ value: '', label: '' }, { value: 'male', label: 'male' }, { value: 'female', label: 'female' }]
+          collection: [{ value: '', label: '' }, { value: 'male', label: 'male', labelKey: 'MALE' }, { value: 'female', label: 'female', labelKey: 'FEMALE' }]
         }
       },
       {
-        id: 'company', field: 'company', name: 'Company', width: 60,
-        columnGroup: 'Customer',
-        sortable: true,
-        filterable: true,
+        id: 'company', field: 'company', name: 'Company', width: 60, columnGroup: 'Customer Information',
+        sortable: true, filterable: true,
         filter: {
           model: Filters.multipleSelect,
           collection: [{ value: 'acme', label: 'Acme' }, { value: 'abc', label: 'Company ABC' }, { value: 'xyz', label: 'Company XYZ' }],
@@ -96,23 +92,23 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         }
       },
       {
-        id: 'billingAddressStreet', field: 'billing.address.street', name: 'Address Street', width: 60,
-        filterable: true, sortable: true, columnGroup: 'Billing Info'
+        id: 'billingAddressStreet', field: 'billing.address.street', name: 'Address Street',
+        width: 60, filterable: true, sortable: true, columnGroup: 'Billing Information',
       },
       {
         id: 'billingAddressZip', field: 'billing.address.zip', name: 'Address Zip', width: 60,
         type: FieldType.number,
-        columnGroup: 'Billing Info',
+        columnGroup: 'Billing Information',
         filterable: true, sortable: true,
         filter: {
           model: Filters.compoundInput
         },
-        formatter: Formatters.complexObject
+        formatter: Formatters.multiple, params: { formatters: [Formatters.complexObject, Formatters.translate] }
       },
       {
         id: 'finish', field: 'finish', name: 'Date', formatter: Formatters.dateIso, sortable: true, minWidth: 90, width: 120, exportWithFormatter: true,
         type: FieldType.date,
-        columnGroup: 'Billing Info',
+        columnGroup: 'Billing Information',
         filterable: true,
         filter: {
           model: Filters.dateRange,
@@ -126,9 +122,11 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
     this.gridOptions = {
       enableFiltering: true,
       enableCellNavigation: true,
+      enableTranslate: true,
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 28,
+      i18n: this.translate,
       gridMenu: {
         resizeOnShowHeaderRow: true,
         customItems: [
@@ -147,6 +145,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
           }
         }
       },
+      enablePagination: true, // you could optionally disable the Pagination
       pagination: {
         pageSizes: [10, 15, 20, 25, 30, 40, 50, 75, 100],
         pageSize: defaultPageSize,
@@ -179,16 +178,26 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       },
       backendServiceApi: {
         service: new GraphqlService(),
-        options: this.getBackendOptions(this.isWithCursor),
+        options: {
+          datasetName: GRAPHQL_QUERY_DATASET_NAME, // the only REQUIRED property
+          addLocaleIntoQuery: true,   // optionally add current locale into the query
+          extraQueryArguments: [{     // optionally add some extra query arguments as input query arguments
+            field: 'userId',
+            value: 123
+          }],
+          // when dealing with complex objects, we want to keep our field name with double quotes
+          // example with gender: query { users (orderBy:[{field:"gender",direction:ASC}]) {}
+          keepArgumentFieldDoubleQuotes: true
+        },
         // you can define the onInit callback OR enable the "executeProcessCommandOnInit" flag in the service init
         // onInit: (query) => this.getCustomerApiCall(query)
         preProcess: () => this.displaySpinner(true),
         process: (query) => this.getCustomerApiCall(query),
-        postProcess: (result: GraphqlPaginatedResult) => {
+        postProcess: (result: GraphqlResult | GraphqlPaginatedResult) => {
           this.metrics = result.metrics;
           this.displaySpinner(false);
         }
-      }
+      } as GraphqlServiceApi
     };
   }
 
@@ -204,32 +213,13 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       : { text: 'done', class: 'alert alert-success' };
   }
 
-  getBackendOptions(withCursor: boolean): GraphqlServiceOption {
-    // with cursor, paginationOptions can be: { first, last, after, before }
-    // without cursor, paginationOptions can be: { first, last, offset }
-    return {
-      columnDefinitions: this.columnDefinitions,
-      datasetName: GRAPHQL_QUERY_DATASET_NAME,
-      isWithCursor: withCursor,
-      addLocaleIntoQuery: true,
-      extraQueryArguments: [{
-        field: 'userId',
-        value: 123
-      }],
-
-      // when dealing with complex objects, we want to keep our field name with double quotes
-      // example with gender: query { users (orderBy:[{field:"gender",direction:ASC}]) {}
-      keepArgumentFieldDoubleQuotes: true
-    };
-  }
-
   /**
    * Calling your GraphQL backend server should always return a Promise or Observable of type GraphqlPaginatedResult (or GraphqlResult)
    *
    * @param query
    * @return Promise<GraphqlPaginatedResult> | Observable<GraphqlPaginatedResult>
    */
-  getCustomerApiCall(query: string): Promise<GraphqlPaginatedResult> {
+  getCustomerApiCall(query: string): Promise<GraphqlResult | GraphqlPaginatedResult> {
     // in your case, you will call your WebAPI function (wich needs to return a Promise)
     // for the demo purpose, we will call a mock WebAPI function
     const mockedResult = {
@@ -296,5 +286,10 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       { columnId: 'billingAddressZip', direction: 'DESC' },
       { columnId: 'company', direction: 'ASC' },
     ]);
+  }
+
+  switchLanguage() {
+    this.selectedLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
+    this.translate.use(this.selectedLanguage);
   }
 }

@@ -104,7 +104,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       {
         id: 'billingAddressZip', field: 'billing.address.zip', headerKey: 'BILLING.ADDRESS.ZIP', width: 60,
         type: FieldType.number,
-        columnGroupKey: 'BILLING.INFORMATION',
+        columnGroupKey: 'BILLING.INFORMATION', // or use "columnGroup" without Translate
         filterable: true, sortable: true,
         filter: {
           model: Filters.compoundInput
@@ -114,7 +114,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       {
         id: 'finish', field: 'finish', name: 'Date', formatter: Formatters.dateIso, sortable: true, minWidth: 90, width: 120, exportWithFormatter: true,
         type: FieldType.date,
-        columnGroupKey: 'BILLING.INFORMATION',
+        columnGroupKey: 'BILLING.INFORMATION', // or use "columnGroup" without Translate
         filterable: true,
         filter: {
           model: Filters.dateRange,
@@ -209,6 +209,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
+    this.gridStateSub = this.angularGrid.gridStateService.onGridStateChanged.subscribe((data) => console.log(data));
   }
 
   displaySpinner(isProcessing) {
