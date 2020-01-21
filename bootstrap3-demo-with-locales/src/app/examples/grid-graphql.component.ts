@@ -65,7 +65,8 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.columnDefinitions = [
       {
-        id: 'name', field: 'name', headerKey: 'NAME', width: 60,
+        id: 'name', field: 'name', name: 'Name', width: 60,
+        columnGroup: 'Customer',
         type: FieldType.string,
         sortable: true,
         filterable: true,
@@ -74,14 +75,16 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         }
       },
       {
-        id: 'gender', field: 'gender', headerKey: 'GENDER', filterable: true, sortable: true, width: 60,
+        id: 'gender', field: 'gender', name: 'Gender', filterable: true, sortable: true, width: 60,
+        columnGroup: 'Customer',
         filter: {
           model: Filters.singleSelect,
-          collection: [{ value: '', label: '' }, { value: 'male', label: 'male', labelKey: 'MALE' }, { value: 'female', label: 'female', labelKey: 'FEMALE' }]
+          collection: [{ value: '', label: '' }, { value: 'male', label: 'male' }, { value: 'female', label: 'female' }]
         }
       },
       {
-        id: 'company', field: 'company', headerKey: 'COMPANY', width: 60,
+        id: 'company', field: 'company', name: 'Company', width: 60,
+        columnGroup: 'Customer',
         sortable: true,
         filterable: true,
         filter: {
@@ -92,10 +95,14 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
           } as MultipleSelectOption
         }
       },
-      { id: 'billingAddressStreet', field: 'billing.address.street', headerKey: 'BILLING.ADDRESS.STREET', width: 60, filterable: true, sortable: true },
       {
-        id: 'billingAddressZip', field: 'billing.address.zip', headerKey: 'BILLING.ADDRESS.ZIP', width: 60,
+        id: 'billingAddressStreet', field: 'billing.address.street', name: 'Address Street', width: 60,
+        filterable: true, sortable: true, columnGroup: 'Billing Info'
+      },
+      {
+        id: 'billingAddressZip', field: 'billing.address.zip', name: 'Address Zip', width: 60,
         type: FieldType.number,
+        columnGroup: 'Billing Info',
         filterable: true, sortable: true,
         filter: {
           model: Filters.compoundInput
@@ -105,6 +112,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       {
         id: 'finish', field: 'finish', name: 'Date', formatter: Formatters.dateIso, sortable: true, minWidth: 90, width: 120, exportWithFormatter: true,
         type: FieldType.date,
+        columnGroup: 'Billing Info',
         filterable: true,
         filter: {
           model: Filters.dateRange,
@@ -118,6 +126,9 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
     this.gridOptions = {
       enableFiltering: true,
       enableCellNavigation: true,
+      createPreHeaderPanel: true,
+      showPreHeaderPanel: true,
+      preHeaderPanelHeight: 28,
       gridMenu: {
         resizeOnShowHeaderRow: true,
         customItems: [
