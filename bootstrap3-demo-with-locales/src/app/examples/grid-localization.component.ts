@@ -54,7 +54,7 @@ export class GridLocalizationComponent implements OnInit {
         filter: { model: Filters.compoundSlider, operator: '>=' }
       },
       {
-        id: 'start', name: 'Start', field: 'start', headerKey: 'START', minWidth: 100,
+        id: 'start', name: 'Start', field: 'start', nameKey: 'START', minWidth: 100,
         formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, exportWithFormatter: true,
         filterable: true, filter: { model: Filters.compoundDate }
       },
