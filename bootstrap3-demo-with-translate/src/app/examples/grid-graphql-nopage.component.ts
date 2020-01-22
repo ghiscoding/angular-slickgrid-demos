@@ -106,6 +106,14 @@ export class GridGraphqlWithoutPaginationComponent implements OnInit {
             // the data is not at the root of the array, so we must tell the Select Filter where to pull the data
             collectionInsideObjectProperty: 'data.languages'
           },
+          collectionFilterBy: [
+            // filter out any empty values
+            { property: 'name', value: '', operator: 'NE' },
+            { property: 'name', value: null, operator: 'NE' },
+          ],
+          collectionSortBy: {
+            property: 'name'
+          },
           customStructure: {
             value: 'name',
             label: 'name',
@@ -129,7 +137,6 @@ export class GridGraphqlWithoutPaginationComponent implements OnInit {
       enableFiltering: true,
       enableCellNavigation: true,
       enablePagination: false,
-      enableTranslate: true,
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 28,
