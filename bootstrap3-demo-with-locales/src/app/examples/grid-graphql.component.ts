@@ -103,7 +103,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         filter: {
           model: Filters.compoundInput
         },
-        formatter: Formatters.multiple, params: { formatters: [Formatters.complexObject, Formatters.translate] }
+        formatter: Formatters.complexObject
       },
       {
         id: 'finish', field: 'finish', name: 'Date', formatter: Formatters.dateIso, sortable: true, minWidth: 90, width: 120, exportWithFormatter: true,
@@ -122,11 +122,9 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
     this.gridOptions = {
       enableFiltering: true,
       enableCellNavigation: true,
-      enableTranslate: true,
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 28,
-      i18n: this.translate,
       gridMenu: {
         resizeOnShowHeaderRow: true,
         customItems: [
@@ -286,10 +284,5 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       { columnId: 'billingAddressZip', direction: 'DESC' },
       { columnId: 'company', direction: 'ASC' },
     ]);
-  }
-
-  switchLanguage() {
-    this.selectedLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
-    this.translate.use(this.selectedLanguage);
   }
 }

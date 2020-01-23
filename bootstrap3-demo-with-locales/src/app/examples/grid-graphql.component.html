@@ -24,14 +24,6 @@
           Set Sorting Dynamically
         </button>
       </div>
-      <div class="row col-md-12">
-        <button class="btn btn-default btn-sm" (click)="switchLanguage()">
-          <i class="fa fa-language"></i>
-          Switch Language
-        </button>
-        <b>Locale:</b>
-        <span style="font-style: italic">{{selectedLanguage + '.json'}}</span>
-      </div>
       <br />
       <div *ngIf="metrics" style="margin: 10px 0px">
         <b>Metrics:</b> {{metrics.endTime | date: 'yyyy-MM-dd hh:mm aaaaa\'m\''}} | {{metrics.executionTime}}ms
