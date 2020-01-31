@@ -77,7 +77,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         id: 'gender', field: 'gender', name: 'Gender', filterable: true, sortable: true, width: 60, columnGroup: 'Customer Information',
         filter: {
           model: Filters.singleSelect,
-          collection: [{ value: '', label: '' }, { value: 'male', label: 'male', labelKey: 'MALE' }, { value: 'female', label: 'female', labelKey: 'FEMALE' }]
+          collection: [{ value: '', label: '' }, { value: 'male', label: 'Male' }, { value: 'female', label: 'Female' }]
         }
       },
       {

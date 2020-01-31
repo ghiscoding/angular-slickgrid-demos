@@ -33,18 +33,18 @@ export class GridMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.columnDefinitions = [
-      { id: 'title', name: 'Title', field: 'title', nameKey: 'TITLE', filterable: true, type: FieldType.string },
-      { id: 'duration', name: 'Duration', field: 'duration', nameKey: 'DURATION', sortable: true, filterable: true, type: FieldType.string },
+      { id: 'title', name: 'Title', field: 'title', filterable: true, type: FieldType.string },
+      { id: 'duration', name: 'Duration', field: 'duration', sortable: true, filterable: true, type: FieldType.string },
       {
-        id: 'percentComplete', name: '% Complete', field: 'percentComplete', nameKey: 'PERCENT_COMPLETE', sortable: true, filterable: true,
+        id: 'percentComplete', name: '% Complete', field: 'percentComplete', sortable: true, filterable: true,
         type: FieldType.number,
         formatter: Formatters.percentCompleteBar,
         filter: { model: Filters.compoundSlider, params: { hideSliderNumber: false } }
       },
-      { id: 'start', name: 'Start', field: 'start', nameKey: 'START', filterable: true, type: FieldType.string },
-      { id: 'finish', name: 'Finish', field: 'finish', nameKey: 'FINISH', filterable: true, type: FieldType.string },
+      { id: 'start', name: 'Start', field: 'start', filterable: true, type: FieldType.string },
+      { id: 'finish', name: 'Finish', field: 'finish', filterable: true, type: FieldType.string },
       {
-        id: 'effort-driven', name: 'Completed', field: 'effortDriven', nameKey: 'COMPLETED', maxWidth: 80, formatter: Formatters.checkmark,
+        id: 'effort-driven', name: 'Completed', field: 'effortDriven', maxWidth: 80, formatter: Formatters.checkmark,
         type: FieldType.boolean,
         minWidth: 100,
         sortable: true,
@@ -73,9 +73,7 @@ export class GridMenuComponent implements OnInit {
       enableFiltering: true,
       enableCellNavigation: true,
       gridMenu: {
-        // all titles optionally support translation keys, if you wish to use that feature then use the title properties with the 'Key' suffix (e.g: titleKey)
-        // example "customTitle" for a plain string OR "customTitleKey" to use a translation key
-        customTitleKey: 'CUSTOM_COMMANDS',
+        customTitle: 'Custom Commands',
         iconCssClass: 'fa fa-ellipsis-v', // defaults to "fa-bars"
         hideForceFitButton: true,
         hideSyncResizeButton: true,
@@ -89,7 +87,7 @@ export class GridMenuComponent implements OnInit {
           // if you want yours at the bottom then start with 61, below 50 will make your command(s) show on top
           {
             iconCssClass: 'fa fa-question-circle',
-            titleKey: 'HELP',
+            title: 'Help',
             disabled: false,
             command: 'help',
             positionOrder: 90,

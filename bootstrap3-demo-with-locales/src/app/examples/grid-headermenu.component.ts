@@ -60,7 +60,7 @@ export class GridHeaderMenuComponent implements OnInit {
               // HOWEVER note that if you use "itemUsabilityOverride" has precedence when it is defined
               // disabled: (columnDef.id === 'completed'),
 
-              titleKey: 'HELP', // use "title" as plain string OR "titleKey" when using a translation key
+              title: 'Help',
               command: 'help',
               tooltip: 'Need assistance?',
               cssClass: 'bold',     // container css class
