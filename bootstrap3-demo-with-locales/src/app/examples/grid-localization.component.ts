@@ -80,6 +80,10 @@ export class GridLocalizationComponent implements OnInit {
         containerId: 'demo-container',
         sidePadding: 15
       },
+
+      // use a Single Custom Locales set
+      locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
+      locales: localeFrench,
       enableAutoResize: true,
       enableExcelCopyBuffer: true,
       enableExcelExport: true,

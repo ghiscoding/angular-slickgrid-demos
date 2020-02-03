@@ -306,8 +306,6 @@ export class GridOdataComponent implements OnInit {
   changeCountEnableFlag() {
     this.isCountEnabled = !this.isCountEnabled;
     const odataService = this.gridOptions.backendServiceApi.service;
-
-    // @ts-ignore
     odataService.updateOptions({ enableCount: this.isCountEnabled } as OdataOption);
     odataService.clearFilters();
     this.angularGrid.filterService.clearFilters();
@@ -317,7 +315,6 @@ export class GridOdataComponent implements OnInit {
   setOdataVersion(version: number) {
     this.odataVersion = version;
     const odataService = this.gridOptions.backendServiceApi.service;
-    // @ts-ignore
     odataService.updateOptions({ version: this.odataVersion } as OdataOption);
     odataService.clearFilters();
     this.angularGrid.filterService.clearFilters();

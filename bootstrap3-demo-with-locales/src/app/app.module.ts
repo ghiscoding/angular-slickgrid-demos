@@ -105,6 +105,7 @@ import { localeFrench } from './locales/fr';
         sidePadding: 15
       },
       // Provide a custom locales set
+      // locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
       // locales: localeFrench,
     })
   ],
