@@ -1,4 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import {
   AngularGridInstance,
   Column,
@@ -8,15 +9,18 @@ import {
   Filters,
   Formatter,
   Formatters,
-  GridOption
+  GridOption,
+  GridStateChange
 } from 'angular-slickgrid';
-import { localeFrench } from '../locales/fr';
 
-const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
-  return value !== undefined ? `Titre ${value}` : '';
-};
-const exportBooleanFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
-  return value ? 'Vrai' : 'Faux';
+const NB_ITEMS = 1500;
+
+// create a custom translate Formatter (typically you would move that a separate file, for separation of concerns)
+const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
+  const gridOptions = (grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {};
+  const translate = gridOptions.i18n;
+
+  return translate.instant('TASK_X', { x: value });
 };
 
 @Component({
@@ -24,75 +28,127 @@ const exportBooleanFormatter: Formatter = (row: number, cell: number, value: any
 })
 @Injectable()
 export class GridLocalizationComponent implements OnInit {
-  title = 'Example 12: Localization with Locales - French Locale displayed';
-  subTitle = `This Examples uses French Locales but you could use your own custom locales
+  title = 'Example 12: Localization (i18n)';
+  subTitle = `Support multiple locales with the ngx-translate plugin, following these steps (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Localization" target="_blank">Wiki docs</a>)
+  <ol class="small">
+    <li>You first need to "enableTranslate" in the Grid Options</li>
+    <li>In the Column Definitions, you have following options</li>
     <ul>
-      <li>Defining your own Custom Locales must include all necessary text, see the default (<a href="https://github.com/ghiscoding/angular-slickgrid-demos/blob/master/bootstrap3-demo-with-locales/src/app/locales/en.ts" target="_blank">English Custom Locales</a>)</li>
-      <li>Support Custom Locales (through the "locales" grid option), following these steps (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Localization-with-Custom-Locales" target="_blank">Wiki docs</a>)
-      <li>For more info about "Download to File", read the <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Export-to-File" target="_blank">Wiki page</a></li>
+      <li>To translate a header title, use "nameKey" with a translate key (nameKey: 'TITLE')</li>
+      <li>For the cell values, you need to use a Formatter, there's 2 ways of doing it</li>
+      <ul>
+        <li>formatter: myCustomTranslateFormatter <b>&lt;= "Title" column uses it</b></li>
+        <li>formatter: Formatters.translate, i18n: this.translateService <b>&lt;= "Completed" column uses it</b></li>
+      </ul>
     </ul>
+    <li>For date localization, you need to create your own custom formatter. </li>
+    <ul>
+      <li>You can easily implement logic to switch between Formatters "dateIso" or "dateUs", depending on current locale.</li>
+    </ul>
+    <li>For the Select (dropdown) filter, you can fill in the "labelKey" property, if found it will use it, else it will use "label"</li>
+      <ul>
+        <li>What if your select options have totally different value/label pair? In this case, you can use the <b>customStructure: { label: 'customLabel', value: 'customValue'}</b> to change the property name(s) to use.'</li>
+        <li>What if you want to use "customStructure" and translation? Simply pass this flag <b>enableTranslateLabel: true</b></li>
+        <li>More info on the Select Filter <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Select-Filter" target="_blank">Wiki page</a>
+      </ul>
+    <li>For more info about "Download to File", read the <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Export-to-File" target="_blank">Wiki page</a></li>
+    </ol>
   `;
 
   angularGrid: AngularGridInstance;
   columnDefinitions: Column[];
   gridOptions: GridOption;
   dataset: any[];
-  selectedLanguage = `localeFrench.ts`;
+  selectedLanguage: string;
   duplicateTitleHeaderCount = 1;
 
-  constructor() { }
+  constructor(private translate: TranslateService) {
+    // always start with English for Cypress E2E tests to be consistent
+    const defaultLang = 'en';
+    this.translate.use(defaultLang);
+    this.selectedLanguage = defaultLang;
+  }
 
   ngOnInit(): void {
     this.columnDefinitions = [
-      { id: 'title', name: 'Titre', field: 'id', sortable: true, minWidth: 100, filterable: true, formatter: taskFormatter, params: { useFormatterOuputToFilter: true } },
+      {
+        id: 'title', name: 'Title', field: 'id', nameKey: 'TITLE', minWidth: 100,
+        formatter: taskTranslateFormatter,
+        sortable: true,
+        filterable: true,
+        params: { useFormatterOuputToFilter: true }
+      },
       { id: 'description', name: 'Description', field: 'description', filterable: true, sortable: true, minWidth: 80 },
       {
-        id: 'duration', name: 'Durée (jours)', field: 'duration', sortable: true,
-        formatter: Formatters.percentCompleteBar,
-        minWidth: 100,
+        id: 'duration', name: 'Duration (days)', field: 'duration', nameKey: 'DURATION', sortable: true,
+        formatter: Formatters.percentCompleteBar, minWidth: 100,
+        exportWithFormatter: false,
         filterable: true,
-        filter: { model: Filters.compoundSlider, operator: '>=' }
+        type: FieldType.number,
+        filter: { model: Filters.slider, /* operator: '>=',*/ params: { hideSliderNumber: true } }
       },
       {
         id: 'start', name: 'Start', field: 'start', nameKey: 'START', minWidth: 100,
         formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, exportWithFormatter: true,
         filterable: true, filter: { model: Filters.compoundDate }
       },
-      { id: 'finish', name: 'Fin', field: 'finish', formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, minWidth: 100, filterable: true, filter: { model: Filters.compoundDate } },
+      { id: 'finish', name: 'Finish', field: 'finish', nameKey: 'FINISH', formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, minWidth: 100, filterable: true, filter: { model: Filters.compoundDate } },
       {
-        id: 'completedBool', name: 'Complétée', field: 'completedBool', minWidth: 100,
+        id: 'completedBool', name: 'Completed', field: 'completedBool', nameKey: 'COMPLETED', minWidth: 100,
         sortable: true,
         formatter: Formatters.checkmark,
-        exportCustomFormatter: exportBooleanFormatter,
+        exportCustomFormatter: Formatters.translateBoolean,
         filterable: true,
         filter: {
-          collection: [{ value: true, label: 'Vrai' }, { value: false, label: 'Faux' }],
-          model: Filters.multipleSelect,
+          collection: [{ value: '', label: '' }, { value: true, labelKey: 'TRUE' }, { value: false, labelKey: 'FALSE' }],
+          model: Filters.singleSelect,
+          enableTranslateLabel: true,
+          filterOptions: {
+            autoDropWidth: true
+          }
+        }
+      },
+      {
+        id: 'completed', name: 'Completed', field: 'completed', nameKey: 'COMPLETED', formatter: Formatters.translate, sortable: true,
+        minWidth: 100,
+        exportWithFormatter: true, // you can set this property in the column definition OR in the grid options, column def has priority over grid options
+        filterable: true,
+        filter: {
+          collection: [{ value: '', label: '' }, { value: 'TRUE', labelKey: 'TRUE' }, { value: 'FALSE', labelKey: 'FALSE' }],
+          collectionSortBy: {
+            property: 'labelKey' // will sort by translated value since "enableTranslateLabel" is true
+          },
+          enableTranslateLabel: true,
+          model: Filters.singleSelect,
           filterOptions: {
             autoDropWidth: true
           }
         }
       }
+      // OR via your own custom translate formatter
+      // { id: 'completed', name: 'Completed', field: 'completed', nameKey: 'COMPLETED', formatter: translateFormatter, sortable: true, minWidth: 100 }
     ];
-
     this.gridOptions = {
       autoResize: {
         containerId: 'demo-container',
         sidePadding: 15
       },
-
-      // use a Single Custom Locales set
-      locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
-      locales: localeFrench,
       enableAutoResize: true,
       enableExcelCopyBuffer: true,
       enableExcelExport: true,
       enableExport: true,
       enableFiltering: true,
+      enableTranslate: true,
+      i18n: this.translate,
+      checkboxSelector: {
+        // you can toggle these 2 properties to show the "select all" checkbox in different location
+        hideInFilterHeaderRow: false,
+        hideInColumnTitleRow: true
+      },
+      enableCheckboxSelector: true,
+      enableRowSelection: true,
       showCustomFooter: true, // display some metrics in the bottom custom footer
       customFooterOptions: {
-        // optionally display some text on the left footer container
-        // leftFooterText: 'custom text shown on left container',
         metricTexts: {
           // default text displayed in the metrics section on the right
           // all texts optionally support translation keys,
@@ -111,6 +167,7 @@ export class GridLocalizationComponent implements OnInit {
         // a lot of the info can be found on Web Archive of Excel-Builder
         // http://web.archive.org/web/20160907052007/http://excelbuilderjs.com/cookbook/fontsAndColors.html
         customExcelHeader: (workbook, sheet) => {
+          const customTitle = this.translate.currentLang === 'fr' ? 'Titre qui est suffisament long pour être coupé' : 'My header that is long enough to wrap';
           const stylesheet = workbook.getStyleSheet();
           const aFormatDefn = {
             'font': { 'size': 12, 'fontName': 'Calibri', 'bold': true, color: 'FF0000FF' }, // every color starts with FF, then regular HTML color
@@ -125,7 +182,7 @@ export class GridLocalizationComponent implements OnInit {
           // push empty data on A1
           cols.push({ value: '' });
           // push data in B1 cell with metadata formatter
-          cols.push({ value: 'Titre qui est suffisament long pour être coupé', metadata: { style: formatterId.id } });
+          cols.push({ value: customTitle, metadata: { style: formatterId.id } });
           sheet.data.push(cols);
         }
       },
@@ -140,7 +197,7 @@ export class GridLocalizationComponent implements OnInit {
       }
     };
 
-    this.loadData(1000);
+    this.loadData(NB_ITEMS);
   }
 
   // mock a dataset
@@ -157,7 +214,8 @@ export class GridLocalizationComponent implements OnInit {
         duration: Math.round(Math.random() * 100) + '',
         start: new Date(randomYear, randomMonth, randomDay),
         finish: new Date(randomYear, (randomMonth + 1), randomDay),
-        completedBool: (i % 5 === 0) ? true : false
+        completedBool: (i % 5 === 0) ? true : false,
+        completed: (i % 5 === 0) ? 'TRUE' : 'FALSE'
       };
     }
   }
@@ -167,7 +225,7 @@ export class GridLocalizationComponent implements OnInit {
   }
 
   dynamicallyAddTitleHeader() {
-    const newCol = { id: `title${this.duplicateTitleHeaderCount++}`, field: 'id', name: 'Titre', sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true } };
+    const newCol = { id: `title${this.duplicateTitleHeaderCount++}`, field: 'id', nameKey: 'TITLE', formatter: taskTranslateFormatter, sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true } };
     this.columnDefinitions.push(newCol);
     this.columnDefinitions = this.columnDefinitions.slice();
   }
@@ -184,6 +242,19 @@ export class GridLocalizationComponent implements OnInit {
       delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,
       filename: 'myExport',
       format: (type === 'csv') ? FileType.csv : FileType.txt
+    });
+  }
+
+  /** Dispatched event of a Grid State Changed event */
+  gridStateChanged(gridStateChanges: GridStateChange) {
+    console.log('Grid State changed:: ', gridStateChanges);
+    console.log('Grid State changed:: ', gridStateChanges.change);
+  }
+
+  switchLanguage() {
+    const nextLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
+    this.translate.use(nextLanguage).subscribe(() => {
+      this.selectedLanguage = nextLanguage;
     });
   }
 }
