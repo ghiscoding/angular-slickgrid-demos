@@ -272,6 +272,7 @@ export class GridDraggableGroupingComponent implements OnInit {
     if (this.draggableGroupingPlugin && this.draggableGroupingPlugin.setDroppedGroups) {
       this.draggableGroupingPlugin.clearDroppedGroups();
     }
+    this.gridObj.invalidate(); // invalidate all rows and re-render
   }
 
   clearGroupingSelects() {
@@ -306,8 +307,7 @@ export class GridDraggableGroupingComponent implements OnInit {
     if (this.draggableGroupingPlugin && this.draggableGroupingPlugin.setDroppedGroups) {
       this.showPreHeader();
       this.draggableGroupingPlugin.setDroppedGroups('duration');
-      this.gridObj.invalidate();
-      this.gridObj.render();
+      this.gridObj.invalidate(); // invalidate all rows and re-render
     }
   }
 
@@ -318,17 +318,15 @@ export class GridDraggableGroupingComponent implements OnInit {
 
     // you need to manually add the sort icon(s) in UI
     const sortColumns = sortedByCount ? [] : [{ columnId: 'duration', sortAsc: true }];
-    this.angularGrid.slickGrid.setSortColumns(sortColumns);
+    this.angularGrid.filterService.setSortColumnIcons(sortColumns);
   }
 
   groupByDurationEffortDriven() {
-    this.angularGrid.slickGrid.setSortColumns([]);
     this.clearGrouping();
     if (this.draggableGroupingPlugin && this.draggableGroupingPlugin.setDroppedGroups) {
       this.showPreHeader();
       this.draggableGroupingPlugin.setDroppedGroups(['duration', 'effortDriven']);
-      this.gridObj.invalidate();
-      this.gridObj.render();
+      this.gridObj.invalidate(); // invalidate all rows and re-render
     }
   }
 
@@ -340,8 +338,7 @@ export class GridDraggableGroupingComponent implements OnInit {
 
       this.showPreHeader();
       this.draggableGroupingPlugin.setDroppedGroups(groupedFields);
-      this.gridObj.invalidate();
-      this.gridObj.render();
+      this.gridObj.invalidate(); // invalidate all rows and re-render
     }
   }
 
