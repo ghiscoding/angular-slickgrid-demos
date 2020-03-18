@@ -14,7 +14,6 @@ import {
   SortDirectionNumber,
   Sorters,
 } from 'angular-slickgrid';
-import { Subscription } from 'rxjs';
 
 @Injectable()
 @Component({
@@ -224,6 +223,7 @@ export class GridGroupingComponent implements OnInit {
 
     // you need to manually add the sort icon(s) in UI
     this.angularGrid.slickGrid.setSortColumns([{ columnId: 'duration', sortAsc: true }]);
+    this.gridObj.invalidate(); // invalidate all rows and re-render
   }
 
   groupByDurationOrderByCount(aggregateCollapsed) {
@@ -241,6 +241,7 @@ export class GridGroupingComponent implements OnInit {
       aggregateCollapsed,
       lazyTotalsCalculation: true
     } as Grouping);
+    this.gridObj.invalidate(); // invalidate all rows and re-render
   }
 
   groupByDurationEffortDriven() {
@@ -267,6 +268,7 @@ export class GridGroupingComponent implements OnInit {
         lazyTotalsCalculation: true
       }
     ] as Grouping[]);
+    this.gridObj.invalidate(); // invalidate all rows and re-render
   }
 
   groupByDurationEffortDrivenPercent() {
@@ -302,5 +304,6 @@ export class GridGroupingComponent implements OnInit {
         lazyTotalsCalculation: true
       }
     ] as Grouping[]);
+    this.gridObj.invalidate(); // invalidate all rows and re-render
   }
 }
