@@ -1,9 +1,4 @@
-import {
-    Component, OnInit, Injectable, ViewContainerRef, ComponentFactoryResolver,
-    ComponentFactory, ComponentRef, AfterContentChecked, AfterViewChecked,
-    AfterViewInit, Input, EventEmitter, Output, ViewChild,
-    ElementRef, Renderer
-} from '@angular/core';
+import { Component, OnInit, Injectable, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef, AfterContentChecked, AfterViewChecked, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
     AngularSlickgridComponent, Column, FieldType, Formatter, Formatters,
@@ -154,7 +149,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
      * @param httpClient
      */
     constructor(private httpClient: HttpClient, private translate: TranslateService,
-        private el: ElementRef, private renderer: Renderer) {
+        private el: ElementRef, private renderer: Renderer2) {
         this.logger = new Logger('grid', httpClient);
 
         this.logger.info('method [constructor] - START/END');

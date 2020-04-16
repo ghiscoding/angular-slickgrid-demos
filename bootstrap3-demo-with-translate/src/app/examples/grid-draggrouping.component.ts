@@ -10,7 +10,6 @@ import {
   Formatters,
   GridOption,
   Grouping,
-  GroupingGetterFunction,
   GroupTotalFormatters,
   SortDirectionNumber,
   Sorters,
@@ -46,7 +45,7 @@ export class GridDraggableGroupingComponent implements OnInit {
   gridObj: any;
   gridOptions: GridOption;
   processing = false;
-  selectedGroupingFields: Array<string | GroupingGetterFunction> = ['', '', ''];
+  selectedGroupingFields: Array<string> = ['', '', ''];
 
   constructor() {
     // define the grid options & columns and then create the grid itself
