@@ -1,7 +1,4 @@
-import {
-    Component, OnInit, ViewChild, ModuleWithProviders, NgModule, ViewContainerRef, ComponentFactoryResolver, OnChanges, AfterContentInit, AfterViewChecked, ElementRef, Renderer, EventEmitter,
-    Output, AfterViewInit, Injectable
-} from '@angular/core';
+import { Component, OnInit, ViewChild, ModuleWithProviders, NgModule, ViewContainerRef, ComponentFactoryResolver, OnChanges, AfterContentInit, AfterViewChecked, ElementRef, EventEmitter, Output, AfterViewInit, Injectable, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 
