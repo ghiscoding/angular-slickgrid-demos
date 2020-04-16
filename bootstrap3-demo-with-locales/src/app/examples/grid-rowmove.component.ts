@@ -43,7 +43,7 @@ export class GridRowMoveComponent implements OnInit {
       enableAutoResize: true,
       autoResize: {
         containerId: 'demo-container',
-        sidePadding: 15
+        sidePadding: 10
       },
       enableCellNavigation: true,
       enableRowMoveManager: true,

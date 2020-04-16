@@ -102,7 +102,7 @@ import { localeFrench } from './locales/fr';
       enableAutoResize: true,
       autoResize: {
         containerId: 'demo-container',
-        sidePadding: 15
+        sidePadding: 10
       },
       // Provide a custom locales set
       // locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor

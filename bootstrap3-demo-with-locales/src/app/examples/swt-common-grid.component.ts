@@ -102,7 +102,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
         autoEdit: this.isAutoEdit,
         autoResize: {
             containerId: 'common-grid-container',
-            sidePadding: 15
+            sidePadding: 10
         },
         // locale: 'fr',
         enableColumnPicker: true,

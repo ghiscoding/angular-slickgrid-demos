@@ -80,7 +80,7 @@ export class GridLocalizationComponent implements OnInit {
     this.gridOptions = {
       autoResize: {
         containerId: 'demo-container',
-        sidePadding: 15
+        sidePadding: 10
       },
 
       // use a Single Custom Locales set
