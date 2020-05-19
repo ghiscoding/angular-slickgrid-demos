@@ -316,7 +316,7 @@ export class GridAngularComponent implements OnInit {
     }
   }
 
-  onCellValidation(e, args) {
+  onCellValidationError(e, args) {
     alert(args.validationResults.msg);
   }
 

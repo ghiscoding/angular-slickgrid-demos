@@ -73,6 +73,15 @@ export class GridMenuComponent implements OnInit {
       enableFiltering: true,
       enableCellNavigation: true,
       gridMenu: {
+        // we could disable the menu entirely by returning false depending on some code logic
+        menuUsabilityOverride: (args) => true,
+
+        // use the click event position to reposition the grid menu (defaults to false)
+        // basically which offset do we want to use for reposition the grid menu,
+        // option1 is where we clicked (true) or option2 is where the icon button is located (false and is the defaults)
+        // you probably want to set this to True if you use an external grid menu button BUT set to False when using default grid menu
+        useClickToRepositionMenu: true,
+
         customTitle: 'Custom Commands',
         iconCssClass: 'fa fa-ellipsis-v', // defaults to "fa-bars"
         hideForceFitButton: true,
