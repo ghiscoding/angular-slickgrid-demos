@@ -10,13 +10,14 @@ import {
   Formatters,
   GridOption,
   GridStateChange,
+  SlickGrid,
 } from 'angular-slickgrid';
 import { localeFrench } from '../locales/fr';
 
-const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
+const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
   return value !== undefined ? `Titre ${value}` : '';
 };
-const exportBooleanFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
+const exportBooleanFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
   return value ? 'Vrai' : 'Faux';
 };
 

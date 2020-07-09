@@ -13,6 +13,7 @@ import {
   Metrics,
   MultipleSelectOption,
   OperatorType,
+  SlickGrid,
 } from 'angular-slickgrid';
 import * as moment from 'moment-mini';
 
@@ -22,7 +23,7 @@ function randomBetween(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
+const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
   return value !== undefined ? `Title ${value}` : '';
 };
 

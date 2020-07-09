@@ -8,6 +8,7 @@ import {
   OperatorType,
   OperatorString,
   SearchTerm,
+  SlickGrid,
 } from 'angular-slickgrid';
 
 // using external non-typed js libraries
@@ -16,7 +17,7 @@ declare var $: any;
 export class CustomInputFilter implements Filter {
   private _clearFilterTriggered = false;
   private $filterElm: any;
-  grid: any;
+  grid: SlickGrid;
   searchTerms: SearchTerm[];
   columnDef: Column;
   callback: FilterCallback;

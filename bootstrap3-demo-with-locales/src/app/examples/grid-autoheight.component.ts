@@ -7,6 +7,8 @@ import {
   Formatters,
   GridOption,
   OperatorString,
+  SlickDataView,
+  SlickGrid,
 } from 'angular-slickgrid';
 
 @Component({
@@ -27,8 +29,8 @@ export class GridAutoHeightComponent implements OnInit {
   `;
 
   angularGrid: AngularGridInstance;
-  grid: any;
-  dataView: any;
+  grid: SlickGrid;
+  dataView: SlickDataView;
   columnDefinitions: Column[];
   gridOptions: GridOption;
   dataset: any[];
