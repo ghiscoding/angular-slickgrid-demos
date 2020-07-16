@@ -160,6 +160,17 @@ export class GridAddItemComponent implements OnInit {
   }
 
   addNewItem(insertPosition?: 'top' | 'bottom') {
+    const newItem1 = this.createNewItem(1);
+    const newItem2 = this.createNewItem(2);
+
+    // single insert
+    this.angularGrid.gridService.addItem(newItem1, { position: insertPosition });
+
+    // OR multiple inserts
+    // this.angularGrid.gridService.addItems([newItem1, newItem2], { position: insertPosition });
+  }
+
+  createNewItem(incrementIdByHowMany = 1) {
     const dataset = this.angularGrid.dataView.getItems();
     let highestId = 0;
     dataset.forEach(item => {
@@ -167,13 +178,13 @@ export class GridAddItemComponent implements OnInit {
         highestId = item.id;
       }
     });
-    const newId = highestId + 1;
+    const newId = highestId + incrementIdByHowMany;
     const randomYear = 2000 + Math.floor(Math.random() * 10);
     const randomMonth = Math.floor(Math.random() * 11);
     const randomDay = Math.floor((Math.random() * 29));
     const randomPercent = Math.round(Math.random() * 100);
 
-    const newItem = {
+    return {
       id: newId,
       title: 'Task ' + newId,
       duration: Math.round(Math.random() * 100) + '',
@@ -183,7 +194,6 @@ export class GridAddItemComponent implements OnInit {
       finish: new Date(randomYear, (randomMonth + 2), randomDay),
       effortDriven: true
     };
-    this.angularGrid.gridService.addItem(newItem, { position: insertPosition });
   }
 
   highlighFifthRow() {
@@ -245,7 +255,7 @@ export class GridAddItemComponent implements OnInit {
     const updatedItem2 = this.angularGrid.gridService.getDataItemByRowNumber(2);
     updatedItem1.duration = Math.round(Math.random() * 100);
     updatedItem2.duration = Math.round(Math.random() * 100);
-    this.angularGrid.gridService.updateItems([updatedItem1, updatedItem2], true);
+    this.angularGrid.gridService.updateItems([updatedItem1, updatedItem2], { highlightRow: true });
     */
   }
 
