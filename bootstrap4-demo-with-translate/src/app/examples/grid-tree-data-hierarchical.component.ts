@@ -96,22 +96,22 @@ export class GridTreeDataHierarchicalComponent implements OnInit {
         iconClearGroupingCommand: 'mdi mdi-close',
         iconCopyCellValueCommand: 'mdi mdi-content-copy',
         iconExportCsvCommand: 'mdi mdi-download',
-        iconExportExcelCommand: 'mdi mdi-file-excel-outline text-success has-text-success',
+        iconExportExcelCommand: 'mdi mdi-file-excel-outline',
         iconExportTextDelimitedCommand: 'mdi mdi-download',
       },
       gridMenu: {
         iconCssClass: 'mdi mdi-menu',
         iconClearAllFiltersCommand: 'mdi mdi-filter-remove-outline',
-        iconClearAllSortingCommand: 'mdi mdi-swap-vertical text-danger',
+        iconClearAllSortingCommand: 'mdi mdi-swap-vertical',
         iconExportCsvCommand: 'mdi mdi-download',
-        iconExportExcelCommand: 'mdi mdi-file-excel-outline text-success has-text-success',
+        iconExportExcelCommand: 'mdi mdi-file-excel-outline',
         iconExportTextDelimitedCommand: 'mdi mdi-download',
         iconRefreshDatasetCommand: 'mdi mdi-sync',
         iconToggleFilterCommand: 'mdi mdi-flip-vertical',
         iconTogglePreHeaderCommand: 'mdi mdi-flip-vertical',
       },
       headerMenu: {
-        iconClearFilterCommand: 'mdi mdi mdi-filter-remove-outline text-danger',
+        iconClearFilterCommand: 'mdi mdi mdi-filter-remove-outline',
         iconClearSortCommand: 'mdi mdi-swap-vertical',
         iconSortAscCommand: 'mdi mdi-sort-ascending',
         iconSortDescCommand: 'mdi mdi-flip-v mdi-sort-descending',
@@ -141,7 +141,7 @@ export class GridTreeDataHierarchicalComponent implements OnInit {
 
   treeFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
     const gridOptions = grid.getOptions() as GridOption;
-    const treeLevelPropName = gridOptions.treeDataOptions.levelPropName || '__treeLevel';
+    const treeLevelPropName = gridOptions.treeDataOptions && gridOptions.treeDataOptions.levelPropName || '__treeLevel';
     if (value === null || value === undefined || dataContext === undefined) {
       return '';
     }
@@ -155,7 +155,7 @@ export class GridTreeDataHierarchicalComponent implements OnInit {
     const spacer = `<span style="display:inline-block; width:${(15 * dataContext[treeLevelPropName])}px;"></span>`;
 
     if (data[idx + 1] && data[idx + 1][treeLevelPropName] > data[idx][treeLevelPropName]) {
-      const folderPrefix = `<span class="mdi icon ${dataContext.__collapsed ? 'mdi-folder' : 'mdi-folder-open'}"></span>`;
+      const folderPrefix = `<span class="mdi icon color-alt-warning ${dataContext.__collapsed ? 'mdi-folder' : 'mdi-folder-open'}"></span>`;
       if (dataContext.__collapsed) {
         return `${spacer} <span class="slick-group-toggle collapsed" level="${dataContext[treeLevelPropName]}"></span>${folderPrefix} ${prefix}&nbsp;${value}`;
       } else {
@@ -169,13 +169,13 @@ export class GridTreeDataHierarchicalComponent implements OnInit {
   getFileIcon(value: string) {
     let prefix = '';
     if (value.includes('.pdf')) {
-      prefix = '<span class="mdi icon mdi-file-pdf-outline"></span>';
+      prefix = '<span class="mdi icon mdi-file-pdf-outline color-danger"></span>';
     } else if (value.includes('.txt')) {
-      prefix = '<span class="mdi icon mdi-file-document-outline"></span>';
+      prefix = '<span class="mdi icon mdi-file-document-outline color-muted-light"></span>';
     } else if (value.includes('.xls')) {
-      prefix = '<span class="mdi icon mdi-file-excel-outline"></span>';
+      prefix = '<span class="mdi icon mdi-file-excel-outline color-success"></span>';
     } else if (value.includes('.mp3')) {
-      prefix = '<span class="mdi icon mdi-file-music-outline"></span>';
+      prefix = '<span class="mdi icon mdi-file-music-outline color-info"></span>';
     }
     return prefix;
   }

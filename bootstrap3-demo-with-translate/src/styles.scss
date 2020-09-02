@@ -27,6 +27,13 @@
   color: red !important;
 }
 
+.github-button-container {
+  position: relative;
+  top: 14px;
+  margin-left: 5px;
+}
+
+
 /* Angular-Slickgrid styling */
 /* Customize the SlickGrid Bootstrap theme to your taste
  * Copy any of the variables '../node_modules/angular-slickgrid/styles/sass/_variables.scss'
@@ -37,5 +44,5 @@
 /*$cell-odd-background-color: lightyellow;*/
 
 /* make sure to add the @import the SlickGrid Bootstrap Theme AFTER the variables changes */
-@import '../node_modules/angular-slickgrid/styles/sass/slickgrid-theme-bootstrap.scss';
+@import 'angular-slickgrid/styles/sass/slickgrid-theme-bootstrap.scss';
 
