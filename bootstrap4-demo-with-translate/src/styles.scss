@@ -21,7 +21,7 @@
     padding: 10px;
 
     /* the height is 100% minus the 2 navbars */
-    height: calc(100vh - 58px);
+    height: calc(100vh - 56px);
     li {
       width: 100%;
     }
@@ -78,7 +78,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: 58px;
+  top: 56px;
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -237,6 +237,6 @@ div.au-stagger {
 
 .github-button-container {
   position: relative;
-  top: 14px;
+  top: 5px;
   margin-left: 5px;
 }
