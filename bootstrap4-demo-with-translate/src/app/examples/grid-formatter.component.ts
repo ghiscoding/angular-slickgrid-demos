@@ -9,7 +9,7 @@ const myCustomCheckmarkFormatter: Formatter = (row, cell, value, columnDef, data
 
 const customEnableButtonFormatter: Formatter = (row: number, cell: number, value: any, columnDef: Column, dataContext: any, grid: SlickGrid) => {
   return `<span style="margin-left: 5px">
-      <button class="btn btn-xs btn-default">
+      <button class="btn btn-xs btn-outline-secondary">
         <i class="fa ${value ? 'fa-check-circle' : 'fa-circle-thin'} fa-lg" style="color: ${value ? 'black' : 'lavender'}"></i>
       </button>
     </span>`;
