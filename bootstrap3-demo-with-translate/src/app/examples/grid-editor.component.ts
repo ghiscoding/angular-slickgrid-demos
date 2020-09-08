@@ -238,6 +238,12 @@ export class GridEditorComponent implements OnInit {
           },
           elementOptions: {
             maxHeight: 400
+          },
+          validator: (value, args) => {
+            if (value < 50) {
+              return { valid: false, msg: 'Please use at least 50%' };
+            }
+            return { valid: true, msg: '' };
           }
         },
         params: {
