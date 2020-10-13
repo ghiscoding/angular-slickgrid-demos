@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularGridInstance, Column, ExtensionName, Formatters, GridOption } from 'angular-slickgrid';
+import { AngularGridInstance, Column, ExtensionName, Filters, Formatters, GridOption } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './grid-rowmove.component.html'
@@ -37,12 +37,27 @@ export class GridRowMoveComponent implements OnInit {
 
   ngOnInit(): void {
     this.columnDefinitions = [
-      { id: 'title', name: 'Title', field: 'title' },
-      { id: 'duration', name: 'Duration', field: 'duration', sortable: true },
-      { id: '%', name: '% Complete', field: 'percentComplete', sortable: true },
-      { id: 'start', name: 'Start', field: 'start' },
-      { id: 'finish', name: 'Finish', field: 'finish' },
-      { id: 'effort-driven', name: 'Completed', field: 'effortDriven', formatter: Formatters.checkmark }
+      { id: 'title', name: 'Title', field: 'title', filterable: true, },
+      { id: 'duration', name: 'Duration', field: 'duration', filterable: true, sortable: true },
+      { id: '%', name: '% Complete', field: 'percentComplete', filterable: true, sortable: true },
+      {
+        id: 'start', name: 'Start', field: 'start', filterable: true, sortable: true,
+        filter: { model: Filters.compoundDate },
+      },
+      {
+        id: 'finish', name: 'Finish', field: 'finish',
+        filterable: true, sortable: true,
+        filter: { model: Filters.compoundDate },
+      },
+      {
+        id: 'effort-driven', name: 'Completed', field: 'effortDriven',
+        formatter: Formatters.checkmark,
+        filterable: true, sortable: true,
+        filter: {
+          collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
+          model: Filters.singleSelect
+        },
+      }
     ];
 
     this.gridOptions = {
@@ -52,7 +67,13 @@ export class GridRowMoveComponent implements OnInit {
         sidePadding: 10
       },
       enableCellNavigation: true,
+      enableFiltering: true,
       enableCheckboxSelector: true,
+      checkboxSelector: {
+        // you can toggle these 2 properties to show the "select all" checkbox in different location
+        hideInFilterHeaderRow: false,
+        hideInColumnTitleRow: true
+      },
       enableRowSelection: true,
       rowSelectionOptions: {
         // True (Single Selection), False (Multiple Selections)
@@ -67,6 +88,7 @@ export class GridRowMoveComponent implements OnInit {
         singleRowMove: true,
         disableRowSelection: true,
         cancelEditOnDrag: true,
+        width: 30,
         onBeforeMoveRows: (e, args) => this.onBeforeMoveRow(e, args),
         onMoveRows: (e, args) => this.onMoveRows(e, args),
 
@@ -138,5 +160,34 @@ export class GridRowMoveComponent implements OnInit {
 
     this.angularGrid.slickGrid.resetActiveCell();
     this.dataset = tmpDataset;
+  }
+
+  hideDurationColumnDynamically() {
+    const columnIndex = this.angularGrid.slickGrid.getColumns().findIndex(col => col.id === 'duration');
+    if (columnIndex >= 0) {
+      this.angularGrid.gridService.hideColumnByIndex(columnIndex);
+    }
+  }
+
+  // Disable/Enable Filtering/Sorting functionalities
+  // --------------------------------------------------
+
+  disableFilters() {
+    this.angularGrid.filterService.disableFilterFunctionality(true);
+  }
+
+  disableSorting() {
+    this.angularGrid.sortService.disableSortFunctionality(true);
+  }
+
+  // or Toggle Filtering/Sorting functionalities
+  // ---------------------------------------------
+
+  toggleFilter() {
+    this.angularGrid.filterService.toggleFilterFunctionality();
+  }
+
+  toggleSorting() {
+    this.angularGrid.sortService.toggleSortFunctionality();
   }
 }
