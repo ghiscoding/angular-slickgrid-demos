@@ -71,7 +71,7 @@
               "sourceMap": true,
               "extractCss": true,
               "namedChunks": true,
-              "aot": false,
+              "aot": true,
               "extractLicenses": true,
               "vendorChunk": true,
               "buildOptimizer": false,
