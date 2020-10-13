@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "postinstall": "ngcc",
     "build-demo": "npm-run-all build",
     "postbuild-demo": "npm-run-all del-ghpage copy-ghpage:dist",
     "copy-ghpage:dist": "cross-env copyfiles --up 1 dist-demo/**/*.* ../../Angular-Slickgrid/docs",
