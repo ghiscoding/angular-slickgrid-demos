@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { CustomInputFilter } from './custom-inputFilter';
 import {
@@ -14,9 +14,10 @@ import {
   Metrics,
   MultipleSelectOption,
   OperatorType,
-  SlickGrid,
+  unsubscribeAllObservables,
 } from 'angular-slickgrid';
 import * as moment from 'moment-mini';
+import { Subscription } from 'rxjs';
 
 const NB_ITEMS = 1500;
 
@@ -25,7 +26,7 @@ function randomBetween(min: number, max: number): number {
 }
 
 // create a custom translate Formatter (typically you would move that a separate file, for separation of concerns)
-const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
+const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
   const gridOptions = (grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {};
   const translate = gridOptions.i18n;
 
@@ -35,11 +36,11 @@ const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any
 @Component({
   templateUrl: './grid-range.component.html'
 })
-export class GridRangeComponent implements OnInit {
+export class GridRangeComponent implements OnInit, OnDestroy {
   title = 'Example 25: Filtering from Range of Search Values';
   subTitle = `
-    This demo shows how to use Filters with Range of Search Values
-    <br/>
+  This demo shows how to use Filters with Range of Search Values (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Range-Filters" target="_blank">Wiki docs</a>)
+  <br/>
     <ul class="small">
       <li>All input filters support the following operators: (>, >=, <, <=, <>, !=, =, ==, *) and now also the (..) for an input range
       <li>All filters (which support ranges) can be defined via the 2 dots (..) which represents a range, this also works for dates and slider in the "presets"</li>
@@ -55,7 +56,7 @@ export class GridRangeComponent implements OnInit {
       <li>Date Range with Flatpickr Date Picker, they will also use the locale, choose a start date then drag or click on the end date</li>
     </ul>
   `;
-
+  private subscriptions: Subscription[] = [];
   angularGrid: AngularGridInstance;
   columnDefinitions: Column[];
   gridOptions: GridOption;
@@ -74,6 +75,11 @@ export class GridRangeComponent implements OnInit {
     const defaultLang = 'en';
     this.translate.use(defaultLang);
     this.selectedLanguage = defaultLang;
+  }
+
+  ngOnDestroy() {
+    // also unsubscribe all Angular Subscriptions
+    this.subscriptions = unsubscribeAllObservables(this.subscriptions);
   }
 
   ngOnInit(): void {
@@ -275,7 +281,11 @@ export class GridRangeComponent implements OnInit {
   }
 
   switchLanguage() {
-    const nextLocale = (this.selectedLanguage === 'en') ? 'fr' : 'en';
-    this.translate.use(nextLocale).subscribe(() => this.selectedLanguage = nextLocale);
+    const nextLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
+    this.subscriptions.push(
+      this.translate.use(nextLanguage).subscribe(() => {
+        this.selectedLanguage = nextLanguage;
+      })
+    );
   }
 }

@@ -6,7 +6,6 @@ import {
   FieldType,
   Filters,
   Formatters,
-  GraphqlResult,
   GraphqlPaginatedResult,
   GraphqlService,
   GraphqlServiceApi,
@@ -16,6 +15,7 @@ import {
   MultipleSelectOption,
   OperatorType,
   SortDirection,
+  unsubscribeAllObservables,
 } from 'angular-slickgrid';
 import * as moment from 'moment-mini';
 import { Subscription } from 'rxjs';
@@ -44,6 +44,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       <li>You can also preload a grid with certain "presets" like Filters / Sorters / Pagination <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grid-State-&-Preset" target="_blank">Wiki - Grid Preset</a>
     </ul>
   `;
+  private subscriptions: Subscription[] = [];
   angularGrid: AngularGridInstance;
   columnDefinitions: Column[];
   gridOptions: GridOption;
@@ -55,7 +56,6 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   status = { text: 'processing...', class: 'alert alert-danger' };
   isWithCursor = false;
   selectedLanguage: string;
-  gridStateSub: Subscription;
 
   constructor(private translate: TranslateService) {
     // always start with English for Cypress E2E tests to be consistent
@@ -65,7 +65,8 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.gridStateSub.unsubscribe();
+    // also unsubscribe all Angular Subscriptions
+    this.subscriptions = unsubscribeAllObservables(this.subscriptions);
   }
 
   ngOnInit(): void {
@@ -180,7 +181,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
           { columnId: 'name', direction: 'asc' },
           { columnId: 'company', direction: SortDirection.DESC }
         ],
-        pagination: { pageNumber: 2, pageSize: 20 }
+        pagination: { pageNumber: 2, pageSize: defaultPageSize }
       },
       backendServiceApi: {
         service: new GraphqlService(),
@@ -199,7 +200,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         // onInit: (query) => this.getCustomerApiCall(query)
         preProcess: () => this.displaySpinner(true),
         process: (query) => this.getCustomerApiCall(query),
-        postProcess: (result: GraphqlResult | GraphqlPaginatedResult) => {
+        postProcess: (result: GraphqlPaginatedResult) => {
           this.metrics = result.metrics;
           this.displaySpinner(false);
         }
@@ -209,7 +210,9 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
-    this.gridStateSub = this.angularGrid.gridStateService.onGridStateChanged.subscribe((data) => console.log(data));
+    this.subscriptions.push(
+      this.angularGrid.gridStateService.onGridStateChanged.subscribe((data) => console.log(data))
+    );
   }
 
   displaySpinner(isProcessing) {
@@ -220,12 +223,11 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Calling your GraphQL backend server should always return a Promise or Observable of type GraphqlPaginatedResult (or GraphqlResult)
-   *
+   * Calling your GraphQL backend server should always return a Promise or Observable of type GraphqlPaginatedResult (or GraphqlResult without Pagination)
    * @param query
-   * @return Promise<GraphqlPaginatedResult> | Observable<GraphqlPaginatedResult>
+   * @return Promise<GraphqlPaginatedResult> | Observable<GraphqlResult>
    */
-  getCustomerApiCall(query: string): Promise<GraphqlResult | GraphqlPaginatedResult> {
+  getCustomerApiCall(query: string): Promise<GraphqlPaginatedResult> {
     // in your case, you will call your WebAPI function (wich needs to return a Promise)
     // for the demo purpose, we will call a mock WebAPI function
     const mockedResult = {
@@ -295,7 +297,11 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   }
 
   switchLanguage() {
-    this.selectedLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
-    this.translate.use(this.selectedLanguage);
+    const nextLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
+    this.subscriptions.push(
+      this.translate.use(nextLanguage).subscribe(() => {
+        this.selectedLanguage = nextLanguage;
+      })
+    );
   }
 }

@@ -3,11 +3,12 @@ import { Subscription } from 'rxjs';
 import {
   AngularUtilService,
   Column,
+  ColumnEditor,
   Editor,
   EditorValidator,
   EditorValidatorOutput,
   GridOption,
-  SlickGrid,
+  unsubscribeAllObservables,
 } from 'angular-slickgrid';
 
 /*
@@ -15,7 +16,7 @@ import {
  * KeyDown events are also handled to provide handling for Tab, Shift-Tab, Esc and Ctrl-Enter.
  */
 export class CustomAngularComponentEditor implements Editor {
-  changeSubscriber: Subscription;
+  private _subscriptions: Subscription[] = [];
 
   /** Angular Component Reference */
   componentRef: ComponentRef<any>;
@@ -27,7 +28,7 @@ export class CustomAngularComponentEditor implements Editor {
   defaultItem: any;
 
   /** SlickGrid grid object */
-  grid: SlickGrid;
+  grid: any;
 
   constructor(private args: any) {
     this.grid = args && args.grid;
@@ -54,7 +55,7 @@ export class CustomAngularComponentEditor implements Editor {
   }
 
   /** Get Column Editor object */
-  get columnEditor(): any {
+  get columnEditor(): ColumnEditor {
     return this.columnDef && this.columnDef.internalColumnEditor || {};
   }
 
@@ -88,9 +89,9 @@ export class CustomAngularComponentEditor implements Editor {
       Object.assign(this.componentRef.instance, { collection: this.collection });
 
       // when our model (item object) changes, we'll call a save of the slickgrid editor
-      this.changeSubscriber = this.componentRef.instance.onItemChanged.subscribe((item) => {
-        this.save();
-      });
+      this._subscriptions.push(
+        this.componentRef.instance.onItemChanged.subscribe((item: any) => this.save())
+      );
     }
   }
 
@@ -131,8 +132,10 @@ export class CustomAngularComponentEditor implements Editor {
   destroy() {
     if (this.componentRef && this.componentRef.destroy) {
       this.componentRef.destroy();
-      this.changeSubscriber.unsubscribe();
     }
+
+    // also unsubscribe all Angular Subscriptions
+    this._subscriptions = unsubscribeAllObservables(this._subscriptions);
   }
 
   /** optional, implement a focus method on your Angular Component */
@@ -161,16 +164,13 @@ export class CustomAngularComponentEditor implements Editor {
   }
 
   isValueChanged() {
-    return (!(this.componentRef.instance.selectedId === '' && this.defaultId == null)) && (this.componentRef.instance.selectedId !== this.defaultId);
+    return (!(this.componentRef.instance.selectedId === '' && (this.defaultId === null || this.defaultId === undefined))) && (this.componentRef.instance.selectedId !== this.defaultId);
   }
 
   validate(): EditorValidatorOutput {
     if (this.validator) {
       const value = this.componentRef.instance.selectedId;
-      const validationResults = this.validator(value, this.args);
-      if (!validationResults.valid) {
-        return validationResults;
-      }
+      return this.validator(value, this.args);
     }
 
     // by default the editor is always valid
