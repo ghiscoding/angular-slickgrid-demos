@@ -12,13 +12,15 @@ import {
   OperatorString,
   SearchTerm,
   SlickGrid,
+  unsubscribeAllObservables,
 } from 'angular-slickgrid';
 
 // using external non-typed js libraries
-declare var $: any;
+declare const $: any;
 
 export class CustomAngularComponentFilter implements Filter {
-  changeSubscriber: Subscription;
+  private _shouldTriggerQuery = true;
+  private _subscriptions: Subscription[] = [];
 
   /** Angular Component Reference */
   componentRef: ComponentRef<any>;
@@ -62,7 +64,7 @@ export class CustomAngularComponentFilter implements Filter {
     this.grid = args.grid;
     this.callback = args.callback;
     this.columnDef = args.columnDef;
-    this.searchTerms = args.searchTerms || [];
+    this.searchTerms = (args.hasOwnProperty('searchTerms') ? args.searchTerms : []) || [];
 
     if (!this.columnFilter || !this.columnFilter.params.component || !(this.angularUtilService instanceof AngularUtilService)) {
       throw new Error(`[Angular-Slickgrid] For Filter with Angular Component to work properly, you need to provide your component to the "component" property and make sure to add it to your "entryComponents" array.
@@ -84,9 +86,13 @@ export class CustomAngularComponentFilter implements Filter {
         // but technically you can pass any values you wish to your Component
         Object.assign(componentOuput.componentRef.instance, { collection: this.collection });
 
-        this.changeSubscriber = componentOuput.componentRef.instance.onItemChanged.subscribe((item) => {
-          this.callback(undefined, { columnDef: this.columnDef, operator: this.operator, searchTerms: [item.id] });
-        });
+        this._subscriptions.push(
+          componentOuput.componentRef.instance.onItemChanged.subscribe((item) => {
+            this.callback(undefined, { columnDef: this.columnDef, operator: this.operator, searchTerms: [item.id], shouldTriggerQuery: this._shouldTriggerQuery });
+            // reset flag for next use
+            this._shouldTriggerQuery = true;
+          })
+        );
       });
     }
   }
@@ -94,7 +100,8 @@ export class CustomAngularComponentFilter implements Filter {
   /**
    * Clear the filter value
    */
-  clear() {
+  clear(shouldTriggerQuery = true) {
+    this._shouldTriggerQuery = shouldTriggerQuery;
     if (this.componentRef && this.componentRef.instance && this.componentRef.instance.hasOwnProperty('selectedId')) {
       this.componentRef.instance.selectedId = 0;
     }
@@ -104,13 +111,13 @@ export class CustomAngularComponentFilter implements Filter {
   destroy() {
     if (this.componentRef && this.componentRef.destroy) {
       this.componentRef.destroy();
-      this.changeSubscriber.unsubscribe();
     }
+
+    // also unsubscribe all Angular Subscriptions
+    this._subscriptions = unsubscribeAllObservables(this._subscriptions);
   }
 
-  /**
-   * Set value(s) on the DOM element
-   */
+  /** Set value(s) on the DOM element */
   setValues(values) {
     if (this.componentRef && this.componentRef.instance && this.componentRef.instance.hasOwnProperty('selectedId')) {
       this.componentRef.instance.selectedId = values;
