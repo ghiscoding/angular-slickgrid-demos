@@ -18,6 +18,9 @@
             "tsConfig": "src/tsconfig.app.json",
             "showCircularDependencies": true,
             "polyfills": "src/polyfills.ts",
+            "allowedCommonJsDependencies": [
+              "angular-slickgrid"
+            ],
             "assets": [
               "src/assets",
               "src/favicon.ico",
@@ -63,7 +66,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "50kb"
+                  "maximumWarning": "150kb"
                 }
               ],
               "optimization": false,
