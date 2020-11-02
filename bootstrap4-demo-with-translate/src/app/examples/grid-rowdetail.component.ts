@@ -31,7 +31,7 @@ export class GridRowDetailComponent implements OnInit {
   columnDefinitions: Column[];
   gridOptions: GridOption;
   dataset: any[];
-  detailViewRowCount = 5;
+  detailViewRowCount = 9;
   message: string;
   flashAlertType = 'info';
 
