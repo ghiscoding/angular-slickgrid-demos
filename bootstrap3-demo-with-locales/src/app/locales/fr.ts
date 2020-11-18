@@ -11,6 +11,7 @@ export const localeFrench = {
   TEXT_COMMANDS: 'Commandes',
   TEXT_CONTAINS: 'Contient',
   TEXT_COPY: 'Copier',
+  TEXT_EMPTY_DATA_WARNING_MESSAGE: 'Aucune donnée à afficher.',
   TEXT_ENDS_WITH: 'Se termine par',
   TEXT_EQUALS: 'Égale',
   TEXT_EQUAL_TO: 'Égal à',

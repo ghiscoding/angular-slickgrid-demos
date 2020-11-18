@@ -11,6 +11,7 @@ import {
   Metrics,
   OdataOption,
   OperatorType,
+  Pagination,
 } from 'angular-slickgrid';
 
 const defaultPageSize = 20;
@@ -42,6 +43,7 @@ export class GridOdataComponent implements OnInit {
   gridOptions: GridOption;
   dataset = [];
   metrics: Metrics;
+  paginationOptions: Pagination;
 
   isCountEnabled = true;
   odataVersion = 2;
@@ -136,11 +138,10 @@ export class GridOdataComponent implements OnInit {
     if (this.isCountEnabled) {
       countPropName = (this.odataVersion === 4) ? '@odata.count' : 'odata.count';
     }
-    this.gridOptions.pagination.totalItems = data[countPropName];
+    this.paginationOptions = { ...this.gridOptions.pagination, totalItems: data[countPropName] };
     if (this.metrics) {
       this.metrics.totalItemCount = data[countPropName];
     }
-    this.gridOptions = Object.assign({}, this.gridOptions);
 
     // once pagination totalItems is filled, we can update the dataset
     this.dataset = data['items'];
