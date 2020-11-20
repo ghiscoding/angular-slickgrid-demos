@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "^10.1.5",
     "@angular/router": "^10.1.5",
     "@ng-select/ng-select": "^5.0.3",
-    "angular-slickgrid": "^2.23.1",
+    "angular-slickgrid": "^2.23.2",
     "bootstrap": "^3.4.1",
     "copyfiles": "^2.2.0",
     "core-js": "^2.6.5",
