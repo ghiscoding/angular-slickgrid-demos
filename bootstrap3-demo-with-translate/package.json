@@ -29,7 +29,7 @@
     "@ng-select/ng-select": "^5.0.3",
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
-    "angular-slickgrid": "^2.23.3",
+    "angular-slickgrid": "^2.24.0",
     "bootstrap": "^3.4.1",
     "copyfiles": "^2.1.0",
     "core-js": "^2.6.5",
