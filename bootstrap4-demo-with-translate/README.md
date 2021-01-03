@@ -4,7 +4,7 @@ Common Bootstrap 4 demo using `ngx-translate` that allows for using multiple lan
 ### Install and Start Demo
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap4-demo
+cd angular-slickgrid-demos/bootstrap4-demo-with-translate
 npm install # OR yarn install
 npm start # OR yarn start
 ```
