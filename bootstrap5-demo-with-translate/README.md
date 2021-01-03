@@ -1,10 +1,10 @@
-## Bootstrap 4 
-Common Bootstrap 4 demo using `ngx-translate` that allows for using multiple languages (locales) and switch them on the fly.
+## Bootstrap 5 
+Common Bootstrap 5 demo using `ngx-translate` which allows for using multiple languages (locales) and to be able to switch them on the fly.
 
 ### Install and Start Demo
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap4-demo
+cd angular-slickgrid-demos/bootstrap5-demo-with-translate
 npm install # OR yarn install
 npm start # OR yarn start
 ```
