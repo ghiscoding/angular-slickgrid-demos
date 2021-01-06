@@ -3,7 +3,7 @@
 Common Bootstrap 3 demo using `ngx-translate` that allows for using multiple languages (locales) and switch them on the fly.
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap3-demo
+cd angular-slickgrid-demos/bootstrap3-demo-with-translate
 npm install # OR yarn install
 npm start # OR yarn start
 ```

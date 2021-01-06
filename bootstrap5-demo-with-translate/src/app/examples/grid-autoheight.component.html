@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <h2>{{title}}</h2>
+  <div class="subtitle" [innerHTML]="subTitle"></div>
+
+  <form class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="col-12">
+      <label>Single Search: </label>
+    </div>
+    <div class="col-12">
+      <select class="form-select" name="selectedColumn" [(ngModel)]="selectedColumn"
+          (ngModelChange)="updateFilter()">
+          <option [ngValue]="field" *ngFor="let field of columnDefinitions">{{field.name}}</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <select class="form-select" name="selectedOperator" [(ngModel)]="selectedOperator"
+          (ngModelChange)="updateFilter()">
+          <option [ngValue]="operator" *ngFor="let operator of operatorList">{{operator}}</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <input type="text" class="form-control" name="searchValue" placeholder="search value" autocomplete="off"
+          (input)="updateFilter()" [(ngModel)]="searchValue" />
+    </div>
+  </form>
+  <hr />
+  <angular-slickgrid gridId="grid23" [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions"
+      [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)">
+  </angular-slickgrid>
+</div>
