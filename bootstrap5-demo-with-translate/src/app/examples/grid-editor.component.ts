@@ -10,6 +10,7 @@ import {
   EditorValidator,
   FieldType,
   Filters,
+  FlatpickrOption,
   Formatters,
   GridOption,
   LongTextEditorOption,
@@ -199,7 +200,9 @@ export class GridEditorComponent implements OnInit {
         minWidth: 100,
         filterable: true,
         sortable: true,
+        formatter: Formatters.complexObject,
         type: FieldType.number,
+        exportWithFormatter: true,
         filter: { model: Filters.slider, params: { hideSliderNumber: false } },
         editor: {
           model: Editors.slider,
@@ -214,7 +217,7 @@ export class GridEditorComponent implements OnInit {
           alwaysSaveOnEnterKey: true, // defaults to False, when set to true and user presses ENTER it will always call a Save even if value is empty
           model: Editors.float,
           placeholder: 'enter number',
-          title: 'Your number must be bigger than 5', title: 'show a custom title', // add a custom title, to see it as a real tooltip you'll need to implement something like tipsy jquery lib
+          title: 'Your number must be bigger than 5', // add a custom title, to see it as a real tooltip you'll need to implement something like tipsy jquery lib
           minValue: 5,
           maxValue: 365,
           // the default validation error message is in English but you can override it by using "errorMessage"
@@ -252,13 +255,24 @@ export class GridEditorComponent implements OnInit {
             value: 0,
             operator: OperatorType.notEqual
           },
-          elementOptions: {
+          // you could also provide a collection override to filter/sort based on the item dataContext or whatever else
+          // collectionOverride: (updatedCollection, args) => {
+          //   console.log(args);
+          //   return updatedCollection.filter((col) => args.dataContext.id % 2 ? col.value < 50 : col.value >= 50);
+          // },
+          editorOptions: {
             maxHeight: 400
           }
         },
         params: {
           formatters: [Formatters.collectionEditor, Formatters.percentCompleteBar],
-        }
+        },
+        // validator: (value, args) => {
+        //   if (value < 50) {
+        //     return { valid: false, msg: 'Please use at least 50%' };
+        //   }
+        //   return { valid: true, msg: '' };
+        // }
       }, {
         id: 'start',
         name: 'Start',
@@ -266,12 +280,15 @@ export class GridEditorComponent implements OnInit {
         minWidth: 100,
         filterable: true,
         filter: { model: Filters.compoundDate },
-        formatter: Formatters.dateIso,
+        formatter: Formatters.multiple,
+        params: {
+          formatters: [Formatters.complexObject, Formatters.dateIso]
+        },
         exportWithFormatter: true,
         sortable: true,
         type: FieldType.date,
         editor: {
-          model: Editors.date
+          model: Editors.date,
         },
       }, {
         id: 'finish',
@@ -283,14 +300,14 @@ export class GridEditorComponent implements OnInit {
         filter: { model: Filters.compoundDate },
         formatter: Formatters.dateIso,
         exportWithFormatter: true,
-        type: FieldType.date,
+        type: FieldType.date,              // dataset cell input format
+        // outputType: FieldType.dateUs,   // date picker format
+        saveOutputType: FieldType.dateUtc, // save output date formattype: FieldType.date,
         editor: {
           model: Editors.date,
           // override any of the Flatpickr options through "editorOptions"
           // please note that there's no TSlint on this property since it's generic for any filter, so make sure you entered the correct filter option(s)
-          editorOptions: {
-            minDate: 'today'
-          }
+          editorOptions: { minDate: 'today' } as FlatpickrOption
         },
       }, {
         id: 'cityOfOrigin', name: 'City of Origin', field: 'cityOfOrigin',
@@ -343,7 +360,7 @@ export class GridEditorComponent implements OnInit {
                 success: (data) => response(data)
               });
             }
-          },
+          } as AutocompleteOption,
         }
       }, {
         id: 'countryOfOrigin', name: 'Country of Origin', field: 'countryOfOrigin',
@@ -406,6 +423,7 @@ export class GridEditorComponent implements OnInit {
         sortable: true,
         type: FieldType.string,
         editor: {
+          placeholder: 'choose option',
           collectionAsync: this.http.get<{ value: string; label: string; }[]>(URL_SAMPLE_COLLECTION_DATA),
           // OR a regular collection load
           // collection: Array.from(Array(100).keys()).map(k => ({ value: k, prefix: 'Task', label: k })),
@@ -462,8 +480,7 @@ export class GridEditorComponent implements OnInit {
       editCommandHandler: (item, column, editCommand) => {
         this._commandQueue.push(editCommand);
         editCommand.execute();
-      },
-      i18n: this.translate
+      }
     };
 
     this.dataset = this.mockData(NB_ITEMS);

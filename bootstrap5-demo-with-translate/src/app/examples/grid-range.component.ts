@@ -36,7 +36,7 @@ const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any
 @Component({
   templateUrl: './grid-range.component.html'
 })
-export class GridRangeComponent implements OnInit, OnDestroy {
+export class GridRangeComponent implements OnInit {
   title = 'Example 25: Filtering from Range of Search Values';
   subTitle = `
   This demo shows how to use Filters with Range of Search Values (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Range-Filters" target="_blank">Wiki docs</a>)
@@ -50,12 +50,13 @@ export class GridRangeComponent implements OnInit, OnDestroy {
       </ul>
       <ul>
         <li>note that the examples shown below for the operator, are case sensitive</li>
-        <li>by default the range are not inclusive which would be the same as defining the filter options to "operator: 'RangeExclusive'" or "operator: OperatoryType.rangeExclusive"</li>
-        <li>you can also set the inverse (inclusive) by defining the filter options to "operator: 'RangeInclusive'" or "operator: OperatoryType.rangeIncluside"</li>
+        <li>by default the range is inclusive which would be the same as defining the filter options to "operator: 'RangeInclusive'" or "operator: OperatoryType.rangeInclusive"</li>
+        <li>you can also set the inverse (exclusive) by defining the filter options to "operator: 'RangeExclusive'" or "operator: OperatoryType.rangeExclusive"</li>
       </ul>
       <li>Date Range with Flatpickr Date Picker, they will also use the locale, choose a start date then drag or click on the end date</li>
     </ul>
   `;
+
   private subscriptions: Subscription[] = [];
   angularGrid: AngularGridInstance;
   columnDefinitions: Column[];
