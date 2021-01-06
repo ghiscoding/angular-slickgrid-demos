@@ -50,6 +50,9 @@ import { AppComponent } from './app.component';
 import { AngularSlickgridModule } from 'angular-slickgrid';
 import { localeFrench } from './locales/fr';
 
+// load necessary Flatpickr Locale(s), but make sure it's imported AFTER the AngularSlickgridModule import
+import 'flatpickr/dist/l10n/fr';
+
 // @dynamic
 @NgModule({
   declarations: [

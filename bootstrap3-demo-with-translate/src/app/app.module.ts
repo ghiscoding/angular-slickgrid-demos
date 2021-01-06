@@ -52,6 +52,9 @@ import { SwtCommonGridComponent } from './examples/swt-common-grid.component';
 import { AppComponent } from './app.component';
 import { AngularSlickgridModule } from 'angular-slickgrid';
 
+// load necessary Flatpickr Locale(s), but make sure it's imported AFTER the AngularSlickgridModule import
+import 'flatpickr/dist/l10n/fr';
+
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
