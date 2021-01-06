@@ -35,3 +35,6 @@ dist-demo
 # lock files
 yarn.lock
 yarn-error.log
+
+.naverc
+*/.naverc
