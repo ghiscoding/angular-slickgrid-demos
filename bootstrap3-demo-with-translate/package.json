@@ -12,7 +12,7 @@
     "postinstall": "ngcc",
     "build-demo": "npm-run-all build",
     "postbuild-demo": "npm-run-all del-ghpage copy-ghpage:dist",
-    "copy-ghpage:dist": "cross-env copyfiles --up 1 dist-demo/**/*.* ../../Angular-Slickgrid/docs",
+    "copy-ghpage:dist": "cross-env copyfiles --up 1 dist/**/*.* ../../Angular-Slickgrid/docs",
     "copy:i18n": "cross-env copyfiles -f node_modules/angular-slickgrid/i18n/*.json src/assets/i18n",
     "del-ghpage": "cross-env rimraf ../../Angular-Slickgrid/docs/**/*.*"
   },
