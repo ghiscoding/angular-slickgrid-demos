@@ -4,7 +4,7 @@
     {
       "label": "Build Bootstrap 3 Demo Page",
       "type": "shell",
-      "command": "yarn run build",
+      "command": "yarn build",
       "options": {
         "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
       },
@@ -13,7 +13,7 @@
     {
       "label": "Build Bootstrap 3 Demo Page & Copy to GhPages Folder (for GitHub website deployment)",
       "type": "shell",
-      "command": "yarn run build-demo",
+      "command": "yarn build-demo",
       "options": {
         "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
       },
@@ -31,7 +31,7 @@
     {
       "label": "Build Bootstrap 3 Demo Page (with Custom Locales)",
       "type": "shell",
-      "command": "yarn run build",
+      "command": "yarn build",
       "options": {
         "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
       },
@@ -49,16 +49,7 @@
     {
       "label": "Build Bootstrap 4 Demo Page",
       "type": "shell",
-      "command": "yarn run build",
-      "options": {
-        "cwd": "${workspaceFolder}/bootstrap4-demo-with-translate",
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Build Bootstrap 4 Demo Page & Copy to GhPages Folder (for GitHub website deployment)",
-      "type": "shell",
-      "command": "yarn run build-demo",
+      "command": "yarn build",
       "options": {
         "cwd": "${workspaceFolder}/bootstrap4-demo-with-translate",
       },
@@ -85,7 +76,7 @@
     {
       "label": "Build Bootstrap 5 Demo Page",
       "type": "shell",
-      "command": "yarn run build",
+      "command": "yarn build",
       "options": {
         "cwd": "${workspaceFolder}/bootstrap5-demo-with-translate",
       },
