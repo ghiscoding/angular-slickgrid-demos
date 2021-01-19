@@ -81,6 +81,15 @@
         "cwd": "${workspaceFolder}/bootstrap5-demo-with-translate",
       },
       "problemMatcher": []
+    },
+    {
+      "label": "Build Bootstrap 5 Demo Page",
+      "type": "shell",
+      "command": "yarn run build",
+      "options": {
+        "cwd": "${workspaceFolder}/bootstrap5-demo-with-translate",
+      },
+      "problemMatcher": []
     }
   ]
 }
