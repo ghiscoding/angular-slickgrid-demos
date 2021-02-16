@@ -1,14 +1,11 @@
-import { Component, OnInit, Injectable, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Injectable, ViewEncapsulation, Input } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
   FieldType,
-  FilterCallbackArg,
   Formatters,
   GridOption,
   OperatorString,
-  SlickGrid,
-  SlickDataView,
 } from 'angular-slickgrid';
 
 @Component({
@@ -29,12 +26,12 @@ export class GridAutoHeightComponent implements OnInit {
   `;
 
   angularGrid: AngularGridInstance;
-  grid: SlickGrid;
-  dataView: SlickDataView;
+  grid: any;
+  dataView: any;
   columnDefinitions: Column[];
   gridOptions: GridOption;
   dataset: any[];
-  operatorList: OperatorString[] = ['=', '<', '<=', '>', '>=', '<>'];
+  operatorList: OperatorString[] = ['=', '<', '<=', '>', '>=', '<>', 'StartsWith', 'EndsWith'];
   selectedOperator = '=';
   searchValue = '';
   selectedColumn: Column;
@@ -134,26 +131,16 @@ export class GridAutoHeightComponent implements OnInit {
   // -- if any of the Search form input changes, we'll call the updateFilter() method
   //
 
+  cleargridSearchInput() {
+    this.searchValue = '';
+    this.updateFilter();
+  }
+
   updateFilter() {
-    if (this.selectedColumn && this.selectedOperator) {
-      const fieldName = this.selectedColumn.field;
-      const filter = {};
-      const filterArg: FilterCallbackArg = {
-        columnDef: this.selectedColumn,
-        operator: this.selectedOperator as OperatorString, // or fix one yourself like '='
-        searchTerms: [this.searchValue || '']
-      };
-
-      if (this.searchValue) {
-        // pass a columnFilter object as an object which it's property name must be a column field name (e.g.: 'duration': {...} )
-        filter[fieldName] = filterArg;
-      }
-
-      this.angularGrid.dataView.setFilterArgs({
-        columnFilters: filter,
-        grid: this.angularGrid.slickGrid
-      });
-      this.angularGrid.dataView.refresh();
-    }
+    this.angularGrid.filterService.updateSingleFilter({
+      columnId: `${this.selectedColumn.id || ''}`,
+      operator: this.selectedOperator as OperatorString,
+      searchTerms: [this.searchValue || '']
+    });
   }
 }

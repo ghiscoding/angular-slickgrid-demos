@@ -2,29 +2,38 @@
   <h2>{{title}}</h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
-  <form class="row row-cols-lg-auto g-3 align-items-center">
+  <div class="row row-cols-lg-auto g-3 align-items-center">
     <div class="col-12">
-      <label>Single Search: </label>
+      <label for="columnSelect">Single Search:</label>
     </div>
     <div class="col-12">
-      <select class="form-select" name="selectedColumn" [(ngModel)]="selectedColumn"
-          (ngModelChange)="updateFilter()">
-          <option [ngValue]="field" *ngFor="let field of columnDefinitions">{{field.name}}</option>
+      <select class="form-select" class="form-select" data-test="search-column-list" name="selectedColumn"
+              [(ngModel)]="selectedColumn"
+              (ngModelChange)="updateFilter()">
+        <option [ngValue]="field" *ngFor="let field of columnDefinitions">{{field.name}}</option>
       </select>
     </div>
     <div class="col-12">
-      <select class="form-select" name="selectedOperator" [(ngModel)]="selectedOperator"
-          (ngModelChange)="updateFilter()">
-          <option [ngValue]="operator" *ngFor="let operator of operatorList">{{operator}}</option>
+      <select class="form-select" data-test="search-operator-list" name="selectedOperator"
+              [(ngModel)]="selectedOperator" (ngModelChange)="updateFilter()">
+        <option [ngValue]="operator" *ngFor="let operator of operatorList">{{operator}}</option>
       </select>
     </div>
     <div class="col-12">
-      <input type="text" class="form-control" name="searchValue" placeholder="search value" autocomplete="off"
-          (input)="updateFilter()" [(ngModel)]="searchValue" />
+      <div class="input-group">
+        <input type="text" class="form-control" data-test="search-value-input" name="searchValue"
+               placeholder="search value" autocomplete="off" (input)="updateFilter()" [(ngModel)]="searchValue">
+        <button class="btn btn-outline-secondary d-flex align-items-center pl-2 pr-2" data-test="clear-search-value"
+                (click)="cleargridSearchInput()">
+          <span class="icon fa fa-times"></span>
+        </button>
+      </div>
     </div>
-  </form>
+  </div>
+
   <hr />
+
   <angular-slickgrid gridId="grid23" [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions"
-      [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)">
+                     [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)">
   </angular-slickgrid>
 </div>
