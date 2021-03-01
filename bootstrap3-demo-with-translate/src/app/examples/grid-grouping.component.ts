@@ -20,7 +20,7 @@ import {
   templateUrl: './grid-grouping.component.html'
 })
 export class GridGroupingComponent implements OnInit {
-  title = 'Example 14: Grouping';
+  title = 'Example 14: Grouping & Aggregators';
   subTitle = `
   (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grouping-&-Aggregators" target="_blank">Wiki docs</a>)
   <ul>
@@ -31,10 +31,10 @@ export class GridGroupingComponent implements OnInit {
   </ul>
   `;
 
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   gridObj: any;
   dataviewObj: any;
   processing = false;
@@ -194,7 +194,7 @@ export class GridGroupingComponent implements OnInit {
   }
 
   exportToExcel() {
-    this.angularGrid.excelExportService.exportToExcel({
+    this.angularGrid.excelExportService!.exportToExcel({
       filename: 'Export',
       format: FileType.xlsx
     });
@@ -222,12 +222,12 @@ export class GridGroupingComponent implements OnInit {
     } as Grouping);
 
     // you need to manually add the sort icon(s) in UI
-    this.angularGrid.slickGrid.setSortColumns([{ columnId: 'duration', sortAsc: true }]);
+    this.angularGrid.filterService.setSortColumnIcons([{ columnId: 'duration', sortAsc: true }]);
     this.gridObj.invalidate(); // invalidate all rows and re-render
   }
 
-  groupByDurationOrderByCount(aggregateCollapsed) {
-    this.angularGrid.slickGrid.setSortColumns([]);
+  groupByDurationOrderByCount(aggregateCollapsed: boolean) {
+    this.angularGrid.filterService.setSortColumnIcons([]);
     this.dataviewObj.setGrouping({
       getter: 'duration',
       formatter: (g) => `Duration: ${g.value} <span style="color:green">(${g.count} items)</span>`,
@@ -245,7 +245,7 @@ export class GridGroupingComponent implements OnInit {
   }
 
   groupByDurationEffortDriven() {
-    this.angularGrid.slickGrid.setSortColumns([]);
+    this.angularGrid.filterService.setSortColumnIcons([]);
     this.dataviewObj.setGrouping([
       {
         getter: 'duration',
@@ -272,7 +272,7 @@ export class GridGroupingComponent implements OnInit {
   }
 
   groupByDurationEffortDrivenPercent() {
-    this.angularGrid.slickGrid.setSortColumns([]);
+    this.angularGrid.filterService.setSortColumnIcons([]);
     this.dataviewObj.setGrouping([
       {
         getter: 'duration',

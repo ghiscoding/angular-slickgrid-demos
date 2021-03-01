@@ -19,7 +19,8 @@
       "dom"
     ],
     "module": "es2020",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "strict": true
   },
   "angularCompilerOptions": {
     "preserveWhitespaces": true

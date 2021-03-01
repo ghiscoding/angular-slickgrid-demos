@@ -89,10 +89,10 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     </ul>`;
 
   private subscriptions: Subscription[] = [];
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   selectedLanguage: string;
 
   constructor(private translate: TranslateService) {
@@ -271,6 +271,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         columnHeaderStyle: { font: { bold: true, italic: true } }
       },
       i18n: this.translate,
+
       enableContextMenu: true,
       enableCellMenu: true,
 
@@ -300,7 +301,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     };
   }
 
-  executeCommand(e, args) {
+  executeCommand(e: Event, args: any) {
     const columnDef = args.column;
     const command = args.command;
     const dataContext = args.dataContext;
@@ -447,7 +448,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     });
   }
 
-  showCellMenuCommandsAndOptions(showBothList) {
+  showCellMenuCommandsAndOptions(showBothList: boolean) {
     // change via the plugin setOptions
     this.cellMenuInstance.setOptions({
       hideOptionSection: !showBothList

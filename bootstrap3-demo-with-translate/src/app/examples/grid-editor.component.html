@@ -58,10 +58,10 @@
   </div>
 
   <div class="col-sm-12">
-    <angular-slickgrid gridId="grid2" (onAngularGridCreated)="angularGridReady($event)"
+    <angular-slickgrid gridId="grid3" (onAngularGridCreated)="angularGridReady($event)"
                        (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
                        (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
-                       (sgOnValidationError)="onCellValidationError($event.detail.eventData, $event.detail.args)"
+                       (sgOnValidationError)="onValidationError($event.detail.eventData, $event.detail.args)"
                        [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions" [dataset]="dataset">
     </angular-slickgrid>
   </div>
