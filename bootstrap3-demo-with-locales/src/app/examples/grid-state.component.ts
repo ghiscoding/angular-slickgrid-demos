@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import {
   AngularGridInstance,
   Column,
@@ -8,20 +9,21 @@ import {
   GridOption,
   GridState,
   GridStateChange,
-  MultipleSelectOption
+  MultipleSelectOption,
+  unsubscribeAllObservables
 } from 'angular-slickgrid';
 
-function randomBetween(min, max) {
+function randomBetween(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+const DEFAULT_PAGE_SIZE = 25;
 const LOCAL_STORAGE_KEY = 'gridState';
 const NB_ITEMS = 500;
-const DEFAULT_PAGE_SIZE = 25;
 
 @Component({
   templateUrl: './grid-state.component.html'
 })
-export class GridStateComponent implements OnInit {
+export class GridStateComponent implements OnInit, OnDestroy {
   title = 'Example 16: Grid State & Presets using Local Storage';
   subTitle = `
     Grid State & Preset (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grid-State-&-Preset" target="_blank">Wiki docs</a>)
@@ -34,17 +36,21 @@ export class GridStateComponent implements OnInit {
       <li>Local Storage is just one option, you can use whichever is more convenient for you (Local Storage, Session Storage, DB, ...)</li>
     </ul>
   `;
-
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
-  selectedLanguage: string;
+  private subscriptions: Subscription[] = [];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
 
   constructor() { }
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
+  }
+
+  ngOnDestroy() {
+    // also unsubscribe all Angular Subscriptions
+    this.subscriptions = unsubscribeAllObservables(this.subscriptions);
   }
 
   ngOnInit(): void {
@@ -138,7 +144,11 @@ export class GridStateComponent implements OnInit {
         hideForceFitButton: true
       },
       gridMenu: {
-        hideForceFitButton: true
+        hideForceFitButton: true,
+        hideClearFrozenColumnsCommand: false,
+      },
+      headerMenu: {
+        hideFreezeColumnsCommand: false,
       },
       enablePagination: true,
       pagination: {
@@ -193,7 +203,7 @@ export class GridStateComponent implements OnInit {
   }
 
   /** Save current Filters, Sorters in LocaleStorage or DB */
-  saveCurrentGridState(grid) {
+  saveCurrentGridState() {
     const gridState: GridState = this.angularGrid.gridStateService.getCurrentGridState();
     console.log('Client sample, last Grid State:: ', gridState);
     localStorage[LOCAL_STORAGE_KEY] = JSON.stringify(gridState);
