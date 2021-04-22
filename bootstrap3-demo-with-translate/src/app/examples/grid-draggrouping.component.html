@@ -1,5 +1,14 @@
 <div class="container-fluid">
-  <h2>{{title}}</h2>
+  <h2>
+    {{title}}
+    <span class="float-right">
+      <a style="font-size: 18px"
+         target="_blank"
+         href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-draggrouping.component.ts">
+        <span class="fa fa-link"></span> code
+      </a>
+    </span>
+  </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
   <form>
@@ -52,9 +61,9 @@
       <div class="form-group">
         <label for="field1" class="col-sm-2 control-label">Group by field(s)</label>
         <div class="col-sm-3"
-          *ngFor="let groupField of selectedGroupingFields; let i = index; trackBy: selectTrackByFn">
+             *ngFor="let groupField of selectedGroupingFields; let i = index; trackBy: selectTrackByFn">
           <select class="form-control col-sm-6" name="groupField{{i}}" [(ngModel)]="selectedGroupingFields[i]"
-            (ngModelChange)="groupByFieldName($event, i)">
+                  (ngModelChange)="groupByFieldName($event, i)">
             <option value=""></option>
             <option [ngValue]="field.id" *ngFor="let field of columnDefinitions">{{field.name}}</option>
           </select>
@@ -68,6 +77,6 @@
   </div>
 
   <angular-slickgrid gridId="grid19" [dataset]="dataset" [columnDefinitions]="columnDefinitions"
-    [gridOptions]="gridOptions" (onAngularGridCreated)="angularGridReady($event)">
+                     [gridOptions]="gridOptions" (onAngularGridCreated)="angularGridReady($event)">
   </angular-slickgrid>
 </div>

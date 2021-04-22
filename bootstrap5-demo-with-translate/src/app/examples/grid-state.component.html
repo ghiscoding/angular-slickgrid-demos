@@ -1,19 +1,27 @@
-
 <div id="demo-container" class="container-fluid">
-    <h2>{{title}}</h2>
-    <div class="subtitle" [innerHTML]="subTitle"></div>
+  <h2>
+    {{title}}
+    <span class="float-right">
+      <a style="font-size: 18px"
+         target="_blank"
+         href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-state.component.ts">
+        <span class="fa fa-link"></span> code
+      </a>
+    </span>
+  </h2>
+  <div class="subtitle" [innerHTML]="subTitle"></div>
 
-    <button class="btn btn-outline-secondary btn-sm" (click)="clearGridStateFromLocalStorage()">
-        <i class="fa fa-times"></i>
-        Clear Grid State from Local Storage &amp; Reset Grid
-    </button>
+  <button class="btn btn-outline-secondary btn-sm" (click)="clearGridStateFromLocalStorage()">
+    <i class="fa fa-times"></i>
+    Clear Grid State from Local Storage &amp; Reset Grid
+  </button>
 
-    <angular-slickgrid gridId="grid16"
-              [columnDefinitions]="columnDefinitions"
-              [gridOptions]="gridOptions"
-              [dataset]="dataset"
-              (onAngularGridCreated)="angularGridReady($event)"
-              (onGridStateChanged)="gridStateChanged($event)"
-              (onBeforeGridDestroy)="saveCurrentGridState($event)">
-    </angular-slickgrid>
-  </div>
+  <angular-slickgrid gridId="grid16"
+                     [columnDefinitions]="columnDefinitions"
+                     [gridOptions]="gridOptions"
+                     [dataset]="dataset"
+                     (onAngularGridCreated)="angularGridReady($event)"
+                     (onGridStateChanged)="gridStateChanged($event)"
+                     (onBeforeGridDestroy)="saveCurrentGridState()">
+  </angular-slickgrid>
+</div>

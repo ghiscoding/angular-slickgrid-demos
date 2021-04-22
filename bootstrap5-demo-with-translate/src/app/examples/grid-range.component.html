@@ -1,5 +1,14 @@
 <div class="container-fluid">
-  <h2>{{title}}</h2>
+  <h2>
+    {{title}}
+    <span class="float-right">
+      <a style="font-size: 18px"
+         target="_blank"
+         href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-range.component.ts">
+        <span class="fa fa-link"></span> code
+      </a>
+    </span>
+  </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
   <br />
@@ -16,7 +25,7 @@
     </div>
     <div class="col-12">
       <button class="btn btn-outline-secondary btn-sm" data-test="clear-sorting"
-        (click)="angularGrid.sortService.clearSorting()">
+              (click)="angularGrid.sortService.clearSorting()">
         Clear Sorting
       </button>
     </div>
@@ -26,7 +35,8 @@
       </button>
     </div>
     <div class="col-12">
-      <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-sorting" (click)="setSortingDynamically()">
+      <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-sorting"
+              (click)="setSortingDynamically()">
         Set Sorting Dynamically
       </button>
     </div>
@@ -35,7 +45,7 @@
     </div>
     <div class="col-12">
       <select name="selectedFilter" class="form-select" [(ngModel)]="selectedPredefinedFilter"
-        data-test="select-dynamic-filter" (ngModelChange)="usePredefinedFilter($event)">
+              data-test="select-dynamic-filter" (ngModelChange)="usePredefinedFilter($event)">
         <option [ngValue]="filter.value" *ngFor="let filter of filterList">{{filter.label}}</option>
       </select>
     </div>
@@ -51,8 +61,9 @@
   </div>
 
   <angular-slickgrid gridId="grid25" [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions"
-    [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)"
-    (onGridStateChanged)="gridStateChanged($event)" (onBeforeGridDestroy)="saveCurrentGridState($event)"
-    (sgOnRowCountChanged)="refreshMetrics($event.detail.eventData, $event.detail.args)">
+                     [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)"
+                     (onGridStateChanged)="gridStateChanged($event)"
+                     (onBeforeGridDestroy)="saveCurrentGridState($event)"
+                     (sgOnRowCountChanged)="refreshMetrics($event.detail.eventData, $event.detail.args)">
   </angular-slickgrid>
 </div>

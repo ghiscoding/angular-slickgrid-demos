@@ -31,6 +31,7 @@ import { GridMenuComponent } from './examples/grid-menu.component';
 import { GridOdataComponent } from './examples/grid-odata.component';
 import { GridRemoteComponent } from './examples/grid-remote.component';
 import { GridRangeComponent } from './examples/grid-range.component';
+import { GridResizeByContentComponent } from './examples/grid-resize-by-content.component';
 import { GridRowDetailComponent } from './examples/grid-rowdetail.component';
 import { GridRowMoveComponent } from './examples/grid-rowmove.component';
 import { GridRowSelectionComponent } from './examples/grid-rowselection.component';
@@ -82,6 +83,7 @@ import 'flatpickr/dist/l10n/fr';
     GridOdataComponent,
     GridRangeComponent,
     GridRemoteComponent,
+    GridResizeByContentComponent,
     GridRowDetailComponent,
     GridRowMoveComponent,
     GridRowSelectionComponent,

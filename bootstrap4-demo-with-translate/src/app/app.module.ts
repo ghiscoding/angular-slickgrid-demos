@@ -34,6 +34,7 @@ import { GridMenuComponent } from './examples/grid-menu.component';
 import { GridOdataComponent } from './examples/grid-odata.component';
 import { GridRangeComponent } from './examples/grid-range.component';
 import { GridRemoteComponent } from './examples/grid-remote.component';
+import { GridResizeByContentComponent } from './examples/grid-resize-by-content.component';
 import { GridRowDetailComponent } from './examples/grid-rowdetail.component';
 import { GridRowMoveComponent } from './examples/grid-rowmove.component';
 import { GridRowSelectionComponent } from './examples/grid-rowselection.component';
@@ -107,6 +108,7 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     GridOdataComponent,
     GridRangeComponent,
     GridRemoteComponent,
+    GridResizeByContentComponent,
     GridRowDetailComponent,
     GridRowMoveComponent,
     GridRowSelectionComponent,

@@ -1,5 +1,14 @@
 <div id="demo-container" class="container-fluid">
-  <h2>{{title}}</h2>
+  <h2>
+    {{title}}
+    <span class="float-right">
+      <a style="font-size: 18px"
+         target="_blank"
+         href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-graphql.component.ts">
+        <span class="fa fa-link"></span> code
+      </a>
+    </span>
+  </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
   <div class="row">
@@ -14,16 +23,16 @@
       <div class="row">
         <div class="col-md-12">
           <button class="btn btn-outline-secondary btn-sm" data-test="clear-filters-sorting"
-            (click)="clearAllFiltersAndSorts()" title="Clear all Filters & Sorts">
+                  (click)="clearAllFiltersAndSorts()" title="Clear all Filters & Sorts">
             <i class="fa fa-filter text-danger"></i>
             Clear all Filter & Sorts
           </button>
           <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-filter"
-            (click)="setFiltersDynamically()">
+                  (click)="setFiltersDynamically()">
             Set Filters Dynamically
           </button>
           <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-sorting"
-            (click)="setSortingDynamically()">
+                  (click)="setSortingDynamically()">
             Set Sorting Dynamically
           </button>
         </div>
@@ -66,7 +75,8 @@
 
   <hr />
   <angular-slickgrid gridId="grid6" [gridHeight]="200" [gridWidth]="900" [columnDefinitions]="columnDefinitions"
-    [gridOptions]="gridOptions" [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)"
-    (onGridStateChanged)="gridStateChanged($event)" (onBeforeGridDestroy)="saveCurrentGridState($event)">
+                     [gridOptions]="gridOptions" [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)"
+                     (onGridStateChanged)="gridStateChanged($event)"
+                     (onBeforeGridDestroy)="saveCurrentGridState($event)">
   </angular-slickgrid>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularGridInstance, Column, FieldType, GridOption } from 'angular-slickgrid';
+import { AngularGridInstance, Column, FieldType, GridOption, ItemMetadata } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './grid-colspan.component.html',
@@ -120,7 +120,7 @@ export class GridColspanComponent implements OnInit {
    * Your callback will always have the "item" argument which you can use to decide on the colspan
    * Your return must always be in the form of:: return { columns: {}}
    */
-  renderDifferentColspan(item: any) {
+  renderDifferentColspan(item: any): ItemMetadata {
     if (item.id % 2 === 1) {
       return {
         columns: {

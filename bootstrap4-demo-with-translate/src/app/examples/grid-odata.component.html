@@ -1,5 +1,14 @@
 <div id="demo-container" class="container-fluid">
-  <h2>{{title}}</h2>
+  <h2>
+    {{title}}
+    <span class="float-right">
+      <a style="font-size: 18px"
+         target="_blank"
+         href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-odata.component.ts">
+        <span class="fa fa-link"></span> code
+      </a>
+    </span>
+  </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
   <div class="row">
@@ -47,7 +56,7 @@
     </div>
   </div>
   <div class="row col-md-12">
-    <span>Programmatically go to first/last page:</span>
+    <label>Programmatically go to first/last page:</label>
     <button class="btn btn-outline-secondary btn-xs" data-test="goto-first-page" (click)="goToFirstPage()">
       <i class="fa fa-caret-left fa-lg"></i>
     </button>
