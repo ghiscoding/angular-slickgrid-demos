@@ -38,11 +38,11 @@
       "problemMatcher": []
     },
     {
-      "label": "Start Bootstrap 3 Demo Page (with Custom Locales)",
+      "label": "Start Bootstrap 4 Demo Page (with Custom Locales)",
       "type": "shell",
       "command": "yarn start",
       "options": {
-        "cwd": "${workspaceFolder}/bootstrap3-demo-with-locales",
+        "cwd": "${workspaceFolder}/bootstrap4-demo-with-locales",
       },
       "problemMatcher": []
     },

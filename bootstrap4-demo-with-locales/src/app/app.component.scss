@@ -1,0 +1,26 @@
+$navbar-height: 56px;
+$side-menu-width: 250px;
+
+.lightblue {
+  color: lightblue;
+}
+.red {
+  color: red;
+}
+.faded {
+    opacity: 0.2;
+}
+.faded:hover {
+    opacity: 0.5;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: 0 none;
+}
+
+/** Sidebar (left) and Content (right) */
+@media (min-width: 1200px) {
+  .panel-wm-content .container {
+    width: calc(1170px - #{$side-menu-width});
+  }
+}
+
