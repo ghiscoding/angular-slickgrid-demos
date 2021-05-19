@@ -12,7 +12,7 @@
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
   <div class="col-sm-6">
-    <label>autoEdit setting</label>
+    <label>autoEdit setting: </label>
     <span id="radioAutoEdit">
       <label class="radio-inline control-label" for="radioTrue">
         <input type="radio" name="inlineRadioOptions" id="radioTrue" checked [value]="isAutoEdit"
@@ -30,7 +30,7 @@
           Undo last edit(s)
         </button>
         <label class="checkbox-inline control-label" for="autoCommitEdit">
-          <input type="checkbox" id="autoCommitEdit" [checked]="gridOptions.autoCommitEdit"
+          <input type="checkbox" id="autoCommitEdit" data-test="auto-commit" [checked]="gridOptions.autoCommitEdit"
                  (click)="changeAutoCommit()">
           Auto Commit Edit
         </label>
@@ -38,10 +38,12 @@
     </div>
     <div class="row" style="margin-top: 5px">
       <div class="col-sm-12">
-        <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.filterService.clearFilters()">Clear
-          Filters</button>
-        <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.sortService.clearSorting()">Clear
-          Sorting</button>
+        <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.filterService.clearFilters()">
+          Clear Filters
+        </button>
+        <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.sortService.clearSorting()">
+          Clear Sorting
+        </button>
         <button class="btn btn-sm btn-outline-info" (click)="addItem()"
                 title="Clear Filters &amp; Sorting to see it better">Add item</button>
         <button class="btn btn-sm btn-outline-danger" (click)="deleteItem()">Delete item</button>
@@ -49,11 +51,13 @@
     </div>
     <div class="row" style="margin-top: 5px">
       <div class="col-sm-12">
-        <button class="btn btn-outline-secondary btn-sm" (click)="dynamicallyAddTitleHeader()">
+        <button class="btn btn-outline-secondary btn-sm" data-test="add-title-column"
+                (click)="dynamicallyAddTitleHeader()">
           <i class="fa fa-plus"></i>
           Dynamically Duplicate Title Column
         </button>
-        <button class="btn btn-outline-secondary btn-sm" (click)="dynamicallyRemoveLastColumn()">
+        <button class="btn btn-outline-secondary btn-sm" data-test="remove-title-column"
+                (click)="dynamicallyRemoveLastColumn()">
           <i class="fa fa-minus"></i>
           Dynamically Remove Last Column
         </button>
@@ -71,11 +75,14 @@
   </div>
 
   <div class="col-sm-12">
-    <angular-slickgrid gridId="grid2" (onAngularGridCreated)="angularGridReady($event)"
+    <angular-slickgrid gridId="grid3"
+                       [columnDefinitions]="columnDefinitions"
+                       [gridOptions]="gridOptions"
+                       [dataset]="dataset"
+                       (onAngularGridCreated)="angularGridReady($event)"
                        (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
                        (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
-                       (sgOnValidationError)="onCellValidationError($event.detail.eventData, $event.detail.args)"
-                       [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions" [dataset]="dataset">
+                       (sgOnValidationError)="onValidationError($event.detail.eventData, $event.detail.args)">
     </angular-slickgrid>
   </div>
 </div>

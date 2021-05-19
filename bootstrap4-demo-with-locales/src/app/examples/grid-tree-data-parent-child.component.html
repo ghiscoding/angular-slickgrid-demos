@@ -1,18 +1,44 @@
 <div class="container-fluid">
-  <h2 [innerHTML]="title"></h2>
+  <h2>
+    <span [innerHTML]="title"></span>
+    <span class="float-right">
+      <a style="font-size: 18px"
+         target="_blank"
+         href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-tree-data-parent-child.component.ts">
+        <span class="mdi mdi-link mdi-v-align-sub"></span> code
+      </a>
+    </span>
+  </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
+
+  <div class="row" style="margin-bottom: 4px;">
+    <div class="col-md-12">
+      <button class="btn btn-outline-secondary btn-sm" data-test="add-500-rows-btn" (click)="loadData(500)">
+        500 rows
+      </button>
+      <button class="btn btn-outline-secondary btn-sm" data-test="add-50k-rows-btn" (click)="loadData(25000)">
+        25k rows
+      </button>
+      <button (click)="dynamicallyChangeFilter()" class="btn btn-outline-secondary btn-sm"
+              data-test="change-filter-dynamically">
+        <span class="mdi mdi-filter-outline"></span>
+        <span>Dynamically Change Filter (% complete &lt; 40)</span>
+      </button>
+      <div class.bind="loadingClass"></div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-12">
-      <button (click)="addNewRow()" class="btn btn-info btn-sm">
+      <button (click)="addNewRow()" data-test="add-item-btn" class="btn btn-outline-info btn-sm">
         <span class="icon mdi mdi-plus"></span>
         <span>Add New Item (in 1st group)</span>
       </button>
-      <button (click)="collapseAll()" class="btn btn-outline-secondary btn-sm">
+      <button (click)="collapseAll()" data-test="collapse-all-btn" class="btn btn-outline-secondary btn-sm">
         <span class="icon mdi mdi-arrow-collapse"></span>
         <span>Collapse All</span>
       </button>
-      <button (click)="expandAll()" class="btn btn-outline-secondary btn-sm">
+      <button (click)="expandAll()" data-test="expand-all-btn" class="btn btn-outline-secondary btn-sm">
         <span class="icon mdi mdi-arrow-expand"></span>
         <span>Expand All</span>
       </button>
@@ -30,7 +56,10 @@
 
   <br />
 
-  <angular-slickgrid gridId="grid28" [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions"
-                     [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)">
+  <angular-slickgrid gridId="grid28"
+                     [columnDefinitions]="columnDefinitions"
+                     [gridOptions]="gridOptions"
+                     [dataset]="dataset"
+                     (onAngularGridCreated)="angularGridReady($event)">
   </angular-slickgrid>
 </div>
