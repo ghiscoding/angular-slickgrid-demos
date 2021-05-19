@@ -54,7 +54,7 @@ const myCustomTitleValidator = (value: any, args: any) => {
 @Injectable()
 export class GridResizeByContentComponent implements OnInit {
   title = 'Example 30: Columns Resize by Content';
-  subTitle = `The grid below uses the optional resize by cell content (with a fixed 950px for demo purposes), you can click on the 2 buttons to see the difference. The "autosizeColumns" is really the default option used by SlickGrid-Universal, the resize by cell content is optional because it requires to read the first thousand rows and do extra width calculation.`;
+  subTitle = `The grid below uses the optional resize by cell content (with a fixed 950px for demo purposes), you can click on the 2 buttons to see the difference. The "autosizeColumns" is really the default option used by Angular-SlickGrid, the resize by cell content is optional because it requires to read the first thousand rows and do extra width calculation.`;
 
   angularGrid!: AngularGridInstance;
   gridOptions!: GridOption;
@@ -228,7 +228,7 @@ export class GridResizeByContentComponent implements OnInit {
         },
         filter: {
           model: Filters.inputText,
-          // placeholder: '&#128269; search city',
+          // placeholder: '🔎︎ search city',
           type: FieldType.string,
           queryField: 'product.itemName',
         }
@@ -312,9 +312,11 @@ export class GridResizeByContentComponent implements OnInit {
       autosizeColumnsByCellContentOnFirstLoad: true,
       enableAutoResizeColumnsByCellContent: true,
 
-      // optional resize calculation options
-      resizeDefaultRatioForStringType: 0.92,
-      resizeFormatterPaddingWidthInPx: 8, // optional editor formatter padding for resize calculation
+      resizeByContentOptions: {
+        // optional resize calculation options
+        defaultRatioForStringType: 0.92,
+        formatterPaddingWidthInPx: 8, // optional editor formatter padding for resize calculation
+      },
 
       enableExcelExport: true,
       excelExportOptions: {

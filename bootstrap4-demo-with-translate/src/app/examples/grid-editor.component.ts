@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import {
   AngularGridInstance,
   AutocompleteOption,
@@ -11,6 +12,7 @@ import {
   FieldType,
   Filters,
   FlatpickrOption,
+  Formatter,
   Formatters,
   GridOption,
   LongTextEditorOption,
@@ -23,8 +25,8 @@ import { CustomInputFilter } from './custom-inputFilter';
 import { Subject } from 'rxjs';
 
 // using external non-typed js libraries
-declare var Slick: any;
-declare var $: any;
+declare const Slick: any;
+declare const $: any;
 
 const NB_ITEMS = 100;
 const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_100_numbers.json';
@@ -32,7 +34,7 @@ const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
 const URL_COUNTRY_NAMES = 'assets/data/country_names.json';
 
 // you can create custom validator to pass to an inline editor
-const myCustomTitleValidator: EditorValidator = (value: any, args: EditorArgs) => {
+const myCustomTitleValidator: EditorValidator = (value: any, args?: EditorArgs) => {
   // you can get the Editor Args which can be helpful, e.g. we can get the Translate Service from it
   const grid = args && args.grid;
   const gridOptions = (grid && grid.getOptions) ? grid.getOptions() : {};
@@ -42,19 +44,18 @@ const myCustomTitleValidator: EditorValidator = (value: any, args: EditorArgs) =
   // don't use "editor" property since that one is what SlickGrid uses internally by it's editor factory
   const columnEditor = args && args.column && args.column.internalColumnEditor;
 
-  if (value == null || value === undefined || !value.length) {
+  if (value === null || value === undefined || !value.length) {
     return { valid: false, msg: 'This is a required field' };
   } else if (!/^Task\s\d+$/.test(value)) {
     return { valid: false, msg: 'Your title is invalid, it must start with "Task" followed by a number' };
     // OR use the Translate Service with your custom message
     // return { valid: false, msg: translate.instant('YOUR_ERROR', { x: value }) };
-  } else {
-    return { valid: true, msg: '' };
   }
+  return { valid: true, msg: '' };
 };
 
 // create a custom Formatter to show the Task + value
-const taskFormatter = (row, cell, value, columnDef, dataContext) => {
+const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
   if (value && Array.isArray(value)) {
     const taskValues = value.map((val) => `Task ${val}`);
     const values = taskValues.join(', ');
@@ -67,7 +68,7 @@ const taskFormatter = (row, cell, value, columnDef, dataContext) => {
 })
 @Injectable()
 export class GridEditorComponent implements OnInit {
-  title = 'Example 3: Editors';
+  title = 'Example 3: Editors / Delete';
   subTitle = `
   Grid with Inline Editors and onCellClick actions (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Editors" target="_blank">Wiki docs</a>).
   <ul>
@@ -87,11 +88,11 @@ export class GridEditorComponent implements OnInit {
   </ul>
   `;
 
-  private _commandQueue = [];
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  private _commandQueue: any = [];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   gridObj: any;
   isAutoEdit = true;
   alertWarning: any;
@@ -191,7 +192,7 @@ export class GridEditorComponent implements OnInit {
         },
         filter: {
           model: CustomInputFilter,
-          placeholder: '&#128269; custom',
+          placeholder: '🔎︎ custom',
         },
       }, {
         id: 'duration',
@@ -307,7 +308,17 @@ export class GridEditorComponent implements OnInit {
           model: Editors.date,
           // override any of the Flatpickr options through "editorOptions"
           // please note that there's no TSlint on this property since it's generic for any filter, so make sure you entered the correct filter option(s)
-          editorOptions: { minDate: 'today' } as FlatpickrOption
+          editorOptions: {
+            minDate: 'today',
+
+            // if we want to preload the date picker with a different date,
+            // we could toggle the `closeOnSelect: false`, set the date in the picker and re-toggle `closeOnSelect: true`
+            // closeOnSelect: false,
+            // onOpen: (selectedDates: Date[] | Date, dateStr: string, instance: FlatpickrInstance) => {
+            //   instance.setDate('2021-12-31', true);
+            //   instance.set('closeOnSelect', true);
+            // },
+          } as FlatpickrOption
         },
       }, {
         id: 'cityOfOrigin', name: 'City of Origin', field: 'cityOfOrigin',
@@ -315,7 +326,7 @@ export class GridEditorComponent implements OnInit {
         minWidth: 100,
         editor: {
           model: Editors.autoComplete,
-          placeholder: '&#128269; search city',
+          placeholder: '🔎︎ search city',
 
           // We can use the autocomplete through 3 ways "collection", "collectionAsync" or with your own autocomplete options
           // use your own autocomplete options, instead of $.ajax, use http
@@ -334,14 +345,14 @@ export class GridEditorComponent implements OnInit {
                 data: {
                   q: request.term
                 },
-                success: (data) => response(data)
+                success: (data: any) => response(data)
               });
             }
           } as AutocompleteOption,
         },
         filter: {
           model: Filters.autoComplete,
-          // placeholder: '&#128269; search city',
+          // placeholder: '🔎︎ search city',
 
           // We can use the autocomplete through 3 ways "collection", "collectionAsync" or with your own autocomplete options
           // collectionAsync: this.http.get(URL_COUNTRIES_COLLECTION),
@@ -357,7 +368,7 @@ export class GridEditorComponent implements OnInit {
                 data: {
                   q: request.term
                 },
-                success: (data) => response(data)
+                success: (data: any) => response(data)
               });
             }
           } as AutocompleteOption,
@@ -500,8 +511,8 @@ export class GridEditorComponent implements OnInit {
     setTimeout(() => {
       const requisiteColumnDef = this.columnDefinitions.find((column: Column) => column.id === 'prerequisites');
       if (requisiteColumnDef) {
-        const filterCollectionAsync = requisiteColumnDef.filter.collectionAsync;
-        const editorCollection = requisiteColumnDef.editor.collection;
+        const filterCollectionAsync = requisiteColumnDef.filter!.collectionAsync;
+        const editorCollection = requisiteColumnDef.editor!.collection;
 
         if (Array.isArray(editorCollection)) {
           // add the new row to the grid
@@ -534,15 +545,15 @@ export class GridEditorComponent implements OnInit {
   deleteItem() {
     const requisiteColumnDef = this.columnDefinitions.find((column: Column) => column.id === 'prerequisites');
     if (requisiteColumnDef) {
-      const filterCollectionAsync = requisiteColumnDef.filter.collectionAsync;
-      const filterCollection = requisiteColumnDef.filter.collection;
+      const filterCollectionAsync = requisiteColumnDef.filter!.collectionAsync;
+      const filterCollection = requisiteColumnDef.filter!.collection;
 
       if (Array.isArray(filterCollection)) {
         // sort collection in descending order and take out last collection option
         const selectCollectionObj = this.sortCollectionDescending(filterCollection).pop();
 
         // then we will delete that item from the grid
-        this.angularGrid.gridService.deleteDataGridItemById(selectCollectionObj.value);
+        this.angularGrid.gridService.deleteItemById(selectCollectionObj.value);
 
         // for the Filter only, we have a trigger an RxJS/Subject change with the new collection
         // we do this because Filter(s) are shown at all time, while on Editor it's unnecessary since they are only shown when opening them
@@ -553,11 +564,11 @@ export class GridEditorComponent implements OnInit {
     }
   }
 
-  sortCollectionDescending(collection) {
+  sortCollectionDescending(collection: any[]) {
     return collection.sort((item1, item2) => item1.value - item2.value);
   }
 
-  mockData(itemCount, startingIndex = 0) {
+  mockData(itemCount: number, startingIndex = 0) {
     // mock a dataset
     const tempDataset = [];
     for (let i = startingIndex; i < (startingIndex + itemCount); i++) {
@@ -572,9 +583,9 @@ export class GridEditorComponent implements OnInit {
         id: i,
         title: 'Task ' + i,
         duration: (i % 33 === 0) ? null : Math.round(Math.random() * 100) + '',
+        start: new Date(randomYear, randomMonth, randomDay),
         percentComplete: randomPercent,
         percentCompleteNumber: randomPercent,
-        start: new Date(randomYear, randomMonth, randomDay),
         finish: randomFinish < new Date() ? '' : randomFinish, // make sure the random date is earlier than today
         effortDriven: (i % 5 === 0),
         prerequisites: (i % 2 === 0) && i !== 0 && i < 12 ? [i, i - 1] : [],
@@ -586,11 +597,11 @@ export class GridEditorComponent implements OnInit {
     return tempDataset;
   }
 
-  onCellChanged(e, args) {
+  onCellChanged(e: Event, args: any) {
     this.updatedObject = args.item;
   }
 
-  onCellClicked(e, args) {
+  onCellClicked(e: Event, args: any) {
     const metadata = this.angularGrid.gridService.getColumnFromEventArguments(args);
     console.log(metadata);
 
@@ -604,13 +615,15 @@ export class GridEditorComponent implements OnInit {
       // this.angularGrid.gridService.setSelectedRow(args.row);
     } else if (metadata.columnDef.id === 'delete') {
       if (confirm('Are you sure?')) {
-        this.angularGrid.gridService.deleteDataGridItemById(metadata.dataContext.id);
+        this.angularGrid.gridService.deleteItemById(metadata.dataContext.id);
       }
     }
   }
 
-  onCellValidationError(e, args) {
-    alert(args.validationResults.msg);
+  onValidationError(e: Event, args: any) {
+    if (args.validationResults) {
+      alert(args.validationResults.msg);
+    }
   }
 
   changeAutoCommit() {
@@ -631,7 +644,7 @@ export class GridEditorComponent implements OnInit {
         required: true,
         validator: myCustomTitleValidator, // use a custom validator
       },
-      sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true }
+      sortable: true, minWidth: 100, filterable: true,
     };
 
     // you can dynamically add your column to your column definitions
@@ -670,7 +683,7 @@ export class GridEditorComponent implements OnInit {
     */
   }
 
-  setAutoEdit(isAutoEdit) {
+  setAutoEdit(isAutoEdit: boolean) {
     this.isAutoEdit = isAutoEdit;
     this.gridObj.setOptions({ autoEdit: isAutoEdit }); // change the grid option dynamically
     return true;
@@ -678,6 +691,7 @@ export class GridEditorComponent implements OnInit {
 
   undo() {
     const command = this._commandQueue.pop();
+    const item = this.angularGrid.dataView.getItem(command.row);
     if (command && Slick.GlobalEditorLock.cancelCurrentEdit()) {
       command.undo();
       this.gridObj.gotoCell(command.row, command.cell, false);
