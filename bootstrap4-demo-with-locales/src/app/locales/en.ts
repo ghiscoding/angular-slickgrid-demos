@@ -8,6 +8,7 @@ export const localeEnglish = {
   TEXT_CLEAR_PINNING: 'Unfreeze Columns/Rows',
   TEXT_COLLAPSE_ALL_GROUPS: 'Collapse all Groups',
   TEXT_COLUMNS: 'Columns',
+  TEXT_COLUMN_RESIZE_BY_CONTENT: 'Resize by Content',
   TEXT_COMMANDS: 'Commands',
   TEXT_CONTAINS: 'Contains',
   TEXT_COPY: 'Copy',

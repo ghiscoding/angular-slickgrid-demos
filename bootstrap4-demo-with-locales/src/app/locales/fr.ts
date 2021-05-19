@@ -8,6 +8,7 @@ export const localeFrench = {
   TEXT_CLEAR_PINNING: 'Dégeler les colonnes/rangées',
   TEXT_COLLAPSE_ALL_GROUPS: 'Réduire tous les groupes',
   TEXT_COLUMNS: 'Colonnes',
+  TEXT_COLUMN_RESIZE_BY_CONTENT: 'Redimensionner par contenu',
   TEXT_COMMANDS: 'Commandes',
   TEXT_CONTAINS: 'Contient',
   TEXT_COPY: 'Copier',
