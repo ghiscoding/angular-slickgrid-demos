@@ -3,7 +3,7 @@
 #### All demos were created using the Angular-CLI
 
 ### Installation
-Choose the theme and feature you want, they are separated into 2 theme (Bootstrap 3 or 4) and there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other demos are all with `ngx-translate` (dynamically switch language on the fly).
+Choose the theme and feature you want, they are separated into 2 theme (Bootstrap 4 or 5) and there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other demos are all with `ngx-translate` (dynamically switch language on the fly).
 
 #### VScode
 If you use Visual Studio Code, you can also run each of the demo through the multiple VSCode Tasks.
@@ -15,22 +15,6 @@ This is the same as the Bootstrap 4 demo except that it uses custom Locale(s) an
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
 cd bootstrap4-demo-with-locales
-npm install # OR yarn install
-npm start # OR yarn start
-```
-
-##### Build Demo
-```bash
-npm run build # OR yarn run build
-```
-
-## Bootstrap 3 - with `ngx-translate`
-Common Bootstrap 3 demo using `ngx-translate` to provide the use of multiple languages (locales) which can be switched dynamically (on the fly).
-
-##### Install and Start Demo
-```bash
-git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap3-demo-with-translate
 npm install # OR yarn install
 npm start # OR yarn start
 ```
