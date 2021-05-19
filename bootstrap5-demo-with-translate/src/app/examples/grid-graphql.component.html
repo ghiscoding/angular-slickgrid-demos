@@ -39,12 +39,14 @@
       </div>
       <div class="row mt-1">
         <div class="col-md-12">
-          <button class="btn btn-outline-secondary btn-sm" (click)="switchLanguage()">
+          <button class="btn btn-outline-secondary btn-sm" data-test="language-button" (click)="switchLanguage()">
             <i class="fa fa-language"></i>
             Switch Language
           </button>
           <strong>Locale:</strong>
-          <span style="font-style: italic">{{selectedLanguage + '.json'}}</span>
+          <span style="font-style: italic" data-test="selected-locale">
+            {{selectedLanguage + '.json'}}
+          </span>
         </div>
       </div>
       <br />
@@ -74,9 +76,14 @@
   </div>
 
   <hr />
-  <angular-slickgrid gridId="grid6" [gridHeight]="200" [gridWidth]="900" [columnDefinitions]="columnDefinitions"
-                     [gridOptions]="gridOptions" [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)"
+  <angular-slickgrid gridId="grid6"
+                     [gridHeight]="200"
+                     [gridWidth]="900"
+                     [columnDefinitions]="columnDefinitions"
+                     [gridOptions]="gridOptions"
+                     [dataset]="dataset"
+                     (onAngularGridCreated)="angularGridReady($event)"
                      (onGridStateChanged)="gridStateChanged($event)"
-                     (onBeforeGridDestroy)="saveCurrentGridState($event)">
+                     (onBeforeGridDestroy)="saveCurrentGridState()">
   </angular-slickgrid>
 </div>

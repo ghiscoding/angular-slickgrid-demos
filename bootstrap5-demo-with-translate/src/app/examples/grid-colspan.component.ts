@@ -22,14 +22,14 @@ export class GridColspanComponent implements OnInit {
   </ul>
   `;
 
-  angularGrid2: AngularGridInstance;
+  angularGrid2!: AngularGridInstance;
   gridObj2: any;
-  columnDefinitions1: Column[];
-  columnDefinitions2: Column[];
-  gridOptions1: GridOption;
-  gridOptions2: GridOption;
-  dataset1 = [];
-  dataset2 = [];
+  columnDefinitions1!: Column[];
+  columnDefinitions2!: Column[];
+  gridOptions1!: GridOption;
+  gridOptions2!: GridOption;
+  dataset1: any[] = [];
+  dataset2: any[] = [];
 
   ngOnInit(): void {
     this.prepareGrid1();
@@ -54,7 +54,7 @@ export class GridColspanComponent implements OnInit {
     this.gridOptions1 = {
       enableAutoResize: false,
       enableCellNavigation: true,
-      enableColumnReorder: false,
+      enableExport: true,
       enableSorting: true,
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
@@ -79,7 +79,6 @@ export class GridColspanComponent implements OnInit {
 
     this.gridOptions2 = {
       enableCellNavigation: true,
-      enableColumnReorder: false,
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 25,
@@ -129,14 +128,13 @@ export class GridColspanComponent implements OnInit {
           }
         }
       };
-    } else {
-      return {
-        columns: {
-          0: {
-            colspan: '*' // starting at column index 0, we will span accross all column (*)
-          }
-        }
-      };
     }
+    return {
+      columns: {
+        0: {
+          colspan: '*' // starting at column index 0, we will span accross all column (*)
+        }
+      }
+    };
   }
 }

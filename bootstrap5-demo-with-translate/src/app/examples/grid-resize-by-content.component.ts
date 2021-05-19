@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleteOption, EditCommand, formatNumber, Sorters } from 'angular-slickgrid';
+import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleteOption, EditCommand, formatNumber, Sorters } from '../modules/angular-slickgrid';
 
 const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
 declare const Slick: any;

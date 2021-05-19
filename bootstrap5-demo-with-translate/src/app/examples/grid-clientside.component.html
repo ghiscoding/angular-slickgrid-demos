@@ -16,10 +16,22 @@
     <b>Metrics:</b> {{metrics.startTime | date: 'yyyy-MM-dd hh:mm aaaaa\'m\''}} | {{metrics.itemCount}} of
     {{metrics.totalItemCount}} items
   </span>
-  <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.filterService.clearFilters()">Clear
-    Filters</button>
-  <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.sortService.clearSorting()">Clear
-    Sorting</button>
+  <div class="btn-group" role="group">
+    <button class="btn btn-sm btn-outline-secondary" data-test="scroll-top-btn" (click)="scrollGridTop()">
+      <i class="fa fa-arrow-up"></i>
+    </button>
+    <button class="btn btn-sm btn-outline-secondary" data-test="scroll-bottom-btn" (click)="scrollGridBottom()">
+      <i class="fa fa-arrow-down"></i>
+    </button>
+  </div>
+  <button class="btn btn-outline-secondary btn-sm" data-test="clear-filters"
+          (click)="angularGrid.filterService.clearFilters()">
+    Clear Filters
+  </button>
+  <button class="btn btn-outline-secondary btn-sm" data-test="clear-sorting"
+          (click)="angularGrid.sortService.clearSorting()">
+    Clear Sorting
+  </button>
   <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-filter" (click)="setFiltersDynamically()">
     Set Filters Dynamically
   </button>
@@ -30,7 +42,7 @@
   <angular-slickgrid gridId="grid4" [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions"
                      [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)"
                      (onGridStateChanged)="gridStateChanged($event)"
-                     (onBeforeGridDestroy)="saveCurrentGridState($event)"
+                     (onBeforeGridDestroy)="saveCurrentGridState()"
                      (sgOnRowCountChanged)="refreshMetrics($event.detail.eventData, $event.detail.args)">
   </angular-slickgrid>
 </div>

@@ -59,8 +59,12 @@
     </div>
   </div>
 
-  <angular-slickgrid gridId="grid2" gridHeight="255" gridWidth="800" [columnDefinitions]="columnDefinitions2"
-                     [gridOptions]="gridOptions2" [dataset]="dataset2"
+  <angular-slickgrid gridId="grid2"
+                     gridHeight="255"
+                     gridWidth="800"
+                     [columnDefinitions]="columnDefinitions2"
+                     [gridOptions]="gridOptions2"
+                     [dataset]="dataset2"
                      (onAngularGridCreated)="angularGridReady2($event)"
                      (onGridStateChanged)="grid2StateChanged($event)">
   </angular-slickgrid>

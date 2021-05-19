@@ -37,14 +37,14 @@ export class GridDraggableGroupingComponent implements OnInit {
       </ul>
     `;
 
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  dataset: any[];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  dataset!: any[];
   dataviewObj: any;
   draggableGroupingPlugin: any;
   durationOrderByCount = false;
   gridObj: any;
-  gridOptions: GridOption;
+  gridOptions!: GridOption;
   processing = false;
   selectedGroupingFields: Array<string | GroupingGetterFunction> = ['', '', ''];
 
@@ -116,7 +116,7 @@ export class GridDraggableGroupingComponent implements OnInit {
         groupTotalsFormatter: GroupTotalFormatters.avgTotalsPercentage,
         grouping: {
           getter: 'percentComplete',
-          formatter: (g) => `% Complete:  ${g.value}  <span style="color:green">(${g.count} items)</span>`,
+          formatter: (g) => `% Complete: ${g.value}  <span style="color:green">(${g.count} items)</span>`,
           aggregators: [
             new Aggregators.Sum('cost')
           ],
@@ -218,7 +218,6 @@ export class GridDraggableGroupingComponent implements OnInit {
       // you could debounce/throttle the input text filter if you have lots of data
       // filterTypingDebounce: 250,
       enableSorting: true,
-      enableColumnReorder: true,
       exportOptions: {
         sanitizeDataExport: true
       },
@@ -291,7 +290,7 @@ export class GridDraggableGroupingComponent implements OnInit {
   }
 
   exportToExcel() {
-    this.angularGrid.excelExportService.exportToExcel({
+    this.angularGrid.excelExportService!.exportToExcel({
       filename: 'Export',
       format: FileType.xlsx
     });
@@ -333,7 +332,7 @@ export class GridDraggableGroupingComponent implements OnInit {
     }
   }
 
-  groupByFieldName(fieldName, index) {
+  groupByFieldName(fieldName: string, index: number) {
     this.clearGrouping();
     if (this.draggableGroupingPlugin && this.draggableGroupingPlugin.setDroppedGroups) {
       // get the field names from Group By select(s) dropdown, but filter out any empty fields
@@ -362,7 +361,7 @@ export class GridDraggableGroupingComponent implements OnInit {
     this.gridObj.setPreHeaderPanelVisibility(true);
   }
 
-  selectTrackByFn(index, item) {
+  selectTrackByFn(index: number, item: any) {
     return index;
   }
 

@@ -11,17 +11,22 @@
   </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
-  <button class="btn btn-outline-secondary btn-sm" (click)="toggleGridMenu($event)">
+  <button class="btn btn-outline-secondary btn-sm" data-test="external-gridmenu" (click)="toggleGridMenu($event)">
     <i class="fa fa-bars"></i>
     Grid Menu
   </button>
-  <button class="btn btn-outline-secondary btn-sm" (click)="switchLanguage()">
+  <button class="btn btn-outline-secondary btn-sm" data-test="language" (click)="switchLanguage()">
     <i class="fa fa-language"></i>
     Switch Language
   </button>
 
+  <strong>Locale:</strong>
+  <span style="font-style: italic"
+        data-test="selected-locale">{{selectedLanguage + '.json'}}
+  </span>
+
   <div class="col-sm-12">
-    <angular-slickgrid gridId="grid2"
+    <angular-slickgrid gridId="grid9"
                        (onAngularGridCreated)="angularGridReady($event)"
                        [columnDefinitions]="columnDefinitions"
                        [gridOptions]="gridOptions"

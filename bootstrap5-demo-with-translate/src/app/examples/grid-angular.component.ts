@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {
   AngularGridInstance,
@@ -20,8 +20,8 @@ import { CustomTitleFormatterComponent } from './custom-titleFormatter.component
 import { FilterNgSelectComponent } from './filter-ng-select.component';
 
 // using external non-typed js libraries
-declare var Slick: any;
-declare var $: any;
+declare const Slick: any;
+declare const $: any;
 
 const NB_ITEMS = 100;
 
@@ -30,7 +30,6 @@ const NB_ITEMS = 100;
   styleUrls: ['./grid-angular.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-@Injectable()
 export class GridAngularComponent implements OnInit {
   title = 'Example 22: Use of Angular Components';
   subTitle = `
@@ -54,11 +53,11 @@ export class GridAngularComponent implements OnInit {
   </ul>
   `;
 
-  private _commandQueue = [];
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  private _commandQueue: any[] = [];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions: Column[] = [];
+  gridOptions!: GridOption;
+  dataset!: any[];
   gridObj: any;
   isAutoEdit = true;
   alertWarning: any;
@@ -137,7 +136,7 @@ export class GridAngularComponent implements OnInit {
         id: 'assignee2',
         name: 'Assignee with Angular Component',
         field: 'assignee',
-        minWidth: 100,
+        minWidth: 125,
         filterable: true,
         sortable: true,
         filter: {
@@ -182,7 +181,7 @@ export class GridAngularComponent implements OnInit {
             label: 'label',
             labelSuffix: 'symbol'
           },
-          elementOptions: {
+          editorOptions: {
             maxHeight: 400
           }
         },
@@ -233,7 +232,7 @@ export class GridAngularComponent implements OnInit {
           this.bsDropdown.render({
             component: CustomActionFormatterComponent,
             args,
-            offsetLeft: 65,
+            offsetLeft: 92,
             offsetDropupBottom: 15,
             parent: this, // provide this object to the child component so we can call a method from here if we wish
           });
@@ -271,7 +270,7 @@ export class GridAngularComponent implements OnInit {
     this.dataset = this.mockData(NB_ITEMS);
   }
 
-  mockData(itemCount, startingIndex = 0) {
+  mockData(itemCount: number, startingIndex = 0) {
     // mock a dataset
     const tempDataset = [];
     for (let i = startingIndex; i < (startingIndex + itemCount); i++) {
@@ -295,11 +294,11 @@ export class GridAngularComponent implements OnInit {
     return tempDataset;
   }
 
-  onCellChanged(e, args) {
+  onCellChanged(e: Event, args: any) {
     this.updatedObject = args.item;
   }
 
-  onCellClicked(e, args) {
+  onCellClicked(e: Event, args: any) {
     const metadata = this.angularGrid.gridService.getColumnFromEventArguments(args);
     console.log(metadata);
 
@@ -313,12 +312,12 @@ export class GridAngularComponent implements OnInit {
       // this.angularGrid.gridService.setSelectedRow(args.row);
     } else if (metadata.columnDef.id === 'delete') {
       if (confirm('Are you sure?')) {
-        this.angularGrid.gridService.deleteDataGridItemById(metadata.dataContext.id);
+        this.angularGrid.gridService.deleteItemById(metadata.dataContext.id);
       }
     }
   }
 
-  onCellValidationError(e, args) {
+  onCellValidationError(e: Event, args: any) {
     alert(args.validationResults.msg);
   }
 
@@ -330,7 +329,7 @@ export class GridAngularComponent implements OnInit {
     return true;
   }
 
-  setAutoEdit(isAutoEdit) {
+  setAutoEdit(isAutoEdit: boolean) {
     this.isAutoEdit = isAutoEdit;
     this.gridObj.setOptions({ autoEdit: isAutoEdit }); // change the grid option dynamically
     return true;

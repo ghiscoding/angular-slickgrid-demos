@@ -4,7 +4,7 @@ import 'slickgrid/slick.remotemodel'; // SlickGrid Remote Plugin
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularGridInstance, Column, Formatter, GridOption } from 'angular-slickgrid';
 
-declare var Slick: any;
+declare const Slick: any;
 
 const brandFormatter: Formatter = (row: number, cell: number, value: any, columnDef: Column, dataContext: any) => {
   return dataContext && dataContext.brand && dataContext.brand.name || '';
@@ -43,20 +43,20 @@ export class GridRemoteComponent implements OnDestroy, OnInit {
         for Sorting, Filtering, etc...
       </li>
       <li>
-      Soure code for this example is available <a href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-remote.component.ts" target="_blank">here</a>
+        Soure code for this example is available <a href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-remote.component.ts" target="_blank">here</a>
       </li>
     </ul>
   `;
 
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
   customDataView: any;
   gridObj: any;
-  gridOptions: GridOption;
+  gridOptions!: GridOption;
   dataset = [];
   loaderDataView: any;
   loading = false; // spinner when loading data
-  search = 'switch';
+  search = '';
 
   constructor() {
     this.loaderDataView = new Slick.Data.RemoteModel();
@@ -126,7 +126,7 @@ export class GridRemoteComponent implements OnDestroy, OnInit {
     }
   }
 
-  onSort(e, args) {
+  onSort(e: Event, args: any) {
     if (this.gridObj && this.gridObj.getViewport && this.loaderDataView && this.loaderDataView.ensureData && this.loaderDataView.setSort) {
       const vp = this.gridObj.getViewport();
       if (args && args.sortCol && args.sortCol.field) {
@@ -136,7 +136,7 @@ export class GridRemoteComponent implements OnDestroy, OnInit {
     }
   }
 
-  onViewportChanged(e, args) {
+  onViewportChanged(e: Event, args: any) {
     if (this.gridObj && this.gridObj.getViewport && this.loaderDataView && this.loaderDataView.ensureData) {
       const vp = this.gridObj.getViewport();
       this.loaderDataView.ensureData(vp.top, vp.bottom);

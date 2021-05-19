@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
-  ExtensionName,
   FieldType,
   Filters,
   Formatters,
@@ -27,12 +26,12 @@ export class GridRowDetailComponent implements OnInit {
     </ul>
   `;
 
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   detailViewRowCount = 9;
-  message: string;
+  message = '';
   flashAlertType = 'info';
 
   constructor() { }
@@ -93,6 +92,9 @@ export class GridRowDetailComponent implements OnInit {
       },
       datasetIdPropertyName: 'rowId', // optionally use a different "id"
       rowDetailView: {
+        // optionally change the column index position of the icon (defaults to 0)
+        // columnIndexPosition: 1,
+
         // We can load the "process" asynchronously in 2 different ways (httpClient OR even Promise)
         process: (item) => this.simulateServerAsyncCall(item),
         // process: (item) => this.http.get(`api/item/${item.id}`),
@@ -115,7 +117,7 @@ export class GridRowDetailComponent implements OnInit {
 
         // you can override the logic for showing (or not) the expand icon
         // for example, display the expand icon only on every 2nd row
-        // expandableOverride: (row: number, dataContext: any, grid: SlickGrid) => (dataContext.id % 2 === 1),
+        // expandableOverride: (row: number, dataContext: any, grid: any) => (dataContext.id % 2 === 1),
 
         // Preload View Component
         preloadComponent: RowDetailPreloadComponent,

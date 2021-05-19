@@ -15,7 +15,7 @@ import {
   MultipleSelectOption,
   OperatorType,
   unsubscribeAllObservables,
-} from 'angular-slickgrid';
+} from '../modules/angular-slickgrid';
 import * as moment from 'moment-mini';
 import { Subscription } from 'rxjs';
 
@@ -36,7 +36,7 @@ const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any
 @Component({
   templateUrl: './grid-range.component.html'
 })
-export class GridRangeComponent implements OnInit {
+export class GridRangeComponent implements OnInit, OnDestroy {
   title = 'Example 25: Filtering from Range of Search Values';
   subTitle = `
   This demo shows how to use Filters with Range of Search Values (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Range-Filters" target="_blank">Wiki docs</a>)
@@ -56,20 +56,19 @@ export class GridRangeComponent implements OnInit {
       <li>Date Range with Flatpickr Date Picker, they will also use the locale, choose a start date then drag or click on the end date</li>
     </ul>
   `;
-
   private subscriptions: Subscription[] = [];
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   selectedLanguage: string;
-  metrics: Metrics;
+  metrics!: Metrics;
   filterList = [
     { value: '', label: '' },
     { value: 'currentYearTasks', label: 'Current Year Completed Tasks' },
     { value: 'nextYearTasks', label: 'Next Year Active Tasks' }
   ];
-  selectedPredefinedFilter: { value: string; label: string; };
+  selectedPredefinedFilter!: { value: string; label: string; };
 
   constructor(private translate: TranslateService) {
     // always start with English for Cypress E2E tests to be consistent
@@ -109,7 +108,7 @@ export class GridRangeComponent implements OnInit {
         filter: {
           model: Filters.sliderRange,
           maxValue: 100, // or you can use the filterOptions as well
-          operator: OperatorType.rangeInclusive, // defaults to exclusive
+          operator: OperatorType.rangeInclusive, // defaults to inclusive
           params: { hideSliderNumbers: false }, // you can hide/show the slider numbers on both side
           filterOptions: { min: 0, step: 5 } as JQueryUiSliderOption // you can also optionally pass any option of the jQuery UI Slider
         }
@@ -132,7 +131,7 @@ export class GridRangeComponent implements OnInit {
         sortable: true,
         filterable: true, filter: {
           model: Filters.input,
-          operator: OperatorType.rangeExclusive // defaults to exclusive
+          operator: OperatorType.rangeExclusive // defaults to inclusive
         }
       },
       {
@@ -190,7 +189,7 @@ export class GridRangeComponent implements OnInit {
     this.angularGrid = angularGrid;
   }
 
-  mockData(itemCount, startingIndex = 0): any[] {
+  mockData(itemCount: number, startingIndex = 0): any[] {
     // mock a dataset
     const tempDataset = [];
     for (let i = startingIndex; i < (startingIndex + itemCount); i++) {
@@ -227,11 +226,11 @@ export class GridRangeComponent implements OnInit {
   }
 
   /** Save current Filters, Sorters in LocaleStorage or DB */
-  saveCurrentGridState(grid) {
+  saveCurrentGridState() {
     console.log('Client sample, last Grid State:: ', this.angularGrid.gridStateService.getCurrentGridState());
   }
 
-  refreshMetrics(e, args) {
+  refreshMetrics(e: Event, args: any) {
     if (args && args.current >= 0) {
       setTimeout(() => {
         this.metrics = {
@@ -263,8 +262,8 @@ export class GridRangeComponent implements OnInit {
     ]);
   }
 
-  usePredefinedFilter(filterValue) {
-    let filters = [];
+  usePredefinedFilter(filterValue: string) {
+    let filters: any[] = [];
     const currentYear = moment().year();
 
     switch (filterValue) {

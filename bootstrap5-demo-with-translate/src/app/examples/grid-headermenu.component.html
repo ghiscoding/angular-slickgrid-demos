@@ -11,8 +11,17 @@
   </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
+  <button class="btn btn-outline-secondary btn-sm" (click)="switchLanguage()">
+    <i class="fa fa-language"></i>
+    Switch Language
+  </button>
+  <strong>Locale:</strong>
+  <span style="font-style: italic" data-test="selected-locale">
+    {{selectedLanguage + '.json'}}
+  </span>
+
   <div class="col-sm-12">
-    <angular-slickgrid gridId="grid2"
+    <angular-slickgrid gridId="grid8"
                        (onAngularGridCreated)="angularGridReady($event)"
                        [columnDefinitions]="columnDefinitions"
                        [gridOptions]="gridOptions"

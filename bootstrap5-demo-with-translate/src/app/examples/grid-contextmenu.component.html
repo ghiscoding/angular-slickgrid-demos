@@ -24,6 +24,7 @@
           Show Commands & Priority Options
         </button>
       </span>
+
       <span class="cell-menu">
         <strong>Cell Menu:</strong>
         <button class="btn btn-outline-secondary btn-xs" (click)="showCellMenuCommandsAndOptions(false)"
@@ -51,8 +52,11 @@
   </div>
 
   <div class="col-sm-12">
-    <angular-slickgrid gridId="grid26" (onAngularGridCreated)="angularGridReady($event)"
-                       [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions" [dataset]="dataset">
+    <angular-slickgrid gridId="grid26"
+                       [columnDefinitions]="columnDefinitions"
+                       [gridOptions]="gridOptions"
+                       [dataset]="dataset"
+                       (onAngularGridCreated)="angularGridReady($event)">
     </angular-slickgrid>
   </div>
 </div>

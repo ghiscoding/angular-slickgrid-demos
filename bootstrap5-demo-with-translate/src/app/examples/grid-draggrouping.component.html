@@ -14,19 +14,20 @@
   <form class="form-inline">
     <div class="row">
       <div class="col-sm-12">
-        <button class="btn btn-outline-secondary btn-xs" (click)="loadData(500)">
+        <button class="btn btn-outline-secondary btn-xs" data-test="add-500-rows-btn" (click)="loadData(500)">
           500 rows
         </button>
-        <button class="btn btn-outline-secondary btn-xs" (click)="loadData(50000)">
+        <button class="btn btn-outline-secondary btn-xs" data-test="add-50k-rows-btn" (click)="loadData(50000)">
           50k rows
         </button>
-        <button class="btn btn-outline-secondary btn-xs" (click)="clearGroupsAndSelects()">
+        <button class="btn btn-outline-secondary btn-xs" data-test="clear-grouping-btn"
+                (click)="clearGroupsAndSelects()">
           <i class="fa fa-times"></i> Clear grouping
         </button>
-        <button class="btn btn-outline-secondary btn-xs" (click)="collapseAllGroups()">
+        <button class="btn btn-outline-secondary btn-xs" data-test="collapse-all-btn" (click)="collapseAllGroups()">
           <i class="fa fa-compress"></i> Collapse all groups
         </button>
-        <button class="btn btn-outline-secondary btn-xs" (click)="expandAllGroups()">
+        <button class="btn btn-outline-secondary btn-xs" data-test="expand-all-btn" (click)="expandAllGroups()">
           <i class="fa fa-expand"></i> Expand all groups
         </button>
         <button class="btn btn-outline-secondary btn-xs" (click)="toggleDraggableGroupingRow()">
@@ -39,13 +40,16 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <button class="btn btn-outline-secondary btn-xs" (click)="groupByDurationOrderByCount(false)">
+        <button class="btn btn-outline-secondary btn-xs" data-test="group-duration-sort-value-btn"
+                (click)="groupByDurationOrderByCount(false)">
           Group by duration &amp; sort groups by value
         </button>
-        <button class="btn btn-outline-secondary btn-xs" (click)="groupByDurationOrderByCount(true)">
+        <button class="btn btn-outline-secondary btn-xs" data-test="group-duration-sort-count-btn"
+                (click)="groupByDurationOrderByCount(true)">
           Group by duration &amp; sort groups by count
         </button>
-        <button class="btn btn-outline-secondary btn-xs" (click)="groupByDurationEffortDriven()">
+        <button class="btn btn-outline-secondary btn-xs" data-test="group-duration-effort-btn"
+                (click)="groupByDurationEffortDriven()">
           Group by Duration &amp; then Effort-Driven
         </button>
         <button class="btn btn-outline-secondary btn-xs" data-test="set-dynamic-filter"
@@ -79,7 +83,11 @@
   <div class="row mt-1 mb-1">
     <hr />
   </div>
-  <angular-slickgrid gridId="grid19" [dataset]="dataset" [columnDefinitions]="columnDefinitions"
-                     [gridOptions]="gridOptions" (onAngularGridCreated)="angularGridReady($event)">
+
+  <angular-slickgrid gridId="grid19"
+                     [dataset]="dataset"
+                     [columnDefinitions]="columnDefinitions"
+                     [gridOptions]="gridOptions"
+                     (onAngularGridCreated)="angularGridReady($event)">
   </angular-slickgrid>
 </div>
