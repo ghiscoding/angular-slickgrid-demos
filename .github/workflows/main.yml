@@ -52,11 +52,8 @@ jobs:
           cd bootstrap4-demo-with-translate
           yarn build
 
-      # deploy only on certain conditions
+      # always deploy (re-publish) GitHub demo page with a Prod build
       - name: Deploy to gh-pages
-        if: |
-          github.ref == 'refs/heads/master' &&
-          contains(github.event.head_commit.message, 'refresh github demo')
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
