@@ -52,6 +52,7 @@ jobs:
           cd bootstrap4-demo-with-translate
           yarn build
 
+      # deploy only on certain conditions
       - name: Deploy to gh-pages
         if: |
           github.ref == 'refs/heads/master' &&
