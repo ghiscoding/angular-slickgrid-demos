@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
@@ -26,7 +26,6 @@ const LOCAL_STORAGE_KEY = 'gridStateGraphql';
 @Component({
   templateUrl: './grid-graphql.component.html'
 })
-@Injectable()
 export class GridGraphqlComponent implements OnInit, OnDestroy {
   title = 'Example 6: Grid connected to Backend Server with GraphQL';
   subTitle = `

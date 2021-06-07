@@ -1,6 +1,6 @@
-import { Component, OnInit, Injectable, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleteOption, EditCommand, formatNumber, Sorters } from '../modules/angular-slickgrid';
+import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleteOption, EditCommand, formatNumber, Sorters } from 'angular-slickgrid';
 
 const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
 declare const Slick: any;
@@ -51,7 +51,6 @@ const myCustomTitleValidator = (value: any, args: any) => {
   styleUrls: ['./grid-resize-by-content.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-@Injectable()
 export class GridResizeByContentComponent implements OnInit {
   title = 'Example 30: Columns Resize by Content';
   subTitle = `The grid below uses the optional resize by cell content (with a fixed 950px for demo purposes), you can click on the 2 buttons to see the difference. The "autosizeColumns" is really the default option used by Angular-SlickGrid, the resize by cell content is optional because it requires to read the first thousand rows and do extra width calculation.`;

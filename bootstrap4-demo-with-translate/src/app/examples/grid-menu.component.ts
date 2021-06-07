@@ -1,4 +1,4 @@
-import { Component, Injectable, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatters, GridOption, unsubscribeAllObservables } from 'angular-slickgrid';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./grid-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-@Injectable()
 export class GridMenuComponent implements OnInit, OnDestroy {
   title = 'Example 9: Grid Menu Control';
   subTitle = `

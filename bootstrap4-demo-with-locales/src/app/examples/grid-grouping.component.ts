@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import {
   AngularGridInstance,
   Aggregators,
@@ -15,7 +15,6 @@ import {
   Sorters,
 } from 'angular-slickgrid';
 
-@Injectable()
 @Component({
   templateUrl: './grid-grouping.component.html'
 })

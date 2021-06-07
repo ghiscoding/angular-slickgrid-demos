@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   ComponentFactoryResolver,
-  Injectable,
   OnInit,
   ViewChild,
   ViewContainerRef,
@@ -23,7 +22,6 @@ import { Logger } from './swt-logger.service';
   selector: 'swt-common-grid-test',
   templateUrl: './swt-common-grid-test.component.html'
 })
-@Injectable()
 export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
   title = 'Example 13: Custom Backend Server Pagination';
   subTitle = `A simple component to show that it is possible to create a custom Backend Service for any other backend querying, the example below is for Oracle.`;

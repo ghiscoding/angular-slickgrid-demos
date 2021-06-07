@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
@@ -13,7 +13,6 @@ import {
   encapsulation: ViewEncapsulation.None,
   templateUrl: './grid-autoheight.component.html'
 })
-@Injectable()
 export class GridAutoHeightComponent implements OnInit {
   title = 'Example 23: Grid AutoHeight';
   subTitle = `

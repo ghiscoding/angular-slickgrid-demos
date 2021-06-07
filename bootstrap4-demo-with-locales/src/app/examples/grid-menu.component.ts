@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatters, GridOption } from 'angular-slickgrid';
 
 @Component({
@@ -6,7 +6,6 @@ import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatt
   styleUrls: ['./grid-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-@Injectable()
 export class GridMenuComponent implements OnInit {
   title = 'Example 9: Grid Menu Control';
   subTitle = `

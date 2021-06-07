@@ -1,10 +1,10 @@
-import { Component, OnInit, Injectable, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
-  AngularSlickgridComponent, Column, FieldType, Formatters,
+  AngularSlickgridComponent, Column, FieldType,
   GridOption, BackendService,
   BackendServiceOption, FilterChangedArgs, PaginationChangedArgs, SortChangedArgs, Pagination
-} from '../modules/angular-slickgrid';
+} from 'angular-slickgrid';
 import { TranslateService } from '@ngx-translate/core';
 import { Logger } from './swt-logger.service';
 import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
@@ -39,7 +39,6 @@ const DEFAULT_FILTER_TYPING_DEBOUNCE = 750;
     `]
 })
 
-@Injectable()
 export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendService {
 
   private logger: Logger;

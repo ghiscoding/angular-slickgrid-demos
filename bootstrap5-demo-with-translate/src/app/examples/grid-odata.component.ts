@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   AngularGridInstance,
@@ -21,7 +21,6 @@ const sampleDataRoot = 'assets/data';
 @Component({
   templateUrl: './grid-odata.component.html'
 })
-@Injectable()
 export class GridOdataComponent implements OnInit {
   title = 'Example 5: Grid connected to Backend Server with OData';
   subTitle = `

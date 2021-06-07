@@ -15,7 +15,7 @@ import {
   MultipleSelectOption,
   OperatorType,
   unsubscribeAllObservables,
-} from '../modules/angular-slickgrid';
+} from 'angular-slickgrid';
 import * as moment from 'moment-mini';
 import { Subscription } from 'rxjs';
 

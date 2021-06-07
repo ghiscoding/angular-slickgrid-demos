@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   AngularGridInstance,
   AngularUtilService,
@@ -29,7 +29,6 @@ const NB_ITEMS = 100;
   styleUrls: ['./grid-angular.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-@Injectable()
 export class GridAngularComponent implements OnInit {
   title = 'Example 22: Use of Angular Components';
   subTitle = `

@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   AngularGridInstance,
@@ -36,7 +36,6 @@ export interface Country {
   styleUrls: ['./grid-graphql-nopage.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-@Injectable()
 export class GridGraphqlWithoutPaginationComponent implements OnInit {
   title = 'Example 27: GraphQL Basic API without Pagination';
   subTitle = `

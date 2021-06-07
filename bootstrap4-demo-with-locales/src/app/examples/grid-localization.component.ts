@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
@@ -24,7 +24,6 @@ const exportBooleanFormatter: Formatter = (row: number, cell: number, value: any
 @Component({
   templateUrl: './grid-localization.component.html'
 })
-@Injectable()
 export class GridLocalizationComponent implements OnInit {
   title = 'Example 12: Localization with Locales - French Locale displayed';
   subTitle = `This Examples uses French Locales but you could use your own custom locales

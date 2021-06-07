@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
@@ -26,7 +26,6 @@ import { Subject } from 'rxjs';
 
 // using external non-typed js libraries
 declare const Slick: any;
-declare const $: any;
 
 const NB_ITEMS = 100;
 const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_100_numbers.json';
@@ -66,7 +65,6 @@ const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
 @Component({
   templateUrl: './grid-editor.component.html'
 })
-@Injectable()
 export class GridEditorComponent implements OnInit {
   title = 'Example 3: Editors / Delete';
   subTitle = `

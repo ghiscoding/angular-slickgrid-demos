@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularGridInstance, Column, Editors, FieldType, Formatters, GridOption, GridService, OnEventArgs, SlickGrid, SlickDataView, } from 'angular-slickgrid';
 
 @Component({
@@ -6,7 +6,6 @@ import { AngularGridInstance, Column, Editors, FieldType, Formatters, GridOption
   encapsulation: ViewEncapsulation.None,
   templateUrl: './grid-additem.component.html'
 })
-@Injectable()
 export class GridAddItemComponent implements OnInit {
   title = 'Example 11: Add / Update / Highlight a Datagrid Item';
   subTitle = `

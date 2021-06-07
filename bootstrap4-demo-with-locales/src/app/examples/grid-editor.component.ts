@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import {
@@ -64,7 +64,6 @@ const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
 @Component({
   templateUrl: './grid-editor.component.html'
 })
-@Injectable()
 export class GridEditorComponent implements OnInit {
   title = 'Example 3: Editors / Delete';
   subTitle = `

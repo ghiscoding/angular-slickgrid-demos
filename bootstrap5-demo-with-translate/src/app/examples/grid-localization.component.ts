@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Injectable } from '@angular/core';
+import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import {
@@ -28,7 +28,6 @@ const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any
 @Component({
   templateUrl: './grid-localization.component.html'
 })
-@Injectable()
 export class GridLocalizationComponent implements OnInit, OnDestroy {
   title = 'Example 12: Localization (i18n)';
   subTitle = `Support multiple locales with the ngx-translate plugin, following these steps (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Localization" target="_blank">Wiki docs</a>)
