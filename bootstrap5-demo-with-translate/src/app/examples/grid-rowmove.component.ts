@@ -4,7 +4,7 @@ import { AngularGridInstance, Column, ExtensionName, Filters, Formatters, GridOp
 @Component({
   templateUrl: './grid-rowmove.component.html'
 })
-export class GridRowMoveComponent implements OnInit, OnDestroy {
+export class GridRowMoveComponent implements OnInit {
   title = 'Example 17: Row Move & Checkbox Selector';
   subTitle = `This example demonstrates using the <b>Slick.Plugins.RowMoveManager</b> plugin to easily move a row in the grid.<br/>
     <ul>
@@ -33,9 +33,6 @@ export class GridRowMoveComponent implements OnInit, OnDestroy {
 
   get rowMoveInstance(): any {
     return this.angularGrid && this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.rowMoveManager) || {};
-  }
-
-  ngOnDestroy() {
   }
 
   ngOnInit(): void {
@@ -92,7 +89,7 @@ export class GridRowMoveComponent implements OnInit, OnDestroy {
         disableRowSelection: true,
         cancelEditOnDrag: true,
         width: 30,
-        onBeforeMoveRows: this.onBeforeMoveRow,
+        onBeforeMoveRows: this.onBeforeMoveRow.bind(this),
         onMoveRows: this.onMoveRows.bind(this),
 
         // you can change the move icon position of any extension (RowMove, RowDetail or RowSelector icon)
@@ -110,7 +107,7 @@ export class GridRowMoveComponent implements OnInit, OnDestroy {
         // the RECOMMENDED is to use "dataContextIds" since that will always work even with Pagination, while "gridRowIndexes" is only good for 1 page
         rowSelection: {
           // gridRowIndexes: [2],       // the row position of what you see on the screen (UI)
-          dataContextIds: [2, 3, 6, 7]  // (recommended) select by your data object IDs
+          dataContextIds: [1, 2, 6, 7]  // (recommended) select by your data object IDs
         }
       },
     };
@@ -135,10 +132,10 @@ export class GridRowMoveComponent implements OnInit, OnDestroy {
     this.dataset = mockDataset;
   }
 
-  onBeforeMoveRow(e: Event, data: any) {
-    for (let i = 0; i < data.rows.length; i++) {
+  onBeforeMoveRow(e: Event, data: { rows: number[]; insertBefore: number; }) {
+    for (const rowIdx of data.rows) {
       // no point in moving before or after itself
-      if (data.rows[i] === data.insertBefore || data.rows[i] === data.insertBefore - 1) {
+      if (rowIdx === data.insertBefore || (rowIdx === data.insertBefore - 1 && ((data.insertBefore - 1) !== this.angularGrid.dataView.getItemCount()))) {
         e.stopPropagation();
         return false;
       }
@@ -165,7 +162,7 @@ export class GridRowMoveComponent implements OnInit, OnDestroy {
     const filteredItems = this.angularGrid.dataView.getFilteredItems();
 
     const itemOnRight = this.angularGrid.dataView.getItem(insertBefore);
-    const insertBeforeFilteredIdx = this.angularGrid.dataView.getIdxById(itemOnRight.id);
+    const insertBeforeFilteredIdx = itemOnRight ? this.angularGrid.dataView.getIdxById(itemOnRight.id) : this.angularGrid.dataView.getItemCount();
 
     const filteredRowItems: any[] = [];
     rows.forEach(row => filteredRowItems.push(filteredItems[row]));

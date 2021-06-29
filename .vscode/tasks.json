@@ -2,42 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build Bootstrap 3 Demo Page",
-      "type": "shell",
-      "command": "yarn build",
-      "options": {
-        "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Build Bootstrap 3 Demo Page & Copy to GhPages Folder (for GitHub website deployment)",
-      "type": "shell",
-      "command": "yarn build-demo",
-      "options": {
-        "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Start Bootstrap 3 Demo Page",
-      "type": "shell",
-      "command": "yarn start",
-      "options": {
-        "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Build Bootstrap 3 Demo Page (with Custom Locales)",
-      "type": "shell",
-      "command": "yarn build",
-      "options": {
-        "cwd": "${workspaceFolder}/bootstrap3-demo-with-translate",
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "Start Bootstrap 4 Demo Page (with Custom Locales)",
       "type": "shell",
       "command": "yarn start",
