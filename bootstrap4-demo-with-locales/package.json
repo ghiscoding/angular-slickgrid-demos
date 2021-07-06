@@ -35,6 +35,7 @@
     "moment": "^2.29.1",
     "ngx-bootstrap": "^4.3.0",
     "rxjs": "^6.3.3",
+    "stream-browserify": "^3.0.0",
     "text-encoding-utf-8": "^1.0.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"

@@ -6,6 +6,9 @@
     "paths": {
       "jszip": [
         "../node_modules/jszip/dist/jszip.min.js"
+      ],
+      "stream": [
+        "./node_modules/stream-browserify"
       ]
     },
     "types": []
