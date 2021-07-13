@@ -1,4 +1,4 @@
-import { Column, ColumnEditor, Editor, EditorValidator, EditorValidatorOutput, KeyCode } from 'angular-slickgrid';
+import { Column, ColumnEditor, Editor, EditorValidator, EditorValidationResult, KeyCode } from 'angular-slickgrid';
 
 // using external non-typed js libraries
 declare const $: any;
@@ -26,8 +26,8 @@ export class CustomInputEditor implements Editor {
     return this.columnDef && this.columnDef.internalColumnEditor || {};
   }
 
-  get hasAutoCommitEdit() {
-    return this.args.grid.getOptions().autoCommitEdit;
+  get hasAutoCommitEdit(): boolean {
+    return this.args.grid.getOptions().autoCommitEdit ?? false;
   }
 
   /** Get the Validator function, can be passed in Editor property or Column Definition */
@@ -110,7 +110,7 @@ export class CustomInputEditor implements Editor {
     }
   }
 
-  validate(inputValue?: any): EditorValidatorOutput {
+  validate(inputValue?: any): EditorValidationResult {
     if (this.validator) {
       const value = (inputValue !== undefined) ? inputValue : this.$input && this.$input.val && this.$input.val();
       return this.validator(value, this.args);

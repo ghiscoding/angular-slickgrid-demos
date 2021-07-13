@@ -10,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { SwtCommonGridComponent } from './swt-common-grid.component';
 import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
-import { FilterChangedArgs, PaginationChangedArgs, SortChangedArgs } from 'angular-slickgrid';
 
 import { Logger } from './swt-logger.service';
 /**
@@ -77,17 +76,17 @@ export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
     this.logger.info('method [ngAfterViewInit] - END');
   }
 
-  filterChanged(event: FilterChangedArgs) {
+  filterChanged() {
     this.commonGridPag.processing = true;
     this.updateGridData();
   }
 
-  paginationChanged(event: PaginationChangedArgs) {
+  paginationChanged() {
     this.commonGridPag.processing = true;
     this.updateGridData();
   }
 
-  sortChanged(event: SortChangedArgs) {
+  sortChanged() {
     this.commonGridPag.processing = true;
     this.updateGridData();
   }

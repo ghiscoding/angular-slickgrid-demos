@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
+  ExtensionList,
   FieldType,
   Filters,
   Formatters,
@@ -30,6 +31,7 @@ export class GridRowDetailComponent implements OnInit {
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset!: any[];
+  extensions!: ExtensionList<any, any>;
   detailViewRowCount = 9;
   message = '';
   flashAlertType = 'info';
@@ -82,8 +84,8 @@ export class GridRowDetailComponent implements OnInit {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableFiltering: true,
       enableRowDetailView: true,

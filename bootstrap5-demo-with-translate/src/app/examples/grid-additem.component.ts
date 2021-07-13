@@ -130,8 +130,8 @@ export class GridAddItemComponent implements OnInit {
     this.gridOptions = {
       asyncEditorLoading: false,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       editable: true,
       enableColumnPicker: true,

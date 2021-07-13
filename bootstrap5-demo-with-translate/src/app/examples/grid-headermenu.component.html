@@ -22,10 +22,10 @@
 
   <div class="col-sm-12">
     <angular-slickgrid gridId="grid8"
-                       (onAngularGridCreated)="angularGridReady($event)"
                        [columnDefinitions]="columnDefinitions"
                        [gridOptions]="gridOptions"
-                       [dataset]="dataset">
+                       [dataset]="dataset"
+                       (onAngularGridCreated)="angularGridReady($event.detail)">
     </angular-slickgrid>
   </div>
 </div>

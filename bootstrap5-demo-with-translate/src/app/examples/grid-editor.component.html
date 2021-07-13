@@ -44,7 +44,7 @@
         <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.sortService.clearSorting()">
           Clear Sorting
         </button>
-        <button class="btn btn-sm btn-outline-info" (click)="addItem()"
+        <button class="btn btn-sm btn-outline-primary" (click)="addItem()"
                 title="Clear Filters &amp; Sorting to see it better">Add item</button>
         <button class="btn btn-sm btn-outline-danger" (click)="deleteItem()">Delete item</button>
       </div>
@@ -79,10 +79,10 @@
                        [columnDefinitions]="columnDefinitions"
                        [gridOptions]="gridOptions"
                        [dataset]="dataset"
-                       (onAngularGridCreated)="angularGridReady($event)"
-                       (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
-                       (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
-                       (sgOnValidationError)="onValidationError($event.detail.eventData, $event.detail.args)">
+                       (onAngularGridCreated)="angularGridReady($event.detail)"
+                       (onCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
+                       (onClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
+                       (onValidationError)="onValidationError($event.detail.eventData, $event.detail.args)">
     </angular-slickgrid>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { Subscription } from 'rxjs';
 import {
   AngularGridInstance,
@@ -40,7 +41,7 @@ const priorityExportFormatter: Formatter = (row, cell, value, columnDef, dataCon
   if (!value) {
     return '';
   }
-  const gridOptions = (grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {};
+  const gridOptions = ((grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {}) as GridOption;
   const translate = gridOptions.i18n;
   const count = +(value >= 3 ? 3 : value);
   const key = count === 3 ? 'HIGH' : (count === 2 ? 'MEDIUM' : 'LOW');
@@ -107,11 +108,11 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
   }
 
   get cellMenuInstance(): any {
-    return this.angularGrid && this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.cellMenu) || {};
+    return this.angularGrid?.extensionService?.getSlickgridAddonInstance?.(ExtensionName.cellMenu) ?? {};
   }
 
   get contextMenuInstance(): any {
-    return this.angularGrid && this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.contextMenu) || {};
+    return this.angularGrid?.extensionService?.getSlickgridAddonInstance?.(ExtensionName.contextMenu) ?? {};
   }
 
   ngOnInit() {
@@ -256,13 +257,14 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableCellNavigation: true,
       enableFiltering: true,
       enableSorting: true,
       enableTranslate: true,
+      enableExcelExport: true,
       excelExportOptions: {
         exportWithFormatter: true,
         customColumnWidth: 15,
@@ -271,6 +273,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         columnHeaderStyle: { font: { bold: true, italic: true } }
       },
       i18n: this.translate,
+      registerExternalResources: [new ExcelExportService()],
 
       enableContextMenu: true,
       enableCellMenu: true,

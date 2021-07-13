@@ -108,6 +108,8 @@ export class GridRowSelectionComponent implements OnInit {
     ];
 
     this.gridOptions1 = {
+      gridHeight: 225,
+      gridWidth: 800,
       enableAutoResize: false,
       enableCellNavigation: true,
       enableRowSelection: true,
@@ -147,6 +149,8 @@ export class GridRowSelectionComponent implements OnInit {
     };
 
     this.gridOptions2 = {
+      gridHeight: 255,
+      gridWidth: 800,
       enableAutoResize: false,
       enableCellNavigation: true,
       enableFiltering: true,
@@ -209,19 +213,19 @@ export class GridRowSelectionComponent implements OnInit {
   }
 
   goToGrid1FirstPage() {
-    this.angularGrid1.paginationService.goToFirstPage();
+    this.angularGrid1.paginationService!.goToFirstPage();
   }
 
   goToGrid1LastPage() {
-    this.angularGrid1.paginationService.goToLastPage();
+    this.angularGrid1.paginationService!.goToLastPage();
   }
 
   goToGrid2FirstPage() {
-    this.angularGrid2.paginationService.goToFirstPage();
+    this.angularGrid2.paginationService!.goToFirstPage();
   }
 
   goToGrid2LastPage() {
-    this.angularGrid2.paginationService.goToLastPage();
+    this.angularGrid2.paginationService!.goToLastPage();
   }
 
   /** Dispatched event of a Grid State Changed event */
@@ -248,7 +252,7 @@ export class GridRowSelectionComponent implements OnInit {
   // Basically you cannot toggle a Pagination that doesn't exist (must created at the time as the grid)
   togglePaginationGrid2() {
     this.isGrid2WithPagination = !this.isGrid2WithPagination;
-    this.angularGrid2.paginationService.togglePaginationVisibility(this.isGrid2WithPagination);
+    this.angularGrid2.paginationService!.togglePaginationVisibility(this.isGrid2WithPagination);
   }
 
   handleSelectedRowsChanged1(e: Event, args: any) {
