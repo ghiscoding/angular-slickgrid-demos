@@ -1,5 +1,14 @@
-<div class="container-fluid">
-  <h2>{{title}}</h2>
+<div id="demo-container" class="container-fluid">
+  <h2>
+    {{title}}
+    <span class="float-right">
+      <a style="font-size: 18px"
+         target="_blank"
+         href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-editor.component.ts">
+        <span class="fa fa-link"></span> code
+      </a>
+    </span>
+  </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
   <div class="col-sm-6">
@@ -21,34 +30,40 @@
           Undo last edit(s)
         </button>
         <label class="checkbox-inline control-label" for="autoCommitEdit">
-          <input type="checkbox" id="autoCommitEdit" [checked]="gridOptions.autoCommitEdit"
+          <input type="checkbox" id="autoCommitEdit" data-test="auto-commit" [checked]="gridOptions.autoCommitEdit"
                  (click)="changeAutoCommit()">
           Auto Commit Edit
         </label>
       </span>
     </div>
     <div class="row" style="margin-top: 5px">
-      <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.filterService.clearFilters()">Clear
-        Filters</button>
-      <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.sortService.clearSorting()">Clear
-        Sorting</button>
-      <button class="btn btn-sm btn-outline-info" (click)="addItem()"
-              title="Clear Filters &amp; Sorting to see it better">Add item</button>
-      <button class="btn btn-sm btn-outline-danger" (click)="deleteItem()">Delete item</button>
+      <div class="col-sm-12">
+        <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.filterService.clearFilters()">
+          Clear Filters
+        </button>
+        <button class="btn btn-outline-secondary btn-sm" (click)="angularGrid.sortService.clearSorting()">
+          Clear Sorting
+        </button>
+        <button class="btn btn-sm btn-outline-primary" (click)="addItem()"
+                title="Clear Filters &amp; Sorting to see it better">Add item</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="deleteItem()">Delete item</button>
+      </div>
     </div>
     <div class="row" style="margin-top: 5px">
-      <button class="btn btn-outline-secondary btn-sm" (click)="dynamicallyAddTitleHeader()">
-        <i class="fa fa-plus"></i>
-        Dynamically Duplicate Title Column
-      </button>
-      <button class="btn btn-outline-secondary btn-sm" (click)="dynamicallyRemoveLastColumn()">
-        <i class="fa fa-minus"></i>
-        Dynamically Remove Last Column
-      </button>
+      <div class="col-sm-12">
+        <button class="btn btn-outline-secondary btn-sm" data-test="add-title-column"
+                (click)="dynamicallyAddTitleHeader()">
+          <i class="fa fa-plus"></i>
+          Dynamically Duplicate Title Column
+        </button>
+        <button class="btn btn-outline-secondary btn-sm" data-test="remove-title-column"
+                (click)="dynamicallyRemoveLastColumn()">
+          <i class="fa fa-minus"></i>
+          Dynamically Remove Last Column
+        </button>
+      </div>
     </div>
   </div>
-
-
 
   <div class="col-sm-6">
     <div class="alert alert-info" *ngIf="updatedObject">
@@ -60,11 +75,14 @@
   </div>
 
   <div class="col-sm-12">
-    <angular-slickgrid gridId="grid2" (onAngularGridCreated)="angularGridReady($event)"
-                       (sgOnCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
-                       (sgOnClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
-                       (sgOnValidationError)="onValidationError($event.detail.eventData, $event.detail.args)"
-                       [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions" [dataset]="dataset">
+    <angular-slickgrid gridId="grid3"
+                       [columnDefinitions]="columnDefinitions"
+                       [gridOptions]="gridOptions"
+                       [dataset]="dataset"
+                       (onAngularGridCreated)="angularGridReady($event.detail)"
+                       (onCellChange)="onCellChanged($event.detail.eventData, $event.detail.args)"
+                       (onClick)="onCellClicked($event.detail.eventData, $event.detail.args)"
+                       (onValidationError)="onValidationError($event.detail.eventData, $event.detail.args)">
     </angular-slickgrid>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { AngularGridInstance, Column, FieldType, GridOption, ItemMetadata } from 'angular-slickgrid';
 
 @Component({
@@ -22,14 +23,14 @@ export class GridColspanComponent implements OnInit {
   </ul>
   `;
 
-  angularGrid2: AngularGridInstance;
+  angularGrid2!: AngularGridInstance;
   gridObj2: any;
-  columnDefinitions1: Column[];
-  columnDefinitions2: Column[];
-  gridOptions1: GridOption;
-  gridOptions2: GridOption;
-  dataset1 = [];
-  dataset2 = [];
+  columnDefinitions1!: Column[];
+  columnDefinitions2!: Column[];
+  gridOptions1!: GridOption;
+  gridOptions2!: GridOption;
+  dataset1: any[] = [];
+  dataset2: any[] = [];
 
   ngOnInit(): void {
     this.prepareGrid1();
@@ -52,15 +53,21 @@ export class GridColspanComponent implements OnInit {
     ];
 
     this.gridOptions1 = {
+      gridHeight: 275,
+      gridWidth: 800,
       enableAutoResize: false,
       enableCellNavigation: true,
-      enableColumnReorder: false,
       enableSorting: true,
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 28,
       explicitInitialization: true,
       colspanCallback: this.renderDifferentColspan,
+      enableExcelExport: true,
+      excelExportOptions: {
+        exportWithFormatter: false
+      },
+      registerExternalResources: [new ExcelExportService()],
     };
 
     this.dataset1 = this.getData(500);
@@ -78,15 +85,21 @@ export class GridColspanComponent implements OnInit {
     ];
 
     this.gridOptions2 = {
+      gridHeight: 275,
+      gridWidth: 800,
       enableCellNavigation: true,
-      enableColumnReorder: false,
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 25,
       explicitInitialization: true,
       frozenColumn: 2,
       gridMenu: { hideClearFrozenColumnsCommand: false },
-      headerMenu: { hideFreezeColumnsCommand: false }
+      headerMenu: { hideFreezeColumnsCommand: false },
+      enableExcelExport: true,
+      excelExportOptions: {
+        exportWithFormatter: false
+      },
+      registerExternalResources: [new ExcelExportService()],
     };
 
     this.dataset2 = this.getData(500);
@@ -129,14 +142,13 @@ export class GridColspanComponent implements OnInit {
           }
         }
       };
-    } else {
-      return {
-        columns: {
-          0: {
-            colspan: '*' // starting at column index 0, we will span accross all column (*)
-          }
-        }
-      };
     }
+    return {
+      columns: {
+        0: {
+          colspan: '*' // starting at column index 0, we will span accross all column (*)
+        }
+      }
+    };
   }
 }

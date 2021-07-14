@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
@@ -10,7 +9,6 @@ import {
   GridState,
   GridStateChange,
   MultipleSelectOption,
-  unsubscribeAllObservables
 } from 'angular-slickgrid';
 
 function randomBetween(min: number, max: number) {
@@ -23,7 +21,7 @@ const NB_ITEMS = 500;
 @Component({
   templateUrl: './grid-state.component.html'
 })
-export class GridStateComponent implements OnInit, OnDestroy {
+export class GridStateComponent implements OnInit {
   title = 'Example 16: Grid State & Presets using Local Storage';
   subTitle = `
     Grid State & Preset (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grid-State-&-Preset" target="_blank">Wiki docs</a>)
@@ -36,7 +34,6 @@ export class GridStateComponent implements OnInit, OnDestroy {
       <li>Local Storage is just one option, you can use whichever is more convenient for you (Local Storage, Session Storage, DB, ...)</li>
     </ul>
   `;
-  private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
@@ -46,11 +43,6 @@ export class GridStateComponent implements OnInit, OnDestroy {
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
-  }
-
-  ngOnDestroy() {
-    // also unsubscribe all Angular Subscriptions
-    this.subscriptions = unsubscribeAllObservables(this.subscriptions);
   }
 
   ngOnInit(): void {
@@ -65,7 +57,7 @@ export class GridStateComponent implements OnInit, OnDestroy {
   clearGridStateFromLocalStorage() {
     localStorage[LOCAL_STORAGE_KEY] = null;
     this.angularGrid.gridService.resetGrid(this.columnDefinitions);
-    this.angularGrid.paginationService.changeItemPerPage(DEFAULT_PAGE_SIZE);
+    this.angularGrid.paginationService!.changeItemPerPage(DEFAULT_PAGE_SIZE);
   }
 
   /* Define grid Options and Columns */
@@ -135,8 +127,8 @@ export class GridStateComponent implements OnInit, OnDestroy {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableCheckboxSelector: true,
       enableFiltering: true,

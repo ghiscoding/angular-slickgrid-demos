@@ -1,4 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import { TextExportService } from '@slickgrid-universal/text-export';
 import {
   AngularGridInstance,
   Column,
@@ -10,14 +12,15 @@ import {
   Formatters,
   GridOption,
   GridStateChange,
-  SlickGrid,
 } from 'angular-slickgrid';
 import { localeFrench } from '../locales/fr';
 
-const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
+const NB_ITEMS = 1500;
+
+const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value !== undefined ? `Titre ${value}` : '';
 };
-const exportBooleanFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
+const exportBooleanFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value ? 'Vrai' : 'Faux';
 };
 
@@ -34,13 +37,14 @@ export class GridLocalizationComponent implements OnInit {
     </ul>
   `;
 
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
-  selectedLanguage = `localeFrench.ts`;
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   duplicateTitleHeaderCount = 1;
   gridObj: any;
+  excelExportService = new ExcelExportService();
+  textExportService = new TextExportService();
 
   constructor() { }
 
@@ -79,17 +83,14 @@ export class GridLocalizationComponent implements OnInit {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
-
       // use a Single Custom Locales set
       locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
       locales: localeFrench,
       enableAutoResize: true,
       enableExcelCopyBuffer: true,
-      enableExcelExport: true,
-      enableExport: true,
       enableFiltering: true,
       checkboxSelector: {
         // you can toggle these 2 properties to show the "select all" checkbox in different location
@@ -111,7 +112,7 @@ export class GridLocalizationComponent implements OnInit {
           ofKey: 'OF',
           lastUpdateKey: 'LAST_UPDATE',
         },
-        dateFormat: 'yyyy-MM-dd hh:mm aaaaa\'m\'',
+        dateFormat: 'YYYY-MM-DD, hh:mm a',
         hideTotalItemCount: false,
         hideLastUpdateTimestamp: false,
       },
@@ -146,10 +147,18 @@ export class GridLocalizationComponent implements OnInit {
       gridMenu: {
         hideExportCsvCommand: false,           // false by default, so it's optional
         hideExportTextDelimitedCommand: false  // true by default, so if you want it, you will need to disable the flag
-      }
+      },
+      enableExcelExport: true,
+      enableTextExport: true,
+      textExportOptions: {
+        // set at the grid option level, meaning all column will evaluate the Formatter (when it has a Formatter defined)
+        exportWithFormatter: true,
+        sanitizeDataExport: true
+      },
+      registerExternalResources: [this.excelExportService, this.textExportService],
     };
 
-    this.loadData(1000);
+    this.loadData(NB_ITEMS);
   }
 
   // mock a dataset
@@ -166,7 +175,8 @@ export class GridLocalizationComponent implements OnInit {
         duration: Math.round(Math.random() * 100) + '',
         start: new Date(randomYear, randomMonth, randomDay),
         finish: new Date(randomYear, (randomMonth + 1), randomDay),
-        completedBool: (i % 5 === 0) ? true : false
+        completedBool: (i % 5 === 0) ? true : false,
+        completed: (i % 5 === 0) ? 'TRUE' : 'FALSE'
       };
     }
   }
@@ -194,14 +204,14 @@ export class GridLocalizationComponent implements OnInit {
   }
 
   exportToExcel() {
-    this.angularGrid.excelExportService.exportToExcel({
+    this.excelExportService.exportToExcel({
       filename: 'Export',
       format: FileType.xlsx
     });
   }
 
   exportToFile(type = 'csv') {
-    this.angularGrid.exportService.exportToFile({
+    this.textExportService.exportToFile({
       delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,
       filename: 'myExport',
       format: (type === 'csv') ? FileType.csv : FileType.txt

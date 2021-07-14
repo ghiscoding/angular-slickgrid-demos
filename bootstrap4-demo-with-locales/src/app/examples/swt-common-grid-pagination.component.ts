@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, } from '@angular/core';
 import { SwtCommonGridComponent } from './swt-common-grid.component';
 import { Logger } from './swt-logger.service';
 import { HttpClient } from '@angular/common/http';
@@ -30,7 +30,7 @@ import { GridOption } from 'angular-slickgrid';
         <div class="slick-page-number">
             <span>Page</span>
             <input type="text" value="{{pageNumber}}" size="1"  (change)="changeToCurrentPage($event)">
-            <span >of</span><span> {{pageCount}}</span>
+            <span>of</span><span> {{pageCount}}</span>
         </div>
 
         <nav aria-label="Page navigation">
@@ -70,25 +70,25 @@ import { GridOption } from 'angular-slickgrid';
   `]
 })
 export class SwtCommonGridPaginationComponent implements OnInit {
-  private logger: Logger = null;
+  private logger: Logger;
 
-  @Input('pageCount') pageCount = 1;
-  @Input('pageNumber') pageNumber = 1;
+  @Input() pageCount = 1;
+  @Input() pageNumber = 1;
 
   totalItems = 0;
   processing = false;
 
   // Reference to the real pagination component
   realPagination = true;
-  _gridPaginationOptions: GridOption;
-  commonGrid: SwtCommonGridComponent;
+  _gridPaginationOptions!: GridOption;
+  commonGrid!: SwtCommonGridComponent;
 
   @Input()
   set gridPaginationOptions(gridPaginationOptions: GridOption) {
     this._gridPaginationOptions = gridPaginationOptions;
 
     // The backendServiceApi is itself the SwtCommonGridComponent (This is a hack)
-    this.commonGrid = <SwtCommonGridComponent>this.gridPaginationOptions.backendServiceApi.service;
+    this.commonGrid = <SwtCommonGridComponent>this.gridPaginationOptions!.backendServiceApi!.service;
   }
   get gridPaginationOptions(): GridOption {
     return this._gridPaginationOptions;
@@ -151,6 +151,6 @@ export class SwtCommonGridPaginationComponent implements OnInit {
 
   onPageChanged(event?: Event, pageNumber?: number) {
     this.logger.info('method [onPageChanged] - START/END', this.commonGrid);
-    this.commonGrid.processOnPaginationChanged(event, { newPage: pageNumber, pageSize: -1 });
+    this.commonGrid.processOnPaginationChanged(event, { newPage: pageNumber as number, pageSize: -1 });
   }
 }

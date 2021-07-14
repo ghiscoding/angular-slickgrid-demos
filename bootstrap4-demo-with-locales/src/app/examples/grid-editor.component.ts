@@ -17,7 +17,7 @@ import {
   LongTextEditorOption,
   OnEventArgs,
   OperatorType,
-  Sorters,
+  SortComparers,
 } from 'angular-slickgrid';
 import { CustomInputEditor } from './custom-inputEditor';
 import { CustomInputFilter } from './custom-inputFilter';
@@ -25,7 +25,6 @@ import { Subject } from 'rxjs';
 
 // using external non-typed js libraries
 declare const Slick: any;
-declare const $: any;
 
 const NB_ITEMS = 100;
 const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_100_numbers.json';
@@ -33,7 +32,7 @@ const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
 const URL_COUNTRY_NAMES = 'assets/data/country_names.json';
 
 // you can create custom validator to pass to an inline editor
-const myCustomTitleValidator: EditorValidator = (value: any, args: EditorArgs) => {
+const myCustomTitleValidator: EditorValidator = (value: any, args?: EditorArgs) => {
   // you can get the Editor Args which can be helpful, e.g. we can get the Translate Service from it
   const grid = args && args.grid;
 
@@ -41,15 +40,14 @@ const myCustomTitleValidator: EditorValidator = (value: any, args: EditorArgs) =
   // don't use "editor" property since that one is what SlickGrid uses internally by it's editor factory
   const columnEditor = args && args.column && args.column.internalColumnEditor;
 
-  if (value == null || value === undefined || !value.length) {
+  if (value === null || value === undefined || !value.length) {
     return { valid: false, msg: 'This is a required field' };
   } else if (!/^Task\s\d+$/.test(value)) {
     return { valid: false, msg: 'Your title is invalid, it must start with "Task" followed by a number' };
     // OR use the Translate Service with your custom message
     // return { valid: false, msg: translate.instant('YOUR_ERROR', { x: value }) };
-  } else {
-    return { valid: true, msg: '' };
   }
+  return { valid: true, msg: '' };
 };
 
 // create a custom Formatter to show the Task + value
@@ -376,7 +374,7 @@ export class GridEditorComponent implements OnInit {
         dataKey: 'code',
         labelKey: 'name',
         type: FieldType.object,
-        sorter: Sorters.objectString, // this sorter requires the dataKey and assume that obj1[dataKey] will be a string so it can sort it that way
+        sortComparer: SortComparers.objectString, // this sorter requires the dataKey and assume that obj1[dataKey] will be a string so it can sort it that way
         filterable: true,
         sortable: true,
         minWidth: 100,
@@ -476,8 +474,8 @@ export class GridEditorComponent implements OnInit {
       autoEdit: this.isAutoEdit,
       autoCommitEdit: false,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       editable: true,
       enableCellNavigation: true,
