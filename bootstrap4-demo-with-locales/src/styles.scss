@@ -121,4 +121,4 @@ outline: 0 none;
 /*$cell-odd-background-color: lightyellow;*/
 
 /* make sure to add the @import the SlickGrid Bootstrap Theme AFTER the variables changes */
-@import 'angular-slickgrid/styles/sass/slickgrid-theme-bootstrap.scss';
+@import '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-bootstrap.scss';

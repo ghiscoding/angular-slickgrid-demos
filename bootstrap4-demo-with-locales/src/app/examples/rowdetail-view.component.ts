@@ -19,8 +19,8 @@ export class RowDetailViewComponent {
 
   // you also have access to the following objects (it must match the exact property names shown below)
   addon: any; // row detail addon instance
-  grid: SlickGrid;
-  dataView: SlickDataView;
+  grid!: SlickGrid;
+  dataView!: SlickDataView;
 
   // you can also optionally use the Parent Component reference
   // NOTE that you MUST provide it through the "parent" property in your "rowDetail" grid options

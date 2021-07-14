@@ -19,13 +19,14 @@ import {
   OnEventArgs,
   OperatorType,
   SortComparers,
+  SlickNamespace,
 } from 'angular-slickgrid';
 import { CustomInputEditor } from './custom-inputEditor';
 import { CustomInputFilter } from './custom-inputFilter';
 import { Subject } from 'rxjs';
 
 // using external non-typed js libraries
-declare const Slick: any;
+declare const Slick: SlickNamespace;
 
 const NB_ITEMS = 100;
 const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_100_numbers.json';
@@ -37,7 +38,7 @@ const myCustomTitleValidator: EditorValidator = (value: any, args?: EditorArgs) 
   // you can get the Editor Args which can be helpful, e.g. we can get the Translate Service from it
   const grid = args && args.grid;
   const gridOptions = (grid?.getOptions?.() ?? {}) as GridOption;
-  const translate = gridOptions.i18n;
+  const translate = gridOptions.i18n as TranslateService;
 
   // to get the editor object, you'll need to use "internalColumnEditor"
   // don't use "editor" property since that one is what SlickGrid uses internally by it's editor factory

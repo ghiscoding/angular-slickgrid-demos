@@ -18,7 +18,7 @@ export class CustomInputFilter implements Filter {
   private _clearFilterTriggered = false;
   private _shouldTriggerQuery = true;
   private $filterElm: any;
-  grid: SlickGrid;
+  grid!: SlickGrid;
   searchTerms: SearchTerm[] = [];
   columnDef!: Column;
   callback!: FilterCallback;
@@ -40,7 +40,7 @@ export class CustomInputFilter implements Filter {
    * Initialize the Filter
    */
   init(args: FilterArguments) {
-    this.grid = args.grid;
+    this.grid = args.grid as SlickGrid;
     this.callback = args.callback;
     this.columnDef = args.columnDef;
     this.searchTerms = (args.hasOwnProperty('searchTerms') ? args.searchTerms : []) || [];

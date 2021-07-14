@@ -9,6 +9,7 @@ import {
   EditorValidationResult,
   GridOption,
   unsubscribeAllObservables,
+  SlickGrid,
 } from 'angular-slickgrid';
 
 /*
@@ -28,7 +29,7 @@ export class CustomAngularComponentEditor implements Editor {
   defaultItem: any;
 
   /** SlickGrid grid object */
-  grid: any;
+  grid!: SlickGrid;
 
   constructor(private args: any) {
     this.grid = args && args.grid;

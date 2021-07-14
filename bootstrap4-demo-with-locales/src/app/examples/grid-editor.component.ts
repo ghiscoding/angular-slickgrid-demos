@@ -18,13 +18,14 @@ import {
   OnEventArgs,
   OperatorType,
   SortComparers,
+  SlickNamespace,
 } from 'angular-slickgrid';
 import { CustomInputEditor } from './custom-inputEditor';
 import { CustomInputFilter } from './custom-inputFilter';
 import { Subject } from 'rxjs';
 
 // using external non-typed js libraries
-declare const Slick: any;
+declare const Slick: SlickNamespace;
 
 const NB_ITEMS = 100;
 const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_100_numbers.json';

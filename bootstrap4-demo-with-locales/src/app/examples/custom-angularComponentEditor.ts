@@ -29,7 +29,7 @@ export class CustomAngularComponentEditor implements Editor {
   defaultItem: any;
 
   /** SlickGrid grid object */
-  grid: SlickGrid;
+  grid!: SlickGrid;
 
   constructor(private args: any) {
     this.grid = args && args.grid;

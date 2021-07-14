@@ -11,6 +11,7 @@ import {
   GridOption,
   OnEventArgs,
   SlickGrid,
+  SlickNamespace,
 } from 'angular-slickgrid';
 import { EditorNgSelectComponent } from './editor-ng-select.component';
 import { CustomActionFormatterComponent } from './custom-actionFormatter.component';
@@ -20,7 +21,7 @@ import { CustomTitleFormatterComponent } from './custom-titleFormatter.component
 import { FilterNgSelectComponent } from './filter-ng-select.component';
 
 // using external non-typed js libraries
-declare const Slick: SlickGrid;
+declare const Slick: SlickNamespace;
 declare const $: any;
 
 const NB_ITEMS = 100;

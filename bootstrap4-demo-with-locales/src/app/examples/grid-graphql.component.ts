@@ -121,7 +121,6 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       gridWidth: 900,
       enableFiltering: true,
       enableCellNavigation: true,
-      enableTranslate: true,
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 28,

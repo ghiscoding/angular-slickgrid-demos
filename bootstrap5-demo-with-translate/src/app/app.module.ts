@@ -19,6 +19,7 @@ import { GridAutoHeightComponent } from './examples/grid-autoheight.component';
 import { GridBasicComponent } from './examples/grid-basic.component';
 import { GridClientSideComponent } from './examples/grid-clientside.component';
 import { GridColspanComponent } from './examples/grid-colspan.component';
+import { GridCompositeEditorComponent } from './examples/grid-composite-editor.component';
 import { GridContextMenuComponent } from './examples/grid-contextmenu.component';
 import { GridDraggableGroupingComponent } from './examples/grid-draggrouping.component';
 import { GridEditorComponent } from './examples/grid-editor.component';
@@ -93,6 +94,7 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     GridBasicComponent,
     GridClientSideComponent,
     GridColspanComponent,
+    GridCompositeEditorComponent,
     GridContextMenuComponent,
     GridEditorComponent,
     GridDraggableGroupingComponent,
@@ -142,8 +144,8 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
       // to avoid passing the same options over and over in each grids of your App
       enableAutoResize: true,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       }
     })
   ],

@@ -40,12 +40,12 @@ const priorityExportFormatter: Formatter = (row, cell, value, columnDef, dataCon
   if (!value) {
     return '';
   }
-  const gridOptions = (grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {};
+  const gridOptions = grid?.getOptions?.() as GridOption;
   const count = +(value >= 3 ? 3 : value);
   return count === 3 ? 'High' : (count === 2 ? 'Medium' : 'Low');
 };
 
-const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
+const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value !== undefined ? `Title ${value}` : '';
 };
 

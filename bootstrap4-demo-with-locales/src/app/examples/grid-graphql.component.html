@@ -37,18 +37,6 @@
           </button>
         </div>
       </div>
-      <div class="row mt-1">
-        <div class="col-md-12">
-          <button class="btn btn-outline-secondary btn-sm" data-test="language-button" (click)="switchLanguage()">
-            <i class="fa fa-language"></i>
-            Switch Language
-          </button>
-          <strong>Locale:</strong>
-          <span style="font-style: italic" data-test="selected-locale">
-            {{selectedLanguage + '.json'}}
-          </span>
-        </div>
-      </div>
       <br />
       <div *ngIf="metrics" style="margin: 10px 0px">
         <b>Metrics:</b> {{metrics.endTime | date: 'yyyy-MM-dd hh:mm aaaaa\'m\''}} | {{metrics.executionTime}}ms

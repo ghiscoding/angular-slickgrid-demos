@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, ColumnEditorDualInput, Editors, FieldType, formatNumber, Formatters, Filters, GridOption, SlickGrid } from 'angular-slickgrid';
+import { AngularGridInstance, Column, ColumnEditorDualInput, Editors, FieldType, formatNumber, Formatters, Filters, GridOption, SlickGrid, SlickNamespace } from 'angular-slickgrid';
 
-declare const Slick: SlickGrid;
+declare const Slick: SlickNamespace;
 
 @Component({
   templateUrl: './grid-frozen.component.html',
