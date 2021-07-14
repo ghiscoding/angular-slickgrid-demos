@@ -1,4 +1,5 @@
 import { ComponentRef } from '@angular/core';
+import { SlickGrid } from '@slickgrid-universal/common';
 import { Subscription } from 'rxjs';
 import {
   AngularUtilService,
@@ -6,7 +7,7 @@ import {
   ColumnEditor,
   Editor,
   EditorValidator,
-  EditorValidatorOutput,
+  EditorValidationResult,
   GridOption,
   unsubscribeAllObservables,
 } from 'angular-slickgrid';
@@ -19,16 +20,16 @@ export class CustomAngularComponentEditor implements Editor {
   private _subscriptions: Subscription[] = [];
 
   /** Angular Component Reference */
-  componentRef: ComponentRef<any>;
+  componentRef!: ComponentRef<any>;
 
   /** default item Id */
-  defaultId: string;
+  defaultId = '';
 
   /** default item object */
   defaultItem: any;
 
   /** SlickGrid grid object */
-  grid: any;
+  grid: SlickGrid;
 
   constructor(private args: any) {
     this.grid = args && args.grid;
@@ -46,7 +47,7 @@ export class CustomAngularComponentEditor implements Editor {
 
   /** Get the Collection */
   get collection(): any[] {
-    return this.columnDef && this.columnDef.internalColumnEditor.collection || [];
+    return this.columnDef && this.columnDef.internalColumnEditor!.collection || [];
   }
 
   /** Get Column Definition object */
@@ -61,15 +62,15 @@ export class CustomAngularComponentEditor implements Editor {
 
   /** Getter for the Grid Options pulled through the Grid Object */
   get gridOptions(): GridOption {
-    return (this.grid && this.grid.getOptions) ? this.grid.getOptions() : {};
+    return this.grid?.getOptions?.() as GridOption;
   }
 
-  get hasAutoCommitEdit() {
-    return this.gridOptions.autoCommitEdit;
+  get hasAutoCommitEdit(): boolean {
+    return this.gridOptions.autoCommitEdit ?? false;
   }
 
   /** Get the Validator function, can be passed in Editor property or Column Definition */
-  get validator(): EditorValidator {
+  get validator(): EditorValidator | undefined {
     return this.columnEditor.validator || this.columnDef.validator;
   }
 
@@ -167,7 +168,7 @@ export class CustomAngularComponentEditor implements Editor {
     return (!(this.componentRef.instance.selectedId === '' && (this.defaultId === null || this.defaultId === undefined))) && (this.componentRef.instance.selectedId !== this.defaultId);
   }
 
-  validate(): EditorValidatorOutput {
+  validate(): EditorValidationResult {
     if (this.validator) {
       const value = this.componentRef.instance.selectedId;
       return this.validator(value, this.args);

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, Editors, FieldType, Formatters, GridOption, GridService, OnEventArgs, SlickGrid, SlickDataView, } from 'angular-slickgrid';
+import { AngularGridInstance, Column, Editors, FieldType, Formatters, GridOption, GridService, OnEventArgs } from 'angular-slickgrid';
 
 @Component({
   styles: ['.duration-bg { background-color: #e9d4f1 !important }'],
@@ -22,21 +22,24 @@ export class GridAddItemComponent implements OnInit {
     </ul>
     <li>You can also add CSS class(es) on the fly (or on page load) on rows with certain criteria, (e.g. click on last button)
     <ul>
-      <li>Example, click on button "Highlight Rows with Duration over 50" to see row styling changing. <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Dynamically-Add-CSS-Classes-to-Item-Rows" target="_blank">Wiki doc</a></li>
+      <li>Example, click on button "Highlight Rows with Duration over 40" to see row styling changing. <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Dynamically-Add-CSS-Classes-to-Item-Rows" target="_blank">Wiki doc</a></li>
     </ul>
   </ul>
   `;
 
-  angularGrid: AngularGridInstance;
-  grid: SlickGrid;
-  gridService: GridService;
-  dataView: SlickDataView;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
+  angularGrid!: AngularGridInstance;
+  grid: any;
+  gridService!: GridService;
+  dataView: any;
+  columnDefinitions: Column[] = [];
+  gridOptions!: GridOption;
   dataset: any[];
   updatedObject: any;
 
-  constructor() { }
+  constructor() {
+    // mock a dataset
+    this.dataset = this.mockDataset(1000);
+  }
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
@@ -66,7 +69,7 @@ export class GridAddItemComponent implements OnInit {
         onCellClick: (e: Event, args: OnEventArgs) => {
           console.log(args);
           if (confirm('Are you sure?')) {
-            this.angularGrid.gridService.deleteDataGridItemById(args.dataContext.id);
+            this.angularGrid.gridService.deleteItemById(args.dataContext.id);
           }
         }
       },
@@ -127,23 +130,24 @@ export class GridAddItemComponent implements OnInit {
     this.gridOptions = {
       asyncEditorLoading: false,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       editable: true,
       enableColumnPicker: true,
       enableCellNavigation: true,
       enableRowSelection: true
     };
+  }
 
+  mockDataset(itemCount: number) {
     // mock a dataset
     const mockedDataset = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < itemCount; i++) {
       const randomYear = 2000 + Math.floor(Math.random() * 10);
       const randomMonth = Math.floor(Math.random() * 11);
       const randomDay = Math.floor((Math.random() * 29));
       const randomPercent = Math.round(Math.random() * 100);
-
       mockedDataset[i] = {
         id: i,
         title: 'Task ' + i,
@@ -155,7 +159,7 @@ export class GridAddItemComponent implements OnInit {
         effortDriven: (i % 5 === 0)
       };
     }
-    this.dataset = mockedDataset;
+    return mockedDataset;
   }
 
   addNewItem(insertPosition?: 'top' | 'bottom') {
@@ -172,7 +176,7 @@ export class GridAddItemComponent implements OnInit {
   createNewItem(incrementIdByHowMany = 1) {
     const dataset = this.angularGrid.dataView.getItems();
     let highestId = 0;
-    dataset.forEach(item => {
+    dataset.forEach((item: any) => {
       if (item.id > highestId) {
         highestId = item.id;
       }
@@ -202,7 +206,7 @@ export class GridAddItemComponent implements OnInit {
 
   /** Change the Duration Rows Background Color */
   changeDurationBackgroundColor() {
-    this.dataView.getItemMetadata = this.updateItemMetadataForDurationOver50(this.dataView.getItemMetadata);
+    this.dataView.getItemMetadata = this.updateItemMetadataForDurationOver40(this.dataView.getItemMetadata);
 
     // also re-render the grid for the styling to be applied right away
     this.grid.invalidate();
@@ -216,7 +220,7 @@ export class GridAddItemComponent implements OnInit {
    * Change the SlickGrid Item Metadata, we will add a CSS class on all rows with a Duration over 50
    * For more info, you can see this SO https://stackoverflow.com/a/19985148/1212166
    */
-  updateItemMetadataForDurationOver50(previousItemMetadata: any) {
+  updateItemMetadataForDurationOver40(previousItemMetadata: any) {
     const newCssClass = 'duration-bg';
 
     return (rowNumber: number) => {
@@ -230,7 +234,7 @@ export class GridAddItemComponent implements OnInit {
 
       if (meta && item && item.duration) {
         const duration = +item.duration; // convert to number
-        if (duration > 50) {
+        if (duration > 40) {
           meta.cssClasses = (meta.cssClasses || '') + ' ' + newCssClass;
         }
       }

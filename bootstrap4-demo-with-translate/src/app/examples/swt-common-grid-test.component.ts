@@ -10,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { SwtCommonGridComponent } from './swt-common-grid.component';
 import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
-import { FilterChangedArgs, PaginationChangedArgs, SortChangedArgs } from 'angular-slickgrid';
 
 import { Logger } from './swt-logger.service';
 /**
@@ -29,15 +28,15 @@ export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
   testurl = 'http://127.0.0.1:8080/grid!display.do?';
   currentUrl = this.testurl;
 
-  @ViewChild('commonGrid1', { static: true }) commonGrid: SwtCommonGridComponent;
-  @ViewChild('commonGridPag1', { static: true }) commonGridPag: SwtCommonGridPaginationComponent;
+  @ViewChild('commonGrid1', { static: true }) commonGrid!: SwtCommonGridComponent;
+  @ViewChild('commonGridPag1', { static: true }) commonGridPag!: SwtCommonGridPaginationComponent;
 
-  private logger: Logger = null;
+  private logger: Logger;
 
   constructor(private httpClient: HttpClient,
     private viewContainerRef: ViewContainerRef,
     private componentFactoryResolver: ComponentFactoryResolver) {
-    this.logger = new Logger('test', null);
+    this.logger = new Logger('test', undefined);
 
   }
 
@@ -77,17 +76,17 @@ export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
     this.logger.info('method [ngAfterViewInit] - END');
   }
 
-  filterChanged(event: FilterChangedArgs) {
+  filterChanged() {
     this.commonGridPag.processing = true;
     this.updateGridData();
   }
 
-  paginationChanged(event: PaginationChangedArgs) {
+  paginationChanged() {
     this.commonGridPag.processing = true;
     this.updateGridData();
   }
 
-  sortChanged(event: SortChangedArgs) {
+  sortChanged() {
     this.commonGridPag.processing = true;
     this.updateGridData();
   }

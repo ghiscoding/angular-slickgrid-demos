@@ -9,8 +9,8 @@ import { Subject } from 'rxjs';
       [items]="collection"
       bindValue="id"
       bindLabel="name"
+      appendTo="body"
       [clearable]="false"
-      appendTo="#root-container"
       (change)="onChange($event)"
       [(ngModel)]="selectedId"
 		>
@@ -20,9 +20,9 @@ import { Subject } from 'rxjs';
 		</ng-select>`
 })
 export class FilterNgSelectComponent {
-  selectedId: string;
+  selectedId = '';
   selectedItem: any;
-  collection; // this will be filled by the collection of your column definition
+  collection?: any[]; // this will be filled by the collection of your column definition
   onItemChanged = new Subject<any>();    // object
 
   onChange(item: any) {

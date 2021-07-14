@@ -11,7 +11,7 @@
   </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
-  <div class="col-sm-6 row">
+  <div class="col-sm-6">
     <button class="btn btn-outline-secondary btn-sm" (click)="closeAllRowDetail()" data-test="close-all-btn">
       Close All Row Details
     </button>
@@ -26,7 +26,10 @@
 
   <hr />
 
-  <angular-slickgrid gridId="grid21" [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions"
-                     [dataset]="dataset" (onAngularGridCreated)="angularGridReady($event)">
+  <angular-slickgrid gridId="grid21"
+                     [columnDefinitions]="columnDefinitions"
+                     [gridOptions]="gridOptions"
+                     [dataset]="dataset"
+                     (onAngularGridCreated)="angularGridReady($event.detail)">
   </angular-slickgrid>
 </div>

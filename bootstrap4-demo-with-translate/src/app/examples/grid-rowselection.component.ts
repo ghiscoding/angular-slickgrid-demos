@@ -25,20 +25,20 @@ export class GridRowSelectionComponent implements OnInit {
     </ul>
   `;
 
-  angularGrid1: AngularGridInstance;
-  angularGrid2: AngularGridInstance;
-  columnDefinitions1: Column[];
-  columnDefinitions2: Column[];
-  gridOptions1: GridOption;
-  gridOptions2: GridOption;
-  dataset1: any[];
-  dataset2: any[];
-  gridObj1: any;
-  gridObj2: any;
+  angularGrid1!: AngularGridInstance;
+  angularGrid2!: AngularGridInstance;
+  columnDefinitions1!: Column[];
+  columnDefinitions2!: Column[];
+  gridOptions1!: GridOption;
+  gridOptions2!: GridOption;
+  dataset1!: any[];
+  dataset2!: any[];
+  gridObj1!: any;
+  gridObj2!: any;
   isGrid2WithPagination = true;
-  selectedTitles: any[];
-  selectedTitle: any;
-  selectedGrid2IDs: number[];
+  selectedTitles!: any[];
+  selectedTitle!: any;
+  selectedGrid2IDs!: number[];
 
   constructor(private cd: ChangeDetectorRef) { }
 
@@ -108,18 +108,23 @@ export class GridRowSelectionComponent implements OnInit {
     ];
 
     this.gridOptions1 = {
+      gridHeight: 225,
+      gridWidth: 800,
       enableAutoResize: false,
       enableCellNavigation: true,
       enableRowSelection: true,
       enableCheckboxSelector: true,
       enableFiltering: true,
       checkboxSelector: {
+        // optionally change the column index position of the icon (defaults to 0)
+        // columnIndexPosition: 1,
+
         // remove the unnecessary "Select All" checkbox in header when in single selection mode
         hideSelectAllCheckbox: true,
 
         // you can override the logic for showing (or not) the expand icon
         // for example, display the expand icon only on every 2nd row
-        // selectableOverride: (row: number, dataContext: any, grid: SlickGrid) => (dataContext.id % 2 === 1)
+        // selectableOverride: (row: number, dataContext: any, grid: any) => (dataContext.id % 2 === 1)
       },
       multiSelect: false,
       rowSelectionOptions: {
@@ -144,6 +149,8 @@ export class GridRowSelectionComponent implements OnInit {
     };
 
     this.gridOptions2 = {
+      gridHeight: 255,
+      gridWidth: 800,
       enableAutoResize: false,
       enableCellNavigation: true,
       enableFiltering: true,
@@ -206,19 +213,19 @@ export class GridRowSelectionComponent implements OnInit {
   }
 
   goToGrid1FirstPage() {
-    this.angularGrid1.paginationService.goToFirstPage();
+    this.angularGrid1.paginationService!.goToFirstPage();
   }
 
   goToGrid1LastPage() {
-    this.angularGrid1.paginationService.goToLastPage();
+    this.angularGrid1.paginationService!.goToLastPage();
   }
 
   goToGrid2FirstPage() {
-    this.angularGrid2.paginationService.goToFirstPage();
+    this.angularGrid2.paginationService!.goToFirstPage();
   }
 
   goToGrid2LastPage() {
-    this.angularGrid2.paginationService.goToLastPage();
+    this.angularGrid2.paginationService!.goToLastPage();
   }
 
   /** Dispatched event of a Grid State Changed event */
@@ -232,8 +239,8 @@ export class GridRowSelectionComponent implements OnInit {
     console.log('Grid State changed:: ', gridStateChanges);
     console.log('Grid State changed:: ', gridStateChanges.change);
 
-    if (gridStateChanges.gridState.rowSelection) {
-      this.selectedGrid2IDs = (gridStateChanges.gridState.rowSelection.filteredDataContextIds || []) as number[];
+    if (gridStateChanges!.gridState!.rowSelection) {
+      this.selectedGrid2IDs = (gridStateChanges!.gridState!.rowSelection.filteredDataContextIds || []) as number[];
       this.selectedGrid2IDs = this.selectedGrid2IDs.sort((a, b) => a - b); // sort by ID
       this.selectedTitles = this.selectedGrid2IDs.map(dataContextId => `Task ${dataContextId}`);
       this.cd.detectChanges();
@@ -245,12 +252,12 @@ export class GridRowSelectionComponent implements OnInit {
   // Basically you cannot toggle a Pagination that doesn't exist (must created at the time as the grid)
   togglePaginationGrid2() {
     this.isGrid2WithPagination = !this.isGrid2WithPagination;
-    this.angularGrid2.paginationService.togglePaginationVisibility(this.isGrid2WithPagination);
+    this.angularGrid2.paginationService!.togglePaginationVisibility(this.isGrid2WithPagination);
   }
 
-  handleSelectedRowsChanged1(e, args) {
+  handleSelectedRowsChanged1(e: Event, args: any) {
     if (Array.isArray(args.rows) && this.gridObj1) {
-      this.selectedTitle = args.rows.map(idx => {
+      this.selectedTitle = args.rows.map((idx: number) => {
         const item = this.gridObj1.getDataItem(idx);
         return item.title || '';
       });

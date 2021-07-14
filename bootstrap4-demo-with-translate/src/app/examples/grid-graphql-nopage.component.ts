@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GraphqlService, GraphqlResult, GraphqlServiceApi, } from '@slickgrid-universal/graphql';
 import {
   AngularGridInstance,
   Column,
   Filters,
   Formatters,
-  GraphqlResult,
-  GraphqlService,
-  GraphqlServiceApi,
   GridOption,
   Metrics,
   MultipleSelectOption,
@@ -51,11 +49,11 @@ export class GridGraphqlWithoutPaginationComponent implements OnInit {
     <li>This example is mainly to demo the use of GraphqlService to build the query and retrieve the data but also to demo how to mix that with local (in-memory) Filtering/Sorting strategies</li>
   </ul>
   `;
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
   dataset = [];
-  metrics: Metrics;
+  metrics!: Metrics;
 
   graphqlQuery = '';
   processing = true;
@@ -170,8 +168,8 @@ export class GridGraphqlWithoutPaginationComponent implements OnInit {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableFiltering: true,
       enableCellNavigation: true,
@@ -193,9 +191,9 @@ export class GridGraphqlWithoutPaginationComponent implements OnInit {
         },
         // you can define the onInit callback OR enable the "executeProcessCommandOnInit" flag in the service init
         preProcess: () => !this.isDataLoaded ? this.displaySpinner(true) : '',
-        process: (query) => this.getCountries(query),
+        process: (query: string) => this.getCountries(query),
         postProcess: (result: GraphqlResult<Country>) => {
-          this.metrics = result.metrics;
+          this.metrics = result.metrics as Metrics;
           this.displaySpinner(false);
           this.isDataLoaded = true;
         }
@@ -203,7 +201,7 @@ export class GridGraphqlWithoutPaginationComponent implements OnInit {
     };
   }
 
-  displaySpinner(isProcessing) {
+  displaySpinner(isProcessing: boolean) {
     this.processing = isProcessing;
     this.status = (isProcessing)
       ? { text: 'processing...', class: 'alert alert-danger' }
