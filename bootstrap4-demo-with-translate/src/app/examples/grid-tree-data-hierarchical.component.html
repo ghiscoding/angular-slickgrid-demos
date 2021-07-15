@@ -33,15 +33,20 @@
       </button>
     </div>
 
+
     <div class="col-md-5">
-      <div class="input-group">
-        <input type="text" class="form-control search-string" data-test="search-string"
-               [(ngModel)]="searchString" (ngModelChange)="searchStringChanged()">
-        <button class="btn btn-outline-secondary" data-test="clear-search-string" (click)="clearSearch()">
-          <span class="icon mdi mdi-close-thick"></span>
-        </button>
+      <div class="input-group mb-2 mr-sm-2">
+        <input type="text" class="form-control search-string" data-test="search-string" name="searchString"
+               placeholder="search value" autocomplete="off" (input)="updateFilter()" [(ngModel)]="searchString">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary d-flex align-items-center pl-2 pr-2" data-test="clear-search-string"
+                  (click)="clearSearch()">
+            <span class="icon mdi mdi-close-thick"></span>
+          </button>
+        </div>
       </div>
     </div>
+
   </div>
 
   <br />

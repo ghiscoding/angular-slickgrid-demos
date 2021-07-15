@@ -233,7 +233,7 @@ export class GridAngularComponent implements OnInit {
           this.bsDropdown.render({
             component: CustomActionFormatterComponent,
             args,
-            offsetLeft: 65,
+            offsetLeft: 50,
             offsetDropupBottom: 15,
             parent: this, // provide this object to the child component so we can call a method from here if we wish
           });

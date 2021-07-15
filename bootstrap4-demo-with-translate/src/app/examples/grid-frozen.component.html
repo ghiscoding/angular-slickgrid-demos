@@ -15,20 +15,22 @@
 
   <div class="row mb-1">
     <div class="col-sm-12">
-      <span>
-        <label for="">Pinned Rows: </label>
-        <input type="number" [(ngModel)]="frozenRowCount">
-        <button class="btn btn-outline-secondary btn-xs" (click)="changeFrozenRowCount()">
-          Set
-        </button>
-      </span>
-      <span style="margin-left: 10px">
-        <label for="">Pinned Columns: </label>
-        <input type="number" [(ngModel)]="frozenColumnCount">
-        <button class="btn btn-outline-secondary btn-xs" (click)="changeFrozenColumnCount()">
-          Set
-        </button>
-      </span>
+      <div class="form-inline">
+        <div class="form-group">
+          <label for="pinned-rows">Pinned Rows: </label>
+          <input id="pinned-rows" class="form-control mx-sm-1" type="number" [(ngModel)]="frozenRowCount">
+          <button class="btn btn-outline-secondary btn-sm" (click)="changeFrozenRowCount()">
+            Set
+          </button>
+        </div>
+        <div class="form-group ml-3">
+          <label for="pinned-columns">Pinned Columns: </label>
+          <input id="pinned-columns" class="form-control mx-sm-1" type="number" [(ngModel)]="frozenColumnCount">
+          <button class="btn btn-outline-secondary btn-sm" (click)="changeFrozenColumnCount()">
+            Set
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">

@@ -11,14 +11,14 @@
   </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
-  <div class="col-sm-6">
+  <div class="col-sm-6 form-inline">
     <button class="btn btn-outline-secondary btn-sm" (click)="closeAllRowDetail()" data-test="close-all-btn">
       Close All Row Details
     </button>
     &nbsp;&nbsp;
     <label for="">Detail View Rows Shown: </label>
-    <input type="number" [(ngModel)]="detailViewRowCount">
-    <button class="btn btn-outline-secondary btn-xs" (click)="changeDetailViewRowCount()" data-test="set-count-btn">
+    <input class="form-control mx-sm-1" type="number" [(ngModel)]="detailViewRowCount">
+    <button class="btn btn-outline-secondary btn-sm" (click)="changeDetailViewRowCount()" data-test="set-count-btn">
       Set
     </button>
   </div>
