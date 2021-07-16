@@ -60,11 +60,15 @@ export class GridLocalizationComponent implements OnInit {
         filter: { model: Filters.compoundSlider, operator: '>=' }
       },
       {
-        id: 'start', name: 'Start', field: 'start', nameKey: 'START', minWidth: 100,
+        id: 'start', name: 'Début', field: 'start', minWidth: 100,
         formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, exportWithFormatter: true,
         filterable: true, filter: { model: Filters.compoundDate }
       },
-      { id: 'finish', name: 'Fin', field: 'finish', formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, minWidth: 100, filterable: true, filter: { model: Filters.compoundDate } },
+      {
+        id: 'finish', name: 'Fin', field: 'finish',
+        formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, exportWithFormatter: true,
+        minWidth: 100, filterable: true, filter: { model: Filters.compoundDate }
+      },
       {
         id: 'completedBool', name: 'Complétée', field: 'completedBool', minWidth: 100,
         sortable: true,
@@ -105,12 +109,9 @@ export class GridLocalizationComponent implements OnInit {
         // leftFooterText: 'custom text shown on left container',
         metricTexts: {
           // default text displayed in the metrics section on the right
-          // all texts optionally support translation keys,
-          // if you wish to use that feature then use the text properties with the 'Key' suffix (e.g: itemsKey, ofKey, lastUpdateKey)
-          // example "items" for a plain string OR "itemsKey" to use a translation key
-          itemsKey: 'ITEMS',
-          ofKey: 'OF',
-          lastUpdateKey: 'LAST_UPDATE',
+          items: 'éléments',
+          of: 'de',
+          lastUpdate: 'dernière mise à jour',
         },
         dateFormat: 'YYYY-MM-DD, hh:mm a',
         hideTotalItemCount: false,
@@ -189,7 +190,7 @@ export class GridLocalizationComponent implements OnInit {
   dynamicallyAddTitleHeader() {
     // you can dynamically add your column to your column definitions
     // and then use the spread operator [...cols] OR slice to force Angular to review the changes
-    const newCol = { id: `title${this.duplicateTitleHeaderCount++}`, field: 'id', nameKey: 'TITLE', formatter: taskFormatter, sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true } };
+    const newCol = { id: `title${this.duplicateTitleHeaderCount++}`, field: 'id', name: 'Titre', formatter: taskFormatter, sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true } };
     this.columnDefinitions.push(newCol);
     this.columnDefinitions = this.columnDefinitions.slice(); // or use spread operator [...cols]
 
