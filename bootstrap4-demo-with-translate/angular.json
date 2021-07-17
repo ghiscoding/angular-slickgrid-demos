@@ -18,10 +18,9 @@
             "showCircularDependencies": true,
             "polyfills": "src/polyfills.ts",
             "allowedCommonJsDependencies": [
-              "angular-slickgrid",
+              "jquery-ui-dist/jquery-ui",
               "assign-deep",
               "excel-builder-webpacker",
-              "jquery-ui-dist/jquery-ui",
               "stream"
             ],
             "assets": [
