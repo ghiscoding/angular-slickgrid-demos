@@ -9,7 +9,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { CustomActionFormatterComponent } from './examples/custom-actionFormatter.component';
 import { CustomTitleFormatterComponent } from './examples/custom-titleFormatter.component';
 import { EditorNgSelectComponent } from './examples/editor-ng-select.component';
 import { FilterNgSelectComponent } from './examples/filter-ng-select.component';
@@ -84,7 +83,6 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
 @NgModule({
   declarations: [
     AppComponent,
-    CustomActionFormatterComponent,
     CustomTitleFormatterComponent,
     EditorNgSelectComponent,
     FilterNgSelectComponent,
@@ -151,7 +149,6 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
   ],
   entryComponents: [
     // dynamically created components
-    CustomActionFormatterComponent,
     CustomTitleFormatterComponent,
     EditorNgSelectComponent,
     FilterNgSelectComponent,

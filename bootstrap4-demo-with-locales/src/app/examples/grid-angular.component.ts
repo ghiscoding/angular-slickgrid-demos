@@ -10,7 +10,6 @@ import {
   Formatters,
   GridOption,
   OnEventArgs,
-  SlickGrid,
   SlickNamespace,
 } from 'angular-slickgrid';
 import { EditorNgSelectComponent } from './editor-ng-select.component';

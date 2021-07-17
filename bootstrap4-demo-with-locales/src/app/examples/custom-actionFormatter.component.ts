@@ -8,14 +8,14 @@ import { Component } from '@angular/core';
       Actions
       <span class="caret"></span>
     </a>
-    <ul class="dropdown-menu padding10">
-      <li><span class="text-primary text-center" >{{dataContext.title}}</span></li>
-      <li role="separator" class="divider"></li>
-      <li><span class='pointer'>Another action</span></li>
-      <li><span class='pointer'>Something else here</span></li>
-      <li role="separator" class="divider"></li>
-      <li><a class="text-danger pointer" (click)="parent.deleteCell(row)">Delete Row</a></li>
-    </ul>
+    <div class="dropdown-menu padding10">
+      <div class="text-primary text-center">{{dataContext.title}}</div>
+      <div class="dropdown-divider"></div>
+      <a class="pointer">Another action</a>
+      <a class="pointer">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="text-danger pointer" (click)="parent.deleteCell(row)">Delete Row</a>
+    </div>
   </div>
   `
 })
