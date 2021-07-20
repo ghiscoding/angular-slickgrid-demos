@@ -18,6 +18,7 @@
             "showCircularDependencies": true,
             "polyfills": "src/polyfills.ts",
             "allowedCommonJsDependencies": [
+              "jquery-ui-dist/jquery-ui",
               "assign-deep",
               "excel-builder-webpacker",
               "stream"
