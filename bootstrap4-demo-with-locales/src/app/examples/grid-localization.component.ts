@@ -1,4 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import { TextExportService } from '@slickgrid-universal/text-export';
 import {
   AngularGridInstance,
   Column,
@@ -10,14 +12,15 @@ import {
   Formatters,
   GridOption,
   GridStateChange,
-  SlickGrid,
 } from 'angular-slickgrid';
 import { localeFrench } from '../locales/fr';
 
-const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
+const NB_ITEMS = 1500;
+
+const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value !== undefined ? `Titre ${value}` : '';
 };
-const exportBooleanFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
+const exportBooleanFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value ? 'Vrai' : 'Faux';
 };
 
@@ -34,13 +37,14 @@ export class GridLocalizationComponent implements OnInit {
     </ul>
   `;
 
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
-  selectedLanguage = `localeFrench.ts`;
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   duplicateTitleHeaderCount = 1;
   gridObj: any;
+  excelExportService = new ExcelExportService();
+  textExportService = new TextExportService();
 
   constructor() { }
 
@@ -56,11 +60,15 @@ export class GridLocalizationComponent implements OnInit {
         filter: { model: Filters.compoundSlider, operator: '>=' }
       },
       {
-        id: 'start', name: 'Start', field: 'start', nameKey: 'START', minWidth: 100,
+        id: 'start', name: 'Début', field: 'start', minWidth: 100,
         formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, exportWithFormatter: true,
         filterable: true, filter: { model: Filters.compoundDate }
       },
-      { id: 'finish', name: 'Fin', field: 'finish', formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, minWidth: 100, filterable: true, filter: { model: Filters.compoundDate } },
+      {
+        id: 'finish', name: 'Fin', field: 'finish',
+        formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, exportWithFormatter: true,
+        minWidth: 100, filterable: true, filter: { model: Filters.compoundDate }
+      },
       {
         id: 'completedBool', name: 'Complétée', field: 'completedBool', minWidth: 100,
         sortable: true,
@@ -79,17 +87,14 @@ export class GridLocalizationComponent implements OnInit {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
-
       // use a Single Custom Locales set
       locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
       locales: localeFrench,
       enableAutoResize: true,
       enableExcelCopyBuffer: true,
-      enableExcelExport: true,
-      enableExport: true,
       enableFiltering: true,
       checkboxSelector: {
         // you can toggle these 2 properties to show the "select all" checkbox in different location
@@ -104,14 +109,11 @@ export class GridLocalizationComponent implements OnInit {
         // leftFooterText: 'custom text shown on left container',
         metricTexts: {
           // default text displayed in the metrics section on the right
-          // all texts optionally support translation keys,
-          // if you wish to use that feature then use the text properties with the 'Key' suffix (e.g: itemsKey, ofKey, lastUpdateKey)
-          // example "items" for a plain string OR "itemsKey" to use a translation key
-          itemsKey: 'ITEMS',
-          ofKey: 'OF',
-          lastUpdateKey: 'LAST_UPDATE',
+          items: 'éléments',
+          of: 'de',
+          lastUpdate: 'dernière mise à jour',
         },
-        dateFormat: 'yyyy-MM-dd hh:mm aaaaa\'m\'',
+        dateFormat: 'YYYY-MM-DD, hh:mm a',
         hideTotalItemCount: false,
         hideLastUpdateTimestamp: false,
       },
@@ -146,10 +148,18 @@ export class GridLocalizationComponent implements OnInit {
       gridMenu: {
         hideExportCsvCommand: false,           // false by default, so it's optional
         hideExportTextDelimitedCommand: false  // true by default, so if you want it, you will need to disable the flag
-      }
+      },
+      enableExcelExport: true,
+      enableTextExport: true,
+      textExportOptions: {
+        // set at the grid option level, meaning all column will evaluate the Formatter (when it has a Formatter defined)
+        exportWithFormatter: true,
+        sanitizeDataExport: true
+      },
+      registerExternalResources: [this.excelExportService, this.textExportService],
     };
 
-    this.loadData(1000);
+    this.loadData(NB_ITEMS);
   }
 
   // mock a dataset
@@ -166,7 +176,8 @@ export class GridLocalizationComponent implements OnInit {
         duration: Math.round(Math.random() * 100) + '',
         start: new Date(randomYear, randomMonth, randomDay),
         finish: new Date(randomYear, (randomMonth + 1), randomDay),
-        completedBool: (i % 5 === 0) ? true : false
+        completedBool: (i % 5 === 0) ? true : false,
+        completed: (i % 5 === 0) ? 'TRUE' : 'FALSE'
       };
     }
   }
@@ -179,7 +190,7 @@ export class GridLocalizationComponent implements OnInit {
   dynamicallyAddTitleHeader() {
     // you can dynamically add your column to your column definitions
     // and then use the spread operator [...cols] OR slice to force Angular to review the changes
-    const newCol = { id: `title${this.duplicateTitleHeaderCount++}`, field: 'id', nameKey: 'TITLE', formatter: taskFormatter, sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true } };
+    const newCol = { id: `title${this.duplicateTitleHeaderCount++}`, field: 'id', name: 'Titre', formatter: taskFormatter, sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true } };
     this.columnDefinitions.push(newCol);
     this.columnDefinitions = this.columnDefinitions.slice(); // or use spread operator [...cols]
 
@@ -194,14 +205,14 @@ export class GridLocalizationComponent implements OnInit {
   }
 
   exportToExcel() {
-    this.angularGrid.excelExportService.exportToExcel({
+    this.excelExportService.exportToExcel({
       filename: 'Export',
       format: FileType.xlsx
     });
   }
 
   exportToFile(type = 'csv') {
-    this.angularGrid.exportService.exportToFile({
+    this.textExportService.exportToFile({
       delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,
       filename: 'myExport',
       format: (type === 'csv') ? FileType.csv : FileType.txt

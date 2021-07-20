@@ -13,15 +13,15 @@
 
   <div class="row">
     <div class="col-md-7">
-      <button (click)="addNewFile()" class="btn btn-outline-info btn-sm">
-        <span class="icon mdi mdi-plus"></span>
+      <button (click)="addNewFile()" data-test="add-item-btn" class="btn btn-primary btn-sm">
+        <span class="icon mdi mdi-plus color-white"></span>
         <span>Add New Pop Song</span>
       </button>
-      <button (click)="collapseAll()" class="btn btn-outline-secondary btn-sm">
+      <button (click)="collapseAll()" data-test="collapse-all-btn" class="btn btn-outline-secondary btn-sm">
         <span class="icon mdi mdi-arrow-collapse"></span>
         <span>Collapse All</span>
       </button>
-      <button (click)="expandAll()" class="btn btn-outline-secondary btn-sm">
+      <button (click)="expandAll()" data-test="expand-all-btn" class="btn btn-outline-secondary btn-sm">
         <span class="icon mdi mdi-arrow-expand"></span>
         <span>Expand All</span>
       </button>
@@ -33,17 +33,20 @@
       </button>
     </div>
 
+
     <div class="col-md-5">
-      <div class="input-group">
-        <input type="text" class="form-control search-string" data-test="search-string"
-               [(ngModel)]="searchString" (ngModelChange)="searchStringChanged()">
+      <div class="input-group mb-2 mr-sm-2">
+        <input type="text" class="form-control search-string" data-test="search-string" name="searchString"
+               placeholder="search value" autocomplete="off" (input)="updateFilter()" [(ngModel)]="searchString">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" data-test="clear-search-string" (click)="clearSearch()">
+          <button class="btn btn-outline-secondary d-flex align-items-center pl-2 pr-2" data-test="clear-search-string"
+                  (click)="clearSearch()">
             <span class="icon mdi mdi-close-thick"></span>
           </button>
         </div>
       </div>
     </div>
+
   </div>
 
   <br />
@@ -52,6 +55,6 @@
                      [columnDefinitions]="columnDefinitions"
                      [gridOptions]="gridOptions"
                      [datasetHierarchical]="datasetHierarchical"
-                     (onAngularGridCreated)="angularGridReady($event)">
+                     (onAngularGridCreated)="angularGridReady($event.detail)">
   </angular-slickgrid>
 </div>

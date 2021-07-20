@@ -1,6 +1,15 @@
-<div class="container-fluid">
-  <h2>{{title}}</h2>
-  <div class="subtitle row" [innerHTML]="subTitle"></div>
+<div id="demo-container" class="container-fluid">
+  <h2>
+    {{title}}
+    <span class="float-right">
+      <a style="font-size: 18px"
+         target="_blank"
+         href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-odata.component.ts">
+        <span class="fa fa-link"></span> code
+      </a>
+    </span>
+  </h2>
+  <div class="subtitle" [innerHTML]="subTitle"></div>
 
   <div class="row">
     <div class="col-sm-4">
@@ -13,7 +22,8 @@
       <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-filter" (click)="setFiltersDynamically()">
         Set Filters Dynamically
       </button>
-      <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-sorting" (click)="setSortingDynamically()">
+      <button class="btn btn-outline-secondary btn-sm" data-test="set-dynamic-sorting"
+              (click)="setSortingDynamically()">
         Set Sorting Dynamically
       </button>
       <br>
@@ -45,14 +55,16 @@
       </label>
     </div>
   </div>
-  <div class="row col-md-12">
-    <label>Programmatically go to first/last page:</label>
-    <button class="btn btn-outline-secondary btn-xs" data-test="goto-first-page" (click)="goToFirstPage()">
-      <i class="fa fa-caret-left fa-lg"></i>
-    </button>
-    <button class="btn btn-outline-secondary btn-xs" data-test="goto-last-page" (click)="goToLastPage()">
-      <i class="fa fa-caret-right fa-lg"></i>
-    </button>
+  <div class="row">
+    <div class="col-md-12">
+      <span>Programmatically go to first/last page:</span>
+      <button class="btn btn-outline-secondary btn-xs" data-test="goto-first-page" (click)="goToFirstPage()">
+        <i class="fa fa-caret-left fa-lg"></i>
+      </button>
+      <button class="btn btn-outline-secondary btn-xs" data-test="goto-last-page" (click)="goToLastPage()">
+        <i class="fa fa-caret-right fa-lg"></i>
+      </button>
+    </div>
   </div>
 
   <angular-slickgrid gridId="grid5"
@@ -60,7 +72,7 @@
                      [gridOptions]="gridOptions"
                      [paginationOptions]="paginationOptions"
                      [dataset]="dataset"
-                     (onGridStateChanged)="gridStateChanged($event)"
-                     (onAngularGridCreated)="angularGridReady($event)">
+                     (onGridStateChanged)="gridStateChanged($event.detail)"
+                     (onAngularGridCreated)="angularGridReady($event.detail)">
   </angular-slickgrid>
 </div>

@@ -1,14 +1,11 @@
-import { Column, ColumnEditor, Editor, EditorValidator, EditorValidatorOutput, KeyCode } from 'angular-slickgrid';
-
-// using external non-typed js libraries
-declare var $: any;
+import { Column, ColumnEditor, Editor, EditorValidator, EditorValidationResult, KeyCode } from 'angular-slickgrid';
 
 /*
  * An example of a 'detached' editor.
  * KeyDown events are also handled to provide handling for Tab, Shift-Tab, Esc and Ctrl-Enter.
  */
 export class CustomInputEditor implements Editor {
-  private _lastInputEvent: KeyboardEvent;
+  private _lastInputEvent?: JQuery.Event;
   $input: any;
   defaultValue: any;
 
@@ -26,12 +23,12 @@ export class CustomInputEditor implements Editor {
     return this.columnDef && this.columnDef.internalColumnEditor || {};
   }
 
-  get hasAutoCommitEdit() {
-    return this.args.grid.getOptions().autoCommitEdit;
+  get hasAutoCommitEdit(): boolean {
+    return this.args.grid.getOptions().autoCommitEdit ?? false;
   }
 
   /** Get the Validator function, can be passed in Editor property or Column Definition */
-  get validator(): EditorValidator {
+  get validator(): EditorValidator | undefined {
     return this.columnEditor.validator || this.columnDef.validator;
   }
 
@@ -41,7 +38,7 @@ export class CustomInputEditor implements Editor {
 
     this.$input = $(`<input type="text" class="editor-text" placeholder="${placeholder}" title="${title}" />`)
       .appendTo(this.args.container)
-      .on('keydown.nav', (event: KeyboardEvent) => {
+      .on('keydown.nav', (event: JQuery.Event) => {
         this._lastInputEvent = event;
         if (event.keyCode === KeyCode.LEFT || event.keyCode === KeyCode.RIGHT) {
           event.stopImmediatePropagation();
@@ -110,7 +107,7 @@ export class CustomInputEditor implements Editor {
     }
   }
 
-  validate(inputValue?: any): EditorValidatorOutput {
+  validate(inputValue?: any): EditorValidationResult {
     if (this.validator) {
       const value = (inputValue !== undefined) ? inputValue : this.$input && this.$input.val && this.$input.val();
       return this.validator(value, this.args);

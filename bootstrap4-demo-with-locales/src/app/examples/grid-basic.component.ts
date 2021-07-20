@@ -15,12 +15,12 @@ export class GridBasicComponent implements OnInit {
     </ul>
   `;
 
-  columnDefinitions1: Column[];
-  columnDefinitions2: Column[];
-  gridOptions1: GridOption;
-  gridOptions2: GridOption;
-  dataset1: any[];
-  dataset2: any[];
+  columnDefinitions1: Column[] = [];
+  columnDefinitions2: Column[] = [];
+  gridOptions1!: GridOption;
+  gridOptions2!: GridOption;
+  dataset1!: any[];
+  dataset2!: any[];
 
   ngOnInit(): void {
     this.columnDefinitions1 = [
@@ -34,6 +34,8 @@ export class GridBasicComponent implements OnInit {
     this.gridOptions1 = {
       enableAutoResize: false,
       enableSorting: true,
+      gridHeight: 225,
+      gridWidth: 800,
     };
 
     // copy the same Grid Options and Column Definitions to 2nd grid

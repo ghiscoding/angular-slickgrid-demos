@@ -10,6 +10,7 @@ import {
   Formatters,
   GridOption,
   OnEventArgs,
+  SlickNamespace,
 } from 'angular-slickgrid';
 import { EditorNgSelectComponent } from './editor-ng-select.component';
 import { CustomActionFormatterComponent } from './custom-actionFormatter.component';
@@ -19,8 +20,8 @@ import { CustomTitleFormatterComponent } from './custom-titleFormatter.component
 import { FilterNgSelectComponent } from './filter-ng-select.component';
 
 // using external non-typed js libraries
-declare var Slick: any;
-declare var $: any;
+declare const Slick: SlickNamespace;
+declare const $: any;
 
 const NB_ITEMS = 100;
 
@@ -52,16 +53,15 @@ export class GridAngularComponent implements OnInit {
   </ul>
   `;
 
-  private _commandQueue = [];
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  private _commandQueue: any[] = [];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions: Column[] = [];
+  gridOptions!: GridOption;
+  dataset!: any[];
   gridObj: any;
   isAutoEdit = true;
   alertWarning: any;
   updatedObject: any;
-  selectedLanguage = 'en';
   assignees = [
     { id: '', name: '' },
     { id: '1', name: 'John' },
@@ -135,7 +135,7 @@ export class GridAngularComponent implements OnInit {
         id: 'assignee2',
         name: 'Assignee with Angular Component',
         field: 'assignee',
-        minWidth: 100,
+        minWidth: 125,
         filterable: true,
         sortable: true,
         filter: {
@@ -180,7 +180,7 @@ export class GridAngularComponent implements OnInit {
             label: 'label',
             labelSuffix: 'symbol'
           },
-          elementOptions: {
+          editorOptions: {
             maxHeight: 400
           }
         },
@@ -231,7 +231,7 @@ export class GridAngularComponent implements OnInit {
           this.bsDropdown.render({
             component: CustomActionFormatterComponent,
             args,
-            offsetLeft: 92,
+            offsetLeft: 50,
             offsetDropupBottom: 15,
             parent: this, // provide this object to the child component so we can call a method from here if we wish
           });
@@ -244,8 +244,8 @@ export class GridAngularComponent implements OnInit {
       autoEdit: this.isAutoEdit,
       autoCommitEdit: false,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       headerRowHeight: 45,
       rowHeight: 45, // increase row height so that the ng-select fits in the cell
@@ -268,7 +268,7 @@ export class GridAngularComponent implements OnInit {
     this.dataset = this.mockData(NB_ITEMS);
   }
 
-  mockData(itemCount, startingIndex = 0) {
+  mockData(itemCount: number, startingIndex = 0) {
     // mock a dataset
     const tempDataset = [];
     for (let i = startingIndex; i < (startingIndex + itemCount); i++) {
@@ -292,11 +292,11 @@ export class GridAngularComponent implements OnInit {
     return tempDataset;
   }
 
-  onCellChanged(e, args) {
+  onCellChanged(_e: Event, args: any) {
     this.updatedObject = args.item;
   }
 
-  onCellClicked(e, args) {
+  onCellClicked(_e: Event, args: any) {
     const metadata = this.angularGrid.gridService.getColumnFromEventArguments(args);
     console.log(metadata);
 
@@ -310,12 +310,12 @@ export class GridAngularComponent implements OnInit {
       // this.angularGrid.gridService.setSelectedRow(args.row);
     } else if (metadata.columnDef.id === 'delete') {
       if (confirm('Are you sure?')) {
-        this.angularGrid.gridService.deleteDataGridItemById(metadata.dataContext.id);
+        this.angularGrid.gridService.deleteItemById(metadata.dataContext.id);
       }
     }
   }
 
-  onCellValidationError(e, args) {
+  onCellValidationError(_e: Event, args: any) {
     alert(args.validationResults.msg);
   }
 
@@ -327,7 +327,7 @@ export class GridAngularComponent implements OnInit {
     return true;
   }
 
-  setAutoEdit(isAutoEdit) {
+  setAutoEdit(isAutoEdit: boolean) {
     this.isAutoEdit = isAutoEdit;
     this.gridObj.setOptions({ autoEdit: isAutoEdit }); // change the grid option dynamically
     return true;

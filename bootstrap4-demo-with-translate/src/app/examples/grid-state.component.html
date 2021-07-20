@@ -11,10 +11,11 @@
   </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
-  <button class="btn btn-outline-secondary btn-sm" (click)="clearGridStateFromLocalStorage()" data-test="reset-button">
+  <button class="btn btn-outline-secondary btn-sm" data-test="reset-button" (click)="clearGridStateFromLocalStorage()">
     <i class="fa fa-times"></i>
     Clear Grid State from Local Storage &amp; Reset Grid
   </button>
+
   <button class="btn btn-outline-secondary btn-sm" (click)="switchLanguage()" data-test="language-button">
     <i class="fa fa-language"></i>
     Switch Language
@@ -24,13 +25,12 @@
     {{selectedLanguage + '.json'}}
   </span>
 
-
   <angular-slickgrid gridId="grid16"
                      [columnDefinitions]="columnDefinitions"
                      [gridOptions]="gridOptions"
                      [dataset]="dataset"
-                     (onAngularGridCreated)="angularGridReady($event)"
-                     (onGridStateChanged)="gridStateChanged($event)"
+                     (onAngularGridCreated)="angularGridReady($event.detail)"
+                     (onGridStateChanged)="gridStateChanged($event.detail)"
                      (onBeforeGridDestroy)="saveCurrentGridState()">
   </angular-slickgrid>
 </div>

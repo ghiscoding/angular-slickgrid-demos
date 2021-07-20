@@ -1,15 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularGridInstance, Column, FieldType, Formatter, Formatters, GridOption, SelectedRange, SlickGrid } from 'angular-slickgrid';
+import { AngularGridInstance, Column, FieldType, Formatter, Formatters, GridOption, } from 'angular-slickgrid';
+
+interface DataItem {
+  id: number;
+  title: string;
+  duration: string;
+  percentComplete: number;
+  percentComplete2: number;
+  start: Date;
+  finish: Date;
+  effortDriven: boolean;
+  phone: string;
+  completed: number;
+}
 
 // create my custom Formatter with the Formatter type
-const myCustomCheckmarkFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
+const myCustomCheckmarkFormatter: Formatter<DataItem> = (_row, _cell, value) => {
   // you can return a string of a object (of type FormatterResultObject), the 2 types are shown below
   return value ? `<i class="fa fa-fire red" aria-hidden="true"></i>` : { text: '<i class="fa fa-snowflake-o" aria-hidden="true"></i>', addClasses: 'lightblue', toolTip: 'Freezing' };
 };
 
-const customEnableButtonFormatter: Formatter = (row: number, cell: number, value: any, columnDef: Column, dataContext: any, grid: SlickGrid) => {
+const customEnableButtonFormatter: Formatter<DataItem> = (_row: number, _cell: number, value: any) => {
   return `<span style="margin-left: 5px">
-      <button class="btn btn-xs btn-outline-secondary">
+      <button class="btn btn-xs btn-default">
         <i class="fa ${value ? 'fa-check-circle' : 'fa-circle-thin'} fa-lg" style="color: ${value ? 'black' : 'lavender'}"></i>
       </button>
     </span>`;
@@ -33,10 +46,10 @@ export class GridFormatterComponent implements OnInit {
     </ul>
   `;
 
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
-  angularGrid: AngularGridInstance;
+  columnDefinitions: Column<DataItem>[] = [];
+  gridOptions!: GridOption;
+  dataset!: any[];
+  angularGrid!: AngularGridInstance;
   resizerPaused = false;
 
   angularGridReady(angularGrid: AngularGridInstance) {
@@ -64,8 +77,8 @@ export class GridFormatterComponent implements OnInit {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableAutoResize: true,
       enableCellNavigation: true,
@@ -92,11 +105,11 @@ export class GridFormatterComponent implements OnInit {
 
       // when using the ExcelCopyBuffer, you can see what the selection range is
       enableExcelCopyBuffer: true,
-      excelCopyBufferOptions: {
-        onCopyCells: (e, args: { ranges: SelectedRange[] }) => console.log('onCopyCells', args.ranges),
-        onPasteCells: (e, args: { ranges: SelectedRange[] }) => console.log('onPasteCells', args.ranges),
-        onCopyCancelled: (e, args: { ranges: SelectedRange[] }) => console.log('onCopyCancelled', args.ranges),
-      }
+      // excelCopyBufferOptions: {
+      //   onCopyCells: (e, args: { ranges: SelectedRange[] }) => console.log('onCopyCells', args.ranges),
+      //   onPasteCells: (e, args: { ranges: SelectedRange[] }) => console.log('onPasteCells', args.ranges),
+      //   onCopyCancelled: (e, args: { ranges: SelectedRange[] }) => console.log('onCopyCancelled', args.ranges),
+      // }
     };
 
     // mock a dataset
@@ -135,7 +148,7 @@ export class GridFormatterComponent implements OnInit {
     this.angularGrid.resizerService.pauseResizer(this.resizerPaused);
   }
 
-  toggleCompletedProperty(item) {
+  toggleCompletedProperty(item: any) {
     // toggle property
     if (typeof item === 'object') {
       item.completed = !item.completed;

@@ -11,8 +11,8 @@ import {
   OperatorType,
   OperatorString,
   SearchTerm,
-  SlickGrid,
   unsubscribeAllObservables,
+  SlickGrid,
 } from 'angular-slickgrid';
 
 // using external non-typed js libraries
@@ -23,12 +23,12 @@ export class CustomAngularComponentFilter implements Filter {
   private _subscriptions: Subscription[] = [];
 
   /** Angular Component Reference */
-  componentRef: ComponentRef<any>;
+  componentRef!: ComponentRef<any>;
 
-  grid: SlickGrid;
-  searchTerms: SearchTerm[];
-  columnDef: Column;
-  callback: FilterCallback;
+  grid!: SlickGrid;
+  searchTerms: SearchTerm[] = [];
+  columnDef!: Column;
+  callback!: FilterCallback;
   operator: OperatorType | OperatorString = OperatorType.equal;
 
   constructor() { }
@@ -61,7 +61,7 @@ export class CustomAngularComponentFilter implements Filter {
    * Initialize the Filter
    */
   init(args: FilterArguments) {
-    this.grid = args.grid;
+    this.grid = args.grid as SlickGrid;
     this.callback = args.callback;
     this.columnDef = args.columnDef;
     this.searchTerms = (args.hasOwnProperty('searchTerms') ? args.searchTerms : []) || [];
@@ -87,7 +87,7 @@ export class CustomAngularComponentFilter implements Filter {
         Object.assign(componentOuput.componentRef.instance, { collection: this.collection });
 
         this._subscriptions.push(
-          componentOuput.componentRef.instance.onItemChanged.subscribe((item) => {
+          componentOuput.componentRef.instance.onItemChanged.subscribe((item: any) => {
             this.callback(undefined, { columnDef: this.columnDef, operator: this.operator, searchTerms: [item.id], shouldTriggerQuery: this._shouldTriggerQuery });
             // reset flag for next use
             this._shouldTriggerQuery = true;
@@ -118,7 +118,7 @@ export class CustomAngularComponentFilter implements Filter {
   }
 
   /** Set value(s) on the DOM element */
-  setValues(values) {
+  setValues(values: SearchTerm[] | SearchTerm) {
     if (this.componentRef && this.componentRef.instance && this.componentRef.instance.hasOwnProperty('selectedId')) {
       this.componentRef.instance.selectedId = values;
     }

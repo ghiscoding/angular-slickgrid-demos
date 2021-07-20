@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularGridInstance, Column, GridOption, Filters } from 'angular-slickgrid';
 
@@ -12,16 +12,16 @@ export class GridTabsComponent implements OnInit {
   subTitle = `This example demonstrate the creation of multiple grids in Bootstrap Tabs
    <ol>
     <li>Regular mocked data with javascript</li>
-    <li>Load dataset through Http-Client. Also note we need to call a "resizeGrid()" after focusing on this tab.</li>
+    <li>Load dataset through Http-Client. Also note we need to call a "resizeGrid()" after focusing on this tab</li>
   </ol>`;
 
-  angularGrid2: AngularGridInstance;
-  columnDefinitions1: Column[];
-  columnDefinitions2: Column[];
-  gridOptions1: GridOption;
-  gridOptions2: GridOption;
-  dataset1: any[];
-  dataset2: any[];
+  angularGrid2!: AngularGridInstance;
+  columnDefinitions1!: Column[];
+  columnDefinitions2!: Column[];
+  gridOptions1!: GridOption;
+  gridOptions2!: GridOption;
+  dataset1!: any[];
+  dataset2!: any[];
 
   constructor(private http: HttpClient) { }
 
@@ -37,7 +37,7 @@ export class GridTabsComponent implements OnInit {
     this.dataset1 = this.mockData();
 
     // load data with Http-Client
-    this.http.get((URL_CUSTOMERS)).subscribe((data: any[]) => this.dataset2 = data);
+    this.http.get((URL_CUSTOMERS)).subscribe(((data: any[]) => this.dataset2 = data) as any);
   }
 
   // Grid2 definition
@@ -53,8 +53,8 @@ export class GridTabsComponent implements OnInit {
     this.gridOptions1 = {
       enableAutoResize: true,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableSorting: true
     };
@@ -77,8 +77,8 @@ export class GridTabsComponent implements OnInit {
     this.gridOptions2 = {
       enableAutoResize: true,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableFiltering: true,
       enableSorting: true

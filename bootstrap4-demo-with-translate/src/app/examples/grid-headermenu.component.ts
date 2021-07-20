@@ -31,10 +31,10 @@ export class GridHeaderMenuComponent implements OnInit, OnDestroy {
   `;
 
   private subscriptions: Subscription[] = [];
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   selectedLanguage: string;
 
   constructor(private translate: TranslateService) {
@@ -105,8 +105,8 @@ export class GridHeaderMenuComponent implements OnInit, OnDestroy {
       enableAutoResize: true,
       enableHeaderMenu: true,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableFiltering: false,
       enableCellNavigation: true,

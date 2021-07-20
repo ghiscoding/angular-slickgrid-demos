@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { SlickGrid, SlickDataView } from 'angular-slickgrid';
+import { SlickDataView, SlickGrid } from 'angular-slickgrid';
 import { GridRowDetailComponent } from './grid-rowdetail.component';
 
 @Component({
   templateUrl: './rowdetail-view.component.html'
 })
 export class RowDetailViewComponent {
-  model: {
+  model!: {
     duration: Date;
     percentComplete: number;
     reporter: string;
@@ -19,12 +19,12 @@ export class RowDetailViewComponent {
 
   // you also have access to the following objects (it must match the exact property names shown below)
   addon: any; // row detail addon instance
-  grid: SlickGrid;
-  dataView: SlickDataView;
+  grid!: SlickGrid;
+  dataView!: SlickDataView;
 
   // you can also optionally use the Parent Component reference
   // NOTE that you MUST provide it through the "parent" property in your "rowDetail" grid options
-  parent: GridRowDetailComponent;
+  parent!: GridRowDetailComponent;
 
   constructor() { }
 
@@ -36,7 +36,7 @@ export class RowDetailViewComponent {
     }
   }
 
-  deleteRow(model) {
+  deleteRow(model: any) {
     if (confirm(`Are you sure that you want to delete ${model.title}?`)) {
       // you first need to collapse all rows (via the 3rd party addon instance)
       this.addon.collapseAll();
@@ -48,7 +48,7 @@ export class RowDetailViewComponent {
     }
   }
 
-  callParentMethod(model) {
+  callParentMethod(model: any) {
     this.parent.showFlashMessage(`We just called Parent Method from the Row Detail Child Component on ${model.title}`);
   }
 }

@@ -53,8 +53,8 @@ export class GridTabsComponent implements OnInit {
     this.gridOptions1 = {
       enableAutoResize: true,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableSorting: true
     };
@@ -77,8 +77,8 @@ export class GridTabsComponent implements OnInit {
     this.gridOptions2 = {
       enableAutoResize: true,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableFiltering: true,
       enableSorting: true

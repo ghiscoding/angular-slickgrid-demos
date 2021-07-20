@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import { Subscription } from 'rxjs';
 import {
   AngularGridInstance,
   Column,
@@ -9,7 +11,7 @@ import {
   Formatter,
   Formatters,
   GridOption,
-  SlickGrid,
+  unsubscribeAllObservables,
 } from 'angular-slickgrid';
 
 const actionFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
@@ -38,12 +40,12 @@ const priorityExportFormatter: Formatter = (row, cell, value, columnDef, dataCon
   if (!value) {
     return '';
   }
-  const gridOptions = (grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {};
+  const gridOptions = grid?.getOptions?.() as GridOption;
   const count = +(value >= 3 ? 3 : value);
   return count === 3 ? 'High' : (count === 2 ? 'Medium' : 'Low');
 };
 
-const taskFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: SlickGrid) => {
+const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value !== undefined ? `Title ${value}` : '';
 };
 
@@ -52,7 +54,7 @@ const taskFormatter: Formatter = (row: number, cell: number, value: any, columnD
   styleUrls: ['./grid-contextmenu.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class GridContextMenuComponent implements OnInit {
+export class GridContextMenuComponent implements OnInit, OnDestroy {
   title = 'Example 26: Cell Menu & Context Menu Plugins';
   subTitle = `Add Cell Menu and Context Menu
     <ul>
@@ -80,11 +82,11 @@ export class GridContextMenuComponent implements OnInit {
       </ol>
     </ul>`;
 
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
-  selectedLanguage: string;
+  private subscriptions: Subscription[] = [];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
 
   constructor() { }
 
@@ -93,16 +95,21 @@ export class GridContextMenuComponent implements OnInit {
   }
 
   get cellMenuInstance(): any {
-    return this.angularGrid && this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.cellMenu) || {};
+    return this.angularGrid?.extensionService?.getSlickgridAddonInstance?.(ExtensionName.cellMenu) ?? {};
   }
 
   get contextMenuInstance(): any {
-    return this.angularGrid && this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.contextMenu) || {};
+    return this.angularGrid?.extensionService?.getSlickgridAddonInstance?.(ExtensionName.contextMenu) ?? {};
   }
 
   ngOnInit() {
     this.prepareGrid();
     this.dataset = this.getData(1000);
+  }
+
+  ngOnDestroy() {
+    // also unsubscribe all Angular Subscriptions
+    this.subscriptions = unsubscribeAllObservables(this.subscriptions);
   }
 
   prepareGrid() {
@@ -232,12 +239,14 @@ export class GridContextMenuComponent implements OnInit {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableCellNavigation: true,
       enableFiltering: true,
       enableSorting: true,
+      enableTranslate: true,
+      enableExcelExport: true,
       excelExportOptions: {
         exportWithFormatter: true,
         customColumnWidth: 15,
@@ -245,6 +254,8 @@ export class GridContextMenuComponent implements OnInit {
         // you can customize how the header titles will be styled (defaults to Bold)
         columnHeaderStyle: { font: { bold: true, italic: true } }
       },
+      registerExternalResources: [new ExcelExportService()],
+
       enableContextMenu: true,
       enableCellMenu: true,
 
@@ -274,7 +285,7 @@ export class GridContextMenuComponent implements OnInit {
     };
   }
 
-  executeCommand(e, args) {
+  executeCommand(_e: Event, args: any) {
     const columnDef = args.column;
     const command = args.command;
     const dataContext = args.dataContext;
@@ -421,7 +432,7 @@ export class GridContextMenuComponent implements OnInit {
     });
   }
 
-  showCellMenuCommandsAndOptions(showBothList) {
+  showCellMenuCommandsAndOptions(showBothList: boolean) {
     // change via the plugin setOptions
     this.cellMenuInstance.setOptions({
       hideOptionSection: !showBothList

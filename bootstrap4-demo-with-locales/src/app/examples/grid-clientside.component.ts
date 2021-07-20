@@ -15,7 +15,7 @@ import {
   OperatorType,
 } from 'angular-slickgrid';
 
-function randomBetween(min, max) {
+function randomBetween(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 const NB_ITEMS = 1500;
@@ -49,11 +49,11 @@ export class GridClientSideComponent implements OnInit {
     </ul>
   `;
 
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
-  metrics: Metrics;
+  angularGrid!: AngularGridInstance;
+  columnDefinitions: Column[] = [];
+  gridOptions!: GridOption;
+  dataset!: any[];
+  metrics!: Metrics;
 
   constructor(private http: HttpClient) { }
 
@@ -171,8 +171,8 @@ export class GridClientSideComponent implements OnInit {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableExcelExport: true,
       enableExcelCopyBuffer: true,
@@ -203,7 +203,7 @@ export class GridClientSideComponent implements OnInit {
     this.angularGrid = angularGrid;
   }
 
-  mockData(itemCount, startingIndex = 0): any[] {
+  mockData(itemCount: number, startingIndex = 0): any[] {
     // mock a dataset
     const tempDataset = [];
     for (let i = startingIndex; i < (startingIndex + itemCount); i++) {
@@ -244,7 +244,7 @@ export class GridClientSideComponent implements OnInit {
   }
 
   /** Save current Filters, Sorters in LocaleStorage or DB */
-  saveCurrentGridState(grid) {
+  saveCurrentGridState() {
     console.log('Client sample, last Grid State:: ', this.angularGrid.gridStateService.getCurrentGridState());
   }
 
@@ -266,7 +266,7 @@ export class GridClientSideComponent implements OnInit {
     ]);
   }
 
-  refreshMetrics(e, args) {
+  refreshMetrics(_e: Event, args: any) {
     if (args && args.current >= 0) {
       setTimeout(() => {
         this.metrics = {

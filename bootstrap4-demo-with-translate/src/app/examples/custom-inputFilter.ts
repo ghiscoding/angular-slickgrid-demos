@@ -12,15 +12,16 @@ import {
 } from 'angular-slickgrid';
 
 // using external non-typed js libraries
-declare var $: any;
+declare const $: any;
 
 export class CustomInputFilter implements Filter {
   private _clearFilterTriggered = false;
+  private _shouldTriggerQuery = true;
   private $filterElm: any;
-  grid: SlickGrid;
-  searchTerms: SearchTerm[];
-  columnDef: Column;
-  callback: FilterCallback;
+  grid!: SlickGrid;
+  searchTerms: SearchTerm[] = [];
+  columnDef!: Column;
+  callback!: FilterCallback;
   operator: OperatorType | OperatorString = OperatorType.equal;
 
   constructor() { }
@@ -39,13 +40,13 @@ export class CustomInputFilter implements Filter {
    * Initialize the Filter
    */
   init(args: FilterArguments) {
-    this.grid = args.grid;
+    this.grid = args.grid as SlickGrid;
     this.callback = args.callback;
     this.columnDef = args.columnDef;
-    this.searchTerms = args.searchTerms || [];
+    this.searchTerms = (args.hasOwnProperty('searchTerms') ? args.searchTerms : []) || [];
 
     // filter input can only have 1 search term, so we will use the 1st array index if it exist
-    const searchTerm = (Array.isArray(this.searchTerms) && this.searchTerms[0]) || '';
+    const searchTerm = (Array.isArray(this.searchTerms) && this.searchTerms.length >= 0) ? this.searchTerms[0] : '';
 
     // step 1, create HTML string template
     const filterTemplate = this.buildTemplateHtmlString();
@@ -56,27 +57,31 @@ export class CustomInputFilter implements Filter {
     // step 3, subscribe to the keyup event and run the callback when that happens
     this.$filterElm.keyup((e: any) => {
       let value = e && e.target && e.target.value || '';
-      if (typeof value === 'string' && this.columnFilter.enableTrimWhiteSpace) {
+      const enableWhiteSpaceTrim = this.gridOptions.enableFilterTrimWhiteSpace || this.columnFilter.enableTrimWhiteSpace;
+      if (typeof value === 'string' && enableWhiteSpaceTrim) {
         value = value.trim();
       }
 
       if (this._clearFilterTriggered) {
-        this.callback(e, { columnDef: this.columnDef, clearFilterTriggered: this._clearFilterTriggered });
-        this._clearFilterTriggered = false; // reset flag for next use
+        this.callback(e, { columnDef: this.columnDef, clearFilterTriggered: this._clearFilterTriggered, shouldTriggerQuery: this._shouldTriggerQuery });
         this.$filterElm.removeClass('filled');
       } else {
         value === '' ? this.$filterElm.removeClass('filled') : this.$filterElm.addClass('filled');
-        this.callback(e, { columnDef: this.columnDef, searchTerms: [value] });
+        this.callback(e, { columnDef: this.columnDef, searchTerms: [value], shouldTriggerQuery: this._shouldTriggerQuery });
       }
+      // reset both flags for next use
+      this._clearFilterTriggered = false;
+      this._shouldTriggerQuery = true;
     });
   }
 
   /**
    * Clear the filter value
    */
-  clear() {
+  clear(shouldTriggerQuery = true) {
     if (this.$filterElm) {
       this._clearFilterTriggered = true;
+      this._shouldTriggerQuery = shouldTriggerQuery;
       this.$filterElm.val('');
       this.$filterElm.trigger('keyup');
     }
@@ -91,10 +96,8 @@ export class CustomInputFilter implements Filter {
     }
   }
 
-  /**
-   * Set value(s) on the DOM element
-   */
-  setValues(values) {
+  /** Set value(s) on the DOM element */
+  setValues(values: SearchTerm | SearchTerm[]) {
     if (values) {
       this.$filterElm.val(values);
     }
@@ -127,7 +130,6 @@ export class CustomInputFilter implements Filter {
     const $filterElm = $(filterTemplate);
 
     $filterElm.val(searchTerm);
-    $filterElm.attr('id', `filter-${this.columnDef.id}`);
     $filterElm.data('columnId', this.columnDef.id);
 
     // append the new DOM element to the header row

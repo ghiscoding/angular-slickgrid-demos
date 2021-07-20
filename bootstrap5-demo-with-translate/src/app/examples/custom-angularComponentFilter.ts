@@ -12,6 +12,7 @@ import {
   OperatorString,
   SearchTerm,
   unsubscribeAllObservables,
+  SlickGrid,
 } from 'angular-slickgrid';
 
 // using external non-typed js libraries
@@ -24,7 +25,7 @@ export class CustomAngularComponentFilter implements Filter {
   /** Angular Component Reference */
   componentRef!: ComponentRef<any>;
 
-  grid: any;
+  grid!: SlickGrid;
   searchTerms: SearchTerm[] = [];
   columnDef!: Column;
   callback!: FilterCallback;
@@ -60,7 +61,7 @@ export class CustomAngularComponentFilter implements Filter {
    * Initialize the Filter
    */
   init(args: FilterArguments) {
-    this.grid = args.grid;
+    this.grid = args.grid as SlickGrid;
     this.callback = args.callback;
     this.columnDef = args.columnDef;
     this.searchTerms = (args.hasOwnProperty('searchTerms') ? args.searchTerms : []) || [];

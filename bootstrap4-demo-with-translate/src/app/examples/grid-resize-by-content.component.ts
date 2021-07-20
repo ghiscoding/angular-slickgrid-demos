@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleteOption, EditCommand, formatNumber, Sorters } from 'angular-slickgrid';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleteOption, EditCommand, formatNumber, SortComparers, SlickGrid, SlickNamespace } from 'angular-slickgrid';
 
 const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
-declare const Slick: any;
+declare const Slick: SlickNamespace;
 
 /**
  * Check if the current item (cell) is editable or not
@@ -12,7 +13,7 @@ declare const Slick: any;
  * @param {*} grid - slickgrid grid object
  * @returns {boolean} isEditable
  */
-function checkItemIsEditable(dataContext: any, columnDef: Column, grid: any) {
+function checkItemIsEditable(dataContext: any, columnDef: Column, grid: SlickGrid) {
   const gridOptions = grid && grid.getOptions && grid.getOptions();
   const hasEditor = columnDef.editor;
   const isGridEditable = gridOptions.editable;
@@ -52,7 +53,7 @@ const myCustomTitleValidator = (value: any, args: any) => {
   encapsulation: ViewEncapsulation.None,
 })
 export class GridResizeByContentComponent implements OnInit {
-  title = 'Example 30: Columns Resize by Content';
+  title = 'Example 31: Columns Resize by Content';
   subTitle = `The grid below uses the optional resize by cell content (with a fixed 950px for demo purposes), you can click on the 2 buttons to see the difference. The "autosizeColumns" is really the default option used by Angular-SlickGrid, the resize by cell content is optional because it requires to read the first thousand rows and do extra width calculation.`;
 
   angularGrid!: AngularGridInstance;
@@ -203,7 +204,7 @@ export class GridResizeByContentComponent implements OnInit {
         formatter: Formatters.complexObject,
         exportCustomFormatter: Formatters.complex, // without the Editing cell Formatter
         type: FieldType.object,
-        sorter: Sorters.objectString,
+        sortComparer: SortComparers.objectString,
         editor: {
           model: Editors.autoComplete,
           alwaysSaveOnEnterKey: true,
@@ -239,7 +240,7 @@ export class GridResizeByContentComponent implements OnInit {
         dataKey: 'code',
         labelKey: 'name',
         type: FieldType.object,
-        sorter: Sorters.objectString,
+        sortComparer: SortComparers.objectString,
         filterable: true,
         sortable: true,
         minWidth: 100,
@@ -298,8 +299,8 @@ export class GridResizeByContentComponent implements OnInit {
       autoEdit: true,
       autoCommitEdit: true,
       autoResize: {
-        containerId: 'smaller-container',
-        sidePadding: 10
+        container: '#smaller-container',
+        rightPadding: 10
       },
       enableAutoResize: true,
 
@@ -321,6 +322,7 @@ export class GridResizeByContentComponent implements OnInit {
       excelExportOptions: {
         exportWithFormatter: false
       },
+      registerExternalResources: [new ExcelExportService()],
       enableFiltering: true,
       enableRowSelection: true,
       enableCheckboxSelector: true,

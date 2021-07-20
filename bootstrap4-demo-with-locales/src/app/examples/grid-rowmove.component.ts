@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularGridInstance, Column, ExtensionName, Filters, Formatters, GridOption } from 'angular-slickgrid';
 
 @Component({
@@ -32,7 +32,7 @@ export class GridRowMoveComponent implements OnInit {
   }
 
   get rowMoveInstance(): any {
-    return this.angularGrid && this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.rowMoveManager) || {};
+    return this.angularGrid?.extensionService?.getSlickgridAddonInstance?.(ExtensionName.rowMoveManager) ?? {};
   }
 
   ngOnInit(): void {
@@ -63,13 +63,15 @@ export class GridRowMoveComponent implements OnInit {
     this.gridOptions = {
       enableAutoResize: true,
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableCellNavigation: true,
       enableFiltering: true,
       enableCheckboxSelector: true,
       checkboxSelector: {
+        columnIndexPosition: 1,
+
         // you can toggle these 2 properties to show the "select all" checkbox in different location
         hideInFilterHeaderRow: false,
         hideInColumnTitleRow: true
@@ -95,7 +97,7 @@ export class GridRowMoveComponent implements OnInit {
         // you can change the move icon position of any extension (RowMove, RowDetail or RowSelector icon)
         // note that you might have to play with the position when using multiple extension
         // since it really depends on which extension get created first to know what their real position are
-        // columnIndexPosition: 1,
+        columnIndexPosition: 0,
 
         // you can also override the usability of the rows, for example make every 2nd row the only moveable rows,
         // usabilityOverride: (row, dataContext, grid) => dataContext.id % 2 === 1
@@ -154,7 +156,7 @@ export class GridRowMoveComponent implements OnInit {
     // when moving rows, we need to cancel any sorting that might happen
     // we can do this by providing an undefined sort comparer
     // which basically destroys the current sort comparer without resorting the dataset, it basically keeps the previous sorting
-    this.angularGrid.dataView.sort(undefined, true);
+    this.angularGrid.dataView.sort(undefined as any, true);
 
     // the dataset might be filtered/sorted,
     // so we need to get the same dataset as the one that the SlickGrid DataView uses
@@ -175,14 +177,18 @@ export class GridRowMoveComponent implements OnInit {
     // we need to resort with
     rows.sort((a: number, b: number) => a - b);
     for (const filteredRow of filteredRows) {
-      extractedRows.push(tmpDataset[filteredRow]);
+      if (filteredRow) {
+        extractedRows.push(tmpDataset[filteredRow]);
+      }
     }
     filteredRows.reverse();
     for (const row of filteredRows) {
-      if (row < insertBeforeFilteredIdx) {
-        left.splice(row, 1);
-      } else {
-        right.splice(row - insertBeforeFilteredIdx, 1);
+      if (row !== undefined && insertBeforeFilteredIdx !== undefined) {
+        if (row < insertBeforeFilteredIdx) {
+          left.splice(row, 1);
+        } else {
+          right.splice(row - insertBeforeFilteredIdx, 1);
+        }
       }
     }
 

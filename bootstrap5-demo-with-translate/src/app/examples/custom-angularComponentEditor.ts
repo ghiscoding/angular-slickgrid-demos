@@ -6,9 +6,10 @@ import {
   ColumnEditor,
   Editor,
   EditorValidator,
-  EditorValidatorOutput,
+  EditorValidationResult,
   GridOption,
   unsubscribeAllObservables,
+  SlickGrid,
 } from 'angular-slickgrid';
 
 /*
@@ -28,7 +29,7 @@ export class CustomAngularComponentEditor implements Editor {
   defaultItem: any;
 
   /** SlickGrid grid object */
-  grid: any;
+  grid!: SlickGrid;
 
   constructor(private args: any) {
     this.grid = args && args.grid;
@@ -64,8 +65,8 @@ export class CustomAngularComponentEditor implements Editor {
     return (this.grid && this.grid.getOptions) ? this.grid.getOptions() : {};
   }
 
-  get hasAutoCommitEdit() {
-    return this.gridOptions.autoCommitEdit;
+  get hasAutoCommitEdit(): boolean {
+    return this.gridOptions.autoCommitEdit ?? false;
   }
 
   /** Get the Validator function, can be passed in Editor property or Column Definition */
@@ -167,7 +168,7 @@ export class CustomAngularComponentEditor implements Editor {
     return (!(this.componentRef.instance.selectedId === '' && (this.defaultId === null || this.defaultId === undefined))) && (this.componentRef.instance.selectedId !== this.defaultId);
   }
 
-  validate(): EditorValidatorOutput {
+  validate(): EditorValidationResult {
     if (this.validator) {
       const value = this.componentRef.instance.selectedId;
       return this.validator(value, this.args);

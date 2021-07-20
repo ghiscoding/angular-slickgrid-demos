@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import { TextExportService } from '@slickgrid-universal/text-export';
 import { Subscription } from 'rxjs';
 import {
   AngularGridInstance,
@@ -18,9 +20,9 @@ import {
 const NB_ITEMS = 1500;
 
 // create a custom translate Formatter (typically you would move that a separate file, for separation of concerns)
-const taskTranslateFormatter: Formatter = (row: number, cell: number, value: any, columnDef: any, dataContext: any, grid: any) => {
-  const gridOptions = (grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {};
-  const translate = gridOptions.i18n;
+const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
+  const gridOptions = grid?.getOptions?.() as GridOption;
+  const translate = gridOptions.i18n as TranslateService;
 
   return translate.instant('TASK_X', { x: value });
 };
@@ -57,13 +59,15 @@ export class GridLocalizationComponent implements OnInit, OnDestroy {
   `;
 
   private subscriptions: Subscription[] = [];
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   selectedLanguage: string;
   duplicateTitleHeaderCount = 1;
   gridObj: any;
+  excelExportService = new ExcelExportService();
+  textExportService = new TextExportService();
 
   constructor(private translate: TranslateService) {
     // always start with English for Cypress E2E tests to be consistent
@@ -138,13 +142,11 @@ export class GridLocalizationComponent implements OnInit, OnDestroy {
     ];
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableAutoResize: true,
       enableExcelCopyBuffer: true,
-      enableExcelExport: true,
-      enableExport: true,
       enableFiltering: true,
       enableTranslate: true,
       i18n: this.translate,
@@ -166,7 +168,7 @@ export class GridLocalizationComponent implements OnInit, OnDestroy {
           ofKey: 'OF',
           lastUpdateKey: 'LAST_UPDATE',
         },
-        dateFormat: 'yyyy-MM-dd, hh:mm aaaaa\'m\'',
+        dateFormat: 'YYYY-MM-DD, hh:mm a',
         hideTotalItemCount: false,
         hideLastUpdateTimestamp: false,
       },
@@ -202,7 +204,15 @@ export class GridLocalizationComponent implements OnInit, OnDestroy {
       gridMenu: {
         hideExportCsvCommand: false,           // false by default, so it's optional
         hideExportTextDelimitedCommand: false  // true by default, so if you want it, you will need to disable the flag
-      }
+      },
+      enableExcelExport: true,
+      enableTextExport: true,
+      textExportOptions: {
+        // set at the grid option level, meaning all column will evaluate the Formatter (when it has a Formatter defined)
+        exportWithFormatter: true,
+        sanitizeDataExport: true
+      },
+      registerExternalResources: [this.excelExportService, this.textExportService],
     };
 
     this.loadData(NB_ITEMS);
@@ -251,14 +261,14 @@ export class GridLocalizationComponent implements OnInit, OnDestroy {
   }
 
   exportToExcel() {
-    this.angularGrid.excelExportService.exportToExcel({
+    this.excelExportService.exportToExcel({
       filename: 'Export',
       format: FileType.xlsx
     });
   }
 
   exportToFile(type = 'csv') {
-    this.angularGrid.exportService.exportToFile({
+    this.textExportService.exportToFile({
       delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,
       filename: 'myExport',
       format: (type === 'csv') ? FileType.csv : FileType.txt

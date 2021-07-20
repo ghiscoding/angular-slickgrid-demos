@@ -1,20 +1,28 @@
-<div class="container-fluid">
-    <h2>{{title}}</h2>
-    <div class="subtitle"
-        [innerHTML]="subTitle"></div>
+<div id="demo-container" class="container-fluid">
+  <h2>
+    {{title}}
+    <span class="float-right">
+      <a style="font-size: 18px"
+         target="_blank"
+         href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-menu.component.ts">
+        <span class="fa fa-link"></span> code
+      </a>
+    </span>
+  </h2>
+  <div class="subtitle" [innerHTML]="subTitle"></div>
 
-    <button class="btn btn-outline-secondary btn-sm"
-        (click)="toggleGridMenu($event)">
-        <i class="fa fa-bars"></i>
-        Grid Menu
-    </button>
+  <button class="btn btn-outline-secondary btn-sm" data-test="external-gridmenu"
+          (click)="toggleGridMenu($event)">
+    <i class="fa fa-bars"></i>
+    Grid Menu
+  </button>
 
-    <div class="col-sm-12">
-        <angular-slickgrid gridId="grid2"
-            (onAngularGridCreated)="angularGridReady($event)"
-            [columnDefinitions]="columnDefinitions"
-            [gridOptions]="gridOptions"
-            [dataset]="dataset">
-        </angular-slickgrid>
-    </div>
+  <div class="col-sm-12">
+    <angular-slickgrid gridId="grid9"
+                       [columnDefinitions]="columnDefinitions"
+                       [gridOptions]="gridOptions"
+                       [dataset]="dataset"
+                       (onAngularGridCreated)="angularGridReady($event.detail)">
+    </angular-slickgrid>
+  </div>
 </div>

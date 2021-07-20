@@ -1,4 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import { TextExportService } from '@slickgrid-universal/text-export';
+
 import {
   AngularGridInstance,
   Aggregators,
@@ -12,14 +15,14 @@ import {
   Grouping,
   GroupTotalFormatters,
   SortDirectionNumber,
-  Sorters,
+  SortComparers,
 } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './grid-grouping.component.html'
 })
 export class GridGroupingComponent implements OnInit {
-  title = 'Example 14: Grouping';
+  title = 'Example 14: Grouping & Aggregators';
   subTitle = `
   (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grouping-&-Aggregators" target="_blank">Wiki docs</a>)
   <ul>
@@ -30,13 +33,15 @@ export class GridGroupingComponent implements OnInit {
   </ul>
   `;
 
-  angularGrid: AngularGridInstance;
-  columnDefinitions: Column[];
-  gridOptions: GridOption;
-  dataset: any[];
+  angularGrid!: AngularGridInstance;
+  columnDefinitions!: Column[];
+  gridOptions!: GridOption;
+  dataset!: any[];
   gridObj: any;
   dataviewObj: any;
   processing = false;
+  excelExportService = new ExcelExportService();
+  textExportService = new TextExportService();
 
   constructor() { }
 
@@ -130,23 +135,21 @@ export class GridGroupingComponent implements OnInit {
 
     this.gridOptions = {
       autoResize: {
-        containerId: 'demo-container',
-        sidePadding: 10
+        container: '#demo-container',
+        rightPadding: 10
       },
       enableExcelExport: true,
       enableFiltering: true,
       // you could debounce/throttle the input text filter if you have lots of data
       // filterTypingDebounce: 250,
       enableGrouping: true,
-      exportOptions: {
-        sanitizeDataExport: true
-      },
-      excelExportOptions: {
-        sanitizeDataExport: true
-      },
+      enableExport: true,
       gridMenu: {
         hideExportTextDelimitedCommand: false
-      }
+      },
+      excelExportOptions: { sanitizeDataExport: true },
+      textExportOptions: { sanitizeDataExport: true },
+      registerExternalResources: [this.excelExportService, this.textExportService],
     };
 
     this.loadData(500);
@@ -195,14 +198,14 @@ export class GridGroupingComponent implements OnInit {
   }
 
   exportToExcel() {
-    this.angularGrid.excelExportService.exportToExcel({
+    this.excelExportService.exportToExcel({
       filename: 'Export',
       format: FileType.xlsx
     });
   }
 
-  exportToCsv(type = 'csv') {
-    this.angularGrid.exportService.exportToFile({
+  exportToFile(type = 'csv') {
+    this.textExportService.exportToFile({
       delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,
       filename: 'myExport',
       format: (type === 'csv') ? FileType.csv : FileType.txt
@@ -217,18 +220,18 @@ export class GridGroupingComponent implements OnInit {
         new Aggregators.Avg('percentComplete'),
         new Aggregators.Sum('cost')
       ],
-      comparer: (a, b) => Sorters.numeric(a.value, b.value, SortDirectionNumber.asc),
+      comparer: (a, b) => SortComparers.numeric(a.value, b.value, SortDirectionNumber.asc),
       aggregateCollapsed: false,
       lazyTotalsCalculation: true
     } as Grouping);
 
     // you need to manually add the sort icon(s) in UI
-    this.angularGrid.slickGrid.setSortColumns([{ columnId: 'duration', sortAsc: true }]);
+    this.angularGrid.filterService.setSortColumnIcons([{ columnId: 'duration', sortAsc: true }]);
     this.gridObj.invalidate(); // invalidate all rows and re-render
   }
 
-  groupByDurationOrderByCount(aggregateCollapsed) {
-    this.angularGrid.slickGrid.setSortColumns([]);
+  groupByDurationOrderByCount(aggregateCollapsed: boolean) {
+    this.angularGrid.filterService.setSortColumnIcons([]);
     this.dataviewObj.setGrouping({
       getter: 'duration',
       formatter: (g) => `Duration: ${g.value} <span style="color:green">(${g.count} items)</span>`,
@@ -246,7 +249,7 @@ export class GridGroupingComponent implements OnInit {
   }
 
   groupByDurationEffortDriven() {
-    this.angularGrid.slickGrid.setSortColumns([]);
+    this.angularGrid.filterService.setSortColumnIcons([]);
     this.dataviewObj.setGrouping([
       {
         getter: 'duration',
@@ -273,7 +276,7 @@ export class GridGroupingComponent implements OnInit {
   }
 
   groupByDurationEffortDrivenPercent() {
-    this.angularGrid.slickGrid.setSortColumns([]);
+    this.angularGrid.filterService.setSortColumnIcons([]);
     this.dataviewObj.setGrouping([
       {
         getter: 'duration',
