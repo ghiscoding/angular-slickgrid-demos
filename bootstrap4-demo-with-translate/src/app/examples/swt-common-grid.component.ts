@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
+  AngularGridInstance,
   AngularSlickgridComponent, Column, FieldType,
   GridOption, BackendService,
   BackendServiceOption, FilterChangedArgs, PaginationChangedArgs, Pagination, SlickGrid
@@ -22,8 +23,7 @@ const DEFAULT_FILTER_TYPING_DEBOUNCE = 750;
   selector: 'swt-common-grid',
   template: `<angular-slickgrid gridId='common-grid'
                       #angularSlickGrid
-                      (onDataviewCreated)="dataviewReady($event.detai)"
-                      (onGridCreated)="gridReady($event.detail)"
+                      (onAngularGridCreated)="gridReady($event.detail)"
                       [columnDefinitions]="columnDefinitions"
                       [gridOptions]="gridOptions"
                       [dataset]="dataset">
@@ -287,9 +287,10 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
     return this.dataset;
   }
 
-  gridReady(grid: SlickGrid) {
+  gridReady(instance: AngularGridInstance) {
     this.logger.info('method [gridReady] - START');
-    this.gridObj = grid;
+    this.gridObj = instance.slickGrid;
+    this.dataviewObj = instance.dataView;
     this.logger.info('method [gridReady] - END');
   }
 
