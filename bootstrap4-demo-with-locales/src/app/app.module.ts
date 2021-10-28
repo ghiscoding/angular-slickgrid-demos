@@ -18,6 +18,7 @@ import { GridClientSideComponent } from './examples/grid-clientside.component';
 import { GridColspanComponent } from './examples/grid-colspan.component';
 import { GridCompositeEditorComponent } from './examples/grid-composite-editor.component';
 import { GridContextMenuComponent } from './examples/grid-contextmenu.component';
+import { GridCustomTooltipComponent } from './examples/grid-custom-tooltip.component';
 import { GridDraggableGroupingComponent } from './examples/grid-draggrouping.component';
 import { GridEditorComponent } from './examples/grid-editor.component';
 import { GridFormatterComponent } from './examples/grid-formatter.component';
@@ -71,6 +72,7 @@ import 'flatpickr/dist/l10n/fr';
     GridColspanComponent,
     GridCompositeEditorComponent,
     GridContextMenuComponent,
+    GridCustomTooltipComponent,
     GridEditorComponent,
     GridDraggableGroupingComponent,
     GridFormatterComponent,
