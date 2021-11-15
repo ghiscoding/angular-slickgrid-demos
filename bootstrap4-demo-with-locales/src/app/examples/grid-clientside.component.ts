@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CustomInputFilter } from './custom-inputFilter';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import {
   AngularGridInstance,
   Column,
@@ -14,6 +14,8 @@ import {
   MultipleSelectOption,
   OperatorType,
 } from 'angular-slickgrid';
+
+import { CustomInputFilter } from './custom-inputFilter';
 
 function randomBetween(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -193,6 +195,7 @@ export class GridClientSideComponent implements OnInit {
           { columnId: 'complete', direction: 'ASC' }
         ],
       },
+      registerExternalResources: [new ExcelExportService()],
     };
 
     // mock a dataset
