@@ -1022,7 +1022,7 @@ the terms above.
 
 
 jszip
-(MIT OR GPL-3.0)
+(MIT OR GPL-3.0-or-later)
 JSZip is dual licensed. You may use it under the MIT license *or* the GPLv3
 license.
 
