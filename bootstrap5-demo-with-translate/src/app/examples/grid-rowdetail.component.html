@@ -11,24 +11,18 @@
   </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
-  <div class="row gx-2 mb-2 align-items-end">
-    <div class="col-auto">
-      <button class="btn btn-outline-secondary btn-sm" (click)="closeAllRowDetail()" data-test="close-all-btn">
-        Close All Row Details
-      </button>
-      &nbsp;&nbsp;
-    </div>
-    <div class="col-auto">
-      <label for="row-count">Detail View Rows Shown: </label>
-      <input id="row-count" class="form-control form-control-sm" type="number" [(ngModel)]="detailViewRowCount">
-    </div>
-    <div class="col-auto">
-      <button class="btn btn-outline-secondary btn-sm" (click)="changeDetailViewRowCount()" data-test="set-count-btn">
-        Set
-      </button>
-    </div>
-    <div class="alert alert-{{flashAlertType}} col-sm-6" *ngIf="message" data-test="flash-msg">{{message}}</div>
+  <div class="col-sm-6">
+    <button class="btn btn-outline-secondary btn-sm" (click)="closeAllRowDetail()" data-test="close-all-btn">
+      Close All Row Details
+    </button>
+    &nbsp;&nbsp;
+    <label for="">Detail View Rows Shown: </label>
+    <input type="number" [(ngModel)]="detailViewRowCount">
+    <button class="btn btn-outline-secondary btn-xs" (click)="changeDetailViewRowCount()" data-test="set-count-btn">
+      Set
+    </button>
   </div>
+  <div class="alert alert-{{flashAlertType}} col-sm-6" *ngIf="message" data-test="flash-msg">{{message}}</div>
 
   <hr />
 
