@@ -39,4 +39,4 @@ yarn-error.log
 */.naverc
 
 # angular local cache
-/.angular/cache
+*/.angular/cache/
