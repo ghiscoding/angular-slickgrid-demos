@@ -17,7 +17,6 @@ Thumbs.db
 # Ref: https://github.com/github/gitignore/blob/master/Global
 # Ref: https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
 # Ref: https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
-.angular
 .idea
 .vscode/*
 !.vscode/settings.json
@@ -38,3 +37,6 @@ yarn-error.log
 
 .naverc
 */.naverc
+
+# angular local cache
+/.angular/cache
