@@ -31,7 +31,6 @@ export class GridRowDetailComponent implements OnInit {
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset!: any[];
-  extensions!: ExtensionList<any, any>;
   detailViewRowCount = 9;
   message = '';
   flashAlertType = 'info';
@@ -48,8 +47,8 @@ export class GridRowDetailComponent implements OnInit {
     // option 1
     return this.angularGrid.extensions.rowDetailView.instance || {};
 
-    // OR options 2
-    // return this.angularGrid && this.angularGrid.extensionService.getSlickgridAddonInstance(ExtensionName.rowDetailView) || {};
+    // OR option 2
+    // return this.angularGrid?.extensionService.getExtensionInstanceByName(ExtensionName.rowDetailView) || {};
   }
 
   ngOnInit(): void {
@@ -119,7 +118,7 @@ export class GridRowDetailComponent implements OnInit {
 
         // you can override the logic for showing (or not) the expand icon
         // for example, display the expand icon only on every 2nd row
-        // expandableOverride: (row: number, dataContext: any, grid: SlickGrid) => (dataContext.id % 2 === 1),
+        // expandableOverride: (row: number, dataContext: any) => (dataContext.rowId % 2 === 1),
 
         // Preload View Component
         preloadComponent: RowDetailPreloadComponent,

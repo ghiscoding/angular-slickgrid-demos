@@ -107,12 +107,12 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     this.angularGrid = angularGrid;
   }
 
-  get cellMenuInstance(): any {
-    return this.angularGrid?.extensionService?.getSlickgridAddonInstance?.(ExtensionName.cellMenu) ?? {};
+  get cellMenuInstance() {
+    return this.angularGrid?.extensionService?.getExtensionInstanceByName(ExtensionName.cellMenu);
   }
 
-  get contextMenuInstance(): any {
-    return this.angularGrid?.extensionService?.getSlickgridAddonInstance?.(ExtensionName.contextMenu) ?? {};
+  get contextMenuInstance() {
+    return this.angularGrid?.extensionService?.getExtensionInstanceByName(ExtensionName.contextMenu);
   }
 
   ngOnInit() {
@@ -351,7 +351,6 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
   getContextMenuOptions(): ContextMenu {
     return {
       hideCloseButton: false,
-      width: 200,
       // optionally and conditionally define when the the menu is usable,
       // this should be used with a custom formatter to show/hide/disable the menu
       menuUsabilityOverride: (args) => {
@@ -433,7 +432,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
       onOptionSelected: ((e, args) => {
         // change Priority
         const dataContext = args && args.dataContext;
-        if (dataContext && dataContext.hasOwnProperty('priority')) {
+        if (dataContext?.hasOwnProperty('priority')) {
           dataContext.priority = args.item.option;
           this.angularGrid.gridService.updateItem(dataContext);
         }
@@ -445,7 +444,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     // when showing both Commands/Options, we can just pass an empty array to show over all columns
     // else show on all columns except Priority
     const showOverColumnIds = showBothList ? [] : ['id', 'title', 'complete', 'start', 'finish', 'completed', 'action'];
-    this.contextMenuInstance.setOptions({
+    this.contextMenuInstance?.setOptions({
       commandShownOverColumnIds: showOverColumnIds,
       // hideCommandSection: !showBothList
     });
@@ -453,7 +452,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
 
   showCellMenuCommandsAndOptions(showBothList: boolean) {
     // change via the plugin setOptions
-    this.cellMenuInstance.setOptions({
+    this.cellMenuInstance?.setOptions({
       hideOptionSection: !showBothList
     });
 

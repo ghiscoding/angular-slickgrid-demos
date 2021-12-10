@@ -31,8 +31,8 @@ export class GridRowMoveComponent implements OnInit {
     this.angularGrid = angularGrid;
   }
 
-  get rowMoveInstance(): any {
-    return this.angularGrid?.extensionService?.getSlickgridAddonInstance?.(ExtensionName.rowMoveManager) ?? {};
+  get rowMoveInstance() {
+    return this.angularGrid?.extensionService?.getExtensionInstanceByName(ExtensionName.rowMoveManager);
   }
 
   ngOnInit(): void {
