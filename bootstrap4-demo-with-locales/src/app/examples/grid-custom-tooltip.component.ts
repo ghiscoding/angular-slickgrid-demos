@@ -195,7 +195,7 @@ export class GridCustomTooltipComponent implements OnInit {
         // },
       },
       {
-        id: 'effortDriven', name: 'Effort Driven', field: 'effortDriven',
+        id: 'effortDriven', name: 'Effort-Driven', field: 'effortDriven',
         width: 80, minWidth: 20, maxWidth: 100,
         cssClass: 'cell-effort-driven',
         sortable: true,
@@ -270,7 +270,6 @@ export class GridCustomTooltipComponent implements OnInit {
         excludeFromExport: true,
         cellMenu: {
           hideCloseButton: false,
-          width: 175,
           commandTitle: 'Commands',
           commandItems: [
             // array of command item objects, you can also use the "positionOrder" that will be used to sort the items in the list

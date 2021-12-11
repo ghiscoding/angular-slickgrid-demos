@@ -187,7 +187,7 @@ export class GridDraggableGroupingComponent implements OnInit {
         }
       },
       {
-        id: 'effortDriven', name: 'Effort Driven', field: 'effortDriven',
+        id: 'effortDriven', name: 'Effort-Driven', field: 'effortDriven',
         width: 80, minWidth: 20, maxWidth: 100,
         cssClass: 'cell-effort-driven',
         sortable: true,
@@ -217,6 +217,7 @@ export class GridDraggableGroupingComponent implements OnInit {
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 40,
+      showCustomFooter: true,
       enableFiltering: true,
       // you could debounce/throttle the input text filter if you have lots of data
       // filterTypingDebounce: 250,

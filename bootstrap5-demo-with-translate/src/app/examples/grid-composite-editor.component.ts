@@ -321,7 +321,6 @@ export class GridCompositeEditorComponent implements OnInit {
         formatter: () => `<div class="button-style margin-auto" style="width: 35px;"><span class="fa fa-chevron-down text-primary"></span></div>`,
         cellMenu: {
           hideCloseButton: false,
-          width: 175,
           commandTitle: 'Commands',
           commandItems: [
             {
@@ -605,6 +604,7 @@ export class GridCompositeEditorComponent implements OnInit {
       // viewColumnLayout: 2, // responsive layout, choose from 'auto', 1, 2, or 3 (defaults to 'auto')
       showFormResetButton: true,
       // showResetButtonOnEachEditor: true,
+      resetFormButtonIconCssClass: 'fa fa-undo',
       onClose: () => Promise.resolve(confirm('You have unsaved changes, are you sure you want to close this window?')),
       onError: (error) => alert(error.message),
       onSave: (formValues, _selection, dataContext) => {

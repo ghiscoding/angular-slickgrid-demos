@@ -225,16 +225,23 @@ export class GridAngularComponent implements OnInit {
         id: 'action',
         name: 'Action',
         field: 'id',
-        formatter: Formatters.bsDropdown,
-        params: { label: 'Action' },
-        onCellClick: (e: Event, args: OnEventArgs) => {
-          this.bsDropdown.render({
-            component: CustomActionFormatterComponent,
-            args,
-            offsetLeft: 50,
-            offsetDropupBottom: 15,
-            parent: this, // provide this object to the child component so we can call a method from here if we wish
-          });
+        formatter: () => `<div class="fake-hyperlink">Action <i class="fa fa-caret-down"></i></div>`,
+        cellMenu: {
+          commandTitle: 'Commands',
+          commandItems: [
+            {
+              command: 'help',
+              title: 'Help',
+              iconCssClass: 'fa fa-question-circle text-info',
+              positionOrder: 66,
+              action: () => alert('Please Help!'),
+            },
+            {
+              command: 'delete-row', title: 'Delete Row', positionOrder: 64,
+              iconCssClass: 'fa fa-times color-danger', cssClass: 'red', textCssClass: 'text-italic color-danger-light',
+              action: (_event, args) => this.angularGrid.gridService.deleteItemById(args.dataContext.id)
+            },
+          ]
         }
       }
     ];
@@ -250,6 +257,7 @@ export class GridAngularComponent implements OnInit {
       headerRowHeight: 45,
       rowHeight: 45, // increase row height so that the ng-select fits in the cell
       editable: true,
+      enableCellMenu: true,
       enableCellNavigation: true,
       enableColumnPicker: true,
       enableExcelCopyBuffer: true,
