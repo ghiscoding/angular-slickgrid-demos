@@ -24,7 +24,7 @@
     "@ng-select/ng-select": "^8.1.1",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
-    "@slickgrid-universal/composite-editor-component": "^0.19.2",
+    "@slickgrid-universal/composite-editor-component": "^1.1.1",
     "@slickgrid-universal/custom-tooltip-plugin": "^1.1.1",
     "@slickgrid-universal/excel-export": "^1.1.1",
     "@slickgrid-universal/graphql": "^1.1.1",
