@@ -55,6 +55,7 @@ jobs:
       # always deploy (re-publish) GitHub demo page with a Prod build
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./bootstrap4-demo-with-translate/dist
