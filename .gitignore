@@ -32,7 +32,6 @@ scripts
 dist
 
 # lock files
-yarn.lock
 yarn-error.log
 
 .naverc
