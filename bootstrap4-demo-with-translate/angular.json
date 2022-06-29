@@ -59,7 +59,7 @@
               "node_modules/jquery-ui-dist/jquery-ui.min.js",
               "node_modules/slickgrid/lib/jquery.event.drag-2.3.0.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/multiple-select-modified/src/multiple-select.js",
+              "node_modules/multiple-select-modified/src/multiple-select.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -117,6 +117,15 @@
             }
           }
         },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
@@ -143,7 +152,7 @@
               "node_modules/jquery-ui-dist/jquery-ui.min.js",
               "node_modules/slickgrid/lib/jquery.event.drag-2.3.0.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/multiple-select-modified/src/multiple-select.js",
+              "node_modules/multiple-select-modified/src/multiple-select.js"
             ],
             "assets": [
               "src/assets",
@@ -196,5 +205,11 @@
     "@schematics/angular:directive": {
       "prefix": "app"
     }
+  },
+  "cli": {
+    "packageManager": "yarn",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
