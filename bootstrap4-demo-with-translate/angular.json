@@ -15,7 +15,6 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "showCircularDependencies": true,
             "polyfills": "src/polyfills.ts",
             "allowedCommonJsDependencies": [
               "assign-deep",
@@ -189,7 +188,6 @@
       }
     }
   },
-  "defaultProject": "test-slickgrid",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

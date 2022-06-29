@@ -59,80 +59,71 @@ import 'flatpickr/dist/l10n/fr';
 
 // @dynamic
 @NgModule({
-  declarations: [
-    AppComponent,
-    CustomActionFormatterComponent,
-    CustomTitleFormatterComponent,
-    EditorNgSelectComponent,
-    FilterNgSelectComponent,
-    GridAddItemComponent,
-    GridAngularComponent,
-    GridAutoHeightComponent,
-    GridBasicComponent,
-    GridClientSideComponent,
-    GridColspanComponent,
-    GridCompositeEditorComponent,
-    GridContextMenuComponent,
-    GridCustomTooltipComponent,
-    GridEditorComponent,
-    GridDraggableGroupingComponent,
-    GridFormatterComponent,
-    GridFrozenComponent,
-    GridGraphqlComponent,
-    GridGraphqlWithoutPaginationComponent,
-    GridGroupingComponent,
-    GridHeaderButtonComponent,
-    GridHeaderMenuComponent,
-    GridLocalizationComponent,
-    GridMenuComponent,
-    GridOdataComponent,
-    GridRangeComponent,
-    GridRemoteComponent,
-    GridResizeByContentComponent,
-    GridRowDetailComponent,
-    GridRowMoveComponent,
-    GridRowSelectionComponent,
-    GridStateComponent,
-    GridTabsComponent,
-    GridTradingComponent,
-    GridTreeDataParentChildComponent,
-    GridTreeDataHierarchicalComponent,
-    RowDetailPreloadComponent,
-    RowDetailViewComponent,
-    SwtCommonGridTestComponent,
-    SwtCommonGridPaginationComponent,
-    SwtCommonGridComponent,
-    HomeComponent
-  ],
-  imports: [
-    AppRoutingRoutingModule,
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    NgSelectModule,
-    TabsModule.forRoot(),
-    AngularSlickgridModule.forRoot({
-      // add any Global Grid Options/Config you might want
-      // to avoid passing the same options over and over in each grids of your App
-      enableAutoResize: true,
-      autoResize: {
-        container: '#demo-container',
-        rightPadding: 10
-      },
-      // Provide a custom locales set
-      // locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
-      // locales: localeFrench,
-    })
-  ],
-  entryComponents: [
-    // dynamically created components
-    CustomActionFormatterComponent,
-    CustomTitleFormatterComponent,
-    EditorNgSelectComponent,
-    FilterNgSelectComponent,
-    RowDetailPreloadComponent,
-    RowDetailViewComponent,
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        CustomActionFormatterComponent,
+        CustomTitleFormatterComponent,
+        EditorNgSelectComponent,
+        FilterNgSelectComponent,
+        GridAddItemComponent,
+        GridAngularComponent,
+        GridAutoHeightComponent,
+        GridBasicComponent,
+        GridClientSideComponent,
+        GridColspanComponent,
+        GridCompositeEditorComponent,
+        GridContextMenuComponent,
+        GridCustomTooltipComponent,
+        GridEditorComponent,
+        GridDraggableGroupingComponent,
+        GridFormatterComponent,
+        GridFrozenComponent,
+        GridGraphqlComponent,
+        GridGraphqlWithoutPaginationComponent,
+        GridGroupingComponent,
+        GridHeaderButtonComponent,
+        GridHeaderMenuComponent,
+        GridLocalizationComponent,
+        GridMenuComponent,
+        GridOdataComponent,
+        GridRangeComponent,
+        GridRemoteComponent,
+        GridResizeByContentComponent,
+        GridRowDetailComponent,
+        GridRowMoveComponent,
+        GridRowSelectionComponent,
+        GridStateComponent,
+        GridTabsComponent,
+        GridTradingComponent,
+        GridTreeDataParentChildComponent,
+        GridTreeDataHierarchicalComponent,
+        RowDetailPreloadComponent,
+        RowDetailViewComponent,
+        SwtCommonGridTestComponent,
+        SwtCommonGridPaginationComponent,
+        SwtCommonGridComponent,
+        HomeComponent
+    ],
+    imports: [
+        AppRoutingRoutingModule,
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        NgSelectModule,
+        TabsModule.forRoot(),
+        AngularSlickgridModule.forRoot({
+            // add any Global Grid Options/Config you might want
+            // to avoid passing the same options over and over in each grids of your App
+            enableAutoResize: true,
+            autoResize: {
+                container: '#demo-container',
+                rightPadding: 10
+            },
+            // Provide a custom locales set
+            // locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
+            // locales: localeFrench,
+        })
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
