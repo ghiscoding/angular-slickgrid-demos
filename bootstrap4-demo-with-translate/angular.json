@@ -94,8 +94,11 @@
               ],
               "optimization": true,
               "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
               "aot": false,
               "extractLicenses": true,
+              "vendorChunk": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

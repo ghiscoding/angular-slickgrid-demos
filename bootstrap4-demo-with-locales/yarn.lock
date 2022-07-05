@@ -1645,7 +1645,7 @@
   dependencies:
     dompurify "^2.3.8"
 
-"@slickgrid-universal/common@1.3.0", "@slickgrid-universal/common@^1.3.0":
+"@slickgrid-universal/common@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@slickgrid-universal/common/-/common-1.3.0.tgz#7a053707e7f057bba847571715d36589ef1aabbd"
   integrity sha512-pO23dm7gL0YaqrQvAaMlntbJD0xhOJpYEiNAhtSMH90beuPAFZwVJo09t4VwszUj6eGFgtiM8KZkdY0zuWXaSw==
@@ -1671,7 +1671,7 @@
     "@slickgrid-universal/common" "1.3.0"
     "@slickgrid-universal/utils" "1.3.0"
 
-"@slickgrid-universal/custom-footer-component@^1.3.0":
+"@slickgrid-universal/custom-footer-component@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@slickgrid-universal/custom-footer-component/-/custom-footer-component-1.3.0.tgz#591ffcbbfd1075f8f8de441c55d6d9c6fa9511f3"
   integrity sha512-E270Qaw4evqe59aJJcuux1R1TlfqReVeLGW+w+fGGc7jutYzTHhqXxvXt+6z6ypp8IP9K5jnYGoY9+X/NBf9CA==
@@ -1687,14 +1687,14 @@
     "@slickgrid-universal/common" "1.3.0"
     dompurify "^2.3.8"
 
-"@slickgrid-universal/empty-warning-component@^1.3.0":
+"@slickgrid-universal/empty-warning-component@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@slickgrid-universal/empty-warning-component/-/empty-warning-component-1.3.0.tgz#ed24035d12b6a45d4acaf39644c9f0d29ba70265"
   integrity sha512-WZP4U650k5VuKi4RLWCIh0eUVPq7eKCmlq6ggRwElw2JpOojM5odR/iFJ7nssxvK3C3d8IKsBye3G+r82Pb+Sw==
   dependencies:
     "@slickgrid-universal/common" "1.3.0"
 
-"@slickgrid-universal/event-pub-sub@1.3.0", "@slickgrid-universal/event-pub-sub@^1.3.0":
+"@slickgrid-universal/event-pub-sub@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@slickgrid-universal/event-pub-sub/-/event-pub-sub-1.3.0.tgz#c15289a19fb1992a301505bdc4b450a5d6a04eda"
   integrity sha512-qFFXLcgUNUmdVwJkvFwGHu01Ow14g+AwvUzp8Gy9ZDK/QvjKsQecpRcWIQVPbzypMPigwRtclh6q538r5tbn8A==
@@ -1726,7 +1726,7 @@
     "@slickgrid-universal/common" "1.3.0"
     "@slickgrid-universal/utils" "1.3.0"
 
-"@slickgrid-universal/pagination-component@^1.3.0":
+"@slickgrid-universal/pagination-component@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@slickgrid-universal/pagination-component/-/pagination-component-1.3.0.tgz#2f75318ad3181db0b6270b667367fe07f2779a2c"
   integrity sha512-tWWQOqt+1lBtzR+mSyelzK5THpS7DRkyDabVahRqe4kFBh6nOpkl4rbbCzwXB7X1DTbZBYwfwh0dvHlq1h9m6g==
@@ -1734,14 +1734,14 @@
     "@slickgrid-universal/binding" "1.3.0"
     "@slickgrid-universal/common" "1.3.0"
 
-"@slickgrid-universal/row-detail-view-plugin@^1.3.0":
+"@slickgrid-universal/row-detail-view-plugin@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@slickgrid-universal/row-detail-view-plugin/-/row-detail-view-plugin-1.3.0.tgz#28936696a6e7b2ecf2c61b2baf63c24049930e74"
   integrity sha512-lVwITI1wmBo2VwDMwnKon5gHZakGsBK+Dx908x6sINxrEwnGZ3owCzSCfXpdOs6wiAxEZFBFnKozGRARfQM49g==
   dependencies:
     "@slickgrid-universal/common" "1.3.0"
 
-"@slickgrid-universal/rxjs-observable@^1.3.0":
+"@slickgrid-universal/rxjs-observable@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@slickgrid-universal/rxjs-observable/-/rxjs-observable-1.3.0.tgz#d3791750da0bb8a685662f54a064c66675b997d4"
   integrity sha512-YK3XLquK8HWSGPb2tKAw1BLFPyRnb438f22UL6joTtWFp2+7yn4JZg679O3h6WqLJRDI83V6j0h/69JdsU7O3g==
@@ -2381,18 +2381,18 @@ ajv@^6.10.0, ajv@^6.12.4, ajv@^6.12.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-angular-slickgrid@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-4.2.1.tgz#3a457552786985f03a9209b09c5becfac229dd8a"
-  integrity sha512-SiyntAiYMC1UkUHuRepPFPjlRtOrREvDJQ6Qd3gPiu9Bqf+1XDnxFSNqPfgBY9pAP6TODB4xW38mKQiIuq/TSw==
+angular-slickgrid@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-4.2.2.tgz#bb18c3a6a3955f49852444aa3d5b0082ff334cc3"
+  integrity sha512-+Qodk4P5xvkmhgK3SmJUnw8++3fWTHS3rv/QktJVPUWHuSDWWsuoFcaXayfTVOYirjoKr9iBULmt7tuw9daHgQ==
   dependencies:
-    "@slickgrid-universal/common" "^1.3.0"
-    "@slickgrid-universal/custom-footer-component" "^1.3.0"
-    "@slickgrid-universal/empty-warning-component" "^1.3.0"
-    "@slickgrid-universal/event-pub-sub" "^1.3.0"
-    "@slickgrid-universal/pagination-component" "^1.3.0"
-    "@slickgrid-universal/row-detail-view-plugin" "^1.3.0"
-    "@slickgrid-universal/rxjs-observable" "^1.3.0"
+    "@slickgrid-universal/common" "1.3.0"
+    "@slickgrid-universal/custom-footer-component" "1.3.0"
+    "@slickgrid-universal/empty-warning-component" "1.3.0"
+    "@slickgrid-universal/event-pub-sub" "1.3.0"
+    "@slickgrid-universal/pagination-component" "1.3.0"
+    "@slickgrid-universal/row-detail-view-plugin" "1.3.0"
+    "@slickgrid-universal/rxjs-observable" "1.3.0"
     "@types/dompurify" "^2.3.3"
     "@types/jquery" "^3.5.14"
     dequal "^2.0.2"
