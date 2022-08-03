@@ -100,6 +100,7 @@ export class GridCompositeEditorComponent implements OnInit {
   isGridEditable = true;
   isCompositeDisabled = false;
   isMassSelectionDisabled = true;
+  cellCssStyleQueue: string[] = [];
   complexityLevelList = [
     { value: 0, label: 'Very Simple' },
     { value: 1, label: 'Simple' },
@@ -561,7 +562,7 @@ export class GridCompositeEditorComponent implements OnInit {
     */
   }
 
-  handlePaginationChanged() {
+  handleReRenderUnsavedStyling() {
     this.removeAllUnsavedStylingFromCell();
     this.renderUnsavedStylingOnAllVisibleCells();
   }
@@ -649,19 +650,19 @@ export class GridCompositeEditorComponent implements OnInit {
 
   removeUnsavedStylingFromCell(_item: any, column: Column, row: number) {
     // remove unsaved css class from that cell
-    this.angularGrid.slickGrid.removeCellCssStyles(`unsaved_highlight_${[column.id]}${row}`);
+    const cssStyleKey = `unsaved_highlight_${[column.id]}${row}`;
+    this.angularGrid.slickGrid.removeCellCssStyles(cssStyleKey);
+    const foundIdx = this.cellCssStyleQueue.findIndex(styleKey => styleKey === cssStyleKey);
+    if (foundIdx >= 0) {
+      this.cellCssStyleQueue.splice(foundIdx, 1);
+    }
   }
 
   removeAllUnsavedStylingFromCell() {
-    for (const lastEdit of this.editQueue) {
-      const lastEditCommand = lastEdit?.editCommand;
-      if (lastEditCommand) {
-        // remove unsaved css class from that cell
-        for (const lastEditColumn of lastEdit.columns) {
-          this.removeUnsavedStylingFromCell(lastEdit.item, lastEditColumn, lastEditCommand.row);
-        }
-      }
+    for (const cssStyleKey of this.cellCssStyleQueue) {
+      this.angularGrid.slickGrid.removeCellCssStyles(cssStyleKey);
     }
+    this.cellCssStyleQueue = [];
   }
 
   renderUnsavedStylingOnAllVisibleCells() {
@@ -682,7 +683,9 @@ export class GridCompositeEditorComponent implements OnInit {
       const row = this.angularGrid.dataView.getRowByItem(item) as number;
       if (row >= 0) {
         const hash = { [row]: { [column.id]: 'unsaved-editable-field' } };
+        const cssStyleKey = `unsaved_highlight_${[column.id]}${row}`;
         this.angularGrid.slickGrid.setCellCssStyles(`unsaved_highlight_${[column.id]}${row}`, hash);
+        this.cellCssStyleQueue.push(cssStyleKey);
       }
     }
   }
