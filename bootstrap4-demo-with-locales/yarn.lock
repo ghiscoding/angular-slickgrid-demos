@@ -1824,6 +1824,13 @@
   dependencies:
     "@types/trusted-types" "*"
 
+"@types/dompurify@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@types/dompurify/-/dompurify-2.3.4.tgz#94e997e30338ea24d4c8d08beca91ce4dd17a1b4"
+  integrity sha512-EXzDatIb5EspL2eb/xPGmaC8pePcTHrkDCONjeisusLFrVfl38Pjea/R0YJGu3k9ZQadSvMqW0WXPI2hEo2Ajg==
+  dependencies:
+    "@types/trusted-types" "*"
+
 "@types/eslint-scope@^3.7.3":
   version "3.7.4"
   resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.4.tgz#37fc1223f0786c39627068a12e94d6e6fc61de16"
@@ -2355,10 +2362,10 @@ ajv@^6.10.0, ajv@^6.12.4, ajv@^6.12.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-angular-slickgrid@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-4.3.0.tgz#dc175969d563e11665d9fa0243d3e72038715b4d"
-  integrity sha512-Zb/hTyQM/5MqehJMa8cSJ0+hPLoajcKLwXskOykeLRUAmIxV1vr2nwnY758Ciwhg8w42ih9Fxvnh/zs3uHP5mg==
+angular-slickgrid@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-4.3.1.tgz#43631551bd596aad38c0e621bb3381adb0dd9a1b"
+  integrity sha512-nKMUXc5QLb6aFaA58KKUPsFZ999IrqWC7uqk6zWcksbOUFA2bkrfo8DvpiVvLTUId+PmxSM6jFtojPe3bj4XiQ==
   dependencies:
     "@slickgrid-universal/common" "~1.4.0"
     "@slickgrid-universal/custom-footer-component" "~1.4.0"
@@ -2367,12 +2374,12 @@ angular-slickgrid@^4.3.0:
     "@slickgrid-universal/pagination-component" "~1.4.0"
     "@slickgrid-universal/row-detail-view-plugin" "~1.4.0"
     "@slickgrid-universal/rxjs-observable" "~1.4.0"
-    "@types/dompurify" "^2.3.3"
+    "@types/dompurify" "^2.3.4"
     "@types/jquery" "^3.5.14"
     dequal "^2.0.3"
-    dompurify "^2.3.10"
+    dompurify "^2.4.0"
     font-awesome "^4.7.0"
-    jquery "^3.6.0"
+    jquery "^3.6.1"
     moment-mini "^2.29.4"
     rxjs ">=7.5.6"
     tslib "^2.3.0"
@@ -2736,10 +2743,10 @@ camelcase@^5.3.1:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
-caniuse-lite@1.0.30001359, caniuse-lite@^1.0.30001370, caniuse-lite@^1.0.30001373:
-  version "1.0.30001359"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001359.tgz#a1c1cbe1c2da9e689638813618b4219acbd4925e"
-  integrity sha512-Xln/BAsPzEuiVLgJ2/45IaqD9jShtk3Y33anKb4+yLwQzws3+v6odKfpgES/cDEaZMLzSChpIGdbOYtH9MyuHw==
+caniuse-lite@1.0.30001397, caniuse-lite@^1.0.30001370, caniuse-lite@^1.0.30001373:
+  version "1.0.30001397"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001397.tgz#010d9d56e3b8abcd8df261d0a94b22426271a15f"
+  integrity sha512-SW9N2TbCdLf0eiNDRrrQXx2sOkaakNZbCjgNpPyMJJbiOrU5QzMIrXOVMRM1myBXTD5iTkdrtU/EguCrBocHlA==
 
 chalk@4.1.0:
   version "4.1.0"
@@ -3303,6 +3310,11 @@ dompurify@^2.3.10:
   version "2.3.10"
   resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.3.10.tgz#901f7390ffe16a91a5a556b94043314cd4850385"
   integrity sha512-o7Fg/AgC7p/XpKjf/+RC3Ok6k4St5F7Q6q6+Nnm3p2zGWioAY6dh0CbbuwOhH2UcSzKsdniE/YnE2/92JcsA+g==
+
+dompurify@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.4.0.tgz#c9c88390f024c2823332615c9e20a453cf3825dd"
+  integrity sha512-Be9tbQMZds4a3C6xTmz68NlMfeONA//4dOavl/1rNw50E+/QO0KVpbcU0PcaW0nsQxurXls9ZocqFxk8R2mWEA==
 
 domutils@^2.8.0:
   version "2.8.0"
@@ -4690,6 +4702,11 @@ jquery@>=1.8.0, "jquery@>=1.8.0 <4.0.0", jquery@^3.5.1, jquery@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
   integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
+
+jquery@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.1.tgz#fab0408f8b45fc19f956205773b62b292c147a16"
+  integrity sha512-opJeO4nCucVnsjiXOE+/PcCgYw9Gwpvs/a6B1LL/lQhwWwpbVEVYDZ1FokFr8PRc7ghYlrFPuyHuiiDNTQxmcw==
 
 js-tokens@^4.0.0:
   version "4.0.0"
