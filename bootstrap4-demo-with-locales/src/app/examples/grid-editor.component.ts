@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import {
   AngularGridInstance,
-  AutocompleteOption,
+  AutocompleterOption,
   Column,
   Editors,
   EditorArguments,
@@ -320,7 +320,7 @@ export class GridEditorComponent implements OnInit {
         filterable: true,
         minWidth: 100,
         editor: {
-          model: Editors.autoComplete,
+          model: Editors.autocompleter,
           placeholder: '🔎︎ search city',
 
           // We can use the autocomplete through 3 ways "collection", "collectionAsync" or with your own autocomplete options
@@ -329,7 +329,7 @@ export class GridEditorComponent implements OnInit {
           editorOptions: {
             forceUserInput: true,
             minLength: 3,
-            source: (request, response) => {
+            fetch: (searchText: string, updateCallback: (items: false | any[]) => void) => {
               /** with Angular Http, note this demo won't work because of CORS */
               // this.http.get(`http://gd.geobytes.com/AutoCompleteCity?q=${request.term}`).subscribe(data => response(data));
 
@@ -338,15 +338,18 @@ export class GridEditorComponent implements OnInit {
                 url: 'http://gd.geobytes.com/AutoCompleteCity',
                 dataType: 'jsonp',
                 data: {
-                  q: request.term
+                  q: searchText
                 },
-                success: (data: any) => response(data)
+                success: (data) => {
+                  const finalData = (data.length === 1 && data[0] === '') ? [] : data; // invalid result should be [] instead of [''] to show empty msg
+                  updateCallback(finalData);
+                }
               });
             }
-          } as AutocompleteOption,
+          } as AutocompleterOption,
         },
         filter: {
-          model: Filters.autoComplete,
+          model: Filters.autocompleter,
           // placeholder: '🔎︎ search city',
 
           // We can use the autocomplete through 3 ways "collection", "collectionAsync" or with your own autocomplete options
@@ -356,17 +359,20 @@ export class GridEditorComponent implements OnInit {
           // here we use $.ajax just because I'm not sure how to configure http with JSONP and CORS
           filterOptions: {
             minLength: 3,
-            source: (request, response) => {
+            fetch: (searchText: string, updateCallback: (items: false | any[]) => void) => {
               $.ajax({
                 url: 'http://gd.geobytes.com/AutoCompleteCity',
                 dataType: 'jsonp',
                 data: {
-                  q: request.term
+                  q: searchText
                 },
-                success: (data: any) => response(data)
+                success: (data) => {
+                  const finalData = (data.length === 1 && data[0] === '') ? [] : data; // invalid result should be [] instead of [''] to show empty msg
+                  updateCallback(finalData);
+                }
               });
             }
-          } as AutocompleteOption,
+          } as AutocompleterOption,
         }
       }, {
         id: 'countryOfOrigin', name: 'Country of Origin', field: 'countryOfOrigin',
@@ -380,12 +386,12 @@ export class GridEditorComponent implements OnInit {
         sortable: true,
         minWidth: 100,
         editor: {
-          model: Editors.autoComplete,
+          model: Editors.autocompleter,
           customStructure: { label: 'name', value: 'code' },
           collectionAsync: this.http.get(URL_COUNTRIES_COLLECTION),
         },
         filter: {
-          model: Filters.autoComplete,
+          model: Filters.autocompleter,
           customStructure: { label: 'name', value: 'code' },
           collectionAsync: this.http.get(URL_COUNTRIES_COLLECTION),
         }
@@ -395,11 +401,11 @@ export class GridEditorComponent implements OnInit {
         sortable: true,
         minWidth: 100,
         editor: {
-          model: Editors.autoComplete,
+          model: Editors.autocompleter,
           collectionAsync: this.http.get(URL_COUNTRY_NAMES),
         },
         filter: {
-          model: Filters.autoComplete,
+          model: Filters.autocompleter,
           collectionAsync: this.http.get(URL_COUNTRY_NAMES),
         }
       }, {
