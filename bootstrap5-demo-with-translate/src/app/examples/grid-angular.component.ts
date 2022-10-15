@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   AngularGridInstance,
   AngularUtilService,
-  BsDropDownService,
   Column,
   Editors,
   FieldType,
@@ -71,7 +70,7 @@ export class GridAngularComponent implements OnInit {
     { id: '3', name: 'Paul' },
   ];
 
-  constructor(private angularUtilService: AngularUtilService, private bsDropdown: BsDropDownService, private translate: TranslateService) { }
+  constructor(private angularUtilService: AngularUtilService, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.prepareGrid();

@@ -10,7 +10,6 @@ import {
   Formatters,
   GridOption,
   GridStateChange,
-  JQueryUiSliderOption,
   Metrics,
   MultipleSelectOption,
   OperatorType,

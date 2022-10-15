@@ -6,7 +6,6 @@ module.exports = {
         /slickgrid\//,
         /flatpickr/,
         /dequal/,
-        /jquery-ui\//,
       ]
     },
   }
