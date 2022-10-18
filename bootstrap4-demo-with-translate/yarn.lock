@@ -2362,10 +2362,10 @@ ajv@^6.10.0, ajv@^6.12.4, ajv@^6.12.5:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-angular-slickgrid@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-5.0.0.tgz#9c23d0137a993a2d2bd6747186b580b05bb10a16"
-  integrity sha512-4t+Y3wJ8E8Gj/4vSwGuAfe1UemLMI2u1hT29Zwg4LpCBM7+hr3lcWwmairyLBI9mHnQ51zXf+yin3msBGVwAwg==
+angular-slickgrid@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-5.0.1.tgz#74fd59e6bf5fb17e9060be79db2f5350af261a57"
+  integrity sha512-9Xixkk+f488pUgCh4dwLwR/k1mjqGbB4MwpSZ9yGRpZin07hCDvUlKBGu+Ln1TeZnEI7fH4Nps7HaJacxfYlSQ==
   dependencies:
     "@slickgrid-universal/common" "2.0.0"
     "@slickgrid-universal/custom-footer-component" "2.0.0"

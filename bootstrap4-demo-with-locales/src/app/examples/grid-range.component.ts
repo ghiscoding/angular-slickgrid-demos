@@ -87,7 +87,7 @@ export class GridRangeComponent implements OnInit {
         filter: {
           model: Filters.slider,
           maxValue: 100, // or you can use the filterOptions as well
-          operator: OperatorType.rangeInclusive, // defaults to inclusive
+          operator: OperatorType.greaterThanOrEqual,
           params: { hideSliderNumbers: false }, // you can hide/show the slider numbers on both side
           filterOptions: { min: 0, step: 5 }
         }
@@ -148,7 +148,7 @@ export class GridRangeComponent implements OnInit {
 
           // or you could also use 2 searchTerms values, instead of using the 2 dots (only works with SliderRange & DateRange Filters)
           // BUT make sure to provide the operator, else the filter service won't know that this is really a range
-          { columnId: 'percentComplete', operator: 'RangeInclusive', searchTerms: [5, 80] }, // same result with searchTerms: ['5..80']
+          // { columnId: 'percentComplete', operator: 'RangeInclusive', searchTerms: [5, 80] }, // same result with searchTerms: ['5..80']
           { columnId: 'finish', operator: 'RangeInclusive', searchTerms: [presetLowestDay, presetHighestDay] },
         ],
         sorters: [
