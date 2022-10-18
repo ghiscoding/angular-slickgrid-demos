@@ -12,6 +12,7 @@ import {
   Editors,
   FieldType,
   Filters,
+  FlatpickrOption,
   formatNumber,
   Formatter,
   Formatters,
@@ -242,7 +243,17 @@ export class GridCompositeEditorComponent implements OnInit {
         exportCustomFormatter: Formatters.dateUs,
         editor: {
           model: Editors.date,
-          editorOptions: { minDate: 'today' },
+          editorOptions: {
+            minDate: 'today',
+
+            // if we want to preload the date picker with a different date,
+            // we could toggle the `closeOnSelect: false`, set the date in the picker and re-toggle `closeOnSelect: true`
+            // closeOnSelect: false,
+            // onOpen: (selectedDates: Date[] | Date, dateStr: string, instance: FlatpickrInstance) => {
+            //   instance.setDate('2021-06-04', true);
+            //   instance.set('closeOnSelect', true);
+            // },
+          } as FlatpickrOption,
           massUpdate: true,
           validator: (value, args) => {
             const dataContext = args && args.item;
@@ -272,10 +283,9 @@ export class GridCompositeEditorComponent implements OnInit {
           // example with a Remote API call
           editorOptions: {
             minLength: 1,
-            fetch: (searchText: string, updateCallback: (items: false | any[]) => void) => {
-              // const items = require('c://TEMP/items.json');
+            fetch: (searchTerm: string, callback: (items: false | any[]) => void) => {
               const products = this.mockProducts();
-              updateCallback(products.filter(product => product.itemName.toLowerCase().includes(searchText.toLowerCase())));
+              callback(products.filter(product => product.itemName.toLowerCase().includes(searchTerm.toLowerCase())));
             },
             renderItem: {
               // layout: 'twoRows',
@@ -309,6 +319,7 @@ export class GridCompositeEditorComponent implements OnInit {
           massUpdate: true,
           customStructure: { label: 'name', value: 'code' },
           collectionAsync: this.http.get(URL_COUNTRIES_COLLECTION),
+          editorOptions: { minLength: 0 }
         },
         filter: {
           model: Filters.inputText,
@@ -920,7 +931,7 @@ export class GridCompositeEditorComponent implements OnInit {
       </div>
       <div>
         <span class="autocomplete-top-left">
-          <span class="mdi ${item.itemTypeName === 'I' ? 'fa-info-circle' : 'fa-copy'}"></span>
+          <span class="fa ${item.itemTypeName === 'I' ? 'fa-info-circle' : 'fa-copy'}"></span>
           ${item.itemName}
         </span>
       <div>

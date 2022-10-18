@@ -22,13 +22,13 @@
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
     "@ng-select/ng-select": "^9.0.2",
-    "@slickgrid-universal/composite-editor-component": "2.0.0-alpha.0",
-    "@slickgrid-universal/custom-tooltip-plugin": "2.0.0-alpha.0",
-    "@slickgrid-universal/excel-export": "2.0.0-alpha.0",
-    "@slickgrid-universal/graphql": "2.0.0-alpha.0",
-    "@slickgrid-universal/odata": "2.0.0-alpha.0",
-    "@slickgrid-universal/text-export": "2.0.0-alpha.0",
-    "angular-slickgrid": "^5.0.0-alpha.0",
+    "@slickgrid-universal/composite-editor-component": "2.0.0",
+    "@slickgrid-universal/custom-tooltip-plugin": "2.0.0",
+    "@slickgrid-universal/excel-export": "2.0.0",
+    "@slickgrid-universal/graphql": "2.0.0",
+    "@slickgrid-universal/odata": "2.0.0",
+    "@slickgrid-universal/text-export": "2.0.0",
+    "angular-slickgrid": "^5.0.0",
     "bootstrap": "^4.6.2",
     "custom-event-polyfill": "^1.0.7",
     "font-awesome": "^4.7.0",
@@ -77,6 +77,6 @@
     "typescript": "~4.7.4"
   },
   "resolutions": {
-    "caniuse-lite": "1.0.30001397"
+    "caniuse-lite": "1.0.30001419"
   }
 }
