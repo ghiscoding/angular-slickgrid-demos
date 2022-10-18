@@ -222,9 +222,6 @@ export class GridDraggableGroupingComponent implements OnInit {
       // you could debounce/throttle the input text filter if you have lots of data
       // filterTypingDebounce: 250,
       enableSorting: true,
-      exportOptions: {
-        sanitizeDataExport: true
-      },
       gridMenu: {
         onCommand: (e, args) => {
           if (args.command === 'toggle-preheader') {

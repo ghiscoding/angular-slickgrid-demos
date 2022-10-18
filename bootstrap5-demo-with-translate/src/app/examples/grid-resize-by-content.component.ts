@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleteOption, EditCommand, formatNumber, SortComparers, SlickGrid, SlickNamespace } from 'angular-slickgrid';
+import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleterOption, EditCommand, formatNumber, SortComparers, SlickGrid, SlickNamespace } from 'angular-slickgrid';
 
 const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
 declare const Slick: SlickNamespace;
@@ -206,16 +206,16 @@ export class GridResizeByContentComponent implements OnInit {
         type: FieldType.object,
         sortComparer: SortComparers.objectString,
         editor: {
-          model: Editors.autoComplete,
+          model: Editors.autocompleter,
           alwaysSaveOnEnterKey: true,
 
           // example with a Remote API call
           editorOptions: {
             minLength: 1,
-            source: (request, response) => {
+            fetch: (searchText: string, updateCallback: (items: false | any[]) => void) => {
               // const items = require('c://TEMP/items.json');
               const products = this.mockProducts();
-              response(products.filter(product => product.itemName.toLowerCase().includes(request.term.toLowerCase())));
+              updateCallback(products.filter(product => product.itemName.toLowerCase().includes(searchText.toLowerCase())));
             },
             renderItem: {
               // layout: 'twoRows',
@@ -224,11 +224,11 @@ export class GridResizeByContentComponent implements OnInit {
               layout: 'fourCorners',
               templateCallback: (item: any) => this.renderItemCallbackWith4Corners(item),
             },
-          } as AutocompleteOption,
+          } as AutocompleterOption,
         },
         filter: {
           model: Filters.inputText,
-          // placeholder: '🔎︎ search city',
+          // placeholder: '🔎︎ search product',
           type: FieldType.string,
           queryField: 'product.itemName',
         }
@@ -245,7 +245,7 @@ export class GridResizeByContentComponent implements OnInit {
         sortable: true,
         minWidth: 100,
         editor: {
-          model: Editors.autoComplete,
+          model: Editors.autocompleter,
           customStructure: { label: 'name', value: 'code' },
           collectionAsync: this.http.get(URL_COUNTRIES_COLLECTION),
         },
@@ -349,7 +349,7 @@ export class GridResizeByContentComponent implements OnInit {
           const prevSerializedValue = prevSerializedValues[index];
           const serializedValue = serializedValues[index];
 
-          if (prevSerializedValue !== serializedValue) {
+          if (prevSerializedValue !== serializedValue || serializedValue === '') {
             const finalColumn = Array.isArray(editCommand.prevSerializedValue) ? editorColumns[index] : column;
             this.editedItems[this.gridOptions.datasetIdPropertyName || 'id'] = item; // keep items by their row indexes, if the row got edited twice then we'll keep only the last change
             this.angularGrid.slickGrid.invalidate();
@@ -747,7 +747,7 @@ export class GridResizeByContentComponent implements OnInit {
       </div>
       <div>
         <span class="autocomplete-top-left">
-          <span class="mdfai ${item.itemTypeName === 'I' ? 'fa-info-circle' : 'fa-copy'}"></span>
+          <span class="fa ${item.itemTypeName === 'I' ? 'fa-info-circle' : 'fa-copy'}"></span>
           ${item.itemName}
         </span>
       <div>

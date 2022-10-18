@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   AngularGridInstance,
   AngularUtilService,
-  BsDropDownService,
   Column,
   Editors,
   FieldType,
@@ -69,7 +68,7 @@ export class GridAngularComponent implements OnInit {
     { id: '3', name: 'Paul' },
   ];
 
-  constructor(private angularUtilService: AngularUtilService, private bsDropdown: BsDropDownService) { }
+  constructor(private angularUtilService: AngularUtilService) { }
 
   ngOnInit(): void {
     this.prepareGrid();

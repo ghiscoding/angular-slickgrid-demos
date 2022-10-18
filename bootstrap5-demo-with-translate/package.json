@@ -24,20 +24,20 @@
     "@ng-select/ng-select": "^9.0.2",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
-    "@slickgrid-universal/composite-editor-component": "^1.4.0",
-    "@slickgrid-universal/custom-tooltip-plugin": "^1.4.0",
-    "@slickgrid-universal/excel-export": "^1.4.0",
-    "@slickgrid-universal/graphql": "^1.4.0",
-    "@slickgrid-universal/odata": "^1.4.0",
-    "@slickgrid-universal/text-export": "^1.4.0",
-    "angular-slickgrid": "^4.3.1",
+    "@slickgrid-universal/composite-editor-component": "2.0.0",
+    "@slickgrid-universal/custom-tooltip-plugin": "2.0.0",
+    "@slickgrid-universal/excel-export": "2.0.0",
+    "@slickgrid-universal/graphql": "2.0.0",
+    "@slickgrid-universal/odata": "2.0.0",
+    "@slickgrid-universal/text-export": "2.0.0",
+    "angular-slickgrid": "^5.0.0",
     "bootstrap": "^5.2.0",
     "custom-event-polyfill": "^1.0.7",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "moment-mini": "^2.24.0",
     "ngx-bootstrap": "^9.0.0",
-    "rxjs": "^7.5.6",
+    "rxjs": "^7.5.7",
     "stream-browserify": "^3.0.0",
     "text-encoding-utf-8": "^1.0.2",
     "tslib": "^2.4.0",
@@ -78,6 +78,6 @@
     "typescript": "~4.7.4"
   },
   "resolutions": {
-    "caniuse-lite": "1.0.30001397"
+    "caniuse-lite": "1.0.30001419"
   }
 }
