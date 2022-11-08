@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularGridInstance, Column, ExtensionName, Filters, Formatters, GridOption } from 'angular-slickgrid';
+
+import { AngularGridInstance, Column, ExtensionName, Filters, Formatters, GridOption, OnEventArgs } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './grid-rowmove.component.html'
@@ -32,7 +33,7 @@ export class GridRowMoveComponent implements OnInit {
   }
 
   get rowMoveInstance() {
-    return this.angularGrid?.extensionService?.getExtensionInstanceByName(ExtensionName.rowMoveManager);
+    return this.angularGrid?.extensionService?.getExtensionInstanceByName(ExtensionName.rowMoveManager) ?? {};
   }
 
   ngOnInit(): void {
@@ -218,6 +219,43 @@ export class GridRowMoveComponent implements OnInit {
 
   disableSorting() {
     this.angularGrid.sortService.disableSortFunctionality(true);
+  }
+
+  addEditDeleteColumns() {
+    if (this.columnDefinitions[0].id !== 'change-symbol') {
+      const newCols = [
+        {
+          id: 'change-symbol',
+          field: 'id',
+          excludeFromColumnPicker: true,
+          excludeFromGridMenu: true,
+          excludeFromHeaderMenu: true,
+          formatter: Formatters.editIcon,
+          minWidth: 30,
+          maxWidth: 30,
+          onCellClick: (clickEvent: Event, args: OnEventArgs) => {
+            alert(`Technically we should Edit "Task ${args.dataContext.id}"`);
+          }
+        }, {
+          id: 'delete-symbol',
+          field: 'id',
+          excludeFromColumnPicker: true,
+          excludeFromGridMenu: true,
+          excludeFromHeaderMenu: true,
+          formatter: Formatters.deleteIcon,
+          minWidth: 30,
+          maxWidth: 30,
+          onCellClick: (e: Event, args: OnEventArgs) => {
+            if (confirm('Are you sure?')) {
+              this.angularGrid.gridService.deleteItemById(args.dataContext.id);
+            }
+          }
+        }
+      ];
+
+      this.columnDefinitions.splice(0, 0, newCols[0], newCols[1]);
+      this.columnDefinitions = this.columnDefinitions.slice(); // or use spread operator [...cols] to trigger change
+    }
   }
 
   // or Toggle Filtering/Sorting functionalities
