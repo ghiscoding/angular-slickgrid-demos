@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { CustomInputFilter } from './custom-inputFilter';
 import {
   AngularGridInstance,
@@ -13,6 +15,7 @@ import {
   MultipleSelectOption,
   OperatorType,
   SlickGrid,
+  SliderRangeOption,
 } from 'angular-slickgrid';
 import * as moment from 'moment-mini';
 
@@ -81,15 +84,18 @@ export class GridRangeComponent implements OnInit {
       {
         id: 'percentComplete', name: '% Complete', field: 'percentComplete', nameKey: 'PERCENT_COMPLETE', minWidth: 120,
         sortable: true,
+        customTooltip: { position: 'center' },
         formatter: Formatters.progressBar,
         type: FieldType.number,
         filterable: true,
         filter: {
-          model: Filters.slider,
+          model: Filters.sliderRange,
           maxValue: 100, // or you can use the filterOptions as well
-          operator: OperatorType.greaterThanOrEqual,
-          params: { hideSliderNumbers: false }, // you can hide/show the slider numbers on both side
-          filterOptions: { min: 0, step: 5 }
+          operator: OperatorType.rangeInclusive, // defaults to inclusive
+          filterOptions: {
+            hideSliderNumbers: false, // you can hide/show the slider numbers on both side
+            min: 0, step: 5
+          } as SliderRangeOption
         }
       },
       {
@@ -148,14 +154,15 @@ export class GridRangeComponent implements OnInit {
 
           // or you could also use 2 searchTerms values, instead of using the 2 dots (only works with SliderRange & DateRange Filters)
           // BUT make sure to provide the operator, else the filter service won't know that this is really a range
-          // { columnId: 'percentComplete', operator: 'RangeInclusive', searchTerms: [5, 80] }, // same result with searchTerms: ['5..80']
+          { columnId: 'percentComplete', operator: 'RangeInclusive', searchTerms: [5, 80] }, // same result with searchTerms: ['5..80']
           { columnId: 'finish', operator: 'RangeInclusive', searchTerms: [presetLowestDay, presetHighestDay] },
         ],
         sorters: [
           { columnId: 'percentComplete', direction: 'DESC' },
           { columnId: 'duration', direction: 'ASC' },
         ],
-      }
+      },
+      registerExternalResources: [new SlickCustomTooltip(), new ExcelExportService()],
     };
 
     // mock a dataset
