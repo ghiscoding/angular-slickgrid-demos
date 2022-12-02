@@ -34,7 +34,7 @@
                      [dataset]="dataset"
                      [customDataView]="customDataView"
                      (onAngularGridCreated)="angularGridReady($event.detail)"
-                     (onViewportChanged)="onViewportChanged($event.detail.eventData, $event.detail.args)"
+                     (onViewportChanged)="onViewportChanged()"
                      (onSort)="onSort($event.detail.eventData, $event.detail.args)">
   </angular-slickgrid>
 </div>
