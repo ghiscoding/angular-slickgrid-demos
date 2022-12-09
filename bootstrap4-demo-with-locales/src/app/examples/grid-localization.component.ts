@@ -31,9 +31,9 @@ export class GridLocalizationComponent implements OnInit {
   title = 'Example 12: Localization with Locales - French Locale displayed';
   subTitle = `This Examples uses French Locales but you could use your own custom locales
     <ul>
-      <li>Defining your own Custom Locales must include all necessary text, see the default (<a href="https://github.com/slickclub/angular-slickgrid-demos/blob/master/bootstrap4-demo-with-locales/src/app/locales/en.ts" target="_blank">English Custom Locales</a>)</li>
-      <li>Support Custom Locales (through the "locales" grid option), following these steps (<a href="https://github.com/slickclub/Angular-Slickgrid/wiki/Localization-with-Custom-Locales" target="_blank">Wiki docs</a>)
-      <li>For more info about "Download to File", read the <a href="https://github.com/slickclub/Angular-Slickgrid/wiki/Export-to-File" target="_blank">Wiki page</a></li>
+      <li>Defining your own Custom Locales must include all necessary text, see the default (<a href="https://github.com/slickgrid-stellar/angular-slickgrid-demos/blob/master/bootstrap4-demo-with-locales/src/app/locales/en.ts" target="_blank">English Custom Locales</a>)</li>
+      <li>Support Custom Locales (through the "locales" grid option), following these steps (<a href="https://github.com/slickgrid-stellar/Angular-Slickgrid/wiki/Localization-with-Custom-Locales" target="_blank">Wiki docs</a>)
+      <li>For more info about "Download to File", read the <a href="https://github.com/slickgrid-stellar/Angular-Slickgrid/wiki/Export-to-File" target="_blank">Wiki page</a></li>
     </ul>
   `;
 
