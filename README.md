@@ -1,7 +1,7 @@
 # Angular-Slickgrid Demos
-## Multiple Demos of the [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid) library
+## Multiple Demos of the [Angular-Slickgrid](https://github.com/slickclub/Angular-Slickgrid) library
 #### Previous Version 2.x Reference
-In case you need to refer to the previous 2.x demo code, a tag was created before releasing the new `major 3.x` version, so here's the [2.30.2 tag](https://github.com/ghiscoding/angular-slickgrid-demos/tree/v2.30.2) link.
+In case you need to refer to the previous 2.x demo code, a tag was created before releasing the new `major 3.x` version, so here's the [2.30.2 tag](https://github.com/slickclub/angular-slickgrid-demos/tree/v2.30.2) link.
 
 ### Installation
 Choose the theme and feature you want, they are separated into 2 theme (Bootstrap 4 or 5) and there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other demos are all with `ngx-translate` (dynamically switch language on the fly).
@@ -11,21 +11,21 @@ If you use Visual Studio Code, you can also run each of the demo through the mul
 
 ## Important Note
 ### Angular-Slickgrid & Slickgrid-Universal compatibility
-For a full compatibility table of Angular-Slickgrid with Slickgrid-Universal, you can consult the [Versions Compatibility Table - Wiki](https://github.com/ghiscoding/Angular-Slickgrid/wiki/Versions-Compatibility-Table)
+For a full compatibility table of Angular-Slickgrid with Slickgrid-Universal, you can consult the [Versions Compatibility Table - Wiki](https://github.com/slickclub/Angular-Slickgrid/wiki/Versions-Compatibility-Table)
 
 ### Optional NPM Packages
-Please note that some of the npm packages installed in these demos are **optional** and are installed **only** for demo purposes. If you don't need the feature then don't install it (remove it from your `package.json`) and you'll end up with a smaller production build. 
+Please note that some of the npm packages installed in these demos are **optional** and are installed **only** for demo purposes. If you don't need the feature then don't install it (remove it from your `package.json`) and you'll end up with a smaller production build.
 
 Again the following dependencies are totally **OPTIONAL**
 
 | Package Name | Version | Description |
 | ------------ | ------- | ----------- |
-| [@slickgrid-universal/composite-editor-component](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/composite-editor-component) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/composite-editor-component.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/composite-editor-component) | Composite Editor Modal Component | 
-| [@slickgrid-universal/custom-tooltip-plugin](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/custom-tooltip-plugin) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/custom-tooltip-plugin.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/custom-tooltip-plugin) | Custom Tooltip Plugin | 
-| [@slickgrid-universal/excel-export](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/excel-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/excel-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/excel-export) | Export to Excel Service (xls/xlsx) | 
-| [@slickgrid-universal/text-export](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/text-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/text-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/text-export) | Export to Text File Service (csv/txt) |
-| [@slickgrid-universal/graphql](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/graphql) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/graphql.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/graphql) | GraphQL Query Service (support Filter/Sort/Pagination) |
-| [@slickgrid-universal/odata](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/odata) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/odata.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/odata) | OData Query Service (support Filter/Sort/Pagination) |
+| [@slickgrid-universal/composite-editor-component](https://github.com/slickclub/slickgrid-universal/tree/master/packages/composite-editor-component) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/composite-editor-component.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/composite-editor-component) | Composite Editor Modal Component |
+| [@slickgrid-universal/custom-tooltip-plugin](https://github.com/slickclub/slickgrid-universal/tree/master/packages/custom-tooltip-plugin) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/custom-tooltip-plugin.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/custom-tooltip-plugin) | Custom Tooltip Plugin |
+| [@slickgrid-universal/excel-export](https://github.com/slickclub/slickgrid-universal/tree/master/packages/excel-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/excel-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/excel-export) | Export to Excel Service (xls/xlsx) |
+| [@slickgrid-universal/text-export](https://github.com/slickclub/slickgrid-universal/tree/master/packages/text-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/text-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/text-export) | Export to Text File Service (csv/txt) |
+| [@slickgrid-universal/graphql](https://github.com/slickclub/slickgrid-universal/tree/master/packages/graphql) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/graphql.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/graphql) | GraphQL Query Service (support Filter/Sort/Pagination) |
+| [@slickgrid-universal/odata](https://github.com/slickclub/slickgrid-universal/tree/master/packages/odata) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/odata.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/odata) | OData Query Service (support Filter/Sort/Pagination) |
 
 ---
 
@@ -34,7 +34,7 @@ This is the same as the Bootstrap 4 demo except that it uses custom Locale(s) an
 
 ##### Install and Start Demo
 ```bash
-git clone https://github.com/ghiscoding/angular-slickgrid-demos
+git clone https://github.com/slickclub/angular-slickgrid-demos
 cd bootstrap4-demo-with-locales
 npm install # OR yarn install
 npm start # OR yarn start
@@ -50,7 +50,7 @@ Common Bootstrap 4 demo using `ngx-translate` to provide the use of multiple lan
 
 ##### Install and Start Demo
 ```bash
-git clone https://github.com/ghiscoding/angular-slickgrid-demos
+git clone https://github.com/slickclub/angular-slickgrid-demos
 cd bootstrap4-demo-with-translate
 npm install # OR yarn install
 npm start # OR yarn start
@@ -66,7 +66,7 @@ Common Bootstrap 5 demo using `ngx-translate` to provide the use of multiple lan
 
 ##### Install and Start Demo
 ```bash
-git clone https://github.com/ghiscoding/angular-slickgrid-demos
+git clone https://github.com/slickclub/angular-slickgrid-demos
 cd bootstrap5-demo-with-translate
 npm install # OR yarn install
 npm start # OR yarn start
