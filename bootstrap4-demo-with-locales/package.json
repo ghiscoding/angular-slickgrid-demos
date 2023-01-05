@@ -13,14 +13,14 @@
   },
   "private": false,
   "dependencies": {
-    "@angular/animations": "^14.1.0",
-    "@angular/common": "^14.1.0",
-    "@angular/compiler": "^14.1.0",
-    "@angular/core": "^14.1.0",
-    "@angular/forms": "^14.1.0",
-    "@angular/platform-browser": "^14.1.0",
-    "@angular/platform-browser-dynamic": "^14.1.0",
-    "@angular/router": "^14.1.0",
+    "@angular/animations": "^15.0.4",
+    "@angular/common": "^15.0.4",
+    "@angular/compiler": "^15.0.4",
+    "@angular/core": "^15.0.4",
+    "@angular/forms": "^15.0.4",
+    "@angular/platform-browser": "^15.0.4",
+    "@angular/platform-browser-dynamic": "^15.0.4",
+    "@angular/router": "^15.0.4",
     "@ng-select/ng-select": "^9.0.2",
     "@slickgrid-universal/composite-editor-component": "^2.2.2",
     "@slickgrid-universal/custom-tooltip-plugin": "^2.2.2",
@@ -42,15 +42,15 @@
     "zone.js": "~0.11.7"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.1.0",
+    "@angular-devkit/build-angular": "^15.0.4",
     "@angular-eslint/builder": "^14.0.2",
     "@angular-eslint/eslint-plugin": "^14.0.2",
     "@angular-eslint/eslint-plugin-template": "^14.0.2",
     "@angular-eslint/schematics": "^14.0.2",
     "@angular-eslint/template-parser": "^14.0.2",
-    "@angular/cli": "^14.1.0",
-    "@angular/compiler-cli": "^14.1.0",
-    "@angular/language-service": "^14.1.0",
+    "@angular/cli": "^15.0.4",
+    "@angular/compiler-cli": "^15.0.4",
+    "@angular/language-service": "^15.0.4",
     "@fnando/sparkline": "^0.3.10",
     "@ngx-translate/core": "^14.0.0",
     "@types/dompurify": "^2.3.3",
@@ -74,7 +74,7 @@
     "npm-run-all2": "^6.0.1",
     "sass": "^1.54.0",
     "ts-node": "^10.9.1",
-    "typescript": "~4.7.4"
+    "typescript": "~4.8.4"
   },
   "resolutions": {
     "caniuse-lite": "1.0.30001419"
