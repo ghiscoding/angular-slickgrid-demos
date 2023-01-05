@@ -79,7 +79,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "150kb"
+                  "maximumWarning": "300kb"
                 }
               ],
               "outputHashing": "all",
