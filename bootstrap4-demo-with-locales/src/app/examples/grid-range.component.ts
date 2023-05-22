@@ -127,7 +127,7 @@ export class GridRangeComponent implements OnInit {
         filter: {
           collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
           model: Filters.singleSelect,
-          filterOptions: { autoDropWidth: true } as MultipleSelectOption
+          filterOptions: { autoAdjustDropHeight: true } as MultipleSelectOption
         }
       }
     ];

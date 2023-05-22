@@ -109,6 +109,6 @@ export class GridTabsComponent implements OnInit {
   }
 
   resizeGrid2() {
-    this.angularGrid2.resizerService.resizeGrid();
+    this.angularGrid2.resizerService.resizeGrid(10);
   }
 }
