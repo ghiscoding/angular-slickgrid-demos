@@ -23,6 +23,7 @@
               "dompurify",
               "excel-builder-webpacker",
               "flatpickr",
+              "jquery",
               "moment-mini",
               "sparkline",
               "stream"
@@ -59,6 +60,7 @@
               "src/slickgrid-styles.scss"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/sortablejs/Sortable.min.js"
             ],
@@ -151,6 +153,7 @@
               "src/slickgrid-styles.scss"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/sortablejs/Sortable.min.js"
             ],
