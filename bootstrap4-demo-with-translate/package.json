@@ -58,6 +58,7 @@
     "@types/fnando__sparkline": "^0.3.4",
     "@types/jasmine": "~4.0.3",
     "@types/jasminewd2": "~2.0.10",
+    "@types/jquery": "^3.5.16",
     "@types/node": "^18.16.13",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
