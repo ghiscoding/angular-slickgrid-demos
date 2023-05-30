@@ -167,7 +167,7 @@ export class GridClientSideComponent implements OnInit {
           model: Filters.singleSelect,
 
           // we could add certain option(s) to the "multiple-select" plugin
-          filterOptions: { autoDropWidth: true } as MultipleSelectOption,
+          filterOptions: { autoAdjustDropHeight: true } as MultipleSelectOption,
         }
       }
     ];

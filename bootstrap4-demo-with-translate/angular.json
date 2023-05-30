@@ -55,7 +55,6 @@
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/flatpickr/dist/flatpickr.css",
-              "node_modules/multiple-select-modified/src/multiple-select.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/styles.scss",
               "src/slickgrid-styles.scss"
@@ -63,7 +62,6 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/multiple-select-modified/src/multiple-select.js",
               "node_modules/sortablejs/Sortable.min.js"
             ],
             "vendorChunk": true,
@@ -150,7 +148,6 @@
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/flatpickr/dist/flatpickr.css",
-              "node_modules/multiple-select-modified/src/multiple-select.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/styles.scss",
               "src/slickgrid-styles.scss"
@@ -158,7 +155,6 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/multiple-select-modified/src/multiple-select.js",
               "node_modules/sortablejs/Sortable.min.js"
             ],
             "assets": [

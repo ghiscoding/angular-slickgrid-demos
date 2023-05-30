@@ -1,15 +1,14 @@
 import {
   AfterViewInit,
   Component,
-  ComponentFactoryResolver,
   OnInit,
   ViewChild,
-  ViewContainerRef,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { SwtCommonGridComponent } from './swt-common-grid.component';
 import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
+import { FilterChangedArgs, PaginationChangedArgs } from 'angular-slickgrid';
 
 import { Logger } from './swt-logger.service';
 /**
@@ -24,7 +23,6 @@ import { Logger } from './swt-logger.service';
 export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
   title = 'Example 13: Custom Backend Server Pagination';
   subTitle = `A simple component to show that it is possible to create a custom Backend Service for any other backend querying, the example below is for Oracle.`;
-  componentFactory: any;
   testurl = 'http://127.0.0.1:8080/grid!display.do?';
   currentUrl = this.testurl;
 
@@ -33,11 +31,8 @@ export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
 
   private logger: Logger;
 
-  constructor(private httpClient: HttpClient,
-    private viewContainerRef: ViewContainerRef,
-    private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private httpClient: HttpClient) {
     this.logger = new Logger('test', undefined);
-
   }
 
   ngOnInit() {
@@ -76,17 +71,17 @@ export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
     this.logger.info('method [ngAfterViewInit] - END');
   }
 
-  filterChanged() {
+  filterChanged(event: FilterChangedArgs) {
     this.commonGridPag.processing = true;
     this.updateGridData();
   }
 
-  paginationChanged() {
+  paginationChanged(event: PaginationChangedArgs) {
     this.commonGridPag.processing = true;
     this.updateGridData();
   }
 
-  sortChanged() {
+  sortChanged(event: any) {
     this.commonGridPag.processing = true;
     this.updateGridData();
   }

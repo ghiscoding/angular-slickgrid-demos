@@ -37,7 +37,7 @@ export class GridMenuComponent implements OnInit {
         id: 'percentComplete', name: '% Complete', field: 'percentComplete', sortable: true, filterable: true,
         type: FieldType.number,
         formatter: Formatters.percentCompleteBar,
-        filter: { model: Filters.compoundSlider, params: { hideSliderNumber: false } }
+        filter: { model: Filters.compoundSlider, filterOptions: { hideSliderNumber: false } }
       },
       { id: 'start', name: 'Start', field: 'start', filterable: true, type: FieldType.string },
       { id: 'finish', name: 'Finish', field: 'finish', filterable: true, type: FieldType.string },

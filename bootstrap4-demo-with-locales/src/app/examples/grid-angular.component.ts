@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
 import {
   AngularGridInstance,
   AngularUtilService,
@@ -12,7 +14,6 @@ import {
   SlickNamespace,
 } from 'angular-slickgrid';
 import { EditorNgSelectComponent } from './editor-ng-select.component';
-import { CustomActionFormatterComponent } from './custom-actionFormatter.component';
 import { CustomAngularComponentEditor } from './custom-angularComponentEditor';
 import { CustomAngularComponentFilter } from './custom-angularComponentFilter';
 import { CustomTitleFormatterComponent } from './custom-titleFormatter.component';
@@ -20,14 +21,14 @@ import { FilterNgSelectComponent } from './filter-ng-select.component';
 
 // using external non-typed js libraries
 declare const Slick: SlickNamespace;
-declare const $: any;
 
 const NB_ITEMS = 100;
 
 @Component({
   templateUrl: './grid-angular.component.html',
   styleUrls: ['./grid-angular.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [AngularUtilService]
 })
 export class GridAngularComponent implements OnInit {
   title = 'Example 22: Use of Angular Components';
@@ -61,6 +62,7 @@ export class GridAngularComponent implements OnInit {
   isAutoEdit = true;
   alertWarning: any;
   updatedObject: any;
+  selectedLanguage = 'en';
   assignees = [
     { id: '', name: '' },
     { id: '1', name: 'John' },
@@ -68,7 +70,7 @@ export class GridAngularComponent implements OnInit {
     { id: '3', name: 'Paul' },
   ];
 
-  constructor(private angularUtilService: AngularUtilService) { }
+  constructor(private angularUtilService: AngularUtilService, private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.prepareGrid();
@@ -152,7 +154,7 @@ export class GridAngularComponent implements OnInit {
 
         // to load an Angular Component, you cannot use a Formatter since Angular needs at least 1 cycle to render everything
         // you can use a PostRenderer but you will visually see the data appearing,
-        // which is why it's still better to use regular Formatter (with jQuery if need be) instead of Angular Component
+        // which is why it's still better to use regular Formatter instead of Angular Component
         asyncPostRender: this.renderAngularComponent.bind(this),
         params: {
           component: CustomTitleFormatterComponent,
@@ -186,7 +188,7 @@ export class GridAngularComponent implements OnInit {
         filter: {
           model: Filters.slider,
           operator: '>=',
-          params: { hideSliderNumber: false }
+          filterOptions: { hideSliderNumber: false }
         },
         params: {
           formatters: [Formatters.collectionEditor, Formatters.percentCompleteBar],
@@ -224,6 +226,7 @@ export class GridAngularComponent implements OnInit {
         id: 'action',
         name: 'Action',
         field: 'id',
+        maxWidth: 100,
         formatter: () => `<div class="cell-menu-dropdown">Action<i class="fa fa-caret-down"></i></div>`,
         cellMenu: {
           commandTitle: 'Commands',
@@ -267,6 +270,7 @@ export class GridAngularComponent implements OnInit {
         this._commandQueue.push(editCommand);
         editCommand.execute();
       },
+      i18n: this.translate,
       params: {
         angularUtilService: this.angularUtilService // provide the service to all at once (Editor, Filter, AsyncPostRender)
       }
@@ -299,11 +303,11 @@ export class GridAngularComponent implements OnInit {
     return tempDataset;
   }
 
-  onCellChanged(_e: Event, args: any) {
+  onCellChanged(e: Event, args: any) {
     this.updatedObject = args.item;
   }
 
-  onCellClicked(_e: Event, args: any) {
+  onCellClicked(e: Event, args: any) {
     const metadata = this.angularGrid.gridService.getColumnFromEventArguments(args);
     console.log(metadata);
 
@@ -322,7 +326,7 @@ export class GridAngularComponent implements OnInit {
     }
   }
 
-  onCellValidationError(_e: Event, args: any) {
+  onCellValidationError(e: Event, args: any) {
     alert(args.validationResults.msg);
   }
 
@@ -354,7 +358,7 @@ export class GridAngularComponent implements OnInit {
       Object.assign(componentOutput.componentRef.instance, { item: dataContext });
 
       // use a delay to make sure Angular ran at least a full cycle and make sure it finished rendering the Component
-      setTimeout(() => $(cellNode).empty().html(componentOutput.domElement));
+      setTimeout(() => cellNode.innerHTML = componentOutput.domElement.innerHTML);
     }
   }
 

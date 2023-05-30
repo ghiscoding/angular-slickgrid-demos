@@ -78,9 +78,6 @@ export class GridLocalizationComponent implements OnInit {
         filter: {
           collection: [{ value: true, label: 'Vrai' }, { value: false, label: 'Faux' }],
           model: Filters.multipleSelect,
-          filterOptions: {
-            autoDropWidth: true
-          }
         }
       }
     ];
