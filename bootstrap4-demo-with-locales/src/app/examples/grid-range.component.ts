@@ -17,7 +17,7 @@ import {
   SlickGrid,
   SliderRangeOption,
 } from 'angular-slickgrid';
-import * as moment from 'moment-mini';
+import moment from 'moment-mini';
 
 const NB_ITEMS = 1500;
 
