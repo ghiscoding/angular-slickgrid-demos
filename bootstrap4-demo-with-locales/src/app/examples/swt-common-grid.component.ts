@@ -1,11 +1,13 @@
 import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {
+import { FieldType } from 'angular-slickgrid';
+import type {
   AngularGridInstance,
-  AngularSlickgridComponent, Column, FieldType,
+  AngularSlickgridComponent, Column,
   GridOption, BackendService,
-  BackendServiceOption, FilterChangedArgs, PaginationChangedArgs, Pagination, SlickGrid, SlickDataView
+  BackendServiceOption, FilterChangedArgs, PaginationChangedArgs, Pagination, SlickDataView
 } from 'angular-slickgrid';
+import { TranslateService } from '@ngx-translate/core';
 import { Logger } from './swt-logger.service';
 import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
 
@@ -143,7 +145,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
    * @param resizer
    * @param httpClient
    */
-  constructor(private httpClient: HttpClient,
+  constructor(private httpClient: HttpClient, private translate: TranslateService,
     private el: ElementRef, private renderer: Renderer2) {
     this.logger = new Logger('grid', httpClient);
 
