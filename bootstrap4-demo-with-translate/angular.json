@@ -22,10 +22,13 @@
               "autocompleter",
               "dompurify",
               "excel-builder-webpacker",
+              "fetch-jsonp",
               "flatpickr",
-              "jquery",
+              "jszip/dist/jszip.min.js",
+              "lodash",
               "moment-mini",
-              "sparkline",
+              "q",
+              "slickgrid",
               "stream"
             ],
             "assets": [
