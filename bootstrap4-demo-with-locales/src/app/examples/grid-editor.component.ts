@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import fetchJsonp from 'fetch-jsonp';
 
@@ -101,7 +100,7 @@ export class GridEditorComponent implements OnInit {
   selectedLanguage = 'en';
   duplicateTitleHeaderCount = 1;
 
-  constructor(private http: HttpClient, private translate: TranslateService) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.prepareGrid();
@@ -486,7 +485,6 @@ export class GridEditorComponent implements OnInit {
         this._commandQueue.push(editCommand);
         editCommand.execute();
       },
-      i18n: this.translate
     };
 
     this.dataset = this.mockData(NB_ITEMS);

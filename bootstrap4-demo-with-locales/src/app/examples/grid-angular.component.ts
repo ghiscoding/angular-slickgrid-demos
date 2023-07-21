@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 
 import {
   AngularGridInstance,
@@ -70,7 +69,7 @@ export class GridAngularComponent implements OnInit {
     { id: '3', name: 'Paul' },
   ];
 
-  constructor(private angularUtilService: AngularUtilService, private translate: TranslateService) { }
+  constructor(private angularUtilService: AngularUtilService) { }
 
   ngOnInit(): void {
     this.prepareGrid();
@@ -270,7 +269,6 @@ export class GridAngularComponent implements OnInit {
         this._commandQueue.push(editCommand);
         editCommand.execute();
       },
-      i18n: this.translate,
       params: {
         angularUtilService: this.angularUtilService // provide the service to all at once (Editor, Filter, AsyncPostRender)
       }
