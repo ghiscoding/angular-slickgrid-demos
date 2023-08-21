@@ -154,6 +154,7 @@ export class GridOdataComponent implements OnInit {
         ? { text: 'loading', class: 'alert alert-warning' }
         : { text: 'finished', class: 'alert alert-success' };
     }
+    this.cd.detectChanges();
   }
 
   getCustomerCallback(data: any) {
