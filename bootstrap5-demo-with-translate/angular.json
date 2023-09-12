@@ -18,7 +18,6 @@
             "polyfills": "./src/polyfills.ts",
             "allowedCommonJsDependencies": [
               "@fnando/sparkline",
-              "assign-deep",
               "autocompleter",
               "dompurify",
               "excel-builder-webpacker",
@@ -30,7 +29,7 @@
               "q",
               "slickgrid",
               "stream"
-            ],s
+            ],
             "assets": [
               "src/assets",
               "src/favicon.ico",
