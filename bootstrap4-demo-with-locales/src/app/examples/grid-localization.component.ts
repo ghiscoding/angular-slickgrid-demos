@@ -156,13 +156,13 @@ export class GridLocalizationComponent implements OnInit {
 
   // mock a dataset
   loadData(count: number) {
-    this.dataset = [];
+    const tmpData = [];
     for (let i = 0; i < count; i++) {
       const randomYear = 2000 + Math.floor(Math.random() * 30);
       const randomMonth = Math.floor(Math.random() * 11);
       const randomDay = Math.floor((Math.random() * 29));
 
-      this.dataset[i] = {
+      tmpData[i] = {
         id: i,
         description: (i % 5) ? 'desc ' + i : '🚀🦄 español', // also add some random to test NULL field
         duration: Math.round(Math.random() * 100) + '',
@@ -172,6 +172,7 @@ export class GridLocalizationComponent implements OnInit {
         completed: (i % 5 === 0) ? 'TRUE' : 'FALSE'
       };
     }
+    this.dataset = tmpData;
   }
 
   angularGridReady(angularGrid: AngularGridInstance) {
