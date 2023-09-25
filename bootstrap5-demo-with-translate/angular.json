@@ -9,13 +9,15 @@
       "projectType": "application",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser-esbuild",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "polyfills": "./src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "allowedCommonJsDependencies": [
               "@fnando/sparkline",
               "autocompleter",
