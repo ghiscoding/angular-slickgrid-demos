@@ -28,8 +28,6 @@ export class CustomAngularComponentFilter implements Filter {
   callback!: FilterCallback;
   operator: OperatorType | OperatorString = OperatorType.equal;
 
-  constructor() { }
-
   /** Angular Util Service (could be inside the Grid Options Params or the Filter Params ) */
   get angularUtilService(): AngularUtilService {
     let angularUtilService = this.gridOptions?.params?.angularUtilService;
@@ -64,8 +62,7 @@ export class CustomAngularComponentFilter implements Filter {
     this.searchTerms = (args.hasOwnProperty('searchTerms') ? args.searchTerms : []) || [];
 
     if (!this.columnFilter || !this.columnFilter.params.component || !(this.angularUtilService instanceof AngularUtilService)) {
-      throw new Error(`[Angular-Slickgrid] For Filter with Angular Component to work properly, you need to provide your component to the "component" property and make sure to add it to your "entryComponents" array.
-      You also need to provide the "AngularUtilService" via the Filter Params OR the Grid Options Params
+      throw new Error(`[Angular-Slickgrid] For Filter with Angular Component to work properly, you need to provide the "AngularUtilService" via the Filter "params" OR the Grid Options "params"
       Example: this.columnDefs = [{ id: 'title', field: 'title', filter: { model: CustomAngularComponentFilter, collection: [...], params: { component: MyComponent, angularUtilService: this.angularUtilService }}];
       OR this.columnDefs = [{ id: 'title', field: 'title', filter: { model: CustomAngularComponentFilter, collection: [...] }]; this.gridOptions = { params: { angularUtilService: this.angularUtilService }}`);
     }
@@ -73,26 +70,20 @@ export class CustomAngularComponentFilter implements Filter {
     if (this.columnFilter?.params.component) {
       // use a delay to make sure Angular ran at least a full cycle and it finished rendering the Component before hooking onto it
       // else we get the infamous error "ExpressionChangedAfterItHasBeenCheckedError"
-      setTimeout(() => {
-        const headerElm = this.grid.getHeaderRowColumn(this.columnDef.id);
-        if (headerElm) {
-          headerElm.innerHTML = '';
-          const componentOuput = this.angularUtilService.createAngularComponentAppendToDom(this.columnFilter.params.component, headerElm);
-          this.componentRef = componentOuput.componentRef;
+      const headerElm = this.grid.getHeaderRowColumn(this.columnDef.id);
+      if (headerElm) {
+        headerElm.innerHTML = '';
+        const componentOuput = this.angularUtilService.createAngularComponentAppendToDom(this.columnFilter.params.component, headerElm, { collection: this.collection });
+        this.componentRef = componentOuput.componentRef;
 
-          // here we override the collection object of the Angular Component
-          // but technically you can pass any values you wish to your Component
-          Object.assign(componentOuput.componentRef.instance, { collection: this.collection });
-
-          this._subscriptions.push(
-            componentOuput.componentRef.instance.onItemChanged.subscribe((item: any) => {
-              this.callback(undefined, { columnDef: this.columnDef, operator: this.operator, searchTerms: [item.id], shouldTriggerQuery: this._shouldTriggerQuery });
-              // reset flag for next use
-              this._shouldTriggerQuery = true;
-            })
-          );
-        }
-      });
+        this._subscriptions.push(
+          componentOuput.componentRef.instance.onItemChanged.subscribe((item: any) => {
+            this.callback(undefined, { columnDef: this.columnDef, operator: this.operator, searchTerms: [item.id], shouldTriggerQuery: this._shouldTriggerQuery });
+            // reset flag for next use
+            this._shouldTriggerQuery = true;
+          })
+        );
+      }
     }
   }
 
