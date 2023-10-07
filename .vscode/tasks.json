@@ -2,15 +2,6 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Start Bootstrap 4 Demo Page (with Custom Locales)",
-      "type": "shell",
-      "command": "yarn start",
-      "options": {
-        "cwd": "${workspaceFolder}/bootstrap4-demo-with-locales",
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "Start Bootstrap 4 Demo Page",
       "type": "shell",
       "command": "yarn start",
@@ -29,11 +20,11 @@
       "problemMatcher": []
     },
     {
-      "label": "Build Bootstrap 4 Demo Page (with Custom Locales)",
+      "label": "Start Bootstrap 5 Demo Page (with Custom Locales)",
       "type": "shell",
-      "command": "yarn build",
+      "command": "yarn start",
       "options": {
-        "cwd": "${workspaceFolder}/bootstrap4-demo-with-locales",
+        "cwd": "${workspaceFolder}/bootstrap5-demo-with-locales",
       },
       "problemMatcher": []
     },
@@ -52,6 +43,15 @@
       "command": "yarn build",
       "options": {
         "cwd": "${workspaceFolder}/bootstrap5-demo-with-translate",
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Bootstrap 5 Demo Page (with Custom Locales)",
+      "type": "shell",
+      "command": "yarn build",
+      "options": {
+        "cwd": "${workspaceFolder}/bootstrap5-demo-with-locales",
       },
       "problemMatcher": []
     }

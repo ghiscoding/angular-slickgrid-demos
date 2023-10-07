@@ -1,10 +1,8 @@
 # Angular-Slickgrid Demos
 ## Multiple Demos of the [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid) library
-#### Previous Version 2.x Reference
-In case you need to refer to the previous 2.x demo code, a tag was created before releasing the new `major 3.x` version, so here's the [2.30.2 tag](https://github.com/ghiscoding/angular-slickgrid-demos/tree/v2.30.2) link.
 
 ### Installation
-Choose the theme and feature you want, they are separated into 2 theme (Bootstrap 4 or 5) and there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other demos are all with `ngx-translate` (dynamically switch language on the fly).
+Choose the theme and feature you want, they are separated into 2 themes (Bootstrap 4 or 5) and there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other demos are all with `ngx-translate` (dynamically switch language on the fly).
 
 #### VScode
 If you use Visual Studio Code, you can also run each of the demo through the multiple VSCode Tasks.
@@ -29,22 +27,6 @@ Again the following dependencies are totally **OPTIONAL**
 
 ---
 
-## Bootstrap 4 - with Custom Locales (single locale)
-This is the same as the Bootstrap 4 demo except that it uses custom Locale(s) and does not require (neither use) `ngx-translate` and are with fixed Locale(s) (this means you cannot switch locale on the fly). The Locales that were added for the demo (English/French), can be found under [src/app/locales](/bootstrap4-demo-with-locales/src/app/locales). You can use, and define, your own custom Locales via a TypeScript file.
-
-##### Install and Start Demo
-```bash
-git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap4-demo-with-locales
-npm install # OR yarn install
-npm start # OR yarn start
-```
-
-##### Build Demo
-```bash
-npm run build # OR yarn run build
-```
-
 ## Bootstrap 4 - with `ngx-translate`
 Common Bootstrap 4 demo using `ngx-translate` to provide the use of multiple languages (locales) which can be switched dynamically (on the fly).
 
@@ -68,6 +50,22 @@ Common Bootstrap 5 demo using `ngx-translate` to provide the use of multiple lan
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
 cd bootstrap5-demo-with-translate
+npm install # OR yarn install
+npm start # OR yarn start
+```
+
+##### Build Demo
+```bash
+npm run build # OR yarn run build
+```
+
+## Bootstrap 5 - with Custom Locales (single locale)
+This is the same as the Bootstrap 5 demo except that it uses custom Locale(s) and does not require (neither use) `ngx-translate` and are with fixed Locale(s) (this means you cannot switch locale on the fly). The Locales that were added for the demo (English/French), can be found under [src/app/locales](/bootstrap5-demo-with-locales/src/app/locales). You can use, and define, your own custom Locales via a TypeScript file.
+
+##### Install and Start Demo
+```bash
+git clone https://github.com/ghiscoding/angular-slickgrid-demos
+cd bootstrap5-demo-with-locales
 npm install # OR yarn install
 npm start # OR yarn start
 ```
