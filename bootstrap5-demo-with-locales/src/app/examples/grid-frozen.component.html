@@ -1,7 +1,7 @@
 <div id="demo-container" class="container-fluid">
   <h2>
     {{title}}
-    <span class="float-right">
+    <span class="float-end">
       <a style="font-size: 18px"
          target="_blank"
          href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-frozen.component.ts">
@@ -11,31 +11,30 @@
   </h2>
   <div class="subtitle" [innerHTML]="subTitle"></div>
 
-  <br>
-
-  <div class="row mb-1">
-    <div class="col-sm-12">
-      <div class="form-inline">
-        <div class="form-group">
-          <label for="pinned-rows">Pinned Rows: </label>
-          <input id="pinned-rows" class="form-control mx-sm-1" type="number" [(ngModel)]="frozenRowCount">
-          <button class="btn btn-outline-secondary btn-sm" (click)="changeFrozenRowCount()">
-            Set
-          </button>
-        </div>
-        <div class="form-group ml-3">
-          <label for="pinned-columns">Pinned Columns: </label>
-          <input id="pinned-columns" class="form-control mx-sm-1" type="number" [(ngModel)]="frozenColumnCount">
-          <button class="btn btn-outline-secondary btn-sm" (click)="changeFrozenColumnCount()">
-            Set
-          </button>
-        </div>
-      </div>
+  <div class="row gx-2 mb-2 align-items-end">
+    <div class="col-2">
+      <label for="pinned-rows">Pinned Rows: </label>
+      <input id="pinned-rows" class="form-control form-control-sm" type="number" [(ngModel)]="frozenRowCount">
+    </div>
+    <div class="col-auto gr-2">
+      <button class="btn btn-outline-secondary btn-sm" (click)="changeFrozenRowCount()">
+        Set
+      </button>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-2">
+      <label for="pinned-columns">Pinned Columns: </label>
+      <input id="pinned-columns" class="form-control form-control-sm" type="number" [(ngModel)]="frozenColumnCount">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-outline-secondary btn-sm" (click)="changeFrozenColumnCount()">
+        Set
+      </button>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-12">
       <button class="btn btn-outline-secondary btn-sm" (click)="setFrozenColumns(-1)"
               data-test="remove-frozen-column-button">
         <i class="fa fa-times fa-lg"></i> Remove Frozen Columns

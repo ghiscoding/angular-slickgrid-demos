@@ -10,6 +10,7 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { CustomActionFormatterComponent } from './examples/custom-actionFormatter.component';
+import { CustomButtonFormatterComponent } from './examples/custom-buttonFormatter.component';
 import { CustomTitleFormatterComponent } from './examples/custom-titleFormatter.component';
 import { EditorNgSelectComponent } from './examples/editor-ng-select.component';
 import { FilterNgSelectComponent } from './examples/filter-ng-select.component';
@@ -84,83 +85,84 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
 
 // @dynamic
 @NgModule({
-    declarations: [
-        AppComponent,
-        CustomActionFormatterComponent,
-        CustomTitleFormatterComponent,
-        EditorNgSelectComponent,
-        FilterNgSelectComponent,
-        GridAddItemComponent,
-        GridAngularComponent,
-        GridAutoHeightComponent,
-        GridBasicComponent,
-        GridClientSideComponent,
-        GridColspanComponent,
-        GridCompositeEditorComponent,
-        GridContextMenuComponent,
-        GridCustomTooltipComponent,
-        GridEditorComponent,
-        GridDraggableGroupingComponent,
-        GridFormatterComponent,
-        GridFrozenComponent,
-        GridGraphqlComponent,
-        GridGraphqlWithoutPaginationComponent,
-        GridGroupingComponent,
-        GridHeaderButtonComponent,
-        GridHeaderMenuComponent,
-        GridLocalizationComponent,
-        GridMenuComponent,
-        GridOdataComponent,
-        GridRangeComponent,
-        GridRemoteComponent,
-        GridResizeByContentComponent,
-        GridRowDetailComponent,
-        GridRowMoveComponent,
-        GridRowSelectionComponent,
-        GridStateComponent,
-        GridTabsComponent,
-        GridTradingComponent,
-        GridTreeDataParentChildComponent,
-        GridTreeDataHierarchicalComponent,
-        RowDetailPreloadComponent,
-        RowDetailViewComponent,
-        SwtCommonGridTestComponent,
-        SwtCommonGridPaginationComponent,
-        SwtCommonGridComponent,
-        HomeComponent
-    ],
-    imports: [
-        AppRoutingRoutingModule,
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        NgSelectModule,
-        TabsModule.forRoot(),
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps: [HttpClient]
-            }
-        }),
-        AngularSlickgridModule.forRoot({
-            // add any Global Grid Options/Config you might want
-            // to avoid passing the same options over and over in each grids of your App
-            enableAutoResize: true,
-            autoResize: {
-                container: '#demo-container',
-                rightPadding: 10
-            }
-        })
-    ],
-    providers: [
-        {
-            provide: APP_INITIALIZER,
-            useFactory: appInitializerFactory,
-            deps: [TranslateService, Injector],
-            multi: true
-        }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    CustomActionFormatterComponent,
+    CustomButtonFormatterComponent,
+    CustomTitleFormatterComponent,
+    EditorNgSelectComponent,
+    FilterNgSelectComponent,
+    GridAddItemComponent,
+    GridAngularComponent,
+    GridAutoHeightComponent,
+    GridBasicComponent,
+    GridClientSideComponent,
+    GridColspanComponent,
+    GridCompositeEditorComponent,
+    GridContextMenuComponent,
+    GridCustomTooltipComponent,
+    GridEditorComponent,
+    GridDraggableGroupingComponent,
+    GridFormatterComponent,
+    GridFrozenComponent,
+    GridGraphqlComponent,
+    GridGraphqlWithoutPaginationComponent,
+    GridGroupingComponent,
+    GridHeaderButtonComponent,
+    GridHeaderMenuComponent,
+    GridLocalizationComponent,
+    GridMenuComponent,
+    GridOdataComponent,
+    GridRangeComponent,
+    GridRemoteComponent,
+    GridResizeByContentComponent,
+    GridRowDetailComponent,
+    GridRowMoveComponent,
+    GridRowSelectionComponent,
+    GridStateComponent,
+    GridTabsComponent,
+    GridTradingComponent,
+    GridTreeDataParentChildComponent,
+    GridTreeDataHierarchicalComponent,
+    RowDetailPreloadComponent,
+    RowDetailViewComponent,
+    SwtCommonGridTestComponent,
+    SwtCommonGridPaginationComponent,
+    SwtCommonGridComponent,
+    HomeComponent
+  ],
+  imports: [
+    AppRoutingRoutingModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    NgSelectModule,
+    TabsModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
+    AngularSlickgridModule.forRoot({
+      // add any Global Grid Options/Config you might want
+      // to avoid passing the same options over and over in each grids of your App
+      enableAutoResize: true,
+      autoResize: {
+        container: '#demo-container',
+        rightPadding: 10
+      }
+    })
+  ],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [TranslateService, Injector],
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

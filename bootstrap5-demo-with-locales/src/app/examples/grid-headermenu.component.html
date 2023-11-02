@@ -1,7 +1,7 @@
 <div id="demo-container" class="container-fluid">
   <h2>
     {{title}}
-    <span class="float-right">
+    <span class="float-end">
       <a style="font-size: 18px"
          target="_blank"
          href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-headermenu.component.ts">
@@ -13,10 +13,10 @@
 
   <div class="col-sm-12">
     <angular-slickgrid gridId="grid8"
+                       (onAngularGridCreated)="angularGridReady($event.detail)"
                        [columnDefinitions]="columnDefinitions"
                        [gridOptions]="gridOptions"
-                       [dataset]="dataset"
-                       (onAngularGridCreated)="angularGridReady($event.detail)">
+                       [dataset]="dataset">
     </angular-slickgrid>
   </div>
 </div>

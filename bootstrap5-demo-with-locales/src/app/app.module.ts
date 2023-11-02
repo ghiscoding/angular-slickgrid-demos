@@ -7,6 +7,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { CustomActionFormatterComponent } from './examples/custom-actionFormatter.component';
+import { CustomButtonFormatterComponent } from './examples/custom-buttonFormatter.component';
 import { CustomTitleFormatterComponent } from './examples/custom-titleFormatter.component';
 import { EditorNgSelectComponent } from './examples/editor-ng-select.component';
 import { FilterNgSelectComponent } from './examples/filter-ng-select.component';
@@ -62,6 +63,7 @@ import 'flatpickr/dist/l10n/fr';
     declarations: [
         AppComponent,
         CustomActionFormatterComponent,
+    CustomButtonFormatterComponent,
         CustomTitleFormatterComponent,
         EditorNgSelectComponent,
         FilterNgSelectComponent,
