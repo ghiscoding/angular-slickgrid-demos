@@ -19,16 +19,11 @@
               "zone.js"
             ],
             "allowedCommonJsDependencies": [
-              "@fnando/sparkline",
               "autocompleter",
               "dompurify",
               "excel-builder-webpacker",
               "fetch-jsonp",
               "flatpickr",
-              "jszip/dist/jszip.min.js",
-              "lodash",
-              "moment-mini",
-              "q",
               "slickgrid",
               "stream"
             ],
