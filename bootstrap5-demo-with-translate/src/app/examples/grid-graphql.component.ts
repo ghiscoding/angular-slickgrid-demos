@@ -22,6 +22,7 @@ import { Subscription } from 'rxjs';
 const defaultPageSize = 20;
 const GRAPHQL_QUERY_DATASET_NAME = 'users';
 const LOCAL_STORAGE_KEY = 'gridStateGraphql';
+const FAKE_SERVER_DELAY = 250;
 
 @Component({
   templateUrl: './grid-graphql.component.html'
@@ -54,6 +55,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   processing = true;
   status = { text: 'processing...', class: 'alert alert-danger' };
   selectedLanguage: string;
+  serverWaitDelay = FAKE_SERVER_DELAY; // server simulation with default of 250ms but 50ms for Cypress tests
 
   constructor(private readonly cd: ChangeDetectorRef, private translate: TranslateService) {
     // always start with English for Cypress E2E tests to be consistent
@@ -280,7 +282,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
           this.angularGrid?.paginationService?.setCursorPageInfo((mockedResult.data[GRAPHQL_QUERY_DATASET_NAME].pageInfo));
         }
         resolve(mockedResult);
-      }, 100);
+      }, this.serverWaitDelay);
     });
   }
 
@@ -364,9 +366,9 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   private resetOptions(options: Partial<GraphqlServiceOption>) {
     const graphqlService = this.gridOptions.backendServiceApi!.service as GraphqlService;
     this.angularGrid.paginationService!.setCursorBased(options.isWithCursor!);
-    this.angularGrid.paginationService?.goToFirstPage();
     graphqlService.updateOptions(options);
     this.gridOptions = { ...this.gridOptions };
+    this.angularGrid.paginationService?.goToFirstPage();
   }
 
   switchLanguage() {
