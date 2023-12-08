@@ -275,7 +275,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         // you can customize how the header titles will be styled (defaults to Bold)
         columnHeaderStyle: { font: { bold: true, italic: true } }
       },
-      registerExternalResources: [new ExcelExportService()],
+      externalResources: [new ExcelExportService()],
 
       enableContextMenu: true,
       enableCellMenu: true,

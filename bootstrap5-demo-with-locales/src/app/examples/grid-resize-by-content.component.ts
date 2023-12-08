@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
+
 import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleterOption, EditCommand, formatNumber, SortComparers, SlickGrid, SlickNamespace } from 'angular-slickgrid';
 
 const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
@@ -82,7 +83,7 @@ export class GridResizeByContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.defineGrid();
-    this.dataset = this.loadData(5000);
+    this.dataset = this.loadData(400);
   }
 
   // Grid2 definition
@@ -95,9 +96,8 @@ export class GridResizeByContentComponent implements OnInit {
         resizeCharWidthInPx: 7.6,
         resizeCalcWidthRatio: 1,
         resizeMaxWidthThreshold: 200,
-        filterable: true, columnGroup: 'Common Factor',
-        filter: { model: Filters.compoundInputText },
-        formatter: Formatters.multiple, params: { formatters: [Formatters.uppercase, Formatters.bold] },
+        cssClass: 'text-uppercase text-bold', columnGroup: 'Common Factor',
+        filterable: true, filter: { model: Filters.compoundInputText },
         editor: {
           model: Editors.longText, required: true, alwaysSaveOnEnterKey: true,
           maxLength: 12,
@@ -164,10 +164,10 @@ export class GridResizeByContentComponent implements OnInit {
       },
       {
         id: 'completed', name: 'Completed', field: 'completed', width: 80, minWidth: 75, maxWidth: 100,
-        sortable: true, filterable: true, columnGroup: 'Period',
-        formatter: Formatters.multiple,
-        params: { formatters: [Formatters.checkmark, Formatters.center] },
+        cssClass: 'text-center', columnGroup: 'Period',
+        formatter: Formatters.checkmark,
         exportWithFormatter: false,
+        filterable: true, sortable: true,
         filter: {
           collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
           model: Filters.singleSelect
@@ -212,10 +212,10 @@ export class GridResizeByContentComponent implements OnInit {
           // example with a Remote API call
           editorOptions: {
             minLength: 1,
-            fetch: (searchText: string, updateCallback: (items: false | any[]) => void) => {
+            fetch: (searchTerm: string, callback: (items: false | any[]) => void) => {
               // const items = require('c://TEMP/items.json');
               const products = this.mockProducts();
-              updateCallback(products.filter(product => product.itemName.toLowerCase().includes(searchText.toLowerCase())));
+              callback(products.filter(product => product.itemName.toLowerCase().includes(searchTerm.toLowerCase())));
             },
             renderItem: {
               // layout: 'twoRows',
@@ -228,7 +228,7 @@ export class GridResizeByContentComponent implements OnInit {
         },
         filter: {
           model: Filters.inputText,
-          // placeholder: '🔎︎ search product',
+          // placeholder: '🔎︎ search city',
           type: FieldType.string,
           queryField: 'product.itemName',
         }
@@ -302,6 +302,11 @@ export class GridResizeByContentComponent implements OnInit {
         rightPadding: 10
       },
       enableAutoResize: true,
+      enablePagination: true,
+      pagination: {
+        pageSize: 10,
+        pageSizes: [10, 200, 500, 5000]
+      },
 
       // resizing by cell content is opt-in
       // we first need to disable the 2 default flags to autoFit/autosize
@@ -321,7 +326,7 @@ export class GridResizeByContentComponent implements OnInit {
       excelExportOptions: {
         exportWithFormatter: false
       },
-      registerExternalResources: [new ExcelExportService()],
+      externalResources: [new ExcelExportService()],
       enableFiltering: true,
       enableRowSelection: true,
       enableCheckboxSelector: true,
@@ -349,7 +354,7 @@ export class GridResizeByContentComponent implements OnInit {
           const prevSerializedValue = prevSerializedValues[index];
           const serializedValue = serializedValues[index];
 
-          if (prevSerializedValue !== serializedValue || serializedValue === '') {
+          if (prevSerializedValue !== serializedValue) {
             const finalColumn = Array.isArray(editCommand.prevSerializedValue) ? editorColumns[index] : column;
             this.editedItems[this.gridOptions.datasetIdPropertyName || 'id'] = item; // keep items by their row indexes, if the row got edited twice then we'll keep only the last change
             this.angularGrid.slickGrid.invalidate();
@@ -462,6 +467,10 @@ export class GridResizeByContentComponent implements OnInit {
     this.isUsingDefaultResize = false;
   }
 
+  handleOnSelectedRowIdsChanged(args: any) {
+    console.log('Selected Ids:', args.selectedRowIds);
+  }
+
   toggleGridEditReadonly() {
     // first need undo all edits
     this.undoAllEdits();
@@ -516,6 +525,18 @@ export class GridResizeByContentComponent implements OnInit {
     }
   }
 
+  // change row selection dynamically and apply it to the DataView and the Grid UI
+  setSelectedRowIds() {
+    // change row selection even across multiple pages via DataView
+    this.angularGrid.dataView?.setSelectedIds([3, 4, 11]);
+
+    // you can also provide optional options (all defaults to true)
+    // this.sgb.dataView?.setSelectedIds([4, 5, 8, 10], {
+    //   isRowBeingAdded: true,
+    //   shouldTriggerEvent: true,
+    //   applyGridRowSelection: true
+    // });
+  }
 
   saveAll() {
     // Edit Queue (array increases every time a cell is changed, regardless of item object)
@@ -747,7 +768,7 @@ export class GridResizeByContentComponent implements OnInit {
       </div>
       <div>
         <span class="autocomplete-top-left">
-          <span class="fa ${item.itemTypeName === 'I' ? 'fa-info-circle' : 'fa-copy'}"></span>
+          <span class="mdfai ${item.itemTypeName === 'I' ? 'fa-info-circle' : 'fa-copy'}"></span>
           ${item.itemName}
         </span>
       <div>

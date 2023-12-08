@@ -195,7 +195,7 @@ export class GridClientSideComponent implements OnInit {
           { columnId: 'complete', direction: 'ASC' }
         ],
       },
-      registerExternalResources: [new ExcelExportService()],
+      externalResources: [new ExcelExportService()],
     };
 
     // mock a dataset

@@ -148,7 +148,7 @@ export class GridLocalizationComponent implements OnInit {
         exportWithFormatter: true,
         sanitizeDataExport: true
       },
-      registerExternalResources: [this.excelExportService, this.textExportService],
+      externalResources: [this.excelExportService, this.textExportService],
     };
 
     this.loadData(NB_ITEMS);
