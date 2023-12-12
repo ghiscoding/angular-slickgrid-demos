@@ -64,6 +64,6 @@
     "typescript": "~5.1.6"
   },
   "resolutions": {
-    "caniuse-lite": "1.0.30001517"
+    "caniuse-lite": "1.0.30001566"
   }
 }
