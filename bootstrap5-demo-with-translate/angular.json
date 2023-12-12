@@ -110,11 +110,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "test-slickgrid:build"
+            "buildTarget": "test-slickgrid:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "test-slickgrid:build:production"
+              "buildTarget": "test-slickgrid:build:production"
             }
           }
         },
@@ -130,7 +130,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "test-slickgrid:build"
+            "buildTarget": "test-slickgrid:build"
           }
         }
       }
