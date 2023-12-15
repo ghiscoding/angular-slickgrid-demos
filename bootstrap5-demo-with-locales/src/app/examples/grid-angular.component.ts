@@ -10,7 +10,7 @@ import {
   Formatters,
   GridOption,
   OnEventArgs,
-  SlickNamespace,
+  SlickGlobalEditorLock,
 } from 'angular-slickgrid';
 import { EditorNgSelectComponent } from './editor-ng-select.component';
 import { CustomAngularComponentEditor } from './custom-angularComponentEditor';
@@ -18,9 +18,6 @@ import { CustomAngularComponentFilter } from './custom-angularComponentFilter';
 import { CustomTitleFormatterComponent } from './custom-titleFormatter.component';
 import { FilterNgSelectComponent } from './filter-ng-select.component';
 import { CustomButtonFormatterComponent } from './custom-buttonFormatter.component';
-
-// using external non-typed js libraries
-declare const Slick: SlickNamespace;
 
 const NB_ITEMS = 100;
 
@@ -361,7 +358,7 @@ export class GridAngularComponent implements OnInit {
 
   undo() {
     const command = this._commandQueue.pop();
-    if (command && Slick.GlobalEditorLock.cancelCurrentEdit()) {
+    if (command && SlickGlobalEditorLock.cancelCurrentEdit()) {
       command.undo();
       this.gridObj.gotoCell(command.row, command.cell, false);
     }

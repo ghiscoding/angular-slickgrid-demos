@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class GridHeaderMenuComponent implements OnInit, OnDestroy {
   title = 'Example 8: Header Menu Plugin';
   subTitle = `
-    This example demonstrates using the <b>Slick.Plugins.HeaderMenu</b> plugin to easily add menus to colum headers.<br/>
+    This example demonstrates using the <b>SlickHeaderMenu</b> plugin to easily add menus to colum headers.<br/>
     These menus can be specified directly in the column definition, and are very easy to configure and use.
     (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Header-Menu-&-Header-Buttons" target="_blank">Wiki docs</a>)
     <ul>

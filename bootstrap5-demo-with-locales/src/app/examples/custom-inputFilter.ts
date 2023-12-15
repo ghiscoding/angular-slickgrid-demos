@@ -82,7 +82,7 @@ export class CustomInputFilter implements Filter {
   // ------------------
 
   private onKeyup(e: KeyboardEvent) {
-    let value = (e as KeyboardEvent & { target: HTMLInputElement; })?.target?.value ?? '';
+    let value = (e as KeyboardEvent & { target: HTMLInputElement })?.target?.value ?? '';
     const enableWhiteSpaceTrim = this.gridOptions.enableFilterTrimWhiteSpace || this.columnFilter.enableTrimWhiteSpace;
     if (typeof value === 'string' && enableWhiteSpaceTrim) {
       value = value.trim();

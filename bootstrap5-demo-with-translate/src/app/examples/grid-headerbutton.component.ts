@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
 import { AngularGridInstance, Column, GridOption, } from 'angular-slickgrid';
 
 // create a custom Formatter to highlight negative values in red
@@ -14,7 +13,7 @@ let columns2WithHighlightingById: any = {};
 export class GridHeaderButtonComponent implements OnInit {
   title = 'Example 7: Header Button Plugin';
   subTitle = `
-    This example demonstrates using the <b>Slick.Plugins.HeaderButtons</b> plugin to easily add buttons to colum headers.
+    This example demonstrates using the <b>SlickHeaderButtons</b> plugin to easily add buttons to colum headers.
     These buttons can be specified directly in the column definition, and are very easy to configure and use.
     (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Header-Menu-&-Header-Buttons" target="_blank">Wiki docs</a>)
     <ul>
@@ -80,7 +79,7 @@ export class GridHeaderButtonComponent implements OnInit {
       gridHeight: 275,
       headerButton: {
         // you can use the "onCommand" (in Grid Options) and/or the "action" callback (in Column Definition)
-        onCommand: (_e, args) => this.handleOnCommand(_e, args, 1)
+        onCommand: (_e: any, args) => this.handleOnCommand(_e, args, 1)
       }
     };
 
@@ -93,7 +92,7 @@ export class GridHeaderButtonComponent implements OnInit {
       // frozenRow: 2,
       headerButton: {
         // when floating to left, you might want to inverse the icon orders
-        onCommand: (_e, args) => this.handleOnCommand(_e, args, 2)
+        onCommand: (_e: any, args) => this.handleOnCommand(_e, args, 2)
       }
     };
   }

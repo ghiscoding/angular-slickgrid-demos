@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class GridMenuComponent implements OnInit, OnDestroy {
   title = 'Example 9: Grid Menu Control';
   subTitle = `
-    This example demonstrates using the <b>Slick.Controls.GridMenu</b> plugin to easily add a Grid Menu (aka hamburger menu) on the top right corner of the grid.
+    This example demonstrates using the <b>SlickGridMenu</b> plugin to easily add a Grid Menu (aka hamburger menu) on the top right corner of the grid.
     (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grid-Menu" target="_blank">Wiki docs</a>)
     <br/>
     <ul>

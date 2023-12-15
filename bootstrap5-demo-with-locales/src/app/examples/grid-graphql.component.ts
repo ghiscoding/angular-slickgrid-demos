@@ -1,6 +1,5 @@
 import { GraphqlService, GraphqlPaginatedResult, GraphqlServiceApi, GraphqlServiceOption, } from '@slickgrid-universal/graphql';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import {
   AngularGridInstance,
   Column,
@@ -54,15 +53,9 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   graphqlQuery = '';
   processing = true;
   status = { text: 'processing...', class: 'alert alert-danger' };
-  selectedLanguage: string;
   serverWaitDelay = FAKE_SERVER_DELAY; // server simulation with default of 250ms but 50ms for Cypress tests
 
-  constructor(private readonly cd: ChangeDetectorRef, private translate: TranslateService) {
-    // always start with English for Cypress E2E tests to be consistent
-    const defaultLang = 'en';
-    this.translate.use(defaultLang);
-    this.selectedLanguage = defaultLang;
-  }
+  constructor(private readonly cd: ChangeDetectorRef) { }
 
   ngOnDestroy() {
     // also unsubscribe all Angular Subscriptions
@@ -72,7 +65,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.columnDefinitions = [
       {
-        id: 'name', field: 'name', nameKey: 'NAME', width: 60, columnGroupKey: 'CUSTOMER_INFORMATION',
+        id: 'name', field: 'name', name: 'Name', width: 60, columnGroup: 'Customer Information',
         type: FieldType.string,
         sortable: true,
         filterable: true,
@@ -81,14 +74,14 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         }
       },
       {
-        id: 'gender', field: 'gender', nameKey: 'GENDER', filterable: true, sortable: true, width: 60, columnGroupKey: 'CUSTOMER_INFORMATION',
+        id: 'gender', field: 'gender', name: 'Gender', filterable: true, sortable: true, width: 60, columnGroup: 'Customer Information',
         filter: {
           model: Filters.singleSelect,
-          collection: [{ value: '', label: '' }, { value: 'male', label: 'male', labelKey: 'MALE' }, { value: 'female', label: 'female', labelKey: 'FEMALE' }]
+          collection: [{ value: '', label: '' }, { value: 'male', label: 'Male' }, { value: 'female', label: 'Female' }]
         }
       },
       {
-        id: 'company', field: 'company', nameKey: 'COMPANY', width: 60, columnGroupKey: 'CUSTOMER_INFORMATION',
+        id: 'company', field: 'company', name: 'Company', width: 60, columnGroup: 'Customer Information',
         sortable: true, filterable: true,
         filter: {
           model: Filters.multipleSelect,
@@ -99,23 +92,23 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         }
       },
       {
-        id: 'billingAddressStreet', field: 'billing.address.street', nameKey: 'BILLING.ADDRESS.STREET',
-        width: 60, filterable: true, sortable: true, columnGroupKey: 'BILLING.INFORMATION',
+        id: 'billingAddressStreet', field: 'billing.address.street', name: 'Address Street',
+        width: 60, filterable: true, sortable: true, columnGroup: 'Billing Information',
       },
       {
-        id: 'billingAddressZip', field: 'billing.address.zip', nameKey: 'BILLING.ADDRESS.ZIP', width: 60,
+        id: 'billingAddressZip', field: 'billing.address.zip', name: 'Address Zip', width: 60,
         type: FieldType.number,
-        columnGroupKey: 'BILLING.INFORMATION', // or use "columnGroup" without Translate
+        columnGroup: 'Billing Information',
         filterable: true, sortable: true,
         filter: {
           model: Filters.compoundInput
         },
-        formatter: Formatters.multiple, params: { formatters: [Formatters.complexObject, Formatters.translate] }
+        formatter: Formatters.complexObject
       },
       {
         id: 'finish', field: 'finish', name: 'Date', formatter: Formatters.dateIso, sortable: true, minWidth: 90, width: 120, exportWithFormatter: true,
         type: FieldType.date,
-        columnGroupKey: 'BILLING.INFORMATION', // or use "columnGroup" without Translate
+        columnGroup: 'Billing Information',
         filterable: true,
         filter: {
           model: Filters.dateRange,
@@ -131,11 +124,9 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       gridWidth: 900,
       enableFiltering: true,
       enableCellNavigation: true,
-      enableTranslate: true,
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 28,
-      i18n: this.translate,
       gridMenu: {
         resizeOnShowHeaderRow: true,
         commandItems: [
@@ -369,14 +360,5 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
     graphqlService.updateOptions(options);
     this.gridOptions = { ...this.gridOptions };
     this.angularGrid.paginationService?.goToFirstPage();
-  }
-
-  switchLanguage() {
-    const nextLanguage = (this.selectedLanguage === 'en') ? 'fr' : 'en';
-    this.subscriptions.push(
-      this.translate.use(nextLanguage).subscribe(() => {
-        this.selectedLanguage = nextLanguage;
-      })
-    );
   }
 }

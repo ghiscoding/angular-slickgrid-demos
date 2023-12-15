@@ -24,7 +24,6 @@
               "excel-builder-webpacker",
               "fetch-jsonp",
               "flatpickr",
-              "slickgrid",
               "stream"
             ],
             "assets": [
@@ -59,8 +58,7 @@
               "src/slickgrid-styles.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/sortablejs/Sortable.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
