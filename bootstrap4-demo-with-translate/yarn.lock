@@ -3066,10 +3066,10 @@ ajv@^8.0.0, ajv@^8.8.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-angular-slickgrid@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-7.0.0.tgz#a1b7f901ce8ffc3cb52544d342e3ee0b1a7615e3"
-  integrity sha512-/5bfFhyCQ25SUm9ybA2ebhpoGu42lBOah7Bnv//HnzCEkVhMO0EbQp7cX4yWM4BvJLrgYAdQH6BIk/RefNIKOw==
+angular-slickgrid@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-7.0.1.tgz#0fbc8a87331b8b568358f6dfd50b77a78f21ea90"
+  integrity sha512-iTIsrvAIzzhck2GbCo9/f6++q8xa5jb3MhzU9fjB3VcNSm4KC37vyQ2h2vifCzaDjL+LV1ieMDkE53oMdm4O1g==
   dependencies:
     "@ngx-translate/core" "^15.0.0"
     "@slickgrid-universal/common" "~4.0.2"
