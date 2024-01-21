@@ -9,11 +9,13 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CustomActionFormatterComponent } from './examples/custom-actionFormatter.component';
 import { CustomButtonFormatterComponent } from './examples/custom-buttonFormatter.component';
 import { CustomTitleFormatterComponent } from './examples/custom-titleFormatter.component';
+import { CustomFooterComponent, GridHeaderFooterComponent } from './examples/grid-header-footer.component';
 import { EditorNgSelectComponent } from './examples/editor-ng-select.component';
 import { FilterNgSelectComponent } from './examples/filter-ng-select.component';
 import { GridAddItemComponent } from './examples/grid-additem.component';
 import { GridAngularComponent } from './examples/grid-angular.component';
 import { GridAutoHeightComponent } from './examples/grid-autoheight.component';
+import { GridBaseRowEditingComponent } from './examples/grid-base-row-editing.component';
 import { GridBasicComponent } from './examples/grid-basic.component';
 import { GridClientSideComponent } from './examples/grid-clientside.component';
 import { GridColspanComponent } from './examples/grid-colspan.component';
@@ -60,72 +62,75 @@ import 'flatpickr/dist/l10n/fr';
 
 // @dynamic
 @NgModule({
-    declarations: [
-        AppComponent,
-        CustomActionFormatterComponent,
+  declarations: [
+    AppComponent,
+    CustomActionFormatterComponent,
     CustomButtonFormatterComponent,
-        CustomTitleFormatterComponent,
-        EditorNgSelectComponent,
-        FilterNgSelectComponent,
-        GridAddItemComponent,
-        GridAngularComponent,
-        GridAutoHeightComponent,
-        GridBasicComponent,
-        GridClientSideComponent,
-        GridColspanComponent,
-        GridCompositeEditorComponent,
-        GridContextMenuComponent,
-        GridCustomTooltipComponent,
-        GridEditorComponent,
-        GridDraggableGroupingComponent,
-        GridFormatterComponent,
-        GridFrozenComponent,
-        GridGraphqlComponent,
-        GridGraphqlWithoutPaginationComponent,
-        GridGroupingComponent,
-        GridHeaderButtonComponent,
-        GridHeaderMenuComponent,
-        GridLocalizationComponent,
-        GridMenuComponent,
-        GridOdataComponent,
-        GridRangeComponent,
-        GridRemoteComponent,
-        GridResizeByContentComponent,
-        GridRowDetailComponent,
-        GridRowMoveComponent,
-        GridRowSelectionComponent,
-        GridStateComponent,
-        GridTabsComponent,
-        GridTradingComponent,
-        GridTreeDataParentChildComponent,
-        GridTreeDataHierarchicalComponent,
-        RowDetailPreloadComponent,
-        RowDetailViewComponent,
-        SwtCommonGridTestComponent,
-        SwtCommonGridPaginationComponent,
-        SwtCommonGridComponent,
-        HomeComponent
-    ],
-    imports: [
-        AppRoutingRoutingModule,
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        NgSelectModule,
-        TabsModule.forRoot(),
-        AngularSlickgridModule.forRoot({
-            // add any Global Grid Options/Config you might want
-            // to avoid passing the same options over and over in each grids of your App
-            enableAutoResize: true,
-            autoResize: {
-                container: '#demo-container',
-                rightPadding: 10
-            },
-            // Provide a custom locales set
-            // locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
-            // locales: localeFrench,
-        })
-    ],
-    bootstrap: [AppComponent]
+    CustomFooterComponent,
+    CustomTitleFormatterComponent,
+    EditorNgSelectComponent,
+    FilterNgSelectComponent,
+    GridAddItemComponent,
+    GridAngularComponent,
+    GridAutoHeightComponent,
+    GridBaseRowEditingComponent,
+    GridBasicComponent,
+    GridClientSideComponent,
+    GridColspanComponent,
+    GridCompositeEditorComponent,
+    GridContextMenuComponent,
+    GridCustomTooltipComponent,
+    GridEditorComponent,
+    GridDraggableGroupingComponent,
+    GridFormatterComponent,
+    GridFrozenComponent,
+    GridGraphqlComponent,
+    GridGraphqlWithoutPaginationComponent,
+    GridGroupingComponent,
+    GridHeaderButtonComponent,
+    GridHeaderFooterComponent,
+    GridHeaderMenuComponent,
+    GridLocalizationComponent,
+    GridMenuComponent,
+    GridOdataComponent,
+    GridRangeComponent,
+    GridRemoteComponent,
+    GridResizeByContentComponent,
+    GridRowDetailComponent,
+    GridRowMoveComponent,
+    GridRowSelectionComponent,
+    GridStateComponent,
+    GridTabsComponent,
+    GridTradingComponent,
+    GridTreeDataParentChildComponent,
+    GridTreeDataHierarchicalComponent,
+    RowDetailPreloadComponent,
+    RowDetailViewComponent,
+    SwtCommonGridTestComponent,
+    SwtCommonGridPaginationComponent,
+    SwtCommonGridComponent,
+    HomeComponent
+  ],
+  imports: [
+    AppRoutingRoutingModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    NgSelectModule,
+    TabsModule.forRoot(),
+    AngularSlickgridModule.forRoot({
+      // add any Global Grid Options/Config you might want
+      // to avoid passing the same options over and over in each grids of your App
+      enableAutoResize: true,
+      autoResize: {
+        container: '#demo-container',
+        rightPadding: 10
+      },
+      // Provide a custom locales set
+      // locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
+      // locales: localeFrench,
+    })
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

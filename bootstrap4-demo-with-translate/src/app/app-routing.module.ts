@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { GridAddItemComponent } from './examples/grid-additem.component';
 import { GridAngularComponent } from './examples/grid-angular.component';
 import { GridAutoHeightComponent } from './examples/grid-autoheight.component';
+import { GridBaseRowEditingComponent } from './examples/grid-base-row-editing.component';
 import { GridBasicComponent } from './examples/grid-basic.component';
 import { GridClientSideComponent } from './examples/grid-clientside.component';
 import { GridColspanComponent } from './examples/grid-colspan.component';
@@ -17,6 +18,7 @@ import { GridGraphqlComponent } from './examples/grid-graphql.component';
 import { GridGraphqlWithoutPaginationComponent } from './examples/grid-graphql-nopage.component';
 import { GridGroupingComponent } from './examples/grid-grouping.component';
 import { GridHeaderButtonComponent } from './examples/grid-headerbutton.component';
+import { GridHeaderFooterComponent } from './examples/grid-header-footer.component';
 import { GridHeaderMenuComponent } from './examples/grid-headermenu.component';
 import { GridLocalizationComponent } from './examples/grid-localization.component';
 import { GridMenuComponent } from './examples/grid-menu.component';
@@ -40,6 +42,7 @@ const routes: Routes = [
   { path: 'angular-components', component: GridAngularComponent },
   { path: 'additem', component: GridAddItemComponent },
   { path: 'autoheight', component: GridAutoHeightComponent },
+  { path: 'base-row-editing', component: GridBaseRowEditingComponent },
   { path: 'basic', component: GridBasicComponent },
   { path: 'colspan', component: GridColspanComponent },
   { path: 'composite-editor', component: GridCompositeEditorComponent },
@@ -49,6 +52,7 @@ const routes: Routes = [
   { path: 'formatter', component: GridFormatterComponent },
   { path: 'frozen', component: GridFrozenComponent },
   { path: 'headerbutton', component: GridHeaderButtonComponent },
+  { path: 'header-footer', component: GridHeaderFooterComponent },
   { path: 'headermenu', component: GridHeaderMenuComponent },
   { path: 'gridgraphql', component: GridGraphqlComponent },
   { path: 'graphql-nopage', component: GridGraphqlWithoutPaginationComponent },

@@ -328,7 +328,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     };
   }
 
-  executeCommand(e: Event, args: any) {
+  executeCommand(e: any, args: any) {
     const columnDef = args.column;
     const command = args.command;
     const dataContext = args.dataContext;

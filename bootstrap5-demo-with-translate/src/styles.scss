@@ -1,4 +1,5 @@
 @import "bootstrap/scss/bootstrap";
+$slick-button-border-color: #ababab !default;
 
 .btn-group-xs > .btn, .btn-xs {
   padding  : 1px 5px;
@@ -239,4 +240,16 @@ div.au-stagger {
   position: relative;
   top: 6px;
   margin-left: 5px;
+}
+
+.button-style {
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #{$slick-button-border-color};
+  border-radius: 2px;
+  justify-content: center;
+  text-align: center;
+  &:hover {
+    border-color: darken($slick-button-border-color, 10%);
+  }
 }
