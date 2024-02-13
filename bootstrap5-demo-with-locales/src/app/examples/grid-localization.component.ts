@@ -116,8 +116,8 @@ export class GridLocalizationComponent implements OnInit {
       },
       excelExportOptions: {
         // optionally pass a custom header to the Excel Sheet
-        // a lot of the info can be found on Web Archive of Excel-Builder
-        // http://web.archive.org/web/20160907052007/http://excelbuilderjs.com/cookbook/fontsAndColors.html
+        // a lot of the info can be found on Excel-Builder-Vanilla
+        // https://ghiscoding.gitbook.io/excel-builder-vanilla/cookbook/fonts-and-colors
         customExcelHeader: (workbook, sheet) => {
           const stylesheet = workbook.getStyleSheet();
           const aFormatDefn = {
