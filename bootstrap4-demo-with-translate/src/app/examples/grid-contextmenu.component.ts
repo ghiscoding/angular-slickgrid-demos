@@ -42,7 +42,7 @@ const priorityExportFormatter: Formatter = (row, cell, value, columnDef, dataCon
   if (!value) {
     return '';
   }
-  const gridOptions = ((grid && typeof grid.getOptions === 'function') ? grid.getOptions() : {}) as GridOption;
+  const gridOptions = grid.getOptions() as GridOption;
   const translate = gridOptions.i18n;
   const count = +(value >= 3 ? 3 : value);
   const key = count === 3 ? 'HIGH' : (count === 2 ? 'MEDIUM' : 'LOW');
@@ -51,7 +51,7 @@ const priorityExportFormatter: Formatter = (row, cell, value, columnDef, dataCon
 };
 
 const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
-  const gridOptions = grid?.getOptions?.() as GridOption;
+  const gridOptions = grid.getOptions() as GridOption;
   const translate = gridOptions.i18n;
 
   return translate && translate.instant && translate.instant('TASK_X', { x: value });
@@ -68,11 +68,11 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     <ul>
       <li>This example demonstrates 2 SlickGrid plugins
       <ol>
-      <li>Using the <b>SlickCellMenu</b> plugin, often used for an Action Menu(s), 1 or more per grid
-      (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Cell-Menu" target="_blank">Wiki docs</a>).
+      <li>Using the <b>Slick.Plugins.CellMenu</b> plugin, often used for an Action Menu(s), 1 or more per grid
+      (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/cell-menu" target="_blank">Wiki docs</a>).
     </li>
-    <li>Using the <b>SlickContextMenu</b> plugin, shown after a mouse right+click, only 1 per grid.
-    (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Context-Menu" target="_blank">Wiki docs</a>).
+    <li>Using the <b>Slick.Plugins.ContextMenu</b> plugin, shown after a mouse right+click, only 1 per grid.
+    (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/context-menu" target="_blank">Wiki docs</a>).
     </li>
       </ol>
       <li>It will also "autoAdjustDrop" (bottom/top) and "autoAlignSide" (left/right) by default but could be turned off</li>
@@ -90,6 +90,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
       </ol>
     </ul>`;
 
+  private _darkModeGrid = false;
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -124,6 +125,8 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // also unsubscribe all Angular Subscriptions
     unsubscribeAllObservables(this.subscriptions);
+    document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
+    document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
   }
 
   prepareGrid() {
@@ -284,6 +287,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         container: '#demo-container',
         rightPadding: 10
       },
+      darkMode: this._darkModeGrid,
       enableCellNavigation: true,
       enableFiltering: true,
       enableSorting: true,
@@ -328,7 +332,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     };
   }
 
-  executeCommand(e: any, args: any) {
+  executeCommand(_e: any, args: any) {
     const columnDef = args.column;
     const command = args.command;
     const dataContext = args.dataContext;
@@ -541,5 +545,17 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         this.selectedLanguage = nextLanguage;
       })
     );
+  }
+
+  toggleDarkModeGrid() {
+    this._darkModeGrid = !this._darkModeGrid;
+    if (this._darkModeGrid) {
+      document.querySelector<HTMLDivElement>('.panel-wm-content')!.classList.add('dark-mode');
+      document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'dark';
+    } else {
+      document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
+      document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
+    }
+    this.angularGrid.slickGrid?.setOptions({ darkMode: this._darkModeGrid });
   }
 }
