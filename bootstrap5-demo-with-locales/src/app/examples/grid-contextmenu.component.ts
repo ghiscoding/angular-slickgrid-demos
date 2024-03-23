@@ -515,7 +515,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     // actionColumn.cellMenu.hideOptionSection = !showBothList;
   }
 
-  toggleDarkModeGrid() {
+  toggleDarkMode() {
     this._darkModeGrid = !this._darkModeGrid;
     if (this._darkModeGrid) {
       document.querySelector<HTMLDivElement>('.panel-wm-content')!.classList.add('dark-mode');

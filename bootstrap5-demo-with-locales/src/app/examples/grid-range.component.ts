@@ -77,7 +77,7 @@ export class GridRangeComponent implements OnInit {
         id: 'description', name: 'Description', field: 'description', filterable: true, sortable: true, minWidth: 80,
         type: FieldType.string,
         filter: {
-          model: new CustomInputFilter(), // create a new instance to make each Filter independent from each other
+          model: CustomInputFilter, // create a new instance to make each Filter independent from each other
           enableTrimWhiteSpace: true // or use global "enableFilterTrimWhiteSpace" to trim on all Filters
         }
       },
