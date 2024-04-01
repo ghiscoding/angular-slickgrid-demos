@@ -19,7 +19,6 @@
               "zone.js"
             ],
             "allowedCommonJsDependencies": [
-              "autocompleter",
               "dompurify",
               "fetch-jsonp",
               "flatpickr",

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
 import { Subscription } from 'rxjs';
 
 import {
@@ -182,6 +183,7 @@ export class GridBaseRowEditingComponent implements OnInit {
           deleteButtonPrompt: 'Are you sure you want to delete this row?',
         },
       },
+      externalResources: [new SlickCustomTooltip()],
     };
   }
 
