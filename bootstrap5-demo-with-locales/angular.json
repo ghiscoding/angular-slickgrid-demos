@@ -19,6 +19,7 @@
               "zone.js"
             ],
             "allowedCommonJsDependencies": [
+              "@fnando/sparkline",
               "dompurify",
               "fetch-jsonp",
               "flatpickr",
