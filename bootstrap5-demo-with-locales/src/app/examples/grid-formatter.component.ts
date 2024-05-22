@@ -17,13 +17,13 @@ interface DataItem {
 // create my custom Formatter with the Formatter type
 const myCustomCheckmarkFormatter: Formatter<DataItem> = (_row, _cell, value) => {
   // you can return a string of a object (of type FormatterResultObject), the 2 types are shown below
-  return value ? `<i class="fa fa-fire red" aria-hidden="true"></i>` : { text: '<i class="fa fa-snowflake-o" aria-hidden="true"></i>', addClasses: 'lightblue', toolTip: 'Freezing' };
+  return value ? `<i class="mdi mdi-fire red" aria-hidden="true"></i>` : { text: '<i class="mdi mdi-snowflake" aria-hidden="true"></i>', addClasses: 'lightblue', toolTip: 'Freezing' };
 };
 
 const customEnableButtonFormatter: Formatter<DataItem> = (_row: number, _cell: number, value: any) => {
   return `<span style="margin-left: 5px">
-      <button class="btn btn-xs btn-default">
-        <i class="fa ${value ? 'fa-check-circle' : 'fa-circle-thin'} fa-lg" style="color: ${value ? 'black' : 'lavender'}"></i>
+      <button class="btn btn-xs btn-default btn-icon">
+        <i class="mdi ${value ? 'mdi-check-circle' : 'mdi-circle'}" style="color: ${value ? 'black' : 'lavender'}"></i>
       </button>
     </span>`;
 };
@@ -34,7 +34,7 @@ const customEnableButtonFormatter: Formatter<DataItem> = (_row: number, _cell: n
 export class GridFormatterComponent implements OnInit {
   title = 'Example 2: Grid with Formatters';
   subTitle = `
-    Grid with Custom and/or included Slickgrid Formatters (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Formatters" target="_blank">Wiki docs</a>).
+    Grid with Custom and/or included Slickgrid Formatters (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/column-functionalities/formatters" target="_blank">Wiki docs</a>).
     <ul>
       <li>The 2 last columns are using Custom Formatters</li>
       <ul><li>The "Completed" column uses a the "onCellClick" event and a formatter to simulate a toggle action</li></ul>

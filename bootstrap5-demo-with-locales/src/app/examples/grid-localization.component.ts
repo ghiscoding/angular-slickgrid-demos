@@ -13,6 +13,7 @@ import {
   GridOption,
   GridStateChange,
 } from 'angular-slickgrid';
+
 import { localeFrench } from '../locales/fr';
 
 const NB_ITEMS = 1500;
@@ -20,6 +21,7 @@ const NB_ITEMS = 1500;
 const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value !== undefined ? `Titre ${value}` : '';
 };
+
 const exportBooleanFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value ? 'Vrai' : 'Faux';
 };
@@ -46,8 +48,6 @@ export class GridLocalizationComponent implements OnInit {
   excelExportService = new ExcelExportService();
   textExportService = new TextExportService();
 
-  constructor() { }
-
   ngOnInit(): void {
     this.columnDefinitions = [
       { id: 'title', name: 'Titre', field: 'id', sortable: true, minWidth: 100, filterable: true, formatter: taskFormatter, params: { useFormatterOuputToFilter: true } },
@@ -72,7 +72,7 @@ export class GridLocalizationComponent implements OnInit {
       {
         id: 'completedBool', name: 'Complétée', field: 'completedBool', minWidth: 100,
         sortable: true,
-        formatter: Formatters.checkmark,
+        formatter: Formatters.checkmarkMaterial,
         exportCustomFormatter: exportBooleanFormatter,
         filterable: true,
         filter: {

@@ -10,7 +10,7 @@ import {
   GridOption,
   GridState,
   GridStateChange,
-  MultipleSelectOption,
+  type MultipleSelectOption,
   unsubscribeAllObservables
 } from 'angular-slickgrid';
 
@@ -27,7 +27,7 @@ const NB_ITEMS = 500;
 export class GridStateComponent implements OnInit, OnDestroy {
   title = 'Example 16: Grid State & Presets using Local Storage';
   subTitle = `
-    Grid State & Preset (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grid-State-&-Preset" target="_blank">Wiki docs</a>)
+    Grid State & Preset (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/grid-state-and-preset" target="_blank">Wiki docs</a>)
     <br/>
     <ul class="small">
       <li>Uses Local Storage to persist the Grid State and uses Grid Options "presets" to put the grid back to it's previous state</li>
@@ -72,9 +72,9 @@ export class GridStateComponent implements OnInit, OnDestroy {
 
   /** Clear the Grid State from Local Storage and reset the grid to it's original state */
   clearGridStateFromLocalStorage() {
-    localStorage[LOCAL_STORAGE_KEY] = null;
     this.angularGrid.gridService.resetGrid(this.columnDefinitions);
     this.angularGrid.paginationService!.changeItemPerPage(DEFAULT_PAGE_SIZE);
+    setTimeout(() => localStorage[LOCAL_STORAGE_KEY] = null);
   }
 
   /* Define grid Options and Columns */
@@ -130,7 +130,7 @@ export class GridStateComponent implements OnInit, OnDestroy {
         type: FieldType.date, filterable: true, filter: { model: Filters.compoundDate }
       },
       {
-        id: 'completed', field: 'completed', nameKey: 'COMPLETED', minWidth: 85, maxWidth: 85, formatter: Formatters.checkmark, width: 100,
+        id: 'completed', field: 'completed', nameKey: 'COMPLETED', minWidth: 85, maxWidth: 85, formatter: Formatters.checkmarkMaterial, width: 100,
         type: FieldType.boolean,
         sortable: true,
         filterable: true,
@@ -180,7 +180,7 @@ export class GridStateComponent implements OnInit, OnDestroy {
 
   getData(count: number) {
     // mock a dataset
-    const tmpData = [];
+    const tmpData: any[] = [];
     for (let i = 0; i < count; i++) {
       const randomDuration = Math.round(Math.random() * 100);
       const randomYear = randomBetween(2000, 2025);

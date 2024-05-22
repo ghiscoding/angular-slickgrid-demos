@@ -1,4 +1,4 @@
-## Bootstrap 4 - with Custom Locales
+## Bootstrap 5 - with Custom Locales
 
 ## Important Note
 ### Optional NPM Packages
@@ -18,7 +18,7 @@ Again the following dependencies are totally **OPTIONAL**
 ---
 
 ### Install and Start Demo
-This is the same as the Bootstrap 4 demo except that it uses custom Locales and does not require (neither use) `ngx-translate` and are with fixed Locales (meaning you cannot switch language on the fly). The Locales that were added for the demo (English/French), can be found under `src/app/locales`. You can use and define your own custom Locales via TypeScript file.
+This is the same as the Bootstrap 5 demo except that it uses custom Locales and does not require (neither use) `ngx-translate` and are with fixed Locales (meaning you cannot switch language on the fly). The Locales that were added for the demo (English/French), can be found under `src/app/locales`. You can use and define your own custom Locales via TypeScript file.
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
 cd angular-slickgrid-demos/bootstrap4-demo-with-locales

@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
-import { CustomActionFormatterComponent } from './examples/custom-actionFormatter.component';
 import { CustomButtonFormatterComponent } from './examples/custom-buttonFormatter.component';
 import { CustomTitleFormatterComponent } from './examples/custom-titleFormatter.component';
 import { CustomFooterComponent, GridHeaderFooterComponent } from './examples/grid-header-footer.component';
@@ -64,7 +63,6 @@ import 'flatpickr/dist/l10n/fr';
 @NgModule({
   declarations: [
     AppComponent,
-    CustomActionFormatterComponent,
     CustomButtonFormatterComponent,
     CustomFooterComponent,
     CustomTitleFormatterComponent,

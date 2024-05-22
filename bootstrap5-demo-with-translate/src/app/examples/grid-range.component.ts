@@ -13,12 +13,12 @@ import {
   GridOption,
   GridStateChange,
   Metrics,
-  MultipleSelectOption,
+  type MultipleSelectOption,
   OperatorType,
   SliderRangeOption,
   unsubscribeAllObservables,
 } from 'angular-slickgrid';
-import moment from 'moment-mini';
+import { addDay, format } from '@formkit/tempo';
 import { Subscription } from 'rxjs';
 
 const NB_ITEMS = 1500;
@@ -29,7 +29,7 @@ function randomBetween(min: number, max: number): number {
 
 // create a custom translate Formatter (typically you would move that a separate file, for separation of concerns)
 const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
-  const gridOptions = grid?.getOptions?.() as GridOption;
+  const gridOptions = grid.getOptions() as GridOption;
   const translate = gridOptions.i18n as TranslateService;
 
   return translate.instant('TASK_X', { x: value });
@@ -41,7 +41,7 @@ const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataCont
 export class GridRangeComponent implements OnInit, OnDestroy {
   title = 'Example 25: Filtering from Range of Search Values';
   subTitle = `
-  This demo shows how to use Filters with Range of Search Values (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Range-Filters" target="_blank">Wiki docs</a>)
+  This demo shows how to use Filters with Range of Search Values (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/column-functionalities/filters/range-filters" target="_blank">Wiki docs</a>)
   <br/>
     <ul class="small">
       <li>All input filters support the following operators: (>, >=, <, <=, <>, !=, =, ==, *) and now also the (..) for an input range</li>
@@ -55,7 +55,7 @@ export class GridRangeComponent implements OnInit, OnDestroy {
         <li>by default the range is inclusive which would be the same as defining the filter options to "operator: 'RangeInclusive'" or "operator: OperatoryType.rangeInclusive"</li>
         <li>you can also set the inverse (exclusive) by defining the filter options to "operator: 'RangeExclusive'" or "operator: OperatoryType.rangeExclusive"</li>
       </ul>
-      <li>Date Range with Flatpickr Date Picker, they will also use the locale, choose a start date then drag or click on the end date</li>
+      <li>Date Range with Vanilla Calendar Date Picker, they will also use the locale, choose a start date then drag or click on the end date</li>
     </ul>
   `;
   private subscriptions: Subscription[] = [];
@@ -141,7 +141,7 @@ export class GridRangeComponent implements OnInit, OnDestroy {
       },
       {
         id: 'completed', name: 'Completed', field: 'completed', nameKey: 'COMPLETED', minWidth: 85, maxWidth: 90,
-        formatter: Formatters.checkmark,
+        formatter: Formatters.checkmarkMaterial,
         exportWithFormatter: true, // you can set this property in the column definition OR in the grid options, column def has priority over grid options
         filterable: true,
         filter: {
@@ -152,8 +152,9 @@ export class GridRangeComponent implements OnInit, OnDestroy {
       }
     ];
 
-    const presetLowestDay = moment().add(-2, 'days').format('YYYY-MM-DD');
-    const presetHighestDay = moment().add(20, 'days').format('YYYY-MM-DD');
+    const today = new Date();
+    const presetLowestDay = format(addDay(new Date(), -2), 'YYYY-MM-DD');
+    const presetHighestDay = format(addDay(new Date(), today.getDate() < 14 ? 30 : 25), 'YYYY-MM-DD');
 
     this.gridOptions = {
       autoResize: {
@@ -200,7 +201,7 @@ export class GridRangeComponent implements OnInit, OnDestroy {
     const tempDataset = [];
     for (let i = startingIndex; i < (startingIndex + itemCount); i++) {
       const randomDuration = randomBetween(0, 365);
-      const randomYear = randomBetween(moment().year(), moment().year() + 1);
+      const randomYear = randomBetween(new Date().getFullYear(), new Date().getFullYear() + 1);
       const randomMonth = randomBetween(0, 12);
       const randomDay = randomBetween(10, 28);
       const randomPercent = randomBetween(0, 100);
@@ -249,8 +250,8 @@ export class GridRangeComponent implements OnInit, OnDestroy {
   }
 
   setFiltersDynamically() {
-    const presetLowestDay = moment().add(-5, 'days').format('YYYY-MM-DD');
-    const presetHighestDay = moment().add(25, 'days').format('YYYY-MM-DD');
+    const presetLowestDay = format(addDay(new Date(), -5), 'YYYY-MM-DD');
+    const presetHighestDay = format(addDay(new Date(), 25), 'YYYY-MM-DD');
 
     // we can Set Filters Dynamically (or different filters) afterward through the FilterService
     this.angularGrid.filterService.updateFilters([
@@ -270,7 +271,7 @@ export class GridRangeComponent implements OnInit, OnDestroy {
 
   usePredefinedFilter(filterValue: string) {
     let filters: any[] = [];
-    const currentYear = moment().year();
+    const currentYear = new Date().getFullYear();
 
     switch (filterValue) {
       case 'currentYearTasks':

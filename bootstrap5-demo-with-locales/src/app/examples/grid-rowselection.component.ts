@@ -17,7 +17,7 @@ import {
 export class GridRowSelectionComponent implements OnInit {
   title = 'Example 10: Multiple Grids with Row Selection';
   subTitle = `
-    Row selection, single or multi-select (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Row-Selection" target="_blank">Wiki docs</a>).
+    Row selection, single or multi-select (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/row-selection" target="_blank">Wiki docs</a>).
     <ul>
       <li>Single Select, you can click on any cell to make the row active</li>
       <li>Multiple Selections, you need to specifically click on the checkbox to make 1 or more selections</li>
@@ -74,7 +74,7 @@ export class GridRowSelectionComponent implements OnInit {
       },
       {
         id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven',
-        formatter: Formatters.checkmark, type: FieldType.boolean,
+        formatter: Formatters.checkmarkMaterial, type: FieldType.boolean,
         sortable: true, filterable: true,
         filter: {
           collection: [{ value: '', label: '' }, { value: true, label: 'true' }, { value: false, label: 'false' }],
@@ -99,7 +99,7 @@ export class GridRowSelectionComponent implements OnInit {
       },
       {
         id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven',
-        formatter: Formatters.checkmark, type: FieldType.boolean,
+        formatter: Formatters.checkmarkMaterial, type: FieldType.boolean,
         sortable: true, filterable: true,
         filter: {
           collection: [{ value: '', label: '' }, { value: true, label: 'true' }, { value: false, label: 'false' }],

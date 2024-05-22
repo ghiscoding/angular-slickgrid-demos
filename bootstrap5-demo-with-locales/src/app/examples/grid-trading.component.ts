@@ -22,17 +22,22 @@ const currencyFormatter: Formatter = (cell: number, row: number, value: string) 
 const priceFormatter: Formatter = (_cell, _row, value, _col, dataContext) => {
   const direction = dataContext.priceChange >= 0 ? 'up' : 'down';
   const fragment = new DocumentFragment();
+  const divElm = document.createElement('div');
+  divElm.className = `d-inline-flex align-items-center text-${direction === 'up' ? 'success' : 'danger'}`;
   const spanElm = document.createElement('span');
-  spanElm.className = `fa fa-arrow-${direction} text-${direction === 'up' ? 'success' : 'danger'}`;
-  fragment.appendChild(spanElm);
+  spanElm.className = `mdi mdi-arrow-${direction}`;
+  divElm.appendChild(spanElm);
+  fragment.appendChild(divElm);
   if (value instanceof HTMLElement) {
-    fragment.appendChild(value);
+    divElm.appendChild(value);
+  } else {
+    divElm.appendChild(document.createTextNode(value));
   }
   return fragment;
 };
 
-const transactionTypeFormatter: Formatter = (row: number, cell: number, value: string) =>
-  `<span <span class="fa fa-${value === 'Buy' ? 'plus' : 'minus'}-circle ${value === 'Buy' ? 'text-info' : 'text-warning'}"></span> ${value}`;
+const transactionTypeFormatter: Formatter = (_row, _cell, value: string) =>
+  `<div class="d-inline-flex align-items-center"><span class="me-1 mdi mdi-16px mdi-${value === 'Buy' ? 'plus' : 'minus'}-circle ${value === 'Buy' ? 'text-info' : 'text-warning'}"></span> ${value}</div>`;
 
 const historicSparklineFormatter: Formatter = (row: number, cell: number, value: string, col: Column, dataContext: any) => {
   const svgElem = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -50,6 +55,7 @@ const historicSparklineFormatter: Formatter = (row: number, cell: number, value:
   encapsulation: ViewEncapsulation.None,
 })
 export class GridTradingComponent implements OnDestroy, OnInit {
+  private _darkMode = false;
   title = 'Example 33: Real-Time Trading Platform';
   subTitle = `Simulate a stock trading platform with lot of price changes
     <ul>
@@ -84,6 +90,8 @@ export class GridTradingComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.stopSimulation();
+    document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
+    document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
   }
 
   angularGridReady(angularGrid: AngularGridInstance) {
@@ -103,7 +111,7 @@ export class GridTradingComponent implements OnDestroy, OnInit {
         },
         grouping: {
           getter: 'currency',
-          formatter: (g) => `Currency: <span style="color: #003597; font-weight: bold;">${g.value}</span>  <span style="color: #659bff;">(${g.count} items)</span>`,
+          formatter: (g) => `Currency: <span style="var(--slick-primary-color); font-weight: bold;">${g.value}</span>  <span style="color: #659bff;">(${g.count} items)</span>`,
           aggregators: [
             new Aggregators.Sum('amount')
           ],
@@ -116,7 +124,7 @@ export class GridTradingComponent implements OnDestroy, OnInit {
         id: 'market', name: 'Market', field: 'market', filterable: true, sortable: true, minWidth: 75, width: 75,
         grouping: {
           getter: 'market',
-          formatter: (g) => `Market: <span style="color: #003597; font-weight: bold;">${g.value}</span>  <span style="color: #659bff;">(${g.count} items)</span>`,
+          formatter: (g) => `Market: <span style="var(--slick-primary-color); font-weight: bold;">${g.value}</span>  <span style="color: #659bff;">(${g.count} items)</span>`,
           aggregators: [
             new Aggregators.Sum('amount')
           ],
@@ -134,7 +142,7 @@ export class GridTradingComponent implements OnDestroy, OnInit {
         },
         grouping: {
           getter: 'trsnType',
-          formatter: (g) => `Type: <span style="color: #003597; font-weight: bold;">${g.value}</span>  <span style="color: #659bff;">(${g.count} items)</span>`,
+          formatter: (g) => `Type: <span style="var(--slick-primary-color); font-weight: bold;">${g.value}</span>  <span style="color: #659bff;">(${g.count} items)</span>`,
           aggregators: [
             new Aggregators.Sum('amount')
           ],
@@ -147,10 +155,9 @@ export class GridTradingComponent implements OnDestroy, OnInit {
         filter: { model: Filters.compoundInputNumber }, type: FieldType.number,
         formatter: Formatters.multiple,
         params: {
-          formatters: [Formatters.dollarColored, priceFormatter],
+          formatters: [Formatters.dollar, priceFormatter],
           maxDecimal: 2,
         }
-
       },
       {
         id: 'price', name: 'Price', field: 'price', filterable: true, sortable: true, minWidth: 70, width: 70,
@@ -187,10 +194,11 @@ export class GridTradingComponent implements OnDestroy, OnInit {
       },
       draggableGrouping: {
         dropPlaceHolderText: 'Drop a column header here to group by any of these available columns: Currency, Market or Type',
-        deleteIconCssClass: 'fa fa-times',
+        deleteIconCssClass: 'mdi mdi-close',
       },
       enableDraggableGrouping: true,
       createPreHeaderPanel: true,
+      darkMode: this._darkMode,
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 40,
       enableCellNavigation: true,
@@ -315,6 +323,22 @@ export class GridTradingComponent implements OnDestroy, OnInit {
       this.isFullScreen = true;
     }
     this.angularGrid.resizerService.resizeGrid();
+  }
+
+  toggleDarkMode() {
+    this._darkMode = !this._darkMode;
+    this.toggleBodyBackground();
+    this.angularGrid.slickGrid?.setOptions({ darkMode: this._darkMode });
+  }
+
+  toggleBodyBackground() {
+    if (this._darkMode) {
+      document.querySelector<HTMLDivElement>('.panel-wm-content')!.classList.add('dark-mode');
+      document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'dark';
+    } else {
+      document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
+      document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
+    }
   }
 
   private randomNumber(min: number, max: number, floor = true) {

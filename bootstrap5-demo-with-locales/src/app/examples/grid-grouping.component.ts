@@ -24,7 +24,7 @@ import {
 export class GridGroupingComponent implements OnInit {
   title = 'Example 14: Grouping & Aggregators';
   subTitle = `
-  (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grouping-&-Aggregators" target="_blank">Wiki docs</a>)
+  (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/grouping-and-aggregators" target="_blank">Wiki docs</a>)
   <ul>
     <li>
     Fully dynamic and interactive multi-level grouping with filtering and aggregates over 50'000 items
@@ -42,8 +42,6 @@ export class GridGroupingComponent implements OnInit {
   processing = false;
   excelExportService = new ExcelExportService();
   textExportService = new TextExportService();
-
-  constructor() { }
 
   ngOnInit(): void {
     this.columnDefinitions = [
@@ -141,7 +139,7 @@ export class GridGroupingComponent implements OnInit {
         minWidth: 20, width: 80, maxWidth: 80,
         cssClass: 'cell-effort-driven',
         field: 'effortDriven',
-        formatter: Formatters.checkmark,
+        formatter: Formatters.checkmarkMaterial,
         sortable: true,
         filterable: true,
         filter: {

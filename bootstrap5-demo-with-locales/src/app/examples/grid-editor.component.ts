@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import fetchJsonp from 'fetch-jsonp';
 
 import {
@@ -12,15 +11,16 @@ import {
   EditorValidator,
   FieldType,
   Filters,
-  FlatpickrOption,
   Formatter,
   Formatters,
   GridOption,
   LongTextEditorOption,
+  type MultipleSelectOption,
   OnEventArgs,
   OperatorType,
   SortComparers,
   SlickGlobalEditorLock,
+  type VanillaCalendarOption,
 } from 'angular-slickgrid';
 import { CustomInputEditor } from './custom-inputEditor';
 import { CustomInputFilter } from './custom-inputFilter';
@@ -34,13 +34,10 @@ const URL_COUNTRY_NAMES = 'assets/data/country_names.json';
 // you can create custom validator to pass to an inline editor
 const myCustomTitleValidator: EditorValidator = (value: any, args?: EditorArguments) => {
   // you can get the Editor Args which can be helpful, e.g. we can get the Translate Service from it
-  const grid = args && args.grid;
-  const gridOptions = (grid?.getOptions?.() ?? {}) as GridOption;
+  const grid = args?.grid;
+  const gridOptions = (grid?.getOptions() ?? {}) as GridOption;
   const translate = gridOptions.i18n;
-
-  // to get the editor object, you'll need to use "internalColumnEditor"
-  // don't use "editor" property since that one is what SlickGrid uses internally by it's editor factory
-  const columnEditor = args && args.column && args.column.internalColumnEditor;
+  const columnEditor = args?.column?.editor;
 
   if (value === null || value === undefined || !value.length) {
     return { valid: false, msg: 'This is a required field' };
@@ -67,7 +64,7 @@ const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
 export class GridEditorComponent implements OnInit {
   title = 'Example 3: Editors / Delete';
   subTitle = `
-  Grid with Inline Editors and onCellClick actions (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Editors" target="_blank">Wiki docs</a>).
+  Grid with Inline Editors and onCellClick actions (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/column-functionalities/editors" target="_blank">Wiki docs</a>).
   <ul>
     <li>Multiple Editors & Filters are available: AutoComplete, Checkbox, Date, Slider, SingleSelect, MultipleSelect, Float, Text, LongText... even Custom Editor</li>
     <li>When using "enableCellNavigation: true", clicking on a cell will automatically make it active &amp; selected.</li>
@@ -116,7 +113,8 @@ export class GridEditorComponent implements OnInit {
         excludeFromColumnPicker: true,
         excludeFromGridMenu: true,
         excludeFromHeaderMenu: true,
-        formatter: Formatters.icon, params: { iconCssClass: 'fa fa-pencil pointer' },
+        formatter: Formatters.icon,
+        params: { iconCssClass: 'mdi mdi-pencil pointer' },
         minWidth: 30,
         maxWidth: 30,
         // use onCellClick OR grid.onClick.subscribe which you can see down below
@@ -132,7 +130,8 @@ export class GridEditorComponent implements OnInit {
         excludeFromColumnPicker: true,
         excludeFromGridMenu: true,
         excludeFromHeaderMenu: true,
-        formatter: Formatters.icon, params: { iconCssClass: 'fa fa-trash pointer' },
+        formatter: Formatters.icon,
+        params: { iconCssClass: 'mdi mdi-trash-can pointer' },
         minWidth: 30,
         maxWidth: 30,
         // use onCellClick OR grid.onClick.subscribe which you can see down below
@@ -237,7 +236,7 @@ export class GridEditorComponent implements OnInit {
 
           // We can also add HTML text to be rendered (any bad script will be sanitized) but we have to opt-in, else it will be sanitized
           enableRenderHtml: true,
-          collection: Array.from(Array(101).keys()).map(k => ({ value: k, label: k, symbol: '<i class="fa fa-percent" style="color:cadetblue"></i>' })),
+          collection: Array.from(Array(101).keys()).map(k => ({ value: k, label: k, symbol: '<i class="mdi mdi-percent-outline" style="color:cadetblue"></i>' })),
           customStructure: {
             value: 'value',
             label: 'label',
@@ -261,7 +260,7 @@ export class GridEditorComponent implements OnInit {
           // },
           editorOptions: {
             maxHeight: 400
-          }
+          } as MultipleSelectOption
         },
         params: {
           formatters: [Formatters.collectionEditor, Formatters.percentCompleteBar],
@@ -304,19 +303,20 @@ export class GridEditorComponent implements OnInit {
         saveOutputType: FieldType.dateUtc, // save output date formattype: FieldType.date,
         editor: {
           model: Editors.date,
-          // override any of the Flatpickr options through "editorOptions"
+          // override any of the calendar picker options through "editorOptions"
           // please note that there's no TSlint on this property since it's generic for any filter, so make sure you entered the correct filter option(s)
           editorOptions: {
-            minDate: 'today',
+            range: { min: 'today' },
 
             // if we want to preload the date picker with a different date,
-            // we could toggle the `closeOnSelect: false`, set the date in the picker and re-toggle `closeOnSelect: true`
-            // closeOnSelect: false,
-            // onOpen: (selectedDates: Date[] | Date, dateStr: string, instance: FlatpickrInstance) => {
-            //   instance.setDate('2021-12-31', true);
-            //   instance.set('closeOnSelect', true);
-            // },
-          } as FlatpickrOption
+            // we could do it by assigning settings.seleted.dates
+            // NOTE: vanilla-calendar doesn't automatically focus the picker to the year/month and you need to do it yourself
+            // selected: {
+            //   dates: ['2021-06-04'],
+            //   month: 6 - 1, // Note: JS Date month (only) is zero index based, so June is 6-1 => 5
+            //   year: 2021
+            // }
+          } as VanillaCalendarOption
         },
       }, {
         id: 'cityOfOrigin', name: 'City of Origin', field: 'cityOfOrigin',
@@ -408,7 +408,7 @@ export class GridEditorComponent implements OnInit {
           model: Filters.singleSelect,
           collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
         },
-        formatter: Formatters.checkmark,
+        formatter: Formatters.checkmarkMaterial,
         editor: {
           model: Editors.checkbox,
         },
@@ -561,7 +561,7 @@ export class GridEditorComponent implements OnInit {
     // mock a dataset
     const tempDataset = [];
     for (let i = startingIndex; i < (startingIndex + itemCount); i++) {
-      const randomYear = 2000 + Math.floor(Math.random() * 10);
+      const randomYear = 2000 + this.randomBetween(4, 15);
       const randomFinishYear = (new Date().getFullYear() - 3) + Math.floor(Math.random() * 10); // use only years not lower than 3 years ago
       const randomMonth = Math.floor(Math.random() * 11);
       const randomDay = Math.floor((Math.random() * 29));
@@ -584,6 +584,10 @@ export class GridEditorComponent implements OnInit {
       });
     }
     return tempDataset;
+  }
+
+  randomBetween(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   onCellChanged(e: Event, args: any) {
@@ -655,16 +659,7 @@ export class GridEditorComponent implements OnInit {
     this.columnDefinitions.pop();
     this.columnDefinitions = this.columnDefinitions.slice();
 
-    // NOTE if you use an Extensions (Checkbox Selector, Row Detail, ...) that modifies the column definitions in any way
-    // you MUST use the code below, first you must reassign the Editor facade (from the internalColumnEditor back to the editor)
-    // in other words, SlickGrid is not using the same as Angular-Slickgrid uses (editor with a "model" and other properties are a facade, SlickGrid only uses what is inside the model)
     /*
-    const allColumns = this.angularGrid.gridService.getAllColumnDefinitions();
-    const allOriginalColumns = allColumns.map((column) => {
-      column.editor = column.internalColumnEditor;
-      return column;
-    });
-
     // remove your column the full set of columns
     // and use slice or spread [...] to trigger an Angular dirty change
     allOriginalColumns.pop();

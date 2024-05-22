@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
@@ -17,10 +17,11 @@ const NB_ITEMS = 1000;
 @Component({
   templateUrl: './grid-rowdetail.component.html'
 })
-export class GridRowDetailComponent implements OnInit {
+export class GridRowDetailComponent implements OnDestroy, OnInit {
+  private _darkMode = false;
   title = 'Example 21: Row Detail View';
   subTitle = `
-    Add functionality to show extra information with a Row Detail View, (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Row-Detail" target="_blank">Wiki docs</a>)
+    Add functionality to show extra information with a Row Detail View, (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/row-detail" target="_blank">Wiki docs</a>)
     <ul>
       <li>Click on the row "+" icon or anywhere on the row to open it (the latter can be changed via property "useRowClick: false")</li>
       <li>Pass a View/Model as a Template to the Row Detail</li>
@@ -36,8 +37,6 @@ export class GridRowDetailComponent implements OnInit {
   flashAlertType = 'info';
   message = '';
 
-  constructor() { }
-
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
   }
@@ -46,7 +45,7 @@ export class GridRowDetailComponent implements OnInit {
     // you can get the SlickGrid RowDetail plugin (addon) instance via 2 ways
 
     // option 1
-    return (this.angularGrid.extensions.rowDetailView.instance || {});
+    return (this.angularGrid.extensions.rowDetailView?.instance || {});
 
     // OR option 2
     // return this.angularGrid?.extensionService.getExtensionInstanceByName(ExtensionName.rowDetailView) || {};
@@ -54,6 +53,11 @@ export class GridRowDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.defineGrid();
+  }
+
+  ngOnDestroy(): void {
+    document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
+    document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
   }
 
   /* Define grid Options and Columns */
@@ -70,7 +74,7 @@ export class GridRowDetailComponent implements OnInit {
       {
         id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven',
         minWidth: 100,
-        formatter: Formatters.checkmark, type: FieldType.boolean,
+        formatter: Formatters.checkmarkMaterial, type: FieldType.boolean,
         filterable: true, sortable: true,
         filter: {
           collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
@@ -89,6 +93,7 @@ export class GridRowDetailComponent implements OnInit {
       rowSelectionOptions: {
         selectActiveRow: true
       },
+      darkMode: this._darkMode,
       datasetIdPropertyName: 'rowId', // optionally use a different "id"
       rowDetailView: {
         // optionally change the column index position of the icon (defaults to 0)
@@ -125,7 +130,17 @@ export class GridRowDetailComponent implements OnInit {
         viewComponent: RowDetailViewComponent,
 
         // Optionally pass your Parent Component reference to your Child Component (row detail component)
-        parent: this
+        parent: this,
+
+        onBeforeRowDetailToggle: (e, args) => {
+          // you coud cancel opening certain rows
+          // if (args.item.rowId === 1) {
+          //   e.preventDefault();
+          //   return false;
+          // }
+          console.log('before toggling row detail', args.item);
+          return true;
+        },
       }
     };
 
@@ -134,7 +149,7 @@ export class GridRowDetailComponent implements OnInit {
 
   getData() {
     // mock a dataset
-    const tmpData = [];
+    const tmpData: any[] = [];
     for (let i = 0; i < NB_ITEMS; i++) {
       const randomYear = 2000 + Math.floor(Math.random() * 10);
       const randomMonth = Math.floor(Math.random() * 11);
@@ -159,7 +174,7 @@ export class GridRowDetailComponent implements OnInit {
   changeDetailViewRowCount() {
     if (this.angularGrid?.extensionService) {
       const options = this.rowDetailInstance.getOptions();
-      if (options && options.panelRows) {
+      if (options?.panelRows) {
         options.panelRows = this.detailViewRowCount; // change number of rows dynamically
         this.rowDetailInstance.setOptions(options);
       }
@@ -167,6 +182,7 @@ export class GridRowDetailComponent implements OnInit {
   }
 
   changeEditableGrid() {
+    this.rowDetailInstance.collapseAll();
     this.rowDetailInstance.addonOptions.useRowClick = false;
     this.gridOptions.autoCommitEdit = !this.gridOptions.autoCommitEdit;
     this.angularGrid?.slickGrid.setOptions({
@@ -206,6 +222,23 @@ export class GridRowDetailComponent implements OnInit {
         resolve(itemDetail);
       }, 1000);
     });
+  }
+
+  toggleDarkMode() {
+    this._darkMode = !this._darkMode;
+    this.toggleBodyBackground();
+    this.angularGrid.slickGrid?.setOptions({ darkMode: this._darkMode });
+    this.closeAllRowDetail();
+  }
+
+  toggleBodyBackground() {
+    if (this._darkMode) {
+      document.querySelector<HTMLDivElement>('.panel-wm-content')!.classList.add('dark-mode');
+      document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'dark';
+    } else {
+      document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
+      document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
+    }
   }
 
   private randomNumber(min: number, max: number) {

@@ -11,7 +11,7 @@ $sparkline-color: #00b78d;
   bottom: 0;
   padding: 10px 12px 0 10px;
   background-color: white;
-  z-index: 8000;
+  z-index: 1040;
   position: fixed;
 }
 .changed-gain {
@@ -46,4 +46,20 @@ $sparkline-color: #00b78d;
   stroke: $sparkline-color;
   // fill: none;
   fill: rgba($sparkline-color, 0.03);
+}
+
+.slick-dark-mode,
+.dark-mode {
+  .text-success {
+    color: #42b47f !important
+  }
+  .changed-gain {
+    background-color: #00ff001d !important;
+  }
+  .changed-loss {
+    background-color: #ff00001b !important;
+  }
+  .trading-platform.full-screen {
+    background-color: #33393e;
+  }
 }

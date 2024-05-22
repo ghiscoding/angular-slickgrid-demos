@@ -9,16 +9,16 @@ import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatt
 export class GridMenuComponent implements OnInit {
   title = 'Example 9: Grid Menu Control';
   subTitle = `
-    This example demonstrates using the <b>SlickGridMenu</b> plugin to easily add a Grid Menu (aka hamburger menu) on the top right corner of the grid.
-    (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grid-Menu" target="_blank">Wiki docs</a>)
+    This example demonstrates using the <b>Slick.Controls.GridMenu</b> plugin to easily add a Grid Menu (aka hamburger menu) on the top right corner of the grid.
+    (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/grid-menu" target="_blank">Wiki docs</a>)
     <br/>
     <ul>
-      <li>You can change the Grid Menu icon, for example "fa-ellipsis-v"&nbsp;&nbsp;<span class="fa fa-ellipsis-v"></span>&nbsp;&nbsp;(which is shown in this example)</li>
+      <li>You can change the Grid Menu icon, for example "mdi-dots-vertical"&nbsp;&nbsp;<span class="mdi mdi-dots-vertical"></span>&nbsp;&nbsp;(which is shown in this example)</li>
       <li>By default the Grid Menu shows all columns which you can show/hide them</li>
       <li>You can configure multiple custom "commands" to show up in the Grid Menu and use the "onGridMenuCommand()" callback</li>
       <li>Doing a "right + click" over any column header will also provide a way to show/hide a column (via the Column Picker Plugin)</li>
       <li>You can change the icons of both picker via SASS variables as shown in this demo (check all SASS variables)</li>
-      <li><i class="fa fa-arrow-down"></i> You can also show the Grid Menu anywhere on your page</li>
+      <li><i class="mdi mdi-arrow-down"></i> You can also show the Grid Menu anywhere on your page</li>
     </ul>
   `;
 
@@ -40,7 +40,7 @@ export class GridMenuComponent implements OnInit {
       { id: 'start', name: 'Start', field: 'start', filterable: true, type: FieldType.string },
       { id: 'finish', name: 'Finish', field: 'finish', filterable: true, type: FieldType.string },
       {
-        id: 'effort-driven', name: 'Completed', field: 'effortDriven', maxWidth: 80, formatter: Formatters.checkmark,
+        id: 'effort-driven', name: 'Completed', field: 'effortDriven', maxWidth: 80, formatter: Formatters.checkmarkMaterial,
         type: FieldType.boolean,
         minWidth: 100,
         sortable: true,
@@ -73,20 +73,20 @@ export class GridMenuComponent implements OnInit {
         menuUsabilityOverride: () => true,
 
         commandTitle: 'Custom Commands',
-        iconCssClass: 'fa fa-ellipsis-v', // defaults to "fa-bars"
+        iconCssClass: 'mdi mdi-dots-vertical', // defaults to "mdi-menu"
         hideForceFitButton: true,
         hideSyncResizeButton: true,
         hideToggleFilterCommand: false, // show/hide internal custom commands
         menuWidth: 17,
         resizeOnShowHeaderRow: true,
-        subItemChevronClass: 'fa fa-chevron-right',
+        subItemChevronClass: 'mdi mdi-chevron-down mdi-rotate-270',
         commandItems: [
           // add Custom Items Commands which will be appended to the existing internal custom items
           // you cannot override an internal items but you can hide them and create your own
           // also note that the internal custom commands are in the positionOrder range of 50-60,
           // if you want yours at the bottom then start with 61, below 50 will make your command(s) show on top
           {
-            iconCssClass: 'fa fa-question-circle',
+            iconCssClass: 'mdi mdi-help-circle',
             title: 'Help',
             disabled: false,
             command: 'help',
@@ -103,7 +103,7 @@ export class GridMenuComponent implements OnInit {
             command: 'command1',
             positionOrder: 91,
             cssClass: 'orange',
-            iconCssClass: 'fa fa-warning',
+            iconCssClass: 'mdi mdi-alert',
             // you can use the "action" callback and/or use "onCallback" callback from the grid options, they both have the same arguments
             action: (_e: Event, args: any) => alert(args.command),
             itemUsabilityOverride: (args: any) => {

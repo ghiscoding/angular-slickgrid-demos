@@ -9,7 +9,7 @@ import { AngularGridInstance, Column, ColumnEditorDualInput, Editors, FieldType,
 export class GridFrozenComponent implements OnInit, OnDestroy {
   title = 'Example 20: Pinned (frozen) Columns/Rows';
   subTitle = `
-  This example demonstrates the use of Pinned (aka frozen) Columns and/or Rows (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Pinned-(aka-Frozen)-Columns-Rows" target="_blank">Wiki docs</a>)
+  This example demonstrates the use of Pinned (aka frozen) Columns and/or Rows (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/frozen-columns-rows" target="_blank">Wiki docs</a>)
   <ul>
       <li>Option to pin any number of columns (left only) or rows</li>
       <li>Option to pin the rows at the bottom instead of the top (default)</li>
@@ -53,13 +53,6 @@ export class GridFrozenComponent implements OnInit, OnDestroy {
   }
 
   colorizeHoveringRow(event: Event, isMouseEnter: boolean) {
-    const cell = this.gridObj.getCellFromEvent(event);
-    const rows = isMouseEnter ? [cell?.row ?? 0] : [];
-    this.gridObj.setSelectedRows(rows); // highlight current row
-    event.preventDefault();
-  }
-
-  highlightRow(event: Event, isMouseEnter: boolean) {
     const cell = this.gridObj.getCellFromEvent(event);
     const rows = isMouseEnter ? [cell?.row ?? 0] : [];
     this.gridObj.setSelectedRows(rows); // highlight current row
@@ -178,7 +171,7 @@ export class GridFrozenComponent implements OnInit, OnDestroy {
       {
         id: 'effortDriven', name: 'Effort Driven', field: 'effortDriven',
         minWidth: 100, width: 120,
-        formatter: Formatters.checkmark,
+        formatter: Formatters.checkmarkMaterial,
         filterable: true,
         filter: {
           collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
