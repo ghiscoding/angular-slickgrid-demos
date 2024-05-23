@@ -2,7 +2,7 @@
 ## Multiple Demos of the [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid) library
 
 ### Installation
-Choose the theme and feature you want, they are separated into 2 themes (Bootstrap 4 or 5) and there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other demos are all with `ngx-translate` (dynamically switch language on the fly).
+Choose the theme and feature you want, they are separated into 2 themes (with Bootstrap 5) and there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other demos are all with `ngx-translate` (dynamically switch language on the fly).
 
 #### VScode
 If you use Visual Studio Code, you can also run each of the demo through the multiple VSCode Tasks.
@@ -26,22 +26,6 @@ Again the following dependencies are totally **OPTIONAL**
 | [@slickgrid-universal/odata](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/odata) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/odata.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/odata) | OData Query Service (support Filter/Sort/Pagination) |
 
 ---
-
-## Bootstrap 4 - with `ngx-translate`
-Common Bootstrap 4 demo using `ngx-translate` to provide the use of multiple languages (locales) which can be switched dynamically (on the fly).
-
-##### Install and Start Demo
-```bash
-git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap4-demo-with-translate
-npm install # OR yarn install
-npm start # OR yarn start
-```
-
-##### Build Demo
-```bash
-npm run build # OR yarn run build
-```
 
 ## Bootstrap 5 - with `ngx-translate`
 Common Bootstrap 5 demo using `ngx-translate` to provide the use of multiple languages (locales) which can be switched dynamically (on the fly).

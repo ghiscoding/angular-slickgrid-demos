@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 
-import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleterOption, EditCommand, formatNumber, SortComparers, SlickGrid, SlickGlobalEditorLock } from 'angular-slickgrid';
+import { AngularGridInstance, Column, GridOption, Filters, Formatter, LongTextEditorOption, FieldType, Editors, Formatters, AutocompleterOption, EditCommand, formatNumber, SortComparers, SlickGrid, SlickGlobalEditorLock, VanillaCalendarOption } from 'angular-slickgrid';
 
 const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
 
@@ -37,9 +37,9 @@ const customEditableInputFormatter: Formatter = (_row, _cell, value, columnDef, 
 };
 
 // you can create custom validator to pass to an inline editor
-const myCustomTitleValidator = (value: any, args: any) => {
-  if ((value === null || value === undefined || !value.length) && (args.compositeEditorOptions && args.compositeEditorOptions.modalType === 'create' || args.compositeEditorOptions.modalType === 'edit')) {
-    // we will only check if the field is supplied when it's an inline editing OR a composite editor of type create/edit
+const myCustomTitleValidator = (value: any) => {
+  if ((value === null || value === undefined || !value.length)) {
+    // we will only check if the field is supplied when it's an inline editing
     return { valid: false, msg: 'This is a required field.' };
   } else if (!/^(task\s\d+)*$/i.test(value)) {
     return { valid: false, msg: 'Your title is invalid, it must start with "Task" followed by a number.' };
@@ -64,7 +64,6 @@ export class GridResizeByContentComponent implements OnInit {
   editedItems: any = {};
   isUsingDefaultResize = false;
   isGridEditable = true;
-  isCompositeDisabled = false;
   isMassSelectionDisabled = true;
   complexityLevelList = [
     { value: 0, label: 'Very Simple' },
@@ -164,7 +163,7 @@ export class GridResizeByContentComponent implements OnInit {
       {
         id: 'completed', name: 'Completed', field: 'completed', width: 80, minWidth: 75, maxWidth: 100,
         cssClass: 'text-center', columnGroup: 'Period',
-        formatter: Formatters.checkmark,
+        formatter: Formatters.checkmarkMaterial,
         exportWithFormatter: false,
         filterable: true, sortable: true,
         filter: {
@@ -182,7 +181,7 @@ export class GridResizeByContentComponent implements OnInit {
         exportCustomFormatter: Formatters.dateUs,
         editor: {
           model: Editors.date,
-          editorOptions: { minDate: 'today' },
+          editorOptions: { range: { min: 'today' } } as VanillaCalendarOption,
           validator: (value, args) => {
             const dataContext = args && args.item;
             if (dataContext && (dataContext.completed && !value)) {
@@ -257,7 +256,7 @@ export class GridResizeByContentComponent implements OnInit {
       {
         id: 'action', name: 'Action', field: 'action', width: 70, minWidth: 70, maxWidth: 70,
         excludeFromExport: true,
-        formatter: () => `<div class="button-style margin-auto" style="width: 35px;"><span class="fa fa-chevron-down text-primary"></span></div>`,
+        formatter: () => `<div class="button-style margin-auto" style="width: 35px;"><span class="mdi mdi-chevron-down text-primary"></span></div>`,
         cellMenu: {
           hideCloseButton: false,
           commandTitle: 'Commands',
@@ -265,14 +264,14 @@ export class GridResizeByContentComponent implements OnInit {
             {
               command: 'help',
               title: 'Help!',
-              iconCssClass: 'fa fa-question-circle',
+              iconCssClass: 'mdi mdi-help-circle',
               positionOrder: 66,
               action: () => alert('Please Help!'),
             },
             'divider',
             {
               command: 'delete-row', title: 'Delete Row', positionOrder: 64,
-              iconCssClass: 'fa fa-times color-danger', cssClass: 'red', textCssClass: 'text-italic color-danger-light',
+              iconCssClass: 'mdi mdi-close color-danger', cssClass: 'red', textCssClass: 'text-italic color-danger-light',
               // only show command to 'Delete Row' when the task is not completed
               itemVisibilityOverride: (args) => {
                 return !args.dataContext?.completed;
@@ -343,7 +342,6 @@ export class GridResizeByContentComponent implements OnInit {
       rowHeight: 33,
       headerRowHeight: 35,
       editCommandHandler: (item, column, editCommand) => {
-        // composite editors values are saved as array, so let's convert to array in any case and we'll loop through these values
         const prevSerializedValues = Array.isArray(editCommand.prevSerializedValue) ? editCommand.prevSerializedValue : [editCommand.prevSerializedValue];
         const serializedValues = Array.isArray(editCommand.serializedValue) ? editCommand.serializedValue : [editCommand.serializedValue];
         const editorColumns = this.columnDefinitions.filter((col) => col.editor !== undefined);
@@ -364,8 +362,7 @@ export class GridResizeByContentComponent implements OnInit {
           }
         });
 
-        // queued editor only keeps 1 item object even when it's a composite editor,
-        // so we'll push only 1 change at the end but with all columns modified
+        // queued editor, so we'll push only 1 change at the end but with all columns modified
         // this way we can undo the entire row change (for example if user changes 3 field in the editor modal, then doing a undo last change will undo all 3 in 1 shot)
         this.editQueue.push({ item, columns: modifiedColumns, editCommand });
       },
@@ -430,8 +427,8 @@ export class GridResizeByContentComponent implements OnInit {
 
     if (column && item) {
       if (!checkItemIsEditable(item, column, grid)) {
-        // event.preventDefault();
-        e.stopImmediatePropagation();
+        e.preventDefault(); // OR eventData.preventDefault();
+        return false;
       }
     }
     return false;
@@ -476,7 +473,6 @@ export class GridResizeByContentComponent implements OnInit {
 
     // then change a single grid options to make the grid non-editable (readonly)
     this.isGridEditable = !this.isGridEditable;
-    this.isCompositeDisabled = !this.isGridEditable;
     if (!this.isGridEditable) {
       this.isMassSelectionDisabled = true;
     }
@@ -679,81 +675,57 @@ export class GridResizeByContentComponent implements OnInit {
   /** List of icons that are supported in this lib Material Design Icons */
   getRandomIcon(iconIndex?: number) {
     const icons = [
-      'fa-500px',
-      'fa-address-book',
-      'fa-address-book-o',
-      'fa-address-card',
-      'fa-address-card-o',
-      'fa-adjust',
-      'fa-adn',
-      'fa-align-center',
-      'fa-align-justify',
-      'fa-align-left',
-      'fa-align-right',
-      'fa-amazon',
-      'fa-ambulance',
-      'fa-american-sign-language-interpreting',
-      'fa-anchor',
-      'fa-android',
-      'fa-angellist',
-      'fa-angle-double-down',
-      'fa-angle-double-left',
-      'fa-angle-double-right',
-      'fa-angle-double-up',
-      'fa-angle-down',
-      'fa-angle-left',
-      'fa-angle-right',
-      'fa-angle-up',
-      'fa-apple',
-      'fa-archive',
-      'fa-area-chart',
-      'fa-arrow-circle-down',
-      'fa-arrow-circle-left',
-      'fa-arrow-circle-o-down',
-      'fa-arrow-circle-o-left',
-      'fa-arrow-circle-o-right',
-      'fa-arrow-circle-o-up',
-      'fa-arrow-circle-right',
-      'fa-arrow-circle-up',
-      'fa-arrow-down',
-      'fa-arrow-left',
-      'fa-arrow-right',
-      'fa-arrow-up',
-      'fa-arrows',
-      'fa-arrows-alt',
-      'fa-arrows-h',
-      'fa-arrows-v',
-      'fa-assistive-listening-systems',
-      'fa-asterisk',
-      'fa-at',
-      'fa-audio-description',
-      'fa-backward',
-      'fa-balance-scale',
-      'fa-ban',
-      'fa-bandcamp',
-      'fa-bank (alias)',
-      'fa-bar-chart',
-      'fa-barcode',
-      'fa-bars',
-      'fa-bath',
-      'fa-battery-empty',
-      'fa-battery-full',
-      'fa-battery-half',
-      'fa-battery-quarter',
-      'fa-battery-three-quarters',
-      'fa-bed',
-      'fa-beer',
-      'fa-behance',
-      'fa-behance-square',
-      'fa-bell',
-      'fa-bell-o',
-      'fa-bell-slash',
-      'fa-bell-slash-o',
-      'fa-bicycle',
-      'fa-binoculars',
-      'fa-birthday-cake',
-      'fa-bitbucket',
-      'fa-bitbucket-square',
+      'mdi-arrow-collapse',
+      'mdi-arrow-expand',
+      'mdi-cancel',
+      'mdi-check',
+      'mdi-checkbox-blank-outline',
+      'mdi-check-box-outline',
+      'mdi-checkbox-marked',
+      'mdi-close',
+      'mdi-close-circle',
+      'mdi-close-circle-outline',
+      'mdi-close-thick',
+      'mdi-content-copy',
+      'mdi-database-refresh',
+      'mdi-download',
+      'mdi-file-document-outline',
+      'mdi-file-excel-outline',
+      'mdi-file-music-outline',
+      'mdi-file-pdf-outline',
+      'mdi-filter-remove-outline',
+      'mdi-flip-vertical',
+      'mdi-folder',
+      'mdi-folder-open',
+      'mdi-help-circle',
+      'mdi-help-circle-outline',
+      'mdi-history',
+      'mdi-information',
+      'mdi-information-outline',
+      'mdi-link',
+      'mdi-link-variant',
+      'mdi-menu',
+      'mdi-microsoft-excel',
+      'mdi-minus',
+      'mdi-page-first',
+      'mdi-page-last',
+      'mdi-paperclip',
+      'mdi-pin-off-outline',
+      'mdi-pin-outline',
+      'mdi-playlist-plus',
+      'mdi-playlist-remove',
+      'mdi-plus',
+      'mdi-redo',
+      'mdi-refresh',
+      'mdi-shape-square-plus',
+      'mdi-sort-ascending',
+      'mdi-sort-descending',
+      'mdi-swap-horizontal',
+      'mdi-swap-vertical',
+      'mdi-sync',
+      'mdi-table-edit',
+      'mdi-table-refresh',
+      'mdi-undo',
     ];
     const randomNumber = Math.floor((Math.random() * icons.length - 1));
     return icons[iconIndex ?? randomNumber];
@@ -767,7 +739,7 @@ export class GridResizeByContentComponent implements OnInit {
       </div>
       <div>
         <span class="autocomplete-top-left">
-          <span class="mdfai ${item.itemTypeName === 'I' ? 'fa-info-circle' : 'fa-copy'}"></span>
+          <span class="mdfai ${item.itemTypeName === 'I' ? 'mdi-information-outline' : 'mdi-content-copy'}"></span>
           ${item.itemName}
         </span>
       <div>
@@ -785,7 +757,7 @@ export class GridResizeByContentComponent implements OnInit {
           </div>
           <div>
             <span class="autocomplete-top-left">
-              <span class="fa ${item.itemTypeName === 'I' ? 'fa-info-circle' : 'fa-copy'}"></span>
+              <span class="fa ${item.itemTypeName === 'I' ? 'mdi-information-outline' : 'mdi-content-copy'}"></span>
               ${item.itemName}
             </span>
             <span class="autocomplete-top-right">${formatNumber(item.listPrice, 2, 2, false, '$')}</span>

@@ -14,9 +14,9 @@ let columns2WithHighlightingById: any = {};
 export class GridHeaderButtonComponent implements OnInit {
   title = 'Example 7: Header Button Plugin';
   subTitle = `
-    This example demonstrates using the <b>SlickHeaderButtons</b> plugin to easily add buttons to colum headers.
+    This example demonstrates using the <b>Slick.Plugins.HeaderButtons</b> plugin to easily add buttons to colum headers.
     These buttons can be specified directly in the column definition, and are very easy to configure and use.
-    (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Header-Menu-&-Header-Buttons" target="_blank">Wiki docs</a>)
+    (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/header-menu-and-header-buttons" target="_blank">Wiki docs</a>)
     <ul>
       <li>Resize the 1st column to see all icon/command</li>
       <li>Mouse hover the 2nd column to see it's icon/command</li>
@@ -98,19 +98,19 @@ export class GridHeaderButtonComponent implements OnInit {
     };
   }
 
-  handleOnCommand(_e: Event, args: any, gridNo: 1 | 2) {
+  handleOnCommand(_e: any, args: any, gridNo: 1 | 2) {
     const column = args.column;
     const button = args.button;
     const command = args.command;
 
     if (command === 'toggle-highlight') {
-      if (button.cssClass === 'fa fa-circle red') {
+      if (button.cssClass === 'mdi mdi-lightbulb-on text-danger') {
         if (gridNo === 1) {
           delete columns1WithHighlightingById[column.id];
         } else {
           delete columns2WithHighlightingById[column.id];
         }
-        button.cssClass = 'fa fa-circle-o red faded';
+        button.cssClass = 'mdi mdi-lightbulb-outline text-warning faded';
         button.tooltip = 'Highlight negative numbers.';
       } else {
         if (gridNo === 1) {
@@ -118,7 +118,7 @@ export class GridHeaderButtonComponent implements OnInit {
         } else {
           columns2WithHighlightingById[column.id] = true;
         }
-        button.cssClass = 'fa fa-circle red';
+        button.cssClass = 'mdi mdi-lightbulb-on text-danger';
         button.tooltip = 'Remove highlight.';
       }
       ((this as any)[`angularGrid${gridNo}`] as AngularGridInstance).slickGrid.invalidate();
@@ -146,7 +146,7 @@ export class GridHeaderButtonComponent implements OnInit {
         header: {
           buttons: [
             {
-              cssClass: 'fa fa-circle-o red faded',
+              cssClass: 'mdi mdi-lightbulb-outline text-warning faded',
               command: 'toggle-highlight',
               tooltip: 'Highlight negative numbers.',
               itemVisibilityOverride: (args: any) => {
@@ -173,25 +173,25 @@ export class GridHeaderButtonComponent implements OnInit {
     (this as any)[`columnDefinitions${gridNo}`][0].header = {
       buttons: [
         {
-          cssClass: 'fa fa-tag',
+          cssClass: 'mdi mdi-message-text',
           handler: () => {
             alert('Tag');
           }
         },
         {
-          cssClass: 'fa fa-comment',
+          cssClass: 'mdi mdi-forum-outline',
           handler: () => {
             alert('Comment');
           }
         },
         {
-          cssClass: 'fa fa-info-circle',
+          cssClass: 'mdi mdi-information',
           handler: () => {
             alert('Info');
           }
         },
         {
-          cssClass: 'fa fa-question-circle',
+          cssClass: 'mdi mdi-help-circle',
           handler: () => {
             alert('Help');
           }
@@ -209,7 +209,7 @@ export class GridHeaderButtonComponent implements OnInit {
     (this as any)[`columnDefinitions${gridNo}`][1].header = {
       buttons: [
         {
-          cssClass: 'fa fa-question-circle',
+          cssClass: 'mdi mdi-help-circle',
           showOnHover: true,
           tooltip: 'This button only appears on hover.',
           handler: () => {

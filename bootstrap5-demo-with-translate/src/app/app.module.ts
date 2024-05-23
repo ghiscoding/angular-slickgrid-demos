@@ -1,14 +1,15 @@
-import { AppRoutingRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Injector, APP_INITIALIZER, NgModule } from '@angular/core';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LOCATION_INITIALIZED } from '@angular/common';
+import { Injector, APP_INITIALIZER, NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import DOMPurify from 'dompurify';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
+import { AppRoutingRoutingModule } from './app-routing.module';
 import { CustomButtonFormatterComponent } from './examples/custom-buttonFormatter.component';
 import { CustomTitleFormatterComponent } from './examples/custom-titleFormatter.component';
 import { CustomFooterComponent, GridHeaderFooterComponent } from './examples/grid-header-footer.component';
@@ -57,9 +58,6 @@ import { SwtCommonGridComponent } from './examples/swt-common-grid.component';
 
 import { AppComponent } from './app.component';
 import { AngularSlickgridModule } from 'angular-slickgrid';
-
-// load necessary Flatpickr Locale(s), but make sure it's imported AFTER the AngularSlickgridModule import
-import 'flatpickr/dist/l10n/fr';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -134,11 +132,10 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     SwtCommonGridComponent,
     HomeComponent
   ],
-  imports: [
-    AppRoutingRoutingModule,
+  bootstrap: [AppComponent],
+  imports: [AppRoutingRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpClientModule,
     NgSelectModule,
     TabsModule.forRoot(),
     TranslateModule.forRoot({
@@ -155,7 +152,9 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
       autoResize: {
         container: '#demo-container',
         rightPadding: 10
-      }
+      },
+      // we strongly suggest you add DOMPurify as a sanitizer
+      sanitizer: (dirtyHtml) => DOMPurify.sanitize(dirtyHtml, { ADD_ATTR: ['level'], RETURN_TRUSTED_TYPE: true })
     })
   ],
   providers: [
@@ -164,8 +163,8 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
       useFactory: appInitializerFactory,
       deps: [TranslateService, Injector],
       multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
 })
 export class AppModule { }

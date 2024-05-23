@@ -13,6 +13,7 @@ import {
   GridOption,
   GridStateChange,
 } from 'angular-slickgrid';
+
 import { localeFrench } from '../locales/fr';
 
 const NB_ITEMS = 1500;
@@ -20,6 +21,7 @@ const NB_ITEMS = 1500;
 const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value !== undefined ? `Titre ${value}` : '';
 };
+
 const exportBooleanFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
   return value ? 'Vrai' : 'Faux';
 };
@@ -31,7 +33,7 @@ export class GridLocalizationComponent implements OnInit {
   title = 'Example 12: Localization with Locales - French Locale displayed';
   subTitle = `This Examples uses French Locales but you could use your own custom locales
     <ul>
-      <li>Defining your own Custom Locales must include all necessary text, see the default (<a href="https://github.com/ghiscoding/angular-slickgrid-demos/blob/master/bootstrap4-demo-with-locales/src/app/locales/en.ts" target="_blank">English Custom Locales</a>)</li>
+      <li>Defining your own Custom Locales must include all necessary text, see the default (<a href="https://github.com/ghiscoding/angular-slickgrid-demos/blob/master/bootstrap5-demo-with-locales/src/app/locales/en.ts" target="_blank">English Custom Locales</a>)</li>
       <li>Support Custom Locales (through the "locales" grid option), following these steps (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Localization-with-Custom-Locales" target="_blank">Wiki docs</a>)
       <li>For more info about "Download to File", read the <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Export-to-File" target="_blank">Wiki page</a></li>
     </ul>
@@ -45,8 +47,6 @@ export class GridLocalizationComponent implements OnInit {
   gridObj: any;
   excelExportService = new ExcelExportService();
   textExportService = new TextExportService();
-
-  constructor() { }
 
   ngOnInit(): void {
     this.columnDefinitions = [
@@ -72,7 +72,7 @@ export class GridLocalizationComponent implements OnInit {
       {
         id: 'completedBool', name: 'Complétée', field: 'completedBool', minWidth: 100,
         sortable: true,
-        formatter: Formatters.checkmark,
+        formatter: Formatters.checkmarkMaterial,
         exportCustomFormatter: exportBooleanFormatter,
         filterable: true,
         filter: {

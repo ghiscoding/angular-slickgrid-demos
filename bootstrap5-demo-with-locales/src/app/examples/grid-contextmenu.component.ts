@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { Subscription } from 'rxjs';
 
 import {
   AngularGridInstance,
@@ -12,14 +11,13 @@ import {
   Formatter,
   Formatters,
   GridOption,
-  unsubscribeAllObservables,
 } from 'angular-slickgrid';
 
 const actionFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
   if (dataContext.priority === 3) { // option 3 is High
-    return `<div class="cell-menu-dropdown-outline">Action<i class="fa fa-caret-down"></i></div>`;
+    return `<div class="cell-menu-dropdown-outline">Action<i class="mdi mdi-chevron-down"></i></div>`;
   }
-  return `<div class="disabled">Action <i class="fa fa-caret-down"></i></div>`;
+  return `<div class="cell-menu-dropdown-outline disabled">Action <i class="mdi mdi-chevron-down"></i></div>`;
 };
 
 const priorityFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
@@ -29,7 +27,7 @@ const priorityFormatter: Formatter = (row, cell, value, columnDef, dataContext) 
   let output = '';
   const count = +(value >= 3 ? 3 : value);
   const color = count === 3 ? 'red' : (count === 2 ? 'orange' : 'yellow');
-  const icon = `<i class="fa fa-star ${color}" aria-hidden="true"></i>`;
+  const icon = `<i class="mdi mdi-star ${color}" aria-hidden="true"></i>`;
 
   for (let i = 1; i <= count; i++) {
     output += icon;
@@ -41,7 +39,7 @@ const priorityExportFormatter: Formatter = (row, cell, value, columnDef, dataCon
   if (!value) {
     return '';
   }
-  const gridOptions = grid?.getOptions?.() as GridOption;
+  const gridOptions = grid.getOptions() as GridOption;
   const count = +(value >= 3 ? 3 : value);
   return count === 3 ? 'High' : (count === 2 ? 'Medium' : 'Low');
 };
@@ -84,7 +82,6 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
     </ul>`;
 
   private _darkModeGrid = false;
-  private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
@@ -108,8 +105,6 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // also unsubscribe all Angular Subscriptions
-    unsubscribeAllObservables(this.subscriptions);
     document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
     document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
   }
@@ -149,7 +144,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
       },
       {
         id: 'completed', name: 'Completed', field: 'completed',
-        formatter: Formatters.checkmark,
+        formatter: Formatters.checkmarkMaterial,
         sortable: true, filterable: true,
         filter: {
           collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
@@ -189,7 +184,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
             { command: 'command1', title: 'Command 1', cssClass: 'orange', positionOrder: 61 },
             {
               command: 'delete-row', title: 'Delete Row', positionOrder: 64,
-              iconCssClass: 'fa fa-times', cssClass: 'red', textCssClass: 'bold',
+              iconCssClass: 'mdi mdi-close', cssClass: 'red', textCssClass: 'bold',
               // only show command to 'Delete Row' when the task is not completed
               itemVisibilityOverride: (args) => {
                 return !args.dataContext.completed;
@@ -203,7 +198,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
             {
               command: 'help',
               title: 'Help',
-              iconCssClass: 'fa fa-question-circle',
+              iconCssClass: 'mdi mdi-help-circle',
               positionOrder: 66,
             },
             { command: 'something', title: 'Disabled Command', disabled: true, positionOrder: 67, },
@@ -240,8 +235,8 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
           ],
           optionTitle: 'Change Completed Flag',
           optionItems: [
-            { option: true, title: 'True', iconCssClass: 'fa fa-check-square-o' },
-            { option: false, title: 'False', iconCssClass: 'fa fa-square-o' },
+            { option: true, title: 'True', iconCssClass: 'mdi mdi-check-box-outline' },
+            { option: false, title: 'False', iconCssClass: 'mdi mdi-checkbox-blank-outline' },
             {
               option: null, title: 'null', cssClass: 'italic',
               // you can use the "action" callback and/or use "onCallback" callback from the grid options, they both have the same arguments
@@ -378,13 +373,13 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
       commandTitle: 'Commands',
       commandItems: [
         { divider: true, command: '', positionOrder: 61 },
-        { command: 'delete-row', title: 'Delete Row', iconCssClass: 'fa fa-times', cssClass: 'red', textCssClass: 'bold', positionOrder: 62 },
+        { command: 'delete-row', title: 'Delete Row', iconCssClass: 'mdi mdi-close', cssClass: 'red', textCssClass: 'bold', positionOrder: 62 },
         // you can pass divider as a string or an object with a boolean (if sorting by position, then use the object)
         // note you should use the "divider" string only when items array is already sorted and positionOrder are not specified
         // 'divider',
         { divider: true, command: '', positionOrder: 63 },
         {
-          command: 'help', title: 'Help', iconCssClass: 'fa fa-question-circle', positionOrder: 64,
+          command: 'help', title: 'Help', iconCssClass: 'mdi mdi-help-circle', positionOrder: 64,
           // you can use the 'action' callback and/or subscribe to the 'onCallback' event, they both have the same arguments
           action: (e, args) => {
             // action callback.. do something
@@ -446,15 +441,15 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
             // action callback.. do something
           },
         },
-        { option: 1, iconCssClass: 'fa fa-star-o yellow', title: 'Low' },
-        { option: 2, iconCssClass: 'fa fa-star-half-o orange', title: 'Medium' },
-        { option: 3, iconCssClass: 'fa fa-star red', title: 'High' },
+        { option: 1, iconCssClass: 'mdi mdi-star-outline yellow', title: 'Low' },
+        { option: 2, iconCssClass: 'mdi mdi-star orange', title: 'Medium' },
+        { option: 3, iconCssClass: 'mdi mdi-star red', title: 'High' },
         // you can pass divider as a string or an object with a boolean (if sorting by position, then use the object)
         // note you should use the "divider" string only when items array is already sorted and positionOrder are not specified
         'divider',
         // { divider: true, option: '', positionOrder: 3 },
         {
-          option: 4, title: 'Extreme', iconCssClass: 'fa fa-fire', disabled: true,
+          option: 4, title: 'Extreme', iconCssClass: 'mdi mdi-fire', disabled: true,
           // only shown when the task is Not Completed
           itemVisibilityOverride: (args) => {
             const dataContext = args && args.dataContext;
@@ -464,9 +459,9 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         {
           // we can also have multiple nested sub-menus
           option: null, title: 'Sub-Options (demo)', subMenuTitle: 'Change Priority', optionItems: [
-            { option: 1, iconCssClass: 'fa fa-star-o yellow', title: 'Low' },
-            { option: 2, iconCssClass: 'fa fa-star-half-o orange', title: 'Medium' },
-            { option: 3, iconCssClass: 'fa fa-star red', title: 'High' },
+            { option: 1, iconCssClass: 'mdi mdi-star-outline yellow', title: 'Low' },
+            { option: 2, iconCssClass: 'mdi mdi-star orange', title: 'Medium' },
+            { option: 3, iconCssClass: 'mdi mdi-star red', title: 'High' },
           ]
         }
       ],

@@ -1,5 +1,11 @@
-@import "bootstrap/scss/bootstrap";
 @import '@slickgrid-universal/common/dist/styles/sass/variables';
+
+// :root {
+//   --slick-button-style-bg-color: #fff;
+//   --slick-button-border-color: #c7c7c7;
+// }
+
+/* You can add global styles to this file, and also import other style files */
 $slick-button-border-color: #ababab !default;
 
 .btn-group-xs > .btn, .btn-xs {
@@ -7,10 +13,20 @@ $slick-button-border-color: #ababab !default;
   font-size  : 12px;
   line-height  : 1.5;
   border-radius : 3px;
-  margin: 0 2px;
+  margin: 0;
   font-size: 12px;
   height: 22px;
   vertical-align: middle;
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.gap-4px {
+  gap: 4px;
 }
 
 .side-menu {
@@ -21,212 +37,33 @@ $slick-button-border-color: #ababab !default;
     border-right: 1px solid #d0d0d0;
     overflow-y: auto;
     padding: 10px;
-
-    /* the height is 100% minus the 2 navbars */
-    height: calc(100vh - 56px);
     li {
       width: 100%;
     }
   }
 }
 
-body {
-  margin: 0;
-}
 .italic {
   font-style: italic;
 }
-.faded {
-  opacity: 0.2;
-}
-.faded:hover {
-  opacity: 0.5;
+.subtitle {
+  font-size: 15px;
+  font-style: italic;
+  color: grey;
+  margin-bottom: 10px;
 }
 .lightblue {
   color: lightblue;
 }
 .red {
-  color: red;
+    color: red;
 }
-.subtitle {
-  font-size: 18px;
-  font-style: italic;
-  color: grey;
-  margin-bottom: 10px;
+.faded {
+    opacity: 0.7;
 }
-
-.splash {
-  text-align: center;
-  margin: 10% 0 0 0;
-  box-sizing: border-box;
-}
-
-.splash .message {
-  font-size: 72px;
-  line-height: 72px;
-  text-shadow: rgba(0, 0, 0, 0.5) 0 0 15px;
-  text-transform: uppercase;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.splash .fa-spinner {
-  text-align: center;
-  display: inline-block;
-  font-size: 72px;
-  margin-top: 50px;
-}
-
-.page-host {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 56px;
-  bottom: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-@media print {
-  .page-host {
-    position: absolute;
-    left: 10px;
-    right: 0;
-    top: 50px;
-    bottom: 0;
-    overflow-y: inherit;
-    overflow-x: inherit;
-  }
-}
-
-section {
-  margin: 0 20px;
-}
-
-.navbar-nav li.loader {
-  margin: 12px 24px 0 6px;
-}
-
-.pictureDetail {
-  max-width: 425px;
-}
-
-/* animate page transitions */
-section.au-enter-active {
-  -webkit-animation: fadeInRight 1s;
-  animation: fadeInRight 1s;
-}
-
-div.au-stagger {
-  /* 50ms will be applied between each successive enter operation */
-  -webkit-animation-delay: 50ms;
-  animation-delay: 50ms;
-}
-
-.card-container.au-enter {
-  opacity: 0 !important;
-}
-
-.card-container.au-enter-active {
-  -webkit-animation: fadeIn 2s;
-  animation: fadeIn 2s;
-}
-
-.card {
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #CCC;
-  border-radius: 8px;
-  text-align: center;
-  padding: 0;
-  background-color: #337ab7;
-  color: rgb(136, 172, 217);
-  margin-bottom: 32px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
-}
-
-.card .content {
-  margin-top: 10px;
-}
-
-.card .content .name {
-  color: white;
-  text-shadow: 0 0 6px rgba(0, 0, 0, .5);
-  font-size: 18px;
-}
-
-.card .header-bg {
-  /* This stretches the canvas across the entire hero unit */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  border-bottom: 1px #FFF solid;
-  border-radius: 6px 6px 0 0;
-}
-
-.card .avatar {
-  position: relative;
-  margin-top: 15px;
-  z-index: 100;
-}
-
-.card .avatar img {
-  width: 100px;
-  height: 100px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  border: 2px #FFF solid;
-}
-
-/* animation definitions */
-@-webkit-keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0)
-  }
-  100% {
+.faded:hover {
     opacity: 1;
-    -webkit-transform: none;
-    transform: none
-  }
 }
-
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(100%, 0, 0);
-    -ms-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0)
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    -ms-transform: none;
-    transform: none
-  }
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .pointer {
   cursor: pointer !important;
 }
@@ -235,6 +72,12 @@ div.au-stagger {
 }
 .text-danger {
   color: red !important;
+}
+.mdi-pencil.pointer:hover {
+  color: #00bfff;
+}
+.mdi-trash-can.pointer:hover {
+  color: #ff002b;
 }
 
 .github-button-container {
@@ -246,10 +89,13 @@ div.au-stagger {
 .slick-dark-mode {
   --slick-button-style-bg-color: #212121;
   --slick-button-border-color: #626262;
+  .text-primary {
+    color: #599BFE !important;
+  }
 }
 .button-style {
   cursor: pointer;
-  background-color: var(--slick-button-style-bg-color);
+  background-color: var(--slick-button-style-bg-color, $slick-button-style-bg-color);
   border: 1px solid #{var(--slick-button-border-color, $slick-button-border-color)};
   border-radius: 2px;
   justify-content: center;
@@ -284,24 +130,3 @@ div.au-stagger {
     color: #dfdfdf;
   }
 }
-
-.ms-dark-mode,
-.ms-drop.ms-dark-mode,
-.slick-dark-mode .ms-dark-mode,
-.slick-dark-mode {
-  --slick-checkbox-selector-unchecked-color: #0298e3;
-  --slick-column-picker-checkbox-color: #0298e3;
-  --slick-pagination-icon-color: #0298e3;
-}
-
-/* Angular-Slickgrid styling */
-/* Customize the SlickGrid Bootstrap theme to your taste
- * Copy any of the variables '../node_modules/angular-slickgrid/styles/sass/_variables.scss'
- * and make sure to add the @import at the end of this file
- */
-
-/* for example, let's change the mouse hover color */
-/*$slick-cell-odd-background-color: lightyellow;*/
-
-/* make sure to add the @import the SlickGrid Bootstrap Theme AFTER the variables changes */
-@import '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-bootstrap.scss';

@@ -11,12 +11,12 @@ import {
   GridOption,
   GridStateChange,
   Metrics,
-  MultipleSelectOption,
+  type MultipleSelectOption,
   OperatorType,
   SortDirection,
   unsubscribeAllObservables,
 } from 'angular-slickgrid';
-import moment from 'moment-mini';
+import { addDay, format } from '@formkit/tempo';
 import { Subscription } from 'rxjs';
 
 const defaultPageSize = 20;
@@ -30,7 +30,7 @@ const FAKE_SERVER_DELAY = 250;
 export class GridGraphqlComponent implements OnInit, OnDestroy {
   title = 'Example 6: Grid connected to Backend Server with GraphQL';
   subTitle = `
-    Sorting/Paging connected to a Backend GraphQL Service (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/GraphQL" target="_blank">Wiki docs</a>).
+    Sorting/Paging connected to a Backend GraphQL Service (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/backend-services/graphql" target="_blank">Wiki docs</a>).
     <br/>
     <ul class="small">
       <li><span class="red">(*) NO DATA SHOWING</span> - just change Filters &amp; Pages and look at the "GraphQL Query" changing :)</li>
@@ -40,7 +40,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         <li>The (*) can be used as startsWith (ex.: "abc*" => startsWith "abc") / endsWith (ex.: "*xyz" => endsWith "xyz")</li>
         <li>The other operators can be used on column type number for example: ">=100" (bigger or equal than 100)</li>
       </ul>
-      <li>You can also preload a grid with certain "presets" like Filters / Sorters / Pagination <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Grid-State-&-Preset" target="_blank">Wiki - Grid Preset</a>
+      <li>You can also preload a grid with certain "presets" like Filters / Sorters / Pagination <a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/grid-state-and-preset" target="_blank">Wiki - Grid Preset</a>
     </ul>
   `;
   private subscriptions: Subscription[] = [];
@@ -123,8 +123,8 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       },
     ];
 
-    const presetLowestDay = moment().add(-2, 'days').format('YYYY-MM-DD');
-    const presetHighestDay = moment().add(20, 'days').format('YYYY-MM-DD');
+    const presetLowestDay = format(addDay(new Date(), -2), 'YYYY-MM-DD');
+    const presetHighestDay = format(addDay(new Date(), 20), 'YYYY-MM-DD');
 
     this.gridOptions = {
       gridHeight: 200,
@@ -140,7 +140,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
         resizeOnShowHeaderRow: true,
         commandItems: [
           {
-            iconCssClass: 'fa fa-times text-danger',
+            iconCssClass: 'mdi mdi-close text-danger',
             title: 'Reset Grid',
             disabled: false,
             command: 'reset-grid',
@@ -276,7 +276,7 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.graphqlQuery = this.angularGrid.backendService!.buildQuery();
         if (this.isWithCursor) {
-          // When using cursor pagination, the pagination service needs to updated with the PageInfo data from the latest request
+          // When using cursor pagination, the pagination service needs to be updated with the PageInfo data from the latest request
           // This might be done automatically if using a framework specific slickgrid library
           // Note because of this timeout, this may cause race conditions with rapid clicks!
           this.angularGrid?.paginationService?.setCursorPageInfo((mockedResult.data[GRAPHQL_QUERY_DATASET_NAME].pageInfo));
@@ -312,8 +312,8 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   }
 
   setFiltersDynamically() {
-    const presetLowestDay = moment().add(-2, 'days').format('YYYY-MM-DD');
-    const presetHighestDay = moment().add(20, 'days').format('YYYY-MM-DD');
+    const presetLowestDay = format(addDay(new Date(), -2), 'YYYY-MM-DD');
+    const presetHighestDay = format(addDay(new Date(), 20), 'YYYY-MM-DD');
 
     // we can Set Filters Dynamically (or different filters) afterward through the FilterService
     this.angularGrid.filterService.updateFilters([
@@ -334,8 +334,8 @@ export class GridGraphqlComponent implements OnInit, OnDestroy {
   }
 
   resetToOriginalPresets() {
-    const presetLowestDay = moment().add(-2, 'days').format('YYYY-MM-DD');
-    const presetHighestDay = moment().add(20, 'days').format('YYYY-MM-DD');
+    const presetLowestDay = format(addDay(new Date(), -2), 'YYYY-MM-DD');
+    const presetHighestDay = format(addDay(new Date(), 20), 'YYYY-MM-DD');
 
     this.angularGrid.filterService.updateFilters([
       // you can use OperatorType or type them as string, e.g.: operator: 'EQ'

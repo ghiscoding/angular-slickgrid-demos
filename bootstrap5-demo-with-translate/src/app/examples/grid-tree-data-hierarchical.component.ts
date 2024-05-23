@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 
 import {
+  addWhiteSpaces,
   AngularGridInstance,
   Aggregators,
   Column,
@@ -14,9 +15,6 @@ import {
   GridOption,
   isNumber,
   SlickDataView,
-  addWhiteSpaces,
-  // GroupTotalFormatters,
-  // italicFormatter,
 } from 'angular-slickgrid';
 
 @Component({
@@ -25,17 +23,11 @@ import {
   encapsulation: ViewEncapsulation.None
 })
 export class GridTreeDataHierarchicalComponent implements OnInit {
-  title = 'Example 29: Tree Data with Aggregators <small><span class="mdi mdi-file-tree mdi-27px"></span> (from a Hierarchical Dataset - <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Tree-Data-Grid" target="_blank">Wiki</a>)</small>';
+  title = 'Example 29: Tree Data with Aggregators <small><span class="mdi mdi-file-tree mdi-27px"></span> (from a Hierarchical Dataset - <a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/tree-data-grid" target="_blank">Wiki</a>)</small>';
   subTitle = `<ul>
     <li><b>NOTE #1:</b> The grid will automatically sort Ascending with the column that has the Tree Data, you could add a "sortByFieldId" in your column "treeData" option if you wish to sort on a different column</li>
     <li><b>NOTE #2:</b> Tree Totals are only calculated once and are <b>NOT</b> recalculated while filtering data, if you do want that feature then you will need to enable <code>autoRecalcTotalsOnFilterChange</code> <i>(see checkbox below)</i></li>
-    <li><b>Styling - Salesforce Theme</b></li>
-    <ul>
-      <li>The Salesforce Theme was created with SASS and compiled in CSS (<a href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/modules/angular-slickgrid/styles/slickgrid-theme-salesforce.scss" target="_blank">slickgrid-theme-salesforce.scss</a>), you can override any of its SASS variables</li>
-      <li>We use a small subset of <a href="https://materialdesignicons.com/" target="_blank">Material Design Icons</a></li>
-      <li>you might need to refresh the page to clear the browser cache and see the correct theme</li>
-    </ul>
-  `;
+  </ul>`;
 
   angularGrid!: AngularGridInstance;
   dataViewObj: any;
@@ -106,10 +98,10 @@ export class GridTreeDataHierarchicalComponent implements OnInit {
 
             if (avgVal !== undefined && sumVal !== undefined) {
               // when found Avg & Sum, we'll display both
-              return isNaN(sumVal) ? '' : `<span class="color-primary bold">sum: ${decimalFormatted(sumVal, 0, 2)} MB</span> / <span class="avg-total">avg: ${decimalFormatted(avgVal, 0, 2)} MB</span> <span class="total-suffix">(${treeLevel === 0 ? 'total' : 'sub-total'})</span>`;
+              return isNaN(sumVal) ? '' : `<span class="text-primary bold">sum: ${decimalFormatted(sumVal, 0, 2)} MB</span> / <span class="avg-total">avg: ${decimalFormatted(avgVal, 0, 2)} MB</span> <span class="total-suffix">(${treeLevel === 0 ? 'total' : 'sub-total'})</span>`;
             } else if (sumVal !== undefined) {
               // or when only Sum is aggregated, then just show Sum
-              return isNaN(sumVal) ? '' : `<span class="color-primary bold">sum: ${decimalFormatted(sumVal, 0, 2)} MB</span> <span class="total-suffix">(${treeLevel === 0 ? 'total' : 'sub-total'})</span>`;
+              return isNaN(sumVal) ? '' : `<span class="text-primary bold">sum: ${decimalFormatted(sumVal, 0, 2)} MB</span> <span class="total-suffix">(${treeLevel === 0 ? 'total' : 'sub-total'})</span>`;
             }
           }
           // reaching this line means it's a regular dataContext without totals, so regular formatter output will be used
@@ -163,7 +155,7 @@ export class GridTreeDataHierarchicalComponent implements OnInit {
         // add optional debounce time to limit number of execution that recalc is called, mostly useful on large dataset
         // autoRecalcTotalsDebounce: 250
       },
-      // change header/cell row height for salesforce theme
+      // change header/cell row height
       headerRowHeight: 35,
       rowHeight: 33,
       showCustomFooter: true,
@@ -268,7 +260,7 @@ export class GridTreeDataHierarchicalComponent implements OnInit {
     const indentSpacer = addWhiteSpaces(5 * treeLevel);
 
     if (data[idx + 1]?.[treeLevelPropName] > data[idx][treeLevelPropName] || data[idx]['__hasChildren']) {
-      const folderPrefix = `<span class="mdi icon color-alt-warning ${dataContext.__collapsed ? 'mdi-folder' : 'mdi-folder-open'}"></span>`;
+      const folderPrefix = `<span class="mdi icon ${dataContext.__collapsed ? 'mdi-folder' : 'mdi-folder-open'}"></span>`;
       if (dataContext.__collapsed) {
         return `<span class="hidden">${exportIndentationLeadingChar}</span>${spacer}${indentSpacer} <span class="slick-group-toggle collapsed" level="${treeLevel}"></span>${folderPrefix} ${prefix} ${value}`;
       } else {
@@ -282,13 +274,13 @@ export class GridTreeDataHierarchicalComponent implements OnInit {
   getFileIcon(value: string) {
     let prefix = '';
     if (value.includes('.pdf')) {
-      prefix = '<span class="mdi icon mdi-file-pdf-outline color-danger"></span>';
+      prefix = '<span class="mdi icon mdi-file-pdf-outline"></span>';
     } else if (value.includes('.txt')) {
-      prefix = '<span class="mdi icon mdi-file-document-outline color-muted-light"></span>';
+      prefix = '<span class="mdi icon mdi-file-document-outline"></span>';
     } else if (value.includes('.xls')) {
-      prefix = '<span class="mdi icon mdi-file-excel-outline color-success"></span>';
+      prefix = '<span class="mdi icon mdi-file-excel-outline"></span>';
     } else if (value.includes('.mp3')) {
-      prefix = '<span class="mdi icon mdi-file-music-outline color-info"></span>';
+      prefix = '<span class="mdi icon mdi-file-music-outline"></span>';
     }
     return prefix;
   }

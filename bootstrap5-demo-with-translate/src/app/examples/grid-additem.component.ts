@@ -9,7 +9,7 @@ import { AngularGridInstance, Column, Editors, FieldType, Formatters, GridOption
 export class GridAddItemComponent implements OnInit {
   title = 'Example 11: Add / Update / Highlight a Datagrid Item';
   subTitle = `
-  Add / Update / Hightlight an Item from the Datagrid (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Add,-Update-or-Highlight-a-Datagrid-Item" target="_blank">Wiki docs</a>).
+  Add / Update / Hightlight an Item from the Datagrid (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/add-update-highlight" target="_blank">Wiki docs</a>).
   <ul>
     <li><b>Note:</b> this demo is <b>only</b> on the datagrid (client) side, you still need to deal with the backend yourself</li>
     <li>Adding an item, will always be showing as the 1st item in the grid because that is the best visual place to add it</li>
@@ -22,7 +22,7 @@ export class GridAddItemComponent implements OnInit {
     </ul>
     <li>You can also add CSS class(es) on the fly (or on page load) on rows with certain criteria, (e.g. click on last button)
     <ul>
-      <li>Example, click on button "Highlight Rows with Duration over 40" to see row styling changing. <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Dynamically-Add-CSS-Classes-to-Item-Rows" target="_blank">Wiki doc</a></li>
+      <li>Example, click on button "Highlight Rows with Duration over 50" to see row styling changing. <a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/dynamic-item-metadata" target="_blank">Wiki doc</a></li>
     </ul>
   </ul>
   `;
@@ -62,7 +62,8 @@ export class GridAddItemComponent implements OnInit {
         id: 'delete',
         field: 'id',
         excludeFromHeaderMenu: true,
-        formatter: Formatters.icon, params: { iconCssClass: 'fa fa-trash pointer' },
+        formatter: Formatters.icon,
+        params: { iconCssClass: 'mdi mdi-trash-can pointer' },
         minWidth: 30,
         maxWidth: 30,
         // use onCellClick OR grid.onClick.subscribe which you can see down below
@@ -119,7 +120,7 @@ export class GridAddItemComponent implements OnInit {
       },
       {
         id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven',
-        formatter: Formatters.checkmark,
+        formatter: Formatters.checkmarkMaterial,
         type: FieldType.number,
         editor: {
           model: Editors.checkbox

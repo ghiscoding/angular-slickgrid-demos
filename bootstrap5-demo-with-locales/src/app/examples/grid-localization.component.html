@@ -1,11 +1,11 @@
 <div id="demo-container" class="container-fluid">
   <h2>
     {{title}}
-    <span class="float-right">
+    <span class="float-end">
       <a style="font-size: 18px"
          target="_blank"
          href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-localization.component.ts">
-        <span class="fa fa-link"></span> code
+        <span class="mdi mdi-link-variant"></span> code
       </a>
     </span>
   </h2>
@@ -16,20 +16,20 @@
   <div class="row">
     <div class="col-sm-12">
       <span style="margin-left: 20px">
-        <button class="btn btn-outline-secondary btn-sm" (click)="exportToFile('csv')">
-          <i class="fa fa-download"></i>
+        <button class="btn btn-outline-secondary btn-sm btn-icon" (click)="exportToFile('csv')">
+          <i class="mdi mdi-download"></i>
           Télécharger en format CSV
         </button>
-        <button class="btn btn-outline-secondary btn-sm" (click)="exportToFile('txt')">
-          <i class="fa fa-download"></i>
+        <button class="btn btn-outline-secondary btn-sm btn-icon" (click)="exportToFile('txt')">
+          <i class="mdi mdi-download"></i>
           Télécharger en format Text
         </button>
-        <button class="btn btn-outline-secondary btn-sm" (click)="exportToExcel()">
-          <i class="fa fa-file-excel-o text-success"></i>
+        <button class="btn btn-outline-secondary btn-sm btn-icon" (click)="exportToExcel()">
+          <i class="mdi mdi-file-excel-outline text-success"></i>
           Télécharger vers Excel
         </button>
-        <button class="btn btn-outline-secondary btn-sm" (click)="dynamicallyAddTitleHeader()">
-          <i class="fa fa-plus"></i>
+        <button class="btn btn-outline-secondary btn-sm btn-icon" (click)="dynamicallyAddTitleHeader()">
+          <i class="mdi mdi-shape-square-plus"></i>
           Ajouter la colonne Titre dynamiquement
         </button>
       </span>

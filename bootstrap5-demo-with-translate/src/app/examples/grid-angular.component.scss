@@ -6,9 +6,7 @@ h3 {
 #slickGridContainer-grid22 {
   /* you can change all filters heights via CSS variable */
   --slick-header-input-height: 34px;
-}
 
-#slickGridContainer-grid22 {
   .slickgrid-container {
     .slick-headerrow-column {
       .ng-input {
@@ -38,7 +36,7 @@ h3 {
     color: #ffffff;
   }
 
-  .fa-caret-down {
+  .mdi-chevron-down {
     margin-left: 5px;
   }
 }
