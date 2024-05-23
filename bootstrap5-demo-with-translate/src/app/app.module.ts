@@ -1,7 +1,7 @@
 import { AppRoutingRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Injector, APP_INITIALIZER, NgModule } from '@angular/core';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -134,11 +134,10 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     SwtCommonGridComponent,
     HomeComponent
   ],
-  imports: [
-    AppRoutingRoutingModule,
+  bootstrap: [AppComponent],
+  imports: [AppRoutingRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpClientModule,
     NgSelectModule,
     TabsModule.forRoot(),
     TranslateModule.forRoot({
@@ -164,8 +163,8 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
       useFactory: appInitializerFactory,
       deps: [TranslateService, Injector],
       multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
 })
 export class AppModule { }
