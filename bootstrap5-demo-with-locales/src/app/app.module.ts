@@ -1,11 +1,12 @@
-import { AppRoutingRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
+import DOMPurify from 'dompurify';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
+import { AppRoutingRoutingModule } from './app-routing.module';
 import { CustomButtonFormatterComponent } from './examples/custom-buttonFormatter.component';
 import { CustomTitleFormatterComponent } from './examples/custom-titleFormatter.component';
 import { CustomFooterComponent, GridHeaderFooterComponent } from './examples/grid-header-footer.component';
@@ -55,9 +56,6 @@ import { SwtCommonGridComponent } from './examples/swt-common-grid.component';
 import { AppComponent } from './app.component';
 import { AngularSlickgridModule } from 'angular-slickgrid';
 import { localeFrench } from './locales/fr';
-
-// load necessary Flatpickr Locale(s), but make sure it's imported AFTER the AngularSlickgridModule import
-import 'flatpickr/dist/l10n/fr';
 
 // @dynamic
 @NgModule({
@@ -123,6 +121,9 @@ import 'flatpickr/dist/l10n/fr';
         container: '#demo-container',
         rightPadding: 10
       },
+      // we strongly suggest you add DOMPurify as a sanitizer
+      sanitizer: (dirtyHtml) => DOMPurify.sanitize(dirtyHtml, { ADD_ATTR: ['level'], RETURN_TRUSTED_TYPE: true })
+
       // Provide a custom locales set
       // locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
       // locales: localeFrench,

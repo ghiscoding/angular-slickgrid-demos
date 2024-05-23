@@ -23,8 +23,6 @@
               "@fnando/sparkline",
               "dompurify",
               "fetch-jsonp",
-              "flatpickr",
-              "moment-mini",
               "stream"
             ],
             "assets": [
@@ -53,8 +51,6 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/flatpickr/dist/flatpickr.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "src/styles.scss",
               "src/slickgrid-styles.scss"
