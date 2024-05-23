@@ -1,7 +1,7 @@
 import { AppRoutingRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -109,11 +109,10 @@ import 'flatpickr/dist/l10n/fr';
     SwtCommonGridComponent,
     HomeComponent
   ],
-  imports: [
-    AppRoutingRoutingModule,
+  bootstrap: [AppComponent],
+  imports: [AppRoutingRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpClientModule,
     NgSelectModule,
     TabsModule.forRoot(),
     AngularSlickgridModule.forRoot({
@@ -129,6 +128,6 @@ import 'flatpickr/dist/l10n/fr';
       // locales: localeFrench,
     })
   ],
-  bootstrap: [AppComponent]
+  providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class AppModule { }
