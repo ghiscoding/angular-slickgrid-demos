@@ -24,6 +24,7 @@ import { GridContextMenuComponent } from './examples/grid-contextmenu.component'
 import { GridCustomTooltipComponent } from './examples/grid-custom-tooltip.component';
 import { GridDraggableGroupingComponent } from './examples/grid-draggrouping.component';
 import { GridEditorComponent } from './examples/grid-editor.component';
+import { GridExcelFormulaComponent } from './examples/grid-excel-formula.component';
 import { GridFormatterComponent } from './examples/grid-formatter.component';
 import { GridFrozenComponent } from './examples/grid-frozen.component';
 import { GridGraphqlComponent } from './examples/grid-graphql.component';
@@ -77,6 +78,7 @@ import { localeFrench } from './locales/fr';
     GridContextMenuComponent,
     GridCustomTooltipComponent,
     GridEditorComponent,
+    GridExcelFormulaComponent,
     GridDraggableGroupingComponent,
     GridFormatterComponent,
     GridFrozenComponent,

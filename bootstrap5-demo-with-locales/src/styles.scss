@@ -109,7 +109,11 @@ $slick-button-border-color: #ababab !default;
   background-color: #fff;
   /* the height is 100% minus the 2 navbars */
   height: calc(100vh - 56px);
+  padding: 0 20px;
 
+  #demo-container {
+    padding-bottom: 15px;
+  }
   h3 {
     color: #333;
   }
@@ -128,5 +132,23 @@ $slick-button-border-color: #ababab !default;
   }
   .btn-outline-secondary {
     color: #dfdfdf;
+  }
+}
+
+/* editable field with outline border */
+.slick-cell .editing-field, .slick-cell.selected .editing-field {
+  border: 1px solid #dddbda;
+  padding: 3px 5px 3px 4px;
+  margin: -2px;
+  height: calc(100% + 4px);
+  border-radius: 3px;
+  background-color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    border: 1px solid #adadad;
   }
 }

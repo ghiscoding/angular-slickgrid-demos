@@ -80,7 +80,7 @@ export class GridHeaderButtonComponent implements OnInit {
       gridHeight: 275,
       headerButton: {
         // you can use the "onCommand" (in Grid Options) and/or the "action" callback (in Column Definition)
-        onCommand: (_e: any, args) => this.handleOnCommand(_e, args, 1)
+        onCommand: (_e, args) => this.handleOnCommand(_e, args, 1)
       }
     };
 
@@ -93,7 +93,7 @@ export class GridHeaderButtonComponent implements OnInit {
       // frozenRow: 2,
       headerButton: {
         // when floating to left, you might want to inverse the icon orders
-        onCommand: (_e: any, args) => this.handleOnCommand(_e, args, 2)
+        onCommand: (_e, args) => this.handleOnCommand(_e, args, 2)
       }
     };
   }

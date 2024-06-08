@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GraphqlService, GraphqlResult, GraphqlServiceApi, } from '@slickgrid-universal/graphql';
 
-
 import {
   AngularGridInstance,
   Column,
