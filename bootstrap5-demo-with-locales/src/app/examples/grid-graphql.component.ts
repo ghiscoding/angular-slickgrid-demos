@@ -199,7 +199,7 @@ export class GridGraphqlComponent implements OnInit {
               // What that means is that GraphQL won't let you write arbitrary queries out of the box.
               // It will only support the types of queries defined in your GraphQL schema.
               // see this SO: https://stackoverflow.com/a/37981802/1212166
-              return { field: fieldName, operator: OperatorType.custom, value: searchValue };
+              return { field: fieldName, operator: 'Like' as any, value: searchValue };
             }
             return;
           },
