@@ -117,7 +117,7 @@ export class GridGraphqlComponent implements OnInit {
           model: Filters.dateRange,
           filterShortcuts: [
             {
-              titleKey: 'NEXT_20_DAYS',
+              title: 'Next 20 days',
               iconCssClass: 'mdi mdi-calendar',
               searchTerms: [tempoFormat(new Date(), 'YYYY-MM-DD'), tempoFormat(addDay(new Date(), 20), 'YYYY-MM-DD')],
             },
