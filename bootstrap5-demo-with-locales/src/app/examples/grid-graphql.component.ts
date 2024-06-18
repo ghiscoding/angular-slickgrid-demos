@@ -1,5 +1,6 @@
 import { GraphqlService, GraphqlPaginatedResult, GraphqlServiceApi, GraphqlServiceOption, } from '@slickgrid-universal/graphql';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { addDay, format as tempoFormat } from '@formkit/tempo';
 import {
   AngularGridInstance,
   Column,
@@ -14,7 +15,6 @@ import {
   OperatorType,
   SortDirection,
 } from 'angular-slickgrid';
-import { addDay, format } from '@formkit/tempo';
 
 const defaultPageSize = 20;
 const GRAPHQL_QUERY_DATASET_NAME = 'users';
@@ -115,12 +115,19 @@ export class GridGraphqlComponent implements OnInit {
         filterable: true,
         filter: {
           model: Filters.dateRange,
+          filterShortcuts: [
+            {
+              titleKey: 'NEXT_20_DAYS',
+              iconCssClass: 'mdi mdi-calendar',
+              searchTerms: [tempoFormat(new Date(), 'YYYY-MM-DD'), tempoFormat(addDay(new Date(), 20), 'YYYY-MM-DD')],
+            },
+          ]
         }
       },
     ];
 
-    const presetLowestDay = format(addDay(new Date(), -2), 'YYYY-MM-DD');
-    const presetHighestDay = format(addDay(new Date(), 20), 'YYYY-MM-DD');
+    const presetLowestDay = tempoFormat(addDay(new Date(), -2), 'YYYY-MM-DD');
+    const presetHighestDay = tempoFormat(addDay(new Date(), 20), 'YYYY-MM-DD');
 
     this.gridOptions = {
       gridHeight: 200,
@@ -199,7 +206,7 @@ export class GridGraphqlComponent implements OnInit {
               // What that means is that GraphQL won't let you write arbitrary queries out of the box.
               // It will only support the types of queries defined in your GraphQL schema.
               // see this SO: https://stackoverflow.com/a/37981802/1212166
-              return { field: fieldName, operator: 'Like' as any, value: searchValue };
+              return { field: fieldName, operator: 'Like', value: searchValue };
             }
             return;
           },
@@ -321,8 +328,8 @@ export class GridGraphqlComponent implements OnInit {
   }
 
   setFiltersDynamically() {
-    const presetLowestDay = format(addDay(new Date(), -2), 'YYYY-MM-DD');
-    const presetHighestDay = format(addDay(new Date(), 20), 'YYYY-MM-DD');
+    const presetLowestDay = tempoFormat(addDay(new Date(), -2), 'YYYY-MM-DD');
+    const presetHighestDay = tempoFormat(addDay(new Date(), 20), 'YYYY-MM-DD');
 
     // we can Set Filters Dynamically (or different filters) afterward through the FilterService
     this.angularGrid.filterService.updateFilters([
@@ -343,8 +350,8 @@ export class GridGraphqlComponent implements OnInit {
   }
 
   resetToOriginalPresets() {
-    const presetLowestDay = format(addDay(new Date(), -2), 'YYYY-MM-DD');
-    const presetHighestDay = format(addDay(new Date(), 20), 'YYYY-MM-DD');
+    const presetLowestDay = tempoFormat(addDay(new Date(), -2), 'YYYY-MM-DD');
+    const presetHighestDay = tempoFormat(addDay(new Date(), 20), 'YYYY-MM-DD');
 
     this.angularGrid.filterService.updateFilters([
       // you can use OperatorType or type them as string, e.g.: operator: 'EQ'

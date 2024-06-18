@@ -21,6 +21,7 @@ export const localeEnglish = {
   TEXT_EXPORT_TO_EXCEL: 'Export to Excel',
   TEXT_EXPORT_TO_TAB_DELIMITED: 'Export in Text format (Tab delimited)',
   TEXT_EXPORT_TO_TEXT_FORMAT: 'Export in Text format',
+  TEXT_FILTER_SHORTCUTS: 'Filter Shortcuts',
   TEXT_FORCE_FIT_COLUMNS: 'Force fit columns',
   TEXT_FREEZE_COLUMNS: 'Freeze Columns',
   TEXT_GREATER_THAN: 'Greater than',
@@ -43,13 +44,20 @@ export const localeEnglish = {
   TEXT_X_OF_Y_SELECTED: '# of % selected',
 
   // optional locale texts (depending on which features of the grid you use, you might (or not) need them or not)
+  TEXT_BLANK_VALUES: 'Blank Values',
+  TEXT_NON_BLANK_VALUES: 'Non-Blank Values',
+  TEXT_FUTURE: 'Future',
   TEXT_ITEMS: 'items',
   TEXT_ITEMS_PER_PAGE: 'items per page',
+  TEXT_ITEMS_SELECTED: 'items selected',
   TEXT_LAST_UPDATE: 'Last Update',
+  TEXT_NEXT_20_DAYS: 'Next 20 days',
   TEXT_OF: 'of',
   TEXT_PAGE: 'Page',
+  TEXT_PAST: 'Past',
   TEXT_REFRESH_DATASET: 'Refresh Dataset',
   TEXT_SYNCHRONOUS_RESIZE: 'Synchronous resize',
+  TEXT_TODAY: 'Today',
   TEXT_TOGGLE_FILTER_ROW: 'Toggle Filter Row',
   TEXT_TOGGLE_PRE_HEADER_ROW: 'Toggle Pre-Header Row',
 };
