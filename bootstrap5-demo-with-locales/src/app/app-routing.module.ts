@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { HomeComponent } from './examples/home.component';
 import { GridAddItemComponent } from './examples/grid-additem.component';
 import { GridAngularComponent } from './examples/grid-angular.component';
 import { GridAutoHeightComponent } from './examples/grid-autoheight.component';
-import { GridBaseRowEditingComponent } from './examples/grid-base-row-editing.component';
 import { GridBasicComponent } from './examples/grid-basic.component';
+import { GridBaseRowEditingComponent } from './examples/grid-base-row-editing.component';
 import { GridClientSideComponent } from './examples/grid-clientside.component';
 import { GridColspanComponent } from './examples/grid-colspan.component';
 import { GridCompositeEditorComponent } from './examples/grid-composite-editor.component';
@@ -12,6 +14,7 @@ import { GridContextMenuComponent } from './examples/grid-contextmenu.component'
 import { GridCustomTooltipComponent } from './examples/grid-custom-tooltip.component';
 import { GridDraggableGroupingComponent } from './examples/grid-draggrouping.component';
 import { GridEditorComponent } from './examples/grid-editor.component';
+import { GridFooterTotalsComponent } from './examples/grid-footer-totals.component';
 import { GridExcelFormulaComponent } from './examples/grid-excel-formula.component';
 import { GridFormatterComponent } from './examples/grid-formatter.component';
 import { GridFrozenComponent } from './examples/grid-frozen.component';
@@ -35,15 +38,14 @@ import { GridTabsComponent } from './examples/grid-tabs.component';
 import { GridTradingComponent } from './examples/grid-trading.component';
 import { GridTreeDataHierarchicalComponent } from './examples/grid-tree-data-hierarchical.component';
 import { GridTreeDataParentChildComponent } from './examples/grid-tree-data-parent-child.component';
-import { HomeComponent } from './examples/home.component';
 import { SwtCommonGridTestComponent } from './examples/swt-common-grid-test.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'angular-components', component: GridAngularComponent },
   { path: 'additem', component: GridAddItemComponent },
-  { path: 'autoheight', component: GridAutoHeightComponent },
   { path: 'base-row-editing', component: GridBaseRowEditingComponent },
+  { path: 'autoheight', component: GridAutoHeightComponent },
   { path: 'basic', component: GridBasicComponent },
   { path: 'colspan', component: GridColspanComponent },
   { path: 'composite-editor', component: GridCompositeEditorComponent },
@@ -51,10 +53,10 @@ const routes: Routes = [
   { path: 'custom-tooltip', component: GridCustomTooltipComponent },
   { path: 'editor', component: GridEditorComponent },
   { path: 'excel-formula', component: GridExcelFormulaComponent },
+  { path: 'footer-totals', component: GridFooterTotalsComponent },
   { path: 'formatter', component: GridFormatterComponent },
   { path: 'frozen', component: GridFrozenComponent },
   { path: 'headerbutton', component: GridHeaderButtonComponent },
-  { path: 'header-footer', component: GridHeaderFooterComponent },
   { path: 'headermenu', component: GridHeaderMenuComponent },
   { path: 'gridgraphql', component: GridGraphqlComponent },
   { path: 'graphql-nopage', component: GridGraphqlWithoutPaginationComponent },
@@ -63,6 +65,7 @@ const routes: Routes = [
   { path: 'gridtabs', component: GridTabsComponent },
   { path: 'draggrouping', component: GridDraggableGroupingComponent },
   { path: 'grouping', component: GridGroupingComponent },
+  { path: 'header-footer', component: GridHeaderFooterComponent },
   { path: 'localization', component: GridLocalizationComponent },
   { path: 'clientside', component: GridClientSideComponent },
   { path: 'odata', component: GridOdataComponent },
@@ -72,10 +75,10 @@ const routes: Routes = [
   { path: 'rowdetail', component: GridRowDetailComponent },
   { path: 'rowmove', component: GridRowMoveComponent },
   { path: 'selection', component: GridRowSelectionComponent },
-  { path: 'swt', component: SwtCommonGridTestComponent },
   { path: 'trading', component: GridTradingComponent },
   { path: 'tree-data-parent-child', component: GridTreeDataParentChildComponent },
   { path: 'tree-data-hierarchical', component: GridTreeDataHierarchicalComponent },
+  { path: 'swt', component: SwtCommonGridTestComponent },
   { path: '', redirectTo: '/trading', pathMatch: 'full' },
   { path: '**', redirectTo: '/trading', pathMatch: 'full' }
 ];

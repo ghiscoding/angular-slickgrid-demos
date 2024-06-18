@@ -4,37 +4,39 @@ import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { Injector, APP_INITIALIZER, NgModule } from '@angular/core';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import DOMPurify from 'dompurify';
-import { TabsModule } from 'ngx-bootstrap/tabs';
 
+import { AppComponent } from './app.component';
 import { AppRoutingRoutingModule } from './app-routing.module';
-import { CustomButtonFormatterComponent } from './examples/custom-buttonFormatter.component';
 import { CustomTitleFormatterComponent } from './examples/custom-titleFormatter.component';
+import { CustomButtonFormatterComponent } from './examples/custom-buttonFormatter.component';
 import { CustomFooterComponent, GridHeaderFooterComponent } from './examples/grid-header-footer.component';
 import { EditorNgSelectComponent } from './examples/editor-ng-select.component';
 import { FilterNgSelectComponent } from './examples/filter-ng-select.component';
 import { GridAddItemComponent } from './examples/grid-additem.component';
 import { GridAngularComponent } from './examples/grid-angular.component';
 import { GridAutoHeightComponent } from './examples/grid-autoheight.component';
-import { GridBasicComponent } from './examples/grid-basic.component';
 import { GridBaseRowEditingComponent } from './examples/grid-base-row-editing.component';
+import { GridBasicComponent } from './examples/grid-basic.component';
 import { GridClientSideComponent } from './examples/grid-clientside.component';
 import { GridColspanComponent } from './examples/grid-colspan.component';
-import { GridCompositeEditorComponent } from './examples/grid-composite-editor.component';
 import { GridContextMenuComponent } from './examples/grid-contextmenu.component';
+import { GridCompositeEditorComponent } from './examples/grid-composite-editor.component';
 import { GridCustomTooltipComponent } from './examples/grid-custom-tooltip.component';
 import { GridDraggableGroupingComponent } from './examples/grid-draggrouping.component';
 import { GridEditorComponent } from './examples/grid-editor.component';
 import { GridExcelFormulaComponent } from './examples/grid-excel-formula.component';
+import { GridFooterTotalsComponent } from './examples/grid-footer-totals.component';
 import { GridFormatterComponent } from './examples/grid-formatter.component';
 import { GridFrozenComponent } from './examples/grid-frozen.component';
 import { GridGraphqlComponent } from './examples/grid-graphql.component';
 import { GridGraphqlWithoutPaginationComponent } from './examples/grid-graphql-nopage.component';
 import { GridGroupingComponent } from './examples/grid-grouping.component';
-import { GridHeaderMenuComponent } from './examples/grid-headermenu.component';
 import { GridHeaderButtonComponent } from './examples/grid-headerbutton.component';
+import { GridHeaderMenuComponent } from './examples/grid-headermenu.component';
 import { GridLocalizationComponent } from './examples/grid-localization.component';
 import { GridMenuComponent } from './examples/grid-menu.component';
 import { GridOdataComponent } from './examples/grid-odata.component';
@@ -57,7 +59,8 @@ import { SwtCommonGridTestComponent } from './examples/swt-common-grid-test.comp
 import { SwtCommonGridPaginationComponent } from './examples/swt-common-grid-pagination.component';
 import { SwtCommonGridComponent } from './examples/swt-common-grid.component';
 
-import { AppComponent } from './app.component';
+// import our custom module, library created using this article
+// https://medium.com/@ngl817/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e
 import { AngularSlickgridModule } from 'angular-slickgrid';
 
 // AoT requires an exported function for factories
@@ -72,12 +75,12 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     locationInitialized.then(() => {
       const langToSet = 'en';
       translate.setDefaultLang('en');
-      translate.use(langToSet).subscribe(() => {
-        // console.info(`Successfully initialized '${langToSet}' language.'`);
-      }, err => {
-        console.error(`Problem with '${langToSet}' language initialization.'`);
-      }, () => {
-        resolve(null);
+      translate.use(langToSet).subscribe({
+        next: () => {
+          // console.info(`Successfully initialized '${langToSet}' language.'`);
+        },
+        error: () => console.error(`Problem with '${langToSet}' language initialization.'`),
+        complete: () => resolve(null)
       });
     });
   });
@@ -102,9 +105,10 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     GridCompositeEditorComponent,
     GridContextMenuComponent,
     GridCustomTooltipComponent,
+    GridDraggableGroupingComponent,
     GridEditorComponent,
     GridExcelFormulaComponent,
-    GridDraggableGroupingComponent,
+    GridFooterTotalsComponent,
     GridFormatterComponent,
     GridFrozenComponent,
     GridGraphqlComponent,
@@ -132,10 +136,11 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     SwtCommonGridTestComponent,
     SwtCommonGridPaginationComponent,
     SwtCommonGridComponent,
-    HomeComponent
+    HomeComponent,
   ],
   bootstrap: [AppComponent],
-  imports: [AppRoutingRoutingModule,
+  imports: [
+    AppRoutingRoutingModule,
     BrowserModule,
     FormsModule,
     NgSelectModule,
