@@ -15,6 +15,10 @@ import { RowDetailPreloadComponent } from './rowdetail-preload.component';
 const NB_ITEMS = 1000;
 
 @Component({
+  styles: [
+    '.detail-label { display: inline-flex; align-items: center; gap: 4px; padding: 4px; }',
+    'label { font-weight: 600; }'
+  ],
   templateUrl: './grid-rowdetail.component.html'
 })
 export class GridRowDetailComponent implements OnDestroy, OnInit {
