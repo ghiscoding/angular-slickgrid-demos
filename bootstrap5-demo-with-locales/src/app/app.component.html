@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="https://github.com/ghiscoding/Angular-Slickgrid">
-    <i class="fa fa-github"></i>
+  <a class="navbar-brand ms-2" href="https://github.com/ghiscoding/Angular-Slickgrid">
+    <i class="mdi mdi-github"></i>
     <span>{{title}}</span>
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarContent"
           aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -29,13 +29,13 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div>
   <div class="panel-wm">
     <section id="panel-left" class="panel-wm-left">
       <ul class="well nav nav-pills nav-stacked">
         <li class="nav-item fw-bold nav-docs">
           <a class="nav-link" href="https://ghiscoding.gitbook.io/angular-slickgrid/" target="_blank">
-           <i class="fa fa-book"></i> Documentation
+            📘 Documentation
           </a>
         </li>
         <li class="nav-item">
@@ -54,9 +54,8 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/odata']">5- Backend Server with OData</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/gridgraphql']">
-            6- Backend Server with GraphQL
-          </a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/gridgraphql']">6- Backend Server with
+            GraphQL</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/headerbutton']">7- Header Button Plugin</a>
@@ -71,7 +70,8 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/selection']">10- Row Selection / 2 Grids</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/additem']">11- Add/Update Grid Item</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/additem']">11- Add/Update/Highlight Datagrid
+            Item</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/localization']">12- Localization (i18n)</a>
@@ -99,7 +99,7 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/draggrouping']">19- Draggable Grouping</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/frozen']">20- Pinned Columns/Rows</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/frozen']">20- Frozen Columns/Rows</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/rowdetail']">21- Row Detail View</a>
@@ -122,16 +122,19 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/context']">26- Cell & Context Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/graphql-nopage']">27- GraphQL without
-            Pagination</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/graphql-nopage']">
+            27- GraphQL without Pagination
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/tree-data-parent-child']">28- Tree Data
-            (Parent/Child)</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/tree-data-parent-child']">
+            28- Tree Data (Parent/Child)
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/tree-data-hierarchical']">29- Tree Data
-            (Hierarchical)</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/tree-data-hierarchical']">
+            29- Tree Data (Hierarchical)
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/composite-editor']">
@@ -171,6 +174,21 @@
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/footer-totals']">
             37- Footer Totals Row
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/infinite-odata']">
+            38- Infinite Scroll with OData
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/infinite-graphql']">
+            39- Infinite Scroll with GraphQL
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/infinite-json']">
+            40- Infinite Scroll from JSON data
           </a>
         </li>
       </ul>

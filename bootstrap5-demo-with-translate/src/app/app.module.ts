@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { LOCATION_INITIALIZED } from '@angular/common';
 import { Injector, APP_INITIALIZER, NgModule } from '@angular/core';
+import { LOCATION_INITIALIZED } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
@@ -37,6 +37,9 @@ import { GridGraphqlWithoutPaginationComponent } from './examples/grid-graphql-n
 import { GridGroupingComponent } from './examples/grid-grouping.component';
 import { GridHeaderButtonComponent } from './examples/grid-headerbutton.component';
 import { GridHeaderMenuComponent } from './examples/grid-headermenu.component';
+import { GridInfiniteGraphqlComponent } from './examples/grid-infinite-graphql.component';
+import { GridInfiniteJsonComponent } from './examples/grid-infinite-json.component';
+import { GridInfiniteOdataComponent } from './examples/grid-infinite-odata.component';
 import { GridLocalizationComponent } from './examples/grid-localization.component';
 import { GridMenuComponent } from './examples/grid-menu.component';
 import { GridOdataComponent } from './examples/grid-odata.component';
@@ -117,6 +120,9 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     GridHeaderButtonComponent,
     GridHeaderFooterComponent,
     GridHeaderMenuComponent,
+    GridInfiniteGraphqlComponent,
+    GridInfiniteJsonComponent,
+    GridInfiniteOdataComponent,
     GridLocalizationComponent,
     GridMenuComponent,
     GridOdataComponent,

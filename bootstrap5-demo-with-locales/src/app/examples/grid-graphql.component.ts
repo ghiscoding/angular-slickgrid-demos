@@ -126,8 +126,9 @@ export class GridGraphqlComponent implements OnInit {
       },
     ];
 
-    const presetLowestDay = tempoFormat(addDay(new Date(), -2), 'YYYY-MM-DD');
-    const presetHighestDay = tempoFormat(addDay(new Date(), 20), 'YYYY-MM-DD');
+    const currentYear = new Date().getFullYear();
+    const presetLowestDay = `${currentYear}-01-01`;
+    const presetHighestDay = `${currentYear}-02-15`;
 
     this.gridOptions = {
       gridHeight: 200,
@@ -328,8 +329,9 @@ export class GridGraphqlComponent implements OnInit {
   }
 
   setFiltersDynamically() {
-    const presetLowestDay = tempoFormat(addDay(new Date(), -2), 'YYYY-MM-DD');
-    const presetHighestDay = tempoFormat(addDay(new Date(), 20), 'YYYY-MM-DD');
+    const currentYear = new Date().getFullYear();
+    const presetLowestDay = `${currentYear}-01-01`;
+    const presetHighestDay = `${currentYear}-02-15`;
 
     // we can Set Filters Dynamically (or different filters) afterward through the FilterService
     this.angularGrid.filterService.updateFilters([
@@ -350,8 +352,9 @@ export class GridGraphqlComponent implements OnInit {
   }
 
   resetToOriginalPresets() {
-    const presetLowestDay = tempoFormat(addDay(new Date(), -2), 'YYYY-MM-DD');
-    const presetHighestDay = tempoFormat(addDay(new Date(), 20), 'YYYY-MM-DD');
+    const currentYear = new Date().getFullYear();
+    const presetLowestDay = `${currentYear}-01-01`;
+    const presetHighestDay = `${currentYear}-02-15`;
 
     this.angularGrid.filterService.updateFilters([
       // you can use OperatorType or type them as string, e.g.: operator: 'EQ'
