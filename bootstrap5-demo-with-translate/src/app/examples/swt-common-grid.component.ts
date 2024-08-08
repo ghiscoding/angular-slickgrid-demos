@@ -2,13 +2,13 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FieldType } from '../modules/angular-slickgrid';
+import { FieldType } from 'angular-slickgrid';
 import type {
   AngularGridInstance,
   AngularSlickgridComponent, Column,
   GridOption, BackendService,
   BackendServiceOption, FilterChangedArgs, PaginationChangedArgs, Pagination, SlickDataView
-} from '../modules/angular-slickgrid';
+} from 'angular-slickgrid';
 import { TranslateService } from '@ngx-translate/core';
 import { Logger } from './swt-logger.service';
 import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
