@@ -7,7 +7,7 @@
     "start": "ng serve --port 4400",
     "build": "ng build --configuration production",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "eslint .",
     "e2e": "ng e2e"
   },
   "private": false,
@@ -56,12 +56,13 @@
     "@types/dompurify": "^3.0.5",
     "@types/fnando__sparkline": "^0.3.7",
     "@types/node": "^22.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.0.1",
-    "@typescript-eslint/parser": "^8.0.1",
+    "angular-eslint": "^18.2.0",
     "eslint": "^9.8.0",
+    "eslint-plugin-n": "^17.10.2",
     "sass": "^1.77.8",
     "ts-node": "^10.9.2",
-    "typescript": "~5.5.4"
+    "typescript": "~5.5.4",
+    "typescript-eslint": "^8.0.1"
   },
   "resolutions": {
     "caniuse-lite": "1.0.30001642",

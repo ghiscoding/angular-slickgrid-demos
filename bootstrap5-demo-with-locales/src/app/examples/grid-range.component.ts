@@ -15,7 +15,6 @@ import {
   type MultipleSelectOption,
   OperatorType,
   SliderRangeOption,
-  SlickGrid,
 } from 'angular-slickgrid';
 import { addDay, format } from '@formkit/tempo';
 

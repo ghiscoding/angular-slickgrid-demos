@@ -28,11 +28,8 @@
     <span>Loading...</span>
   </div>
 
-  <angular-slickgrid gridId="grid18"
-                     [columnDefinitions]="columnDefinitions"
-                     [gridOptions]="gridOptions"
-                     [dataset]="dataset"
-                     [customDataView]="customDataView"
+  <angular-slickgrid gridId="grid18" [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions"
+                     [dataset]="dataset" [customDataView]="customDataView"
                      (onAngularGridCreated)="angularGridReady($event.detail)"
                      (onViewportChanged)="onViewportChanged()"
                      (onSort)="onSort($event.detail.eventData, $event.detail.args)">

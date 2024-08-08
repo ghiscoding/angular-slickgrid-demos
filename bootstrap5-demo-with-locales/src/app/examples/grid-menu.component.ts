@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatters, GridOption, unsubscribeAllObservables } from 'angular-slickgrid';
+import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatters, GridOption } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './grid-menu.component.html',
@@ -228,7 +228,7 @@ export class GridMenuComponent implements OnInit {
 
   private isObjectEmpty(obj: any) {
     for (const key in obj) {
-      if (obj.hasOwnProperty(key) && obj[key] !== '') {
+      if (key in obj && obj[key] !== '') {
         return false;
       }
     }

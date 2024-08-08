@@ -18,11 +18,11 @@ import { localeFrench } from '../locales/fr';
 
 const NB_ITEMS = 1500;
 
-const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
+const taskFormatter: Formatter = (_row, _cell, value) => {
   return value !== undefined ? `Titre ${value}` : '';
 };
 
-const exportBooleanFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
+const exportBooleanFormatter: Formatter = (_row, _cell, value) => {
   return value ? 'Vrai' : 'Faux';
 };
 

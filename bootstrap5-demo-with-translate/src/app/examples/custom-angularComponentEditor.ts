@@ -90,7 +90,7 @@ export class CustomAngularComponentEditor implements Editor {
 
       // when our model (item object) changes, we'll call a save of the slickgrid editor
       this._subscriptions.push(
-        this.componentRef.instance.onItemChanged.subscribe((item: any) => this.save())
+        this.componentRef.instance.onItemChanged.subscribe((_item: any) => this.save())
       );
     }
   }

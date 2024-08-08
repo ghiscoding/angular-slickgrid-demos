@@ -13,14 +13,14 @@ import {
   GridOption,
 } from 'angular-slickgrid';
 
-const actionFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
+const actionFormatter: Formatter = (_row, _cell, _value, _columnDef, dataContext) => {
   if (dataContext.priority === 3) { // option 3 is High
     return `<div class="cell-menu-dropdown-outline">Action<i class="mdi mdi-chevron-down"></i></div>`;
   }
   return `<div class="cell-menu-dropdown-outline disabled">Action <i class="mdi mdi-chevron-down"></i></div>`;
 };
 
-const priorityFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
+const priorityFormatter: Formatter = (_row, _cell, value) => {
   if (!value) {
     return '';
   }
@@ -35,16 +35,15 @@ const priorityFormatter: Formatter = (row, cell, value, columnDef, dataContext) 
   return output;
 };
 
-const priorityExportFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
+const priorityExportFormatter: Formatter = (_row, _cell, value) => {
   if (!value) {
     return '';
   }
-  const gridOptions = grid.getOptions() as GridOption;
   const count = +(value >= 3 ? 3 : value);
   return count === 3 ? 'High' : (count === 2 ? 'Medium' : 'Low');
 };
 
-const taskFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
+const taskFormatter: Formatter = (_row, _cell, value) => {
   return value !== undefined ? `Title ${value}` : '';
 };
 
@@ -240,7 +239,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
             {
               option: null, title: 'null', cssClass: 'italic',
               // you can use the "action" callback and/or use "onCallback" callback from the grid options, they both have the same arguments
-              action: (e, args) => {
+              action: (_e, _args) => {
                 // action callback.. do something
               },
               // only enable Action menu when the Priority is set to High
@@ -287,7 +286,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         onOptionSelected: (e, args) => {
           // change "Completed" property with new option selected from the Cell Menu
           const dataContext = args && args.dataContext;
-          if (dataContext && dataContext.hasOwnProperty('completed')) {
+          if (dataContext && 'completed' in dataContext) {
             dataContext.completed = args.item.option;
             this.angularGrid.gridService.updateItem(dataContext);
           }
@@ -306,7 +305,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
   }
 
   executeCommand(_e: any, args: any) {
-    const columnDef = args.column;
+    // const columnDef = args.column;
     const command = args.command;
     const dataContext = args.dataContext;
 
@@ -381,7 +380,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         {
           command: 'help', title: 'Help', iconCssClass: 'mdi mdi-help-circle', positionOrder: 64,
           // you can use the 'action' callback and/or subscribe to the 'onCallback' event, they both have the same arguments
-          action: (e, args) => {
+          action: (_e, _args) => {
             // action callback.. do something
           },
           // only show command to 'Help' when the task is Not Completed
@@ -437,7 +436,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
             return (!dataContext.completed);
           },
           // you can use the 'action' callback and/or subscribe to the 'onCallback' event, they both have the same arguments
-          action: (e, args) => {
+          action: (_e, _args) => {
             // action callback.. do something
           },
         },
@@ -481,7 +480,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
       onOptionSelected: ((e, args) => {
         // change Priority
         const dataContext = args && args.dataContext;
-        if (dataContext?.hasOwnProperty('priority')) {
+        if ('priority' in dataContext) {
           dataContext.priority = args.item.option;
           this.angularGrid.gridService.updateItem(dataContext);
         }

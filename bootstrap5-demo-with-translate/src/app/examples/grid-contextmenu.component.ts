@@ -23,7 +23,7 @@ const actionFormatter: Formatter = (row, cell, value, columnDef, dataContext) =>
   return `<div class="cell-menu-dropdown-outline disabled">Action <i class="mdi mdi-chevron-down"></i></div>`;
 };
 
-const priorityFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
+const priorityFormatter: Formatter = (_row, _cell, value) => {
   if (!value) {
     return '';
   }
@@ -38,7 +38,7 @@ const priorityFormatter: Formatter = (row, cell, value, columnDef, dataContext) 
   return output;
 };
 
-const priorityExportFormatter: Formatter = (row, cell, value, columnDef, dataContext, grid) => {
+const priorityExportFormatter: Formatter = (_row, _cell, value, _columnDef, _dataContext, grid) => {
   if (!value) {
     return '';
   }
@@ -265,7 +265,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
             {
               option: null, title: 'null', cssClass: 'italic',
               // you can use the "action" callback and/or use "onCallback" callback from the grid options, they both have the same arguments
-              action: (e, args) => {
+              action: (_e, _args) => {
                 // action callback.. do something
               },
               // only enable Action menu when the Priority is set to High
@@ -314,7 +314,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         onOptionSelected: (e, args) => {
           // change "Completed" property with new option selected from the Cell Menu
           const dataContext = args && args.dataContext;
-          if (dataContext && dataContext.hasOwnProperty('completed')) {
+          if (dataContext && 'completed' in dataContext) {
             dataContext.completed = args.item.option;
             this.angularGrid.gridService.updateItem(dataContext);
           }
@@ -333,7 +333,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
   }
 
   executeCommand(_e: any, args: any) {
-    const columnDef = args.column;
+    // const columnDef = args.column;
     const command = args.command;
     const dataContext = args.dataContext;
 
@@ -408,7 +408,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         {
           command: 'help', titleKey: 'HELP', iconCssClass: 'mdi mdi-help-circle', positionOrder: 64,
           // you can use the 'action' callback and/or subscribe to the 'onCallback' event, they both have the same arguments
-          action: (e, args) => {
+          action: (_e, _args) => {
             // action callback.. do something
           },
           // only show command to 'Help' when the task is Not Completed
@@ -464,7 +464,7 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
             return (!dataContext.completed);
           },
           // you can use the 'action' callback and/or subscribe to the 'onCallback' event, they both have the same arguments
-          action: (e, args) => {
+          action: (_e, _args) => {
             // action callback.. do something
           },
         },
@@ -493,22 +493,22 @@ export class GridContextMenuComponent implements OnInit, OnDestroy {
         }
       ],
       // subscribe to Context Menu
-      onBeforeMenuShow: ((e, args) => {
+      onBeforeMenuShow: ((_e, args) => {
         // for example, you could select the row it was clicked with
         // grid.setSelectedRows([args.row]); // select the entire row
         this.angularGrid.slickGrid.setActiveCell(args.row, args.cell, false); // select the cell that the click originated
         console.log('Before the global Context Menu is shown', args);
       }),
-      onBeforeMenuClose: ((e, args) => console.log('Global Context Menu is closing', args)),
+      onBeforeMenuClose: ((_e, args) => console.log('Global Context Menu is closing', args)),
 
       // subscribe to Context Menu onCommand event (or use the action callback on each command)
       onCommand: ((e, args) => this.executeCommand(e, args)),
 
       // subscribe to Context Menu onOptionSelected event (or use the action callback on each option)
-      onOptionSelected: ((e, args) => {
+      onOptionSelected: ((_e, args) => {
         // change Priority
         const dataContext = args && args.dataContext;
-        if (dataContext?.hasOwnProperty('priority')) {
+        if ('priority' in dataContext) {
           dataContext.priority = args.item.option;
           this.angularGrid.gridService.updateItem(dataContext);
         }

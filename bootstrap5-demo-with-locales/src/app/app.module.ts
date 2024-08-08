@@ -60,7 +60,7 @@ import { SwtCommonGridPaginationComponent } from './examples/swt-common-grid-pag
 import { SwtCommonGridComponent } from './examples/swt-common-grid.component';
 
 import { AngularSlickgridModule } from 'angular-slickgrid';
-import { localeFrench } from './locales/fr';
+// import { localeFrench } from './locales/fr';
 
 // @dynamic
 @NgModule({
