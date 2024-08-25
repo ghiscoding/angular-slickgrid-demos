@@ -24,6 +24,7 @@ import { GridContextMenuComponent } from './examples/grid-contextmenu.component'
 import { GridCompositeEditorComponent } from './examples/grid-composite-editor.component';
 import { GridCustomTooltipComponent } from './examples/grid-custom-tooltip.component';
 import { GridDraggableGroupingComponent } from './examples/grid-draggrouping.component';
+import { GridDragRecycleComponent } from './examples/grid-drag-recycle.component';
 import { GridEditorComponent } from './examples/grid-editor.component';
 import { GridExcelFormulaComponent } from './examples/grid-excel-formula.component';
 import { GridFooterTotalsComponent } from './examples/grid-footer-totals.component';
@@ -82,6 +83,7 @@ import { AngularSlickgridModule } from 'angular-slickgrid';
     GridContextMenuComponent,
     GridCustomTooltipComponent,
     GridDraggableGroupingComponent,
+    GridDragRecycleComponent,
     GridEditorComponent,
     GridExcelFormulaComponent,
     GridFooterTotalsComponent,
