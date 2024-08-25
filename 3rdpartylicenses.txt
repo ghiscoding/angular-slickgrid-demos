@@ -1029,7 +1029,7 @@ License: "MIT"
 
 
 --------------------------------------------------------------------------------
-Package: vanilla-calendar-picker
+Package: vanilla-calendar-pro
 License: "MIT"
 
 MIT License
