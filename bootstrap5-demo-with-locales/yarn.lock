@@ -2831,10 +2831,10 @@ angular-eslint@^18.3.1:
     "@angular-eslint/schematics" "18.3.1"
     "@angular-eslint/template-parser" "18.3.1"
 
-angular-slickgrid@^8.6.2:
-  version "8.6.2"
-  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-8.6.2.tgz#258e36d3507c7eb9787265bb2f16e0fff611a07f"
-  integrity sha512-yCJRo7uc3jSq7ZqIZ6Qo3kDAbdwcjjf5jDCZNfoESUEQMIRjnIjPlcdJTs73wSB4cDbPTfvPCFPquTRAJciMlQ==
+angular-slickgrid@^8.7.0:
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/angular-slickgrid/-/angular-slickgrid-8.7.0.tgz#9104984aaca29793e5be47459bb9c0e6e069902f"
+  integrity sha512-AmF6YZUma3LprozcpIGhAKAREIWS+mwgUigQkW1rgyiyY0XEw/VdV6Fk3B0ycJ5RtaZhpD9VdiHabCTFj130CQ==
   dependencies:
     "@ngx-translate/core" "^15.0.0"
     "@slickgrid-universal/common" "~5.7.0"

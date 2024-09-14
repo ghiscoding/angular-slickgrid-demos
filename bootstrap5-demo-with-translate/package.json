@@ -30,7 +30,7 @@
     "@slickgrid-universal/graphql": "^5.7.0",
     "@slickgrid-universal/odata": "^5.7.0",
     "@slickgrid-universal/text-export": "^5.7.0",
-    "angular-slickgrid": "^8.6.2",
+    "angular-slickgrid": "^8.7.0",
     "bootstrap": "^5.3.3",
     "custom-event-polyfill": "^1.0.7",
     "dompurify": "^3.1.6",
