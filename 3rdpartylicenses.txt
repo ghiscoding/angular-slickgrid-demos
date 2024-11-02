@@ -993,7 +993,12 @@ THE SOFTWARE.
 Package: @slickgrid-universal/common
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1013,6 +1018,7 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: un-flatten-tree
 License: "MIT"
@@ -1215,7 +1221,8 @@ THE SOFTWARE.
 Package: angular-slickgrid
 License: "MIT"
 
-Copyright (c) 2017-present, Angular-Slickgrid - Ghislain B.
+Copyright (c) 2017-present, Michael Leibman and Ghislain B.
+https://github.com/ghiscoding/Angular-Slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1245,7 +1252,12 @@ License: "SEE LICENSE IN LICENSE"
 Package: @slickgrid-universal/row-detail-view-plugin
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1265,11 +1277,17 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: @slickgrid-universal/empty-warning-component
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1289,11 +1307,17 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: @slickgrid-universal/custom-footer-component
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1313,11 +1337,17 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: @slickgrid-universal/pagination-component
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1337,11 +1367,17 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: @slickgrid-universal/rxjs-observable
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1361,11 +1397,17 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: @slickgrid-universal/custom-tooltip-plugin
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1385,6 +1427,7 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: fflate
 License: "MIT"
@@ -1440,7 +1483,12 @@ THE SOFTWARE.
 Package: @slickgrid-universal/excel-export
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1460,11 +1508,17 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: @slickgrid-universal/composite-editor-component
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1484,6 +1538,7 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: text-encoding-utf-8
 License: undefined
@@ -1522,7 +1577,12 @@ For more information, please refer to <http://unlicense.org/>
 Package: @slickgrid-universal/text-export
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1542,11 +1602,17 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: @slickgrid-universal/graphql
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1566,11 +1632,17 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: @slickgrid-universal/odata
 License: "MIT"
 
-Copyright (c) 2020-present, Slickgrid-Universal - Ghislain B.
+Copyright (c) 2020-present, Ghislain B. 
+https://github.com/ghiscoding/slickgrid-universal
+
+and the original author of SlickGrid 
+Michael Leibman, michael{dot}leibman{at}gmail{dot}com
+http://github.com/mleibman/slickgrid
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -1590,6 +1662,7 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 --------------------------------------------------------------------------------
 Package: @faker-js/faker
 License: "MIT"
