@@ -51,10 +51,8 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
-              "src/styles.scss",
-              "src/slickgrid-styles.scss"
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.js"

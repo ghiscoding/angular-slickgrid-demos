@@ -1,5 +1,6 @@
-$slick-button-border-color: #ababab !default;
-@import '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-bootstrap.scss';
+// @use '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-bootstrap.scss' with (
+//   $slick-button-border-color: #ababab
+// );
 
 // --
 // Custom Tooltips CSS Variables (or SASS equivalent)
@@ -16,7 +17,7 @@ $slick-button-border-color: #ababab !default;
 // }
 
 .editable-field {
-  background-color: rgba(227, 240, 251, 0.569) !important;
+  background-color: rgba(227, 240, 251, 0.57) !important;
 }
 .unsaved-editable-field {
   background-color: #fbfdd1 !important;
