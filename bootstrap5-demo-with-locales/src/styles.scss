@@ -2,7 +2,7 @@
 
 $primary-color: #0d6efd;
 
-@use 'bootstrap/scss/bootstrap' with(
+@use 'bootstrap/scss/bootstrap' with (
     $primary: $primary-color
 );
 
