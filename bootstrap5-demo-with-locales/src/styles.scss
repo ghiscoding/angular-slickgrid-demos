@@ -2,10 +2,9 @@
 
 $primary-color: #0d6efd;
 
-@use 'bootstrap';
-// @use 'bootstrap' with (
-//   $primary: $primary-color
-// );
+@use 'bootstrap/scss/bootstrap' with(
+    $primary: $primary-color
+);
 
 // -- 1. load with modern `@use`
 // @use '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-bootstrap.scss';
