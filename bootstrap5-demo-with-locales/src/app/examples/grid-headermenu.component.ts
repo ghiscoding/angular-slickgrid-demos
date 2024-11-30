@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, GridOption } from 'angular-slickgrid';
+import { Column, GridOption } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './grid-headermenu.component.html',
@@ -28,7 +28,6 @@ export class GridHeaderMenuComponent implements OnInit {
     </ul>
   `;
 
-  angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset!: any[];
@@ -168,9 +167,5 @@ export class GridHeaderMenuComponent implements OnInit {
       };
     }
     this.dataset = mockDataset;
-  }
-
-  angularGridReady(angularGrid: AngularGridInstance) {
-    this.angularGrid = angularGrid;
   }
 }
