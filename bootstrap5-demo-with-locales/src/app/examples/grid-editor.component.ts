@@ -337,8 +337,8 @@ export class GridEditorComponent implements OnInit {
               /** with Angular Http, note this demo won't work because of CORS */
               // this.http.get(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`).subscribe(data => updateCallback(data));
 
-              /** with JSONP AJAX will work locally but not on the GitHub demo because of CORS */
-              fetchJsonp<string[]>(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`, { crossorigin: true })
+              /** with JSONP will work locally but not on the GitHub demo because of CORS */
+              fetchJsonp<string[]>(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`)
                 .then((response) => response.json())
                 .then((json) => updateCallback(json))
                 .catch((ex) => console.log('invalid JSONP response', ex));
@@ -357,7 +357,7 @@ export class GridEditorComponent implements OnInit {
           filterOptions: {
             minLength: 3,
             fetch: (searchText: string, updateCallback: (items: false | any[]) => void) => {
-              fetchJsonp<string[]>(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`, { crossorigin: true })
+              fetchJsonp<string[]>(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`)
                 .then((response) => response.json())
                 .then((json) => updateCallback(json))
                 .catch((ex) => console.log('invalid JSONP response', ex));
