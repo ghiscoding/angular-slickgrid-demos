@@ -22,7 +22,6 @@
             "allowedCommonJsDependencies": [
               "@fnando/sparkline",
               "dompurify",
-              "fetch-jsonp",
               "stream"
             ],
             "assets": [

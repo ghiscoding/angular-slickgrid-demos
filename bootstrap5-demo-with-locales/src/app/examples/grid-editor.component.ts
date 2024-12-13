@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import fetchJsonp from 'fetch-jsonp';
-
 import {
   AngularGridInstance,
   AutocompleterOption,
@@ -22,9 +20,11 @@ import {
   SlickGlobalEditorLock,
   type VanillaCalendarOption,
 } from 'angular-slickgrid';
+import { Subject } from 'rxjs';
+
 import { CustomInputEditor } from './custom-inputEditor';
 import { CustomInputFilter } from './custom-inputFilter';
-import { Subject } from 'rxjs';
+import fetchJsonp from './jsonp';
 
 const NB_ITEMS = 100;
 const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_100_numbers.json';
@@ -338,7 +338,7 @@ export class GridEditorComponent implements OnInit {
               // this.http.get(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`).subscribe(data => updateCallback(data));
 
               /** with JSONP AJAX will work locally but not on the GitHub demo because of CORS */
-              fetchJsonp(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`)
+              fetchJsonp<string[]>(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`, { crossorigin: true })
                 .then((response) => response.json())
                 .then((json) => updateCallback(json))
                 .catch((ex) => console.log('invalid JSONP response', ex));
@@ -357,7 +357,7 @@ export class GridEditorComponent implements OnInit {
           filterOptions: {
             minLength: 3,
             fetch: (searchText: string, updateCallback: (items: false | any[]) => void) => {
-              fetchJsonp(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`)
+              fetchJsonp<string[]>(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`, { crossorigin: true })
                 .then((response) => response.json())
                 .then((json) => updateCallback(json))
                 .catch((ex) => console.log('invalid JSONP response', ex));
