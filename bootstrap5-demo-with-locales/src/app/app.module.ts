@@ -53,6 +53,7 @@ import { GridTabsComponent } from './examples/grid-tabs.component';
 import { GridTradingComponent } from './examples/grid-trading.component';
 import { GridTreeDataHierarchicalComponent } from './examples/grid-tree-data-hierarchical.component';
 import { GridTreeDataParentChildComponent } from './examples/grid-tree-data-parent-child.component';
+import { Grid43Component } from './examples/grid43.component';
 import { HomeComponent } from './examples/home.component';
 import { CustomPagerComponent } from './examples/grid-custom-pager.component';
 import { RowDetailPreloadComponent } from './examples/rowdetail-preload.component';
@@ -116,6 +117,7 @@ import { AngularSlickgridModule } from 'angular-slickgrid';
     GridTradingComponent,
     GridTreeDataParentChildComponent,
     GridTreeDataHierarchicalComponent,
+    Grid43Component,
     RowDetailPreloadComponent,
     RowDetailViewComponent,
     SwtCommonGridTestComponent,

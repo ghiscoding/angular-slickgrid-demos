@@ -21,7 +21,6 @@
             ],
             "allowedCommonJsDependencies": [
               "@fnando/sparkline",
-              "dompurify",
               "stream"
             ],
             "assets": [
