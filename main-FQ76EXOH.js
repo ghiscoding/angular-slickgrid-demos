@@ -2822,7 +2822,7 @@ ${" ".repeat(i.length-n.length)}^`),a))]}function PZ(n){let e=n.indexOf(")",1);i
     considered the dataset. Note that this example is demoing a CSV file import but in your application you could easily implemnt
     an Excel file uploading.
   `),p())}function tX(n,e){if(n&1&&(m(0,"angular-slickgrid",17),c(1,`
-  `),p()),n&2){let i=te();x("columnDefinitions",i.columnDefinitions)("gridOptions",i.gridOptions)("dataset",i.dataset)}}var iX="assets/data",hI=(()=>{let e=class e{constructor(t){this.cd=t,this.columnDefinitions=[],this.dataset=[],this.gridCreated=!1,this.showSubTitle=!0,this.uploadFileRef="",this.templateUrl=`${iX}/users.csv`}handleFileImport(t){let r=t.target.files[0];if(r){let o=new FileReader;o.onload=a=>{let s=a.target.result;this.dynamicallyCreateGrid(s)},o.readAsText(r)}}handleDefaultCsv(){this.dynamicallyCreateGrid(`First Name,Last Name,Age,Type
+  `),p()),n&2){let i=te();x("columnDefinitions",i.columnDefinitions)("gridOptions",i.gridOptions)("dataset",i.dataset)}}var iX="assets/data",hI=(()=>{let e=class e{constructor(t){this.cd=t,this.columnDefinitions=[],this.dataset=[],this.gridCreated=!1,this.showSubTitle=!0,this.uploadFileRef="",this.templateUrl=`${iX}/users.csv`}handleFileImport(t){let r=t.target.files[0];if(r.name.endsWith(".csv")){let o=new FileReader;o.onload=a=>{let s=a.target.result;this.dynamicallyCreateGrid(s)},o.readAsText(r)}else alert("File must be a CSV file")}handleDefaultCsv(){this.dynamicallyCreateGrid(`First Name,Last Name,Age,Type
 Bob,Smith,33,Teacher
 John,Doe,20,Student
 Jane,Doe,21,Student`),this.uploadFileRef=""}destroyGrid(){this.gridCreated=!1}dynamicallyCreateGrid(t){this.gridCreated=!1,this.cd.detectChanges();let r=t?.split(`
