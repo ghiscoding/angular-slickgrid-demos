@@ -43,7 +43,6 @@ import { GridLocalizationComponent } from './examples/grid-localization.componen
 import { GridMenuComponent } from './examples/grid-menu.component';
 import { GridOdataComponent } from './examples/grid-odata.component';
 import { GridRangeComponent } from './examples/grid-range.component';
-import { GridRemoteComponent } from './examples/grid-remote.component';
 import { GridResizeByContentComponent } from './examples/grid-resize-by-content.component';
 import { GridRowDetailComponent } from './examples/grid-rowdetail.component';
 import { GridRowMoveComponent } from './examples/grid-rowmove.component';
@@ -53,7 +52,9 @@ import { GridTabsComponent } from './examples/grid-tabs.component';
 import { GridTradingComponent } from './examples/grid-trading.component';
 import { GridTreeDataHierarchicalComponent } from './examples/grid-tree-data-hierarchical.component';
 import { GridTreeDataParentChildComponent } from './examples/grid-tree-data-parent-child.component';
+import { Grid18Component } from './examples/grid18.component';
 import { Grid43Component } from './examples/grid43.component';
+import { Grid44Component } from './examples/grid44.component';
 import { HomeComponent } from './examples/home.component';
 import { CustomPagerComponent } from './examples/grid-custom-pager.component';
 import { RowDetailPreloadComponent } from './examples/rowdetail-preload.component';
@@ -107,7 +108,6 @@ import { AngularSlickgridModule } from 'angular-slickgrid';
     GridMenuComponent,
     GridOdataComponent,
     GridRangeComponent,
-    GridRemoteComponent,
     GridResizeByContentComponent,
     GridRowDetailComponent,
     GridRowMoveComponent,
@@ -117,7 +117,9 @@ import { AngularSlickgridModule } from 'angular-slickgrid';
     GridTradingComponent,
     GridTreeDataParentChildComponent,
     GridTreeDataHierarchicalComponent,
+    Grid18Component,
     Grid43Component,
+    Grid44Component,
     RowDetailPreloadComponent,
     RowDetailViewComponent,
     SwtCommonGridTestComponent,
@@ -138,7 +140,7 @@ import { AngularSlickgridModule } from 'angular-slickgrid';
       enableAutoResize: true,
       autoResize: {
         container: '#demo-container',
-        rightPadding: 10
+        rightPadding: 10,
       },
       // we strongly suggest you add DOMPurify as a sanitizer
       sanitizer: (dirtyHtml) => DOMPurify.sanitize(dirtyHtml, { ADD_ATTR: ['level'], RETURN_TRUSTED_TYPE: true })

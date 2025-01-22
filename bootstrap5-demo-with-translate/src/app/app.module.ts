@@ -46,7 +46,6 @@ import { GridLocalizationComponent } from './examples/grid-localization.componen
 import { GridMenuComponent } from './examples/grid-menu.component';
 import { GridOdataComponent } from './examples/grid-odata.component';
 import { GridRangeComponent } from './examples/grid-range.component';
-import { GridRemoteComponent } from './examples/grid-remote.component';
 import { GridResizeByContentComponent } from './examples/grid-resize-by-content.component';
 import { GridRowDetailComponent } from './examples/grid-rowdetail.component';
 import { GridRowMoveComponent } from './examples/grid-rowmove.component';
@@ -56,7 +55,9 @@ import { GridTabsComponent } from './examples/grid-tabs.component';
 import { GridTradingComponent } from './examples/grid-trading.component';
 import { GridTreeDataHierarchicalComponent } from './examples/grid-tree-data-hierarchical.component';
 import { GridTreeDataParentChildComponent } from './examples/grid-tree-data-parent-child.component';
+import { Grid18Component } from './examples/grid18.component';
 import { Grid43Component } from './examples/grid43.component';
+import { Grid44Component } from './examples/grid44.component';
 import { HomeComponent } from './examples/home.component';
 import { CustomPagerComponent } from './examples/grid-custom-pager.component';
 import { RowDetailPreloadComponent } from './examples/rowdetail-preload.component';
@@ -77,20 +78,21 @@ export function createTranslateLoader(http: HttpClient) {
 
 // use an Initializer Factory as describe here: https://github.com/ngx-translate/core/issues/517#issuecomment-299637956
 export function appInitializerFactory(translate: TranslateService, injector: Injector) {
-  return () => new Promise<any>((resolve: any) => {
-    const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
-    locationInitialized.then(() => {
-      const langToSet = 'en';
-      translate.setDefaultLang('en');
-      translate.use(langToSet).subscribe({
-        next: () => {
-          // console.info(`Successfully initialized '${langToSet}' language.'`);
-        },
-        error: () => console.error(`Problem with '${langToSet}' language initialization.'`),
-        complete: () => resolve(null)
+  return () =>
+    new Promise<any>((resolve: any) => {
+      const locationInitialized = injector.get(LOCATION_INITIALIZED, Promise.resolve(null));
+      locationInitialized.then(() => {
+        const langToSet = 'en';
+        translate.setDefaultLang('en');
+        translate.use(langToSet).subscribe({
+          next: () => {
+            // console.info(`Successfully initialized '${langToSet}' language.'`);
+          },
+          error: () => console.error(`Problem with '${langToSet}' language initialization.'`),
+          complete: () => resolve(null),
+        });
       });
     });
-  });
 }
 
 // @dynamic
@@ -134,7 +136,6 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     GridMenuComponent,
     GridOdataComponent,
     GridRangeComponent,
-    GridRemoteComponent,
     GridResizeByContentComponent,
     GridRowDetailComponent,
     GridRowMoveComponent,
@@ -144,7 +145,9 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     GridTradingComponent,
     GridTreeDataParentChildComponent,
     GridTreeDataHierarchicalComponent,
+    Grid18Component,
     Grid43Component,
+    Grid44Component,
     RowDetailPreloadComponent,
     RowDetailViewComponent,
     SwtCommonGridTestComponent,
@@ -162,9 +165,9 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
     }),
     AngularSlickgridModule.forRoot({
       // add any Global Grid Options/Config you might want
@@ -172,20 +175,20 @@ export function appInitializerFactory(translate: TranslateService, injector: Inj
       enableAutoResize: true,
       autoResize: {
         container: '#demo-container',
-        rightPadding: 10
+        rightPadding: 10,
       },
       // we strongly suggest you add DOMPurify as a sanitizer
-      sanitizer: (dirtyHtml) => DOMPurify.sanitize(dirtyHtml, { ADD_ATTR: ['level'], RETURN_TRUSTED_TYPE: true })
-    })
+      sanitizer: (dirtyHtml) => DOMPurify.sanitize(dirtyHtml, { ADD_ATTR: ['level'], RETURN_TRUSTED_TYPE: true }),
+    }),
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,
       deps: [TranslateService, Injector],
-      multi: true
+      multi: true,
     },
-    provideHttpClient(withInterceptorsFromDi())
-  ]
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
 })
 export class AppModule { }
