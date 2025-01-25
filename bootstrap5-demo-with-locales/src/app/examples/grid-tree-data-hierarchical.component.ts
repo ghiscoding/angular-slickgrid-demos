@@ -112,6 +112,7 @@ export class GridTreeDataHierarchicalComponent implements OnInit {
 
     this.gridOptions = {
       autoResize: {
+        autoHeight: false,
         container: '#demo-container',
         rightPadding: 10
       },
