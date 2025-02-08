@@ -64,7 +64,7 @@
     "typescript-eslint": "^8.23.0"
   },
   "resolutions": {
-    "caniuse-lite": "1.0.30001642",
+    "caniuse-lite": "1.0.30001695",
     "string-width": "4.2.3",
     "wrap-ansi": "7.0.0"
   }
