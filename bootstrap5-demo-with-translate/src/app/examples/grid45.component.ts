@@ -19,9 +19,10 @@ export class Grid45Component implements OnDestroy, OnInit {
   gridOptions!: GridOption;
   angularGrid!: AngularGridInstance;
   dataset: Distributor[] = [];
-  detailViewRowCount = 8;
-  showSubTitle = true;
+  detailViewRowCount = 9;
+  hideSubTitle = false;
   isUsingInnerGridStatePresets = false;
+  isUsingAutoHeight = false;
   serverWaitDelay = FAKE_SERVER_DELAY;
 
   get rowDetailInstance(): SlickRowDetailView {
@@ -100,6 +101,7 @@ export class Grid45Component implements OnDestroy, OnInit {
     this.gridOptions = {
       autoResize: {
         container: '#demo-container',
+        autoHeight: this.isUsingAutoHeight, // works with/without autoHeight
         bottomPadding: 20,
       },
       autoHeight: false,
@@ -159,10 +161,21 @@ export class Grid45Component implements OnDestroy, OnInit {
     return true;
   }
 
+  changeUsingResizerAutoHeight() {
+    this.isUsingAutoHeight = !this.isUsingAutoHeight;
+    this.angularGrid.slickGrid?.setOptions({
+      autoResize: { ...this.gridOptions.autoResize, autoHeight: this.isUsingAutoHeight },
+    });
+    this.angularGrid.resizerService.resizeGrid();
+    return true;
+  }
+
   closeAllRowDetail() {
-    if (this.angularGrid?.extensionService) {
-      this.rowDetailInstance.collapseAll();
-    }
+    this.rowDetailInstance?.collapseAll();
+  }
+
+  redrawAllRowDetail() {
+    this.rowDetailInstance?.redrawAllViewComponents(true);
   }
 
   /** Just for demo purposes, we will simulate an async server call and return more details on the selected row item */
@@ -224,11 +237,5 @@ export class Grid45Component implements OnDestroy, OnInit {
       document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
       document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
     }
-  }
-
-  toggleSubTitle() {
-    this.showSubTitle = !this.showSubTitle;
-    const action = this.showSubTitle ? 'remove' : 'add';
-    document.querySelector('.subtitle')?.classList[action]('hidden');
   }
 }
