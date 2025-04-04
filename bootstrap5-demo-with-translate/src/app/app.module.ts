@@ -8,6 +8,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import DOMPurify from 'dompurify';
+import { AngularSlickgridModule } from 'angular-slickgrid';
 
 import { AppComponent } from './app.component';
 import { AppRoutingRoutingModule } from './app-routing.module';
@@ -68,10 +69,6 @@ import { Grid45DetailComponent } from './examples/grid45-detail.component';
 import { SwtCommonGridTestComponent } from './examples/swt-common-grid-test.component';
 import { SwtCommonGridPaginationComponent } from './examples/swt-common-grid-pagination.component';
 import { SwtCommonGridComponent } from './examples/swt-common-grid.component';
-
-// import our custom module, library created using this article
-// https://medium.com/@ngl817/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e
-import { AngularSlickgridModule } from 'angular-slickgrid';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {

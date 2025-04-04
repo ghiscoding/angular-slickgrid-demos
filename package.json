@@ -1,0 +1,10 @@
+{
+  "name": "test-slickgrid",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cd bootstrap5-demo-with-translate && npm run dev"
+  },
+  "private": false,
+  "dependencies": {}
+}

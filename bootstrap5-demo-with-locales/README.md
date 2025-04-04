@@ -23,7 +23,7 @@ This is the same as the Bootstrap 5 demo except that it uses custom Locales and 
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
 cd angular-slickgrid-demos/bootstrap5-demo-with-locales
 npm install # OR yarn install
-npm start # OR yarn start
+npm dev # OR yarn dev
 ```
 
 ### Build Demo

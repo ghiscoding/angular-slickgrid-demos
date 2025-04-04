@@ -23,7 +23,7 @@ Again the following dependencies are totally **OPTIONAL**
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
 cd angular-slickgrid-demos/bootstrap5-demo-with-translate
 npm install # OR yarn install
-npm start # OR yarn start
+npm dev # OR yarn dev
 ```
 
 ### Build Demo
