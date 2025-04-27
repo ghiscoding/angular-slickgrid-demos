@@ -3,14 +3,13 @@
 $primary-color: #0d6efd;
 
 @use 'bootstrap/scss/bootstrap' with (
-    $primary: $primary-color
+  $primary: $primary-color
 );
 
 // -- 1. load with modern `@use`
 // @use '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-bootstrap.scss';
 @use '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-bootstrap.scss' with (
-  $slick-primary-color: $primary-color,
-  // $slick-input-focus-box-shadow: 0 0 0 0.25rem rgba($primary-color, 0.25),
+  $slick-primary-color: $primary-color // $slick-input-focus-box-shadow: 0 0 0 0.25rem rgba($primary-color, 0.25),
 );
 
 // -- 2. load with legacy `@import`
@@ -20,18 +19,31 @@ $primary-color: #0d6efd;
 
 :root {
   --ms-choice-border: var(--bs-border-width) solid var(--bs-border-color);
-//   --slick-button-style-bg-color: #fff;
-//   --slick-button-border-color: #c7c7c7;
+  //   --slick-button-style-bg-color: #fff;
+  //   --slick-button-border-color: #c7c7c7;
 }
 
 $button-border-color: #ababab;
 $button-style-bg-color: #fff;
 
-.btn-group-xs > .btn, .btn-xs {
-  padding  : 1px 5px;
-  font-size  : 12px;
-  line-height  : 1.5;
-  border-radius : 3px;
+.italic {
+  font-style: italic;
+}
+
+.hidden {
+  display: none;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.btn-group-xs > .btn,
+.btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
   margin: 0;
   font-size: 12px;
   height: 22px;
@@ -62,9 +74,6 @@ $button-style-bg-color: #fff;
   }
 }
 
-.italic {
-  font-style: italic;
-}
 .subtitle {
   font-size: 15px;
   font-style: italic;
@@ -75,13 +84,13 @@ $button-style-bg-color: #fff;
   color: lightblue;
 }
 .red {
-    color: red;
+  color: red;
 }
 .faded {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 .faded:hover {
-    opacity: 1;
+  opacity: 1;
 }
 .pointer {
   cursor: pointer !important;
@@ -101,17 +110,17 @@ $button-style-bg-color: #fff;
 
 .github-button-container {
   position: relative;
-  top: -2px;
-  margin-left: 5px;
+  margin: 0 5px;
 }
 
 .slick-dark-mode {
   --slick-button-style-bg-color: #212121;
   --slick-button-border-color: #626262;
   .text-primary {
-    color: #599BFE !important;
+    color: #599bfe !important;
   }
 }
+
 .button-style {
   cursor: pointer;
   background-color: var(--slick-button-style-bg-color, $button-style-bg-color);
@@ -119,8 +128,9 @@ $button-style-bg-color: #fff;
   border-radius: 2px;
   justify-content: center;
   text-align: center;
+
   &:hover {
-    border-color: color.adjust($button-border-color, $lightness: 10%);
+    border-color: color.adjust($button-border-color, $lightness: -10%);
   }
 }
 
@@ -133,29 +143,36 @@ $button-style-bg-color: #fff;
   #demo-container {
     padding-bottom: 15px;
   }
+
   h3 {
     color: #333;
   }
+
   .subtitle {
     color: #727272;
   }
 }
+
 .panel-wm-content.dark-mode {
   background-color: #212529;
   color: #dddddd;
+
   h3 {
     color: #dddddd;
   }
+
   .subtitle {
     color: #cbcbcb;
   }
+
   .btn-outline-secondary {
     color: #dfdfdf;
   }
 }
 
 /* editable field with outline border */
-.slick-cell .editing-field, .slick-cell.selected .editing-field {
+.slick-cell .editing-field,
+.slick-cell.selected .editing-field {
   border: 1px solid #dddbda;
   padding: 3px 5px 3px 4px;
   margin: -2px;

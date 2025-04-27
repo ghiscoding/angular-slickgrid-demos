@@ -11,21 +11,24 @@ import {
   type Metrics,
   type OnRowCountChangedEventArgs,
   SortComparers,
-  SortDirectionNumber
+  SortDirectionNumber,
 } from 'angular-slickgrid';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+
+import { randomNumber } from './utilities';
 
 const FETCH_SIZE = 50;
 
 @Component({
-  templateUrl: './grid-infinite-json.component.html'
+  templateUrl: './grid-infinite-json.component.html',
 })
 export class GridInfiniteJsonComponent implements OnInit {
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   dataset: any[] = [];
+  hideSubTitle = false;
   gridOptions!: GridOption;
   metrics!: Partial<Metrics>;
-  scrollEndCalled = false;
   shouldResetOnSort = false;
 
   ngOnInit(): void {
@@ -44,23 +47,77 @@ export class GridInfiniteJsonComponent implements OnInit {
   defineGrid() {
     this.columnDefinitions = [
       { id: 'title', name: 'Title', field: 'title', sortable: true, minWidth: 100, filterable: true },
-      { id: 'duration', name: 'Duration (days)', field: 'duration', sortable: true, minWidth: 100, filterable: true, type: FieldType.number },
-      { id: 'percentComplete', name: '% Complete', field: 'percentComplete', sortable: true, minWidth: 100, filterable: true, type: FieldType.number },
-      { id: 'start', name: 'Start', field: 'start', formatter: Formatters.dateIso, exportWithFormatter: true, filterable: true, filter: { model: Filters.compoundDate } },
-      { id: 'finish', name: 'Finish', field: 'finish', formatter: Formatters.dateIso, exportWithFormatter: true, filterable: true, filter: { model: Filters.compoundDate } },
-      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', sortable: true, minWidth: 100, filterable: true, formatter: Formatters.checkmarkMaterial }
+      {
+        id: 'duration',
+        name: 'Duration (days)',
+        field: 'duration',
+        sortable: true,
+        minWidth: 100,
+        filterable: true,
+        type: FieldType.number,
+      },
+      {
+        id: 'percentComplete',
+        name: '% Complete',
+        field: 'percentComplete',
+        sortable: true,
+        minWidth: 100,
+        filterable: true,
+        type: FieldType.number,
+      },
+      {
+        id: 'start',
+        name: 'Start',
+        field: 'start',
+        type: FieldType.date,
+        outputType: FieldType.dateIso, // for date picker format
+        formatter: Formatters.date,
+        exportWithFormatter: true,
+        params: { dateFormat: 'MMM DD, YYYY' },
+        sortable: true,
+        filterable: true,
+        filter: {
+          model: Filters.compoundDate,
+        },
+      },
+      {
+        id: 'finish',
+        name: 'Finish',
+        field: 'finish',
+        type: FieldType.date,
+        outputType: FieldType.dateIso, // for date picker format
+        formatter: Formatters.date,
+        exportWithFormatter: true,
+        params: { dateFormat: 'MMM DD, YYYY' },
+        sortable: true,
+        filterable: true,
+        filter: {
+          model: Filters.compoundDate,
+        },
+      },
+      {
+        id: 'effort-driven',
+        name: 'Effort Driven',
+        field: 'effortDriven',
+        sortable: true,
+        minWidth: 100,
+        filterable: true,
+        formatter: Formatters.checkmarkMaterial,
+      },
     ];
 
     this.gridOptions = {
       autoResize: {
         container: '#demo-container',
-        rightPadding: 10
+        rightPadding: 10,
       },
       enableAutoResize: true,
       enableFiltering: true,
       enableGrouping: true,
       editable: false,
       rowHeight: 33,
+      enableExcelExport: true,
+      externalResources: [new ExcelExportService()],
     };
   }
 
@@ -69,16 +126,14 @@ export class GridInfiniteJsonComponent implements OnInit {
   handleOnScroll(args: any) {
     const viewportElm = args.grid.getViewportNode();
     if (
-      ['mousewheel', 'scroll'].includes(args.triggeredBy || '')
-      && !this.scrollEndCalled
-      && viewportElm.scrollTop > 0
-      && Math.ceil(viewportElm.offsetHeight + args.scrollTop) >= args.scrollHeight
+      ['mousewheel', 'scroll'].includes(args.triggeredBy || '') &&
+      viewportElm.scrollTop > 0 &&
+      Math.ceil(viewportElm.offsetHeight + args.scrollTop) >= args.scrollHeight
     ) {
       console.log('onScroll end reached, add more items');
       const startIdx = this.angularGrid.dataView?.getItemCount() || 0;
       const newItems = this.loadData(startIdx, FETCH_SIZE);
       this.angularGrid.dataView?.addItems(newItems);
-      this.scrollEndCalled = false;
     }
   }
 
@@ -98,12 +153,9 @@ export class GridInfiniteJsonComponent implements OnInit {
       getter: 'duration',
       formatter: (g) => `Duration: ${g.value} <span class="text-green">(${g.count} items)</span>`,
       comparer: (a, b) => SortComparers.numeric(a.value, b.value, SortDirectionNumber.asc),
-      aggregators: [
-        new Aggregators.Avg('percentComplete'),
-        new Aggregators.Sum('cost')
-      ],
+      aggregators: [new Aggregators.Avg('percentComplete'), new Aggregators.Sum('cost')],
       aggregateCollapsed: false,
-      lazyTotalsCalculation: true
+      lazyTotalsCalculation: true,
     } as Grouping);
 
     // you need to manually add the sort icon(s) in UI
@@ -121,19 +173,14 @@ export class GridInfiniteJsonComponent implements OnInit {
   }
 
   newItem(idx: number) {
-    const randomYear = 2000 + Math.floor(Math.random() * 10);
-    const randomMonth = Math.floor(Math.random() * 11);
-    const randomDay = Math.floor((Math.random() * 29));
-    const randomPercent = Math.round(Math.random() * 100);
-
     return {
       id: idx,
       title: 'Task ' + idx,
       duration: Math.round(Math.random() * 100) + '',
-      percentComplete: randomPercent,
-      start: new Date(randomYear, randomMonth + 1, randomDay),
-      finish: new Date(randomYear + 1, randomMonth + 1, randomDay),
-      effortDriven: (idx % 5 === 0)
+      percentComplete: randomNumber(1, 12),
+      start: new Date(2020, randomNumber(1, 11), randomNumber(1, 28)),
+      finish: new Date(2022, randomNumber(1, 11), randomNumber(1, 28)),
+      effortDriven: idx % 5 === 0,
     };
   }
 
@@ -149,21 +196,28 @@ export class GridInfiniteJsonComponent implements OnInit {
 
   setFiltersDynamically() {
     // we can Set Filters Dynamically (or different filters) afterward through the FilterService
-    this.angularGrid?.filterService.updateFilters([
-      { columnId: 'percentComplete', searchTerms: ['50'], operator: '>=' },
-    ]);
+    this.angularGrid?.filterService.updateFilters([{ columnId: 'start', searchTerms: ['2020-08-25'], operator: '<=' }]);
   }
 
-  refreshMetrics(args: OnRowCountChangedEventArgs) {
+  handleOnRowCountChanged(args: OnRowCountChangedEventArgs) {
     if (this.angularGrid && args?.current >= 0) {
+      // we probably want to re-sort the data when we get new items
+      this.angularGrid.dataView?.reSort();
+
+      // update metrics
       this.metrics.itemCount = this.angularGrid.dataView?.getFilteredItemCount() || 0;
       this.metrics.totalItemCount = args.itemCount || 0;
     }
   }
 
   setSortingDynamically() {
-    this.angularGrid?.sortService.updateSorting([
-      { columnId: 'title', direction: 'DESC' },
-    ]);
+    this.angularGrid?.sortService.updateSorting([{ columnId: 'title', direction: 'DESC' }]);
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(2);
   }
 }
