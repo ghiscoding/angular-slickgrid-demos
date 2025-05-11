@@ -31,6 +31,7 @@ export const localeFrench = {
   TEXT_HIDE_COLUMN: 'Cacher la colonne',
   TEXT_LESS_THAN: 'Plus petit que',
   TEXT_LESS_THAN_OR_EQUAL_TO: 'Plus petit ou égal à',
+  TEXT_LOADING: 'Chargement...',
   TEXT_NO_ELEMENTS_FOUND: 'Aucun élément trouvé',
   TEXT_NOT_CONTAINS: 'Ne contient pas',
   TEXT_NOT_EQUAL_TO: 'Non égal à',

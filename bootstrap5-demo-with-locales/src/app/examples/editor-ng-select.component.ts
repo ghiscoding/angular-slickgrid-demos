@@ -18,7 +18,8 @@ import { Subject } from 'rxjs';
 			<ng-template ng-label-tmp ng-option-tmp let-item="item">
 				{{ item?.name }}
 			</ng-template>
-		</ng-select>`
+		</ng-select>`,
+  standalone: false,
 })
 export class EditorNgSelectComponent {
   selectedId = '';

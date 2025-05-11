@@ -16,7 +16,8 @@ const mpnFormatter: Formatter = (_row, _cell, _value, _columnDef, dataContext) =
 };
 
 @Component({
-  templateUrl: './grid-remote.component.html'
+  templateUrl: './grid-remote.component.html',
+  standalone: false,
 })
 export class GridRemoteComponent implements OnDestroy, OnInit {
   private _eventHandler: any = new SlickEventHandler();

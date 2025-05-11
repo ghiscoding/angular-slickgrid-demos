@@ -4,7 +4,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularGridInstance, Column, Formatter, GridOption, SlickEventHandler } from 'angular-slickgrid';
 
 const brandFormatter: Formatter = (_row, _cell, _value, _columnDef, dataContext) => {
-  return dataContext && dataContext.brand && dataContext.brand.name || '';
+  return (dataContext && dataContext.brand && dataContext.brand.name) || '';
 };
 
 const mpnFormatter: Formatter = (_row, _cell, _value, _columnDef, dataContext) => {
@@ -16,7 +16,8 @@ const mpnFormatter: Formatter = (_row, _cell, _value, _columnDef, dataContext) =
 };
 
 @Component({
-  templateUrl: './grid-remote.component.html'
+  templateUrl: './grid-remote.component.html',
+  standalone: false,
 })
 export class GridRemoteComponent implements OnDestroy, OnInit {
   private _eventHandler: any = new SlickEventHandler();
@@ -40,7 +41,7 @@ export class GridRemoteComponent implements OnDestroy, OnInit {
         for Sorting, Filtering, etc...
       </li>
       <li>
-        Soure code for this example is available <a href="https://github.com/ghiscoding/Angular-Slickgrid/blob/master/src/app/examples/grid-remote.component.ts" target="_blank">here</a>
+        Soure code for this example is available <a href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/grid-remote.component.ts" target="_blank">here</a>
       </li>
     </ul>
   `;
@@ -95,17 +96,23 @@ export class GridRemoteComponent implements OnDestroy, OnInit {
       enableAutoResize: true,
       autoResize: {
         container: '#demo-container',
-        rightPadding: 10
+        rightPadding: 10,
       },
       enableCellNavigation: true,
       enableColumnReorder: false,
       enableGridMenu: false,
-      multiColumnSort: false
+      multiColumnSort: false,
     };
   }
 
   hookAllLoaderEvents() {
-    if (this._eventHandler && this._eventHandler.subscribe && this.loaderDataView && this.loaderDataView.onDataLoading && this.loaderDataView.onDataLoaded) {
+    if (
+      this._eventHandler &&
+      this._eventHandler.subscribe &&
+      this.loaderDataView &&
+      this.loaderDataView.onDataLoading &&
+      this.loaderDataView.onDataLoaded
+    ) {
       this._eventHandler.subscribe(this.loaderDataView.onDataLoading, (_e: Event, _args: any) => {
         this.loading = true;
       });
@@ -141,7 +148,14 @@ export class GridRemoteComponent implements OnDestroy, OnInit {
   }
 
   searchChanged(newValue: string) {
-    if (newValue && this.gridObj && this.gridObj.getViewport && this.loaderDataView && this.loaderDataView.ensureData && this.loaderDataView.setSearch) {
+    if (
+      newValue &&
+      this.gridObj &&
+      this.gridObj.getViewport &&
+      this.loaderDataView &&
+      this.loaderDataView.ensureData &&
+      this.loaderDataView.setSearch
+    ) {
       const vp = this.gridObj.getViewport();
       this.loaderDataView.setSearch(newValue);
       this.loaderDataView.ensureData(vp.top, vp.bottom);

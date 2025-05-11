@@ -30,6 +30,7 @@ export const localeEnglish = {
   TEXT_HIDE_COLUMN: 'Hide Column',
   TEXT_LESS_THAN: 'Less than',
   TEXT_LESS_THAN_OR_EQUAL_TO: 'Less than or equal to',
+  TEXT_LOADING: 'Loading...',
   TEXT_NO_ELEMENTS_FOUND: 'No elements found',
   TEXT_NOT_CONTAINS: 'Not contains',
   TEXT_NOT_EQUAL_TO: 'Not equal to',

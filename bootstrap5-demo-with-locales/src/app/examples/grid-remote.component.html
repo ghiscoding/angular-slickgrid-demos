@@ -28,7 +28,7 @@
     <span>Loading...</span>
   </div>
 
-  <angular-slickgrid gridId="grid18" [columnDefinitions]="columnDefinitions" [gridOptions]="gridOptions"
+  <angular-slickgrid gridId="grid18" [columns]="columnDefinitions" [options]="gridOptions"
                      [dataset]="dataset" [customDataView]="customDataView"
                      (onAngularGridCreated)="angularGridReady($event.detail)"
                      (onViewportChanged)="onViewportChanged()"

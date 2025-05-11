@@ -1,0 +1,57 @@
+<div id="demo-container" class="container-fluid">
+  <h2>
+    Example 12: Localization with Locales - French Locale displayed
+    <span class="float-end">
+      <a
+        style="font-size: 18px"
+        target="_blank"
+        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/example12.component.ts"
+      >
+     <span class="mdi mdi-link-variant"></span> code
+      </a>
+    </span>
+  </h2>
+  <div class="subtitle">
+    This Examples uses French Locales but you could use your own custom locales
+    <ul>
+      <li>Defining your own Custom Locales must include all necessary text, see the default (<a href="https://github.com/ghiscoding/angular-slickgrid-demos/blob/master/bootstrap5-demo-with-locales/src/app/locales/en.ts" target="_blank">English Custom Locales</a>)</li>
+      <li>Support Custom Locales (through the "locales" grid option), following these steps (<a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Localization-with-Custom-Locales" target="_blank">Wiki docs</a>)</li>
+      <li>For more info about "Download to File", read the <a href="https://github.com/ghiscoding/Angular-Slickgrid/wiki/Export-to-File" target="_blank">Wiki page</a></li>
+    </ul>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-sm-12">
+      <span style="margin-left: 20px">
+        <button class="btn btn-outline-secondary btn-sm btn-icon" (click)="exportToFile('csv')">
+          <i class="mdi mdi-download"></i>
+          Télécharger en format CSV
+        </button>
+        <button class="btn btn-outline-secondary btn-sm btn-icon" (click)="exportToFile('txt')">
+          <i class="mdi mdi-download"></i>
+          Télécharger en format Text
+        </button>
+        <button class="btn btn-outline-secondary btn-sm btn-icon" (click)="exportToExcel()">
+          <i class="mdi mdi-file-excel-outline text-success"></i>
+          Télécharger vers Excel
+        </button>
+        <button class="btn btn-outline-secondary btn-sm btn-icon" (click)="dynamicallyAddTitleHeader()">
+          <i class="mdi mdi-shape-square-plus"></i>
+          Ajouter la colonne Titre dynamiquement
+        </button>
+      </span>
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    <angular-slickgrid gridId="grid12"
+                       [dataset]="dataset"
+                       [options]="gridOptions"
+                       [columns]="columnDefinitions"
+                       (onAngularGridCreated)="angularGridReady($event.detail)"
+                       (onGridStateChanged)="gridStateChanged($event.detail)">
+    </angular-slickgrid>
+  </div>
+</div>
