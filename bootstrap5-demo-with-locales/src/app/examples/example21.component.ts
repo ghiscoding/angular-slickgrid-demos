@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   AngularGridInstance,
   Column,
-  FieldType,
   Formatters,
   GridOption,
   OperatorString,
@@ -50,31 +49,31 @@ export class Example21Component implements OnInit {
     this.columnDefinitions = [
       {
         id: 'title', name: 'Title', field: 'title',
-        sortable: true, type: FieldType.string
+        sortable: true,
       },
       {
         id: 'duration', name: 'Duration (days)', field: 'duration',
-        sortable: true, type: FieldType.number
+        sortable: true, type: 'number'
       },
       {
         id: 'complete', name: '% Complete', field: 'percentComplete',
         formatter: Formatters.percentCompleteBar, sortable: true,
-        type: FieldType.number
+        type: 'number'
       },
       {
         id: 'start', name: 'Start', field: 'start',
         formatter: Formatters.dateIso, sortable: true,
-        type: FieldType.date
+        type: 'date'
       },
       {
         id: 'finish', name: 'Finish', field: 'finish',
         formatter: Formatters.dateIso, sortable: true,
-        type: FieldType.date
+        type: 'date'
       },
       {
         id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven',
         formatter: Formatters.checkmarkMaterial, sortable: true,
-        type: FieldType.number
+        type: 'number'
       }
     ];
     this.selectedColumn = this.columnDefinitions[0];

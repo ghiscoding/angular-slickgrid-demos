@@ -5,7 +5,6 @@ import {
   AngularGridInstance,
   Column,
   CursorPageInfo,
-  FieldType,
   Filters,
   Formatters,
   GridOption,
@@ -13,7 +12,6 @@ import {
   Metrics,
   type MultipleSelectOption,
   OperatorType,
-  SortDirection,
 } from 'angular-slickgrid';
 
 const defaultPageSize = 20;
@@ -62,7 +60,6 @@ export class Example6Component implements OnInit {
     this.columnDefinitions = [
       {
         id: 'name', field: 'name', name: 'Name', width: 60, columnGroup: 'Customer Information',
-        type: FieldType.string,
         sortable: true,
         filterable: true,
         filter: {
@@ -90,7 +87,7 @@ export class Example6Component implements OnInit {
         filter: {
           model: Filters.multipleSelect,
           collection: [{ value: 'acme', label: 'Acme' }, { value: 'abc', label: 'Company ABC' }, { value: 'xyz', label: 'Company XYZ' }],
-          filterOptions: {
+          options: {
             filter: true // adds a filter on top of the multi-select dropdown
           } as MultipleSelectOption
         }
@@ -101,7 +98,7 @@ export class Example6Component implements OnInit {
       },
       {
         id: 'billingAddressZip', field: 'billing.address.zip', name: 'Address Zip', width: 60,
-        type: FieldType.number,
+        type: 'number',
         columnGroup: 'Billing Information',
         filterable: true, sortable: true,
         filter: {
@@ -111,7 +108,7 @@ export class Example6Component implements OnInit {
       },
       {
         id: 'finish', field: 'finish', name: 'Date', formatter: Formatters.dateIso, sortable: true, minWidth: 90, width: 120, exportWithFormatter: true,
-        type: FieldType.date,
+        type: 'date',
         columnGroup: 'Billing Information',
         filterable: true,
         filter: {
@@ -189,7 +186,7 @@ export class Example6Component implements OnInit {
         sorters: [
           // direction can written as 'asc' (uppercase or lowercase) and/or use the SortDirection type
           { columnId: 'name', direction: 'asc' },
-          { columnId: 'company', direction: SortDirection.DESC }
+          { columnId: 'company', direction: 'DESC' }
         ],
         pagination: { pageNumber: this.isWithCursor ? 1 : 2, pageSize: 20 } // if cursor based, start at page 1
       },
@@ -370,7 +367,7 @@ export class Example6Component implements OnInit {
     this.angularGrid.sortService.updateSorting([
       // direction can written as 'asc' (uppercase or lowercase) and/or use the SortDirection type
       { columnId: 'name', direction: 'asc' },
-      { columnId: 'company', direction: SortDirection.DESC }
+      { columnId: 'company', direction: 'DESC' }
     ]);
     setTimeout(() => {
       this.angularGrid.paginationService?.changeItemPerPage(20);

@@ -11,7 +11,6 @@ import {
   CompositeEditorModalType,
   EditCommand,
   Editors,
-  FieldType,
   Filters,
   formatNumber,
   Formatter,
@@ -135,13 +134,13 @@ export class Example30Component implements OnDestroy, OnInit {
     this.columnDefinitions = [
       {
         id: 'title', name: '<span title="Task must always be followed by a number" class="text-warning mdi mdi-alert-outline"></span> Title <span title="Title is always rendered as UPPERCASE" class="mdi mdi-information-outline"></span>',
-        field: 'title', sortable: true, type: FieldType.string, minWidth: 75,
+        field: 'title', sortable: true, minWidth: 75,
         cssClass: 'text-uppercase fw-bold', columnGroup: 'Common Factor',
         filterable: true, filter: { model: Filters.compoundInputText },
         editor: {
           model: Editors.longText, massUpdate: false, required: true, alwaysSaveOnEnterKey: true,
           maxLength: 12,
-          editorOptions: {
+          options: {
             cols: 45,
             rows: 6,
             buttonTexts: {
@@ -154,7 +153,7 @@ export class Example30Component implements OnDestroy, OnInit {
       },
       {
         id: 'duration', name: 'Duration', field: 'duration', sortable: true, filterable: true, minWidth: 75,
-        type: FieldType.number, columnGroup: 'Common Factor',
+        type: 'number', columnGroup: 'Common Factor',
         formatter: (_row, _cell, value) => {
           if (value === null || value === undefined || value === '') {
             return '';
@@ -165,13 +164,13 @@ export class Example30Component implements OnDestroy, OnInit {
       },
       {
         id: 'cost', name: 'Cost', field: 'cost', width: 90, minWidth: 70,
-        sortable: true, filterable: true, type: FieldType.number, columnGroup: 'Analysis',
+        sortable: true, filterable: true, type: 'number', columnGroup: 'Analysis',
         filter: { model: Filters.compoundInputNumber },
         formatter: Formatters.dollar,
       },
       {
         id: 'percentComplete', name: '% Complete', field: 'percentComplete', minWidth: 100,
-        type: FieldType.number,
+        type: 'number',
         sortable: true, filterable: true, columnGroup: 'Analysis',
         filter: { model: Filters.compoundSlider, operator: '>=' },
         editor: {
@@ -182,7 +181,7 @@ export class Example30Component implements OnDestroy, OnInit {
       },
       // {
       //   id: 'percentComplete2', name: '% Complete', field: 'analysis.percentComplete', minWidth: 100,
-      //   type: FieldType.number,
+      //   type: 'number',
       //   sortable: true, filterable: true, columnGroup: 'Analysis',
       //   // filter: { model: Filters.compoundSlider, operator: '>=' },
       //   formatter: Formatters.complex,
@@ -207,7 +206,7 @@ export class Example30Component implements OnDestroy, OnInit {
       // },
       {
         id: 'complexity', name: 'Complexity', field: 'complexity', minWidth: 100,
-        type: FieldType.number,
+        type: 'number',
         sortable: true, filterable: true, columnGroup: 'Analysis',
         formatter: (_row, _cell, value) => this.complexityLevelList[value]?.label,
         exportCustomFormatter: (_row, _cell, value) => this.complexityLevelList[value]?.label,
@@ -225,9 +224,9 @@ export class Example30Component implements OnDestroy, OnInit {
         id: 'start', name: 'Start', field: 'start', sortable: true, minWidth: 100,
         formatter: Formatters.dateUs, columnGroup: 'Period',
         exportCustomFormatter: Formatters.dateUs,
-        type: FieldType.date, outputType: FieldType.dateUs, saveOutputType: FieldType.dateUtc,
+        type: 'date', outputType: 'dateUs', saveOutputType: 'dateUtc',
         filterable: true, filter: { model: Filters.compoundDate },
-        editor: { model: Editors.date, massUpdate: true, editorOptions: { hideClearButton: false } },
+        editor: { model: Editors.date, massUpdate: true, options: { hideClearButton: false } },
       },
       {
         id: 'completed', name: 'Completed', field: 'completed', width: 80, minWidth: 75, maxWidth: 100,
@@ -245,13 +244,13 @@ export class Example30Component implements OnDestroy, OnInit {
       {
         id: 'finish', name: 'Finish', field: 'finish', sortable: true, minWidth: 100,
         formatter: Formatters.dateUs, columnGroup: 'Period',
-        type: FieldType.date, outputType: FieldType.dateUs, saveOutputType: FieldType.dateUtc,
+        type: 'date', outputType: 'dateUs', saveOutputType: 'dateUtc',
         filterable: true, filter: { model: Filters.compoundDate },
         exportCustomFormatter: Formatters.dateUs,
         editor: {
           model: Editors.date,
-          editorOptions: {
-            range: { min: 'today' },
+          options: {
+            displayDateMin: 'today',
 
             // if we want to preload the date picker with a different date,
             // we could do it by assigning settings.seleted.dates
@@ -281,7 +280,7 @@ export class Example30Component implements OnDestroy, OnInit {
         labelKey: 'itemName',
         formatter: Formatters.complexObject,
         exportCustomFormatter: Formatters.complex, // without the Editing cell Formatter
-        type: FieldType.object,
+        type: 'object',
         sortComparer: SortComparers.objectString,
         editor: {
           model: Editors.autocompleter,
@@ -289,7 +288,7 @@ export class Example30Component implements OnDestroy, OnInit {
           massUpdate: true,
 
           // example with a Remote API call
-          editorOptions: {
+          options: {
             minLength: 1,
             fetch: (searchTerm: string, callback: (items: false | any[]) => void) => {
               const products = this.mockProducts();
@@ -307,7 +306,6 @@ export class Example30Component implements OnDestroy, OnInit {
         filter: {
           model: Filters.inputText,
           // placeholder: '🔎︎ search product',
-          type: FieldType.string,
           queryField: 'product.itemName',
         }
       },
@@ -317,7 +315,7 @@ export class Example30Component implements OnDestroy, OnInit {
         exportCustomFormatter: Formatters.complex, // without the Editing cell Formatter
         dataKey: 'code',
         labelKey: 'name',
-        type: FieldType.object,
+        type: 'object',
         sortComparer: SortComparers.objectString,
         filterable: true,
         sortable: true,
@@ -327,7 +325,7 @@ export class Example30Component implements OnDestroy, OnInit {
           massUpdate: true,
           customStructure: { label: 'name', value: 'code' },
           collectionAsync: this.http.get(URL_COUNTRIES_COLLECTION),
-          editorOptions: { minLength: 0 }
+          options: { minLength: 0 }
         },
         filter: {
           model: Filters.inputText,

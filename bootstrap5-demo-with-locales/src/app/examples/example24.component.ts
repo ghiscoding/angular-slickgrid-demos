@@ -6,7 +6,6 @@ import {
   Column,
   ContextMenu,
   ExtensionName,
-  FieldType,
   Filters,
   Formatter,
   Formatters,
@@ -124,14 +123,14 @@ export class Example24Component implements OnInit, OnDestroy {
         exportWithFormatter: false,
         sortable: true, filterable: true,
         filter: { model: Filters.slider, operator: '>=' },
-        formatter: Formatters.percentCompleteBar, type: FieldType.number,
+        formatter: Formatters.percentCompleteBar, type: 'number',
       },
       {
         id: 'start', name: 'Start', field: 'start', minWidth: 100,
-        formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date,
+        formatter: Formatters.dateIso, outputType: 'dateIso', type: 'date',
         filterable: true, filter: { model: Filters.compoundDate }
       },
-      { id: 'finish', name: 'Finish', field: 'finish', formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, minWidth: 100, filterable: true, filter: { model: Filters.compoundDate } },
+      { id: 'finish', name: 'Finish', field: 'finish', formatter: Formatters.dateIso, outputType: 'dateIso', type: 'date', minWidth: 100, filterable: true, filter: { model: Filters.compoundDate } },
       {
         id: 'priority', name: 'Priority', field: 'priority',
         exportCustomFormatter: priorityExportFormatter,

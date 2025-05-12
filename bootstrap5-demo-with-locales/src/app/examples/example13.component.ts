@@ -7,8 +7,6 @@ import {
   Aggregators,
   Column,
   DelimiterType,
-  FieldType,
-  FileType,
   Filters,
   Formatters,
   GridOption,
@@ -66,7 +64,7 @@ export class Example13Component implements OnInit {
 
     this.columnDefinitions = [
       {
-        id: 'sel', name: nameElementColumn1, field: 'num', type: FieldType.number,
+        id: 'sel', name: nameElementColumn1, field: 'num', type: 'number',
         columnPickerLabel: 'Custom Label', // add a custom label for the ColumnPicker/GridMenu when default header value extractor doesn't work for you ()
         width: 140, maxWidth: 150,
         excludeFromExport: true,
@@ -89,7 +87,7 @@ export class Example13Component implements OnInit {
         filterable: true,
         filter: { model: Filters.slider, operator: '>=' },
         sortable: true,
-        type: FieldType.number,
+        type: 'number',
         groupTotalsFormatter: GroupTotalFormatters.sumTotals,
         params: { groupFormatterPrefix: 'Total: ' }
       },
@@ -100,7 +98,7 @@ export class Example13Component implements OnInit {
         filterable: true,
         filter: { model: Filters.compoundSlider },
         sortable: true,
-        type: FieldType.number,
+        type: 'number',
         groupTotalsFormatter: GroupTotalFormatters.avgTotalsPercentage,
         params: { groupFormatterPrefix: '<i>Avg</i>: ' }
       },
@@ -110,7 +108,7 @@ export class Example13Component implements OnInit {
         filterable: true,
         filter: { model: Filters.compoundDate },
         sortable: true,
-        type: FieldType.dateIso,
+        type: 'dateIso',
         formatter: Formatters.dateIso,
         exportWithFormatter: true
       },
@@ -120,7 +118,7 @@ export class Example13Component implements OnInit {
         filterable: true,
         filter: { model: Filters.compoundDate },
         sortable: true,
-        type: FieldType.dateIso,
+        type: 'dateIso',
         formatter: Formatters.dateIso,
         exportWithFormatter: true
       },
@@ -129,7 +127,7 @@ export class Example13Component implements OnInit {
         minWidth: 70, width: 80,
         sortable: true, filterable: true,
         filter: { model: Filters.compoundInputNumber },
-        type: FieldType.number,
+        type: 'number',
         formatter: Formatters.currency,
         groupTotalsFormatter: GroupTotalFormatters.sumTotalsCurrency,
         params: { displayNegativeNumberWithParentheses: true, currencyPrefix: '€', groupFormatterCurrencyPrefix: '€', minDecimal: 2, maxDecimal: 4, groupFormatterPrefix: '<b>Total</b>: ' },
@@ -246,7 +244,7 @@ export class Example13Component implements OnInit {
   exportToExcel() {
     this.excelExportService.exportToExcel({
       filename: 'Export',
-      format: FileType.xlsx
+      format: 'xlsx'
     });
   }
 
@@ -254,7 +252,7 @@ export class Example13Component implements OnInit {
     this.textExportService.exportToFile({
       delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,
       filename: 'myExport',
-      format: (type === 'csv') ? FileType.csv : FileType.txt
+      format: (type === 'csv') ? 'csv' : 'txt'
     });
   }
 

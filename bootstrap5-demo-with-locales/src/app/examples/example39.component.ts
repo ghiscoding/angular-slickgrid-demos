@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import {
   AngularGridInstance,
   Column,
-  FieldType,
   Filters,
   GridOption,
   Metrics,
@@ -64,7 +63,6 @@ export class Example39Component implements OnInit, OnDestroy {
     this.columnDefinitions = [
       {
         id: 'name', field: 'name', nameKey: 'NAME', width: 60,
-        type: FieldType.string,
         sortable: true,
         filterable: true,
         filter: {
@@ -93,7 +91,7 @@ export class Example39Component implements OnInit, OnDestroy {
             sortDesc: false
           },
           collectionAsync: this.http.get(`${sampleDataRoot}/customers_100.json`),
-          filterOptions: {
+          options: {
             filter: true // adds a filter on top of the multi-select dropdown
           } as MultipleSelectOption
         }

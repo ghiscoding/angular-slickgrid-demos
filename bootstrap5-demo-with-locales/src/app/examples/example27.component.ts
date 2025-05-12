@@ -4,12 +4,10 @@ import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import {
   AngularGridInstance,
   Column,
-  FieldType,
   Filters,
   Formatters,
   GridOption,
   GridStateChange,
-  GridStateType,
   TreeToggledItem,
   TreeToggleStateChange,
 } from 'angular-slickgrid';
@@ -58,7 +56,7 @@ export class Example27Component implements OnInit {
       {
         id: 'title', name: 'Title', field: 'title', width: 220, cssClass: 'cell-title',
         filterable: true, sortable: true, exportWithFormatter: false,
-        queryFieldSorter: 'id', type: FieldType.string,
+        queryFieldSorter: 'id',
         formatter: Formatters.tree, exportCustomFormatter: Formatters.treeExport
 
       },
@@ -67,17 +65,17 @@ export class Example27Component implements OnInit {
         id: 'percentComplete', name: '% Complete', field: 'percentComplete',
         minWidth: 120, maxWidth: 200, exportWithFormatter: false,
         sortable: true, filterable: true, filter: { model: Filters.compoundSlider, operator: '>=' },
-        formatter: Formatters.percentCompleteBarWithText, type: FieldType.number,
+        formatter: Formatters.percentCompleteBarWithText, type: 'number',
       },
       {
         id: 'start', name: 'Start', field: 'start', minWidth: 60,
-        type: FieldType.dateIso, filterable: true, sortable: true,
+        type: 'dateIso', filterable: true, sortable: true,
         filter: { model: Filters.compoundDate },
         formatter: Formatters.dateIso,
       },
       {
         id: 'finish', name: 'Finish', field: 'finish', minWidth: 60,
-        type: FieldType.dateIso, filterable: true, sortable: true,
+        type: 'dateIso', filterable: true, sortable: true,
         filter: { model: Filters.compoundDate },
         formatter: Formatters.dateIso,
       },
@@ -305,7 +303,7 @@ export class Example27Component implements OnInit {
     this.hasNoExpandCollapseChanged = false;
     this.cdref.detectChanges();
 
-    if (gridStateChange?.change?.type === GridStateType.treeData) {
+    if (gridStateChange?.change?.type === 'treeData') {
       console.log('Tree Data gridStateChange', gridStateChange?.gridState?.treeData);
       this.treeToggleItems = gridStateChange?.gridState?.treeData?.toggledItems as TreeToggledItem[];
     }

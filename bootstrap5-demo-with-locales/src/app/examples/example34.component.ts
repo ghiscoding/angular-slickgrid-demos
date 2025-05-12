@@ -7,7 +7,6 @@ import {
   Column,
   createDomElement,
   deepCopy,
-  FieldType,
   Filters,
   Formatter,
   Formatters,
@@ -178,7 +177,7 @@ export class Example34Component implements OnDestroy, OnInit {
       },
       {
         id: 'priceChange', name: 'Change', field: 'priceChange', filterable: true, sortable: true, minWidth: 80, width: 80,
-        filter: { model: Filters.compoundInputNumber }, type: FieldType.number,
+        filter: { model: Filters.compoundInputNumber }, type: 'number',
         formatter: Formatters.multiple,
         params: {
           formatters: [Formatters.dollar, priceFormatter],
@@ -187,16 +186,16 @@ export class Example34Component implements OnDestroy, OnInit {
       },
       {
         id: 'price', name: 'Price', field: 'price', filterable: true, sortable: true, minWidth: 70, width: 70,
-        filter: { model: Filters.compoundInputNumber }, type: FieldType.number,
+        filter: { model: Filters.compoundInputNumber }, type: 'number',
         formatter: Formatters.dollar, params: { maxDecimal: 2 }
       },
       {
         id: 'quantity', name: 'Quantity', field: 'quantity', filterable: true, sortable: true, minWidth: 70, width: 70,
-        filter: { model: Filters.compoundInputNumber }, type: FieldType.number,
+        filter: { model: Filters.compoundInputNumber }, type: 'number',
       },
       {
         id: 'amount', name: 'Amount', field: 'amount', filterable: true, sortable: true, minWidth: 70, width: 60,
-        filter: { model: Filters.compoundInputNumber }, type: FieldType.number,
+        filter: { model: Filters.compoundInputNumber }, type: 'number',
         formatter: Formatters.dollar, params: { maxDecimal: 2 },
         groupTotalsFormatter: GroupTotalFormatters.sumTotalsDollarBold,
       },
@@ -204,7 +203,7 @@ export class Example34Component implements OnDestroy, OnInit {
       {
         id: 'execution', name: 'Execution Timestamp', field: 'execution', filterable: true, sortable: true, minWidth: 125,
         formatter: Formatters.dateTimeIsoAmPm, exportWithFormatter: true,
-        type: FieldType.dateTimeIsoAM_PM, filter: { model: Filters.compoundDate }
+        type: 'dateTimeIsoAM_PM', filter: { model: Filters.compoundDate }
       },
     ];
 

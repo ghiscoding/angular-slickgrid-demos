@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, ColumnEditorDualInput, Editors, FieldType, formatNumber, Formatters, Filters, GridOption, SlickEventHandler } from 'angular-slickgrid';
+import { AngularGridInstance, Column, ColumnEditorDualInput, Editors, formatNumber, Formatters, Filters, GridOption, SlickEventHandler } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './example20.component.html',
@@ -80,7 +80,7 @@ export class Example20Component implements OnInit, OnDestroy {
         resizable: false,
         minWidth: 130, width: 140,
         formatter: Formatters.percentCompleteBar,
-        type: FieldType.number,
+        type: 'number',
         filterable: true,
         filter: { model: Filters.slider, operator: '>=' },
         sortable: true

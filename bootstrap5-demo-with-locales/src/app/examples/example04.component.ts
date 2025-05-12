@@ -4,7 +4,6 @@ import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import {
   AngularGridInstance,
   Column,
-  FieldType,
   Filters,
   Formatters,
   GridOption,
@@ -63,18 +62,17 @@ export class Example4Component implements OnInit {
     this.columnDefinitions = [
       {
         id: 'title', name: 'Title', field: 'title', sortable: true, minWidth: 55,
-        type: FieldType.string, filterable: true, filter: { model: Filters.compoundInputText }
+        filterable: true, filter: { model: Filters.compoundInputText }
       },
       {
         id: 'description', name: 'Description', field: 'description', filterable: true, sortable: true, minWidth: 80,
-        type: FieldType.string,
         filter: {
           model: CustomInputFilter, // create a new instance to make each Filter independent from each other
           enableTrimWhiteSpace: true // or use global "enableFilterTrimWhiteSpace" to trim on all Filters
         }
       },
       {
-        id: 'duration', name: 'Duration (days)', field: 'duration', sortable: true, type: FieldType.number, exportCsvForceToKeepAsString: true,
+        id: 'duration', name: 'Duration (days)', field: 'duration', sortable: true, type: 'number', exportCsvForceToKeepAsString: true,
         minWidth: 55,
         filterable: true,
         filter: {
@@ -93,7 +91,7 @@ export class Example4Component implements OnInit {
           collectionSortBy: {
             property: 'value',
             sortDesc: true,
-            fieldType: FieldType.number
+            fieldType: 'number'
           },
           customStructure: {
             value: 'value',
@@ -108,7 +106,7 @@ export class Example4Component implements OnInit {
           model: Filters.multipleSelect,
 
           // we could add certain option(s) to the "multiple-select" plugin
-          filterOptions: {
+          options: {
             maxHeight: 250,
             width: 175,
 
@@ -119,29 +117,29 @@ export class Example4Component implements OnInit {
         }
       },
       {
-        id: 'complete', name: '% Complete', field: 'percentComplete', formatter: Formatters.percentCompleteBar, minWidth: 70, type: FieldType.number, sortable: true,
+        id: 'complete', name: '% Complete', field: 'percentComplete', formatter: Formatters.percentCompleteBar, minWidth: 70, type: 'number', sortable: true,
         filterable: true, filter: { model: Filters.compoundInputNumber }
       },
       {
         id: 'start', name: 'Start', field: 'start', formatter: Formatters.dateIso, sortable: true, minWidth: 75,
-        type: FieldType.date, filterable: true, filter: { model: Filters.compoundDate }
+        type: 'date', filterable: true, filter: { model: Filters.compoundDate }
       },
       {
         id: 'usDateShort', name: 'US Date Short', field: 'usDateShort', sortable: true, minWidth: 70, width: 70,
-        type: FieldType.dateUsShort, exportWithFormatter: true, filterable: true, filter: { model: Filters.compoundDate }
+        type: 'dateUsShort', exportWithFormatter: true, filterable: true, filter: { model: Filters.compoundDate }
       },
       {
         id: 'utcDate', name: 'UTC Date', field: 'utcDate', formatter: Formatters.dateTimeIsoAmPm, sortable: true, minWidth: 115,
-        type: FieldType.dateUtc, exportWithFormatter: true, outputType: FieldType.dateTimeIsoAmPm, filterable: true,
+        type: 'dateUtc', exportWithFormatter: true, outputType: 'dateTimeIsoAmPm', filterable: true,
         filter: {
           model: Filters.compoundDate,
-          // override any of the date picker options through "filterOptions"
-          filterOptions: { range: { date: 'today' } } as VanillaCalendarOption
+          // override any of the date picker options through "options"
+          options: { displayDateMin: 'today' } as VanillaCalendarOption
         }
       },
       {
         id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven.isEffort', minWidth: 85, maxWidth: 85,
-        type: FieldType.boolean,
+        type: 'boolean',
         sortable: true,
         exportCustomFormatter: Formatters.complexObject,
 
@@ -165,7 +163,7 @@ export class Example4Component implements OnInit {
           model: Filters.singleSelect,
 
           // we could add certain option(s) to the "multiple-select" plugin
-          filterOptions: { autoAdjustDropHeight: true } as MultipleSelectOption,
+          options: { autoAdjustDropHeight: true } as MultipleSelectOption,
         }
       }
     ];

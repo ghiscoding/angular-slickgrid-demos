@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 
-import { AngularGridInstance, Column, FieldType, GridOption, ItemMetadata } from 'angular-slickgrid';
+import { AngularGridInstance, Column, GridOption, ItemMetadata } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './example14.component.html',
@@ -47,7 +47,7 @@ export class Example14Component implements OnInit {
       { id: 'start', name: 'Start', field: 'start', columnGroup: 'Period' },
       { id: 'finish', name: 'Finish', field: 'finish', columnGroup: 'Period' },
       { id: '%', name: '% Complete', field: 'percentComplete', selectable: false, columnGroup: 'Analysis' },
-      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', type: FieldType.boolean, columnGroup: 'Analysis' }
+      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', type: 'boolean', columnGroup: 'Analysis' }
     ];
 
     this.gridOptions1 = {
@@ -86,7 +86,7 @@ export class Example14Component implements OnInit {
       { id: 'start', name: 'Start', field: 'start', columnGroup: 'Period' },
       { id: 'finish', name: 'Finish', field: 'finish', columnGroup: 'Period' },
       { id: '%', name: '% Complete', field: 'percentComplete', selectable: false, columnGroup: 'Analysis' },
-      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', type: FieldType.boolean, columnGroup: 'Analysis' }
+      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', type: 'boolean', columnGroup: 'Analysis' }
     ];
 
     this.gridOptions2 = {

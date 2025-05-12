@@ -7,7 +7,6 @@ import {
   Editors,
   ExcelCellValueParserArgs,
   ExcelGroupValueParserArgs,
-  FieldType,
   Formatter,
   Formatters,
   GridOption,
@@ -135,7 +134,7 @@ export class Example36Component implements OnInit {
         excelExportOptions: { width: 18 }
       },
       {
-        id: 'price', name: 'Price', field: 'price', type: FieldType.number,
+        id: 'price', name: 'Price', field: 'price', type: 'number',
         editor: { model: Editors.float, decimal: 2 }, sortable: true, width: 70, filterable: true,
         formatter: Formatters.dollar, groupTotalsFormatter: GroupTotalFormatters.sumTotalsDollarBold,
         groupTotalsExcelExportOptions: {
@@ -148,7 +147,7 @@ export class Example36Component implements OnInit {
         }
       },
       {
-        id: 'qty', name: 'Quantity', field: 'qty', type: FieldType.number,
+        id: 'qty', name: 'Quantity', field: 'qty', type: 'number',
         groupTotalsFormatter: GroupTotalFormatters.sumTotalsBold,
         groupTotalsExcelExportOptions: {
           style: {
@@ -162,7 +161,7 @@ export class Example36Component implements OnInit {
       },
       {
         id: 'subTotal', name: 'Sub-Total', field: 'subTotal', cssClass: 'text-sub-total',
-        type: FieldType.number, sortable: true, width: 70, filterable: true,
+        type: 'number', sortable: true, width: 70, filterable: true,
         exportWithFormatter: false,
         formatter: Formatters.multiple, groupTotalsFormatter: GroupTotalFormatters.sumTotalsDollarBold,
         params: {
@@ -200,7 +199,7 @@ export class Example36Component implements OnInit {
       },
       {
         id: 'taxes', name: 'Taxes', field: 'taxes', cssClass: 'text-taxes',
-        type: FieldType.number, sortable: true, width: 70, filterable: true,
+        type: 'number', sortable: true, width: 70, filterable: true,
         formatter: Formatters.multiple, groupTotalsFormatter: GroupTotalFormatters.sumTotalsDollarBold,
         params: {
           formatters: [
@@ -231,7 +230,7 @@ export class Example36Component implements OnInit {
         }
       },
       {
-        id: 'total', name: 'Total', field: 'total', type: FieldType.number, sortable: true, width: 70, filterable: true,
+        id: 'total', name: 'Total', field: 'total', type: 'number', sortable: true, width: 70, filterable: true,
         cssClass: 'text-total', formatter: Formatters.multiple, groupTotalsFormatter: GroupTotalFormatters.sumTotalsDollarBold,
         params: {
           formatters: [

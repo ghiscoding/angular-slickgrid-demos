@@ -8,8 +8,6 @@ import {
   Column,
   DelimiterType,
   Editors,
-  FieldType,
-  FileType,
   Filters,
   Formatters,
   GridOption,
@@ -110,7 +108,7 @@ export class Example18Component implements OnInit, OnDestroy {
           alwaysSaveOnEnterKey: true,
         },
         filter: { model: Filters.slider, operator: '>=' },
-        type: FieldType.number,
+        type: 'number',
         groupTotalsFormatter: GroupTotalFormatters.sumTotals,
         grouping: {
           getter: 'duration',
@@ -133,8 +131,8 @@ export class Example18Component implements OnInit, OnDestroy {
         filterable: true,
         filter: { model: Filters.compoundDate },
         formatter: Formatters.dateIso,
-        type: FieldType.dateUtc,
-        outputType: FieldType.dateIso,
+        type: 'dateUtc',
+        outputType: 'dateIso',
         exportWithFormatter: true,
         grouping: {
           getter: 'start',
@@ -153,8 +151,8 @@ export class Example18Component implements OnInit, OnDestroy {
         filterable: true,
         filter: { model: Filters.compoundDate },
         formatter: Formatters.dateIso,
-        type: FieldType.dateUtc,
-        outputType: FieldType.dateIso,
+        type: 'dateUtc',
+        outputType: 'dateIso',
         exportWithFormatter: true,
         grouping: {
           getter: 'finish',
@@ -174,7 +172,7 @@ export class Example18Component implements OnInit, OnDestroy {
         filter: { model: Filters.compoundInput },
         formatter: Formatters.dollar,
         groupTotalsFormatter: GroupTotalFormatters.sumTotalsDollar,
-        type: FieldType.number,
+        type: 'number',
         grouping: {
           getter: 'cost',
           formatter: (g) => `Cost: ${g.value} <span class="text-primary">(${g.count} items)</span>`,
@@ -189,7 +187,7 @@ export class Example18Component implements OnInit, OnDestroy {
         id: 'percentComplete', name: '% Complete', field: 'percentComplete', columnGroup: 'Analysis',
         minWidth: 70, width: 90,
         formatter: Formatters.percentCompleteBar,
-        type: FieldType.number,
+        type: 'number',
         filterable: true,
         filter: { model: Filters.compoundSlider },
         sortable: true,
@@ -338,7 +336,7 @@ export class Example18Component implements OnInit, OnDestroy {
   exportToExcel() {
     this.excelExportService.exportToExcel({
       filename: 'Export',
-      format: FileType.xlsx
+      format: 'xlsx'
     });
   }
 
@@ -346,7 +344,7 @@ export class Example18Component implements OnInit, OnDestroy {
     this.textExportService.exportToFile({
       delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,
       filename: 'myExport',
-      format: (type === 'csv') ? FileType.csv : FileType.txt
+      format: (type === 'csv') ? 'csv' : 'txt'
     });
   }
 

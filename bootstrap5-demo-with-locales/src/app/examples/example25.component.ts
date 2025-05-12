@@ -101,7 +101,7 @@ export class Example25Component implements OnInit {
             value: 'name',
             label: 'name',
           },
-          filterOptions: {
+          options: {
             filter: true
           } as MultipleSelectOption
         },
@@ -131,7 +131,7 @@ export class Example25Component implements OnInit {
             value: 'native',
             label: 'native',
           },
-          filterOptions: {
+          options: {
             filter: true
           } as MultipleSelectOption
         },

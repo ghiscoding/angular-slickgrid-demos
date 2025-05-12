@@ -3,7 +3,6 @@ import { format as tempoFormat } from '@formkit/tempo';
 import {
   AngularGridInstance,
   Column,
-  FieldType,
   Filters,
   Formatters,
   GridOption,
@@ -75,7 +74,6 @@ export class Example15Component implements OnInit {
         field: 'title',
         filterable: true,
         sortable: true,
-        type: FieldType.string,
         minWidth: 45, width: 100,
         filter: {
           model: Filters.compoundInput
@@ -83,7 +81,6 @@ export class Example15Component implements OnInit {
       },
       {
         id: 'description', name: 'Description', field: 'description', filterable: true, sortable: true, minWidth: 80, width: 100,
-        type: FieldType.string,
         filter: {
           model: Filters.input,
           filterShortcuts: [
@@ -93,26 +90,26 @@ export class Example15Component implements OnInit {
         }
       },
       {
-        id: 'duration', name: 'Duration (days)', field: 'duration', sortable: true, type: FieldType.number, exportCsvForceToKeepAsString: true,
+        id: 'duration', name: 'Duration (days)', field: 'duration', sortable: true, type: 'number', exportCsvForceToKeepAsString: true,
         minWidth: 55, width: 100,
         filterable: true,
         filter: {
           collection: multiSelectFilterArray,
           model: Filters.multipleSelect,
           // we could add certain option(s) to the "multiple-select" plugin
-          filterOptions: {
+          options: {
             maxHeight: 250,
             width: 175
           } as MultipleSelectOption
         }
       },
       {
-        id: 'complete', name: '% Complete', field: 'percentComplete', minWidth: 70, type: FieldType.number, sortable: true, width: 100,
+        id: 'complete', name: '% Complete', field: 'percentComplete', minWidth: 70, type: 'number', sortable: true, width: 100,
         formatter: Formatters.percentCompleteBar, filterable: true, filter: { model: Filters.slider, operator: '>' }
       },
       {
         id: 'start', name: 'Start', field: 'start', nameKey: 'START', formatter: Formatters.dateIso, sortable: true, minWidth: 75, exportWithFormatter: true, width: 100,
-        type: FieldType.date, filterable: true,
+        type: 'date', filterable: true,
         filter: {
           model: Filters.compoundDate,
           filterShortcuts: [
@@ -123,7 +120,7 @@ export class Example15Component implements OnInit {
       },
       {
         id: 'completed', field: 'completed', name: 'Completed', minWidth: 85, maxWidth: 85, formatter: Formatters.checkmarkMaterial, width: 100,
-        type: FieldType.boolean,
+        type: 'boolean',
         sortable: true,
         filterable: true,
         filter: {
@@ -131,7 +128,7 @@ export class Example15Component implements OnInit {
           model: Filters.singleSelect,
 
           // we could add certain option(s) to the "multiple-select" plugin
-          filterOptions: { autoAdjustDropHeight: true } as MultipleSelectOption,
+          options: { autoAdjustDropHeight: true } as MultipleSelectOption,
         }
       }
     ];

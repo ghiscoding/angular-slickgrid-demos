@@ -9,7 +9,6 @@ import {
   Filters,
   type Formatter,
   type LongTextEditorOption,
-  FieldType,
   Editors,
   Formatters,
   type AutocompleterOption,
@@ -107,7 +106,7 @@ export class Example32Component implements OnInit {
   defineGrid() {
     this.columnDefinitions = [
       {
-        id: 'title', name: 'Title', field: 'title', sortable: true, type: FieldType.string, minWidth: 65,
+        id: 'title', name: 'Title', field: 'title', sortable: true, minWidth: 65,
         // you can adjust the resize calculation via multiple options
         resizeExtraWidthPadding: 4,
         resizeCharWidthInPx: 7.6,
@@ -161,7 +160,7 @@ export class Example32Component implements OnInit {
         editor: {
           model: Editors.longText, required: true, alwaysSaveOnEnterKey: true,
           maxLength: 12,
-          editorOptions: {
+          options: {
             cols: 45,
             rows: 6,
             buttonTexts: {
@@ -174,7 +173,7 @@ export class Example32Component implements OnInit {
       },
       {
         id: 'duration', name: 'Duration', field: 'duration', sortable: true, filterable: true, minWidth: 65,
-        type: FieldType.number, columnGroup: 'Common Factor',
+        type: 'number', columnGroup: 'Common Factor',
         formatter: (_row, _cell, value) => {
           if (value === null || value === undefined || value === '') {
             return '';
@@ -185,13 +184,13 @@ export class Example32Component implements OnInit {
       },
       {
         id: 'cost', name: 'Cost', field: 'cost', minWidth: 65,
-        sortable: true, filterable: true, type: FieldType.number, columnGroup: 'Analysis',
+        sortable: true, filterable: true, type: 'number', columnGroup: 'Analysis',
         filter: { model: Filters.compoundInputNumber },
         formatter: Formatters.dollar,
       },
       {
         id: 'percentComplete', name: '% Complete', field: 'percentComplete', minWidth: 100,
-        type: FieldType.number,
+        type: 'number',
         sortable: true, filterable: true, columnGroup: 'Analysis',
         filter: { model: Filters.compoundSlider, operator: '>=' },
         editor: {
@@ -218,7 +217,7 @@ export class Example32Component implements OnInit {
         id: 'start', name: 'Start', field: 'start', sortable: true,
         formatter: Formatters.dateUs, columnGroup: 'Period',
         exportCustomFormatter: Formatters.dateUs,
-        type: FieldType.date, outputType: FieldType.dateUs, saveOutputType: FieldType.dateUtc,
+        type: 'date', outputType: 'dateUs', saveOutputType: 'dateUtc',
         filterable: true, filter: { model: Filters.compoundDate },
         editor: { model: Editors.date, params: { hideClearButton: false } },
       },
@@ -238,12 +237,12 @@ export class Example32Component implements OnInit {
       {
         id: 'finish', name: 'Finish', field: 'finish', sortable: true,
         formatter: Formatters.dateUs, columnGroup: 'Period',
-        type: FieldType.date, outputType: FieldType.dateUs, saveOutputType: FieldType.dateUtc,
+        type: 'date', outputType: 'dateUs', saveOutputType: 'dateUtc',
         filterable: true, filter: { model: Filters.compoundDate },
         exportCustomFormatter: Formatters.dateUs,
         editor: {
           model: Editors.date,
-          editorOptions: { range: { min: 'today' } } as VanillaCalendarOption,
+          options: { displayDateMin: 'today' } as VanillaCalendarOption,
           validator: (value, args) => {
             const dataContext = args && args.item;
             if (dataContext && (dataContext.completed && !value)) {
@@ -263,14 +262,14 @@ export class Example32Component implements OnInit {
         labelKey: 'itemName',
         formatter: Formatters.complexObject,
         exportCustomFormatter: Formatters.complex, // without the Editing cell Formatter
-        type: FieldType.object,
+        type: 'object',
         sortComparer: SortComparers.objectString,
         editor: {
           model: Editors.autocompleter,
           alwaysSaveOnEnterKey: true,
 
           // example with a Remote API call
-          editorOptions: {
+          options: {
             minLength: 1,
             fetch: (searchTerm: string, callback: (items: false | any[]) => void) => {
               // const items = require('c://TEMP/items.json');
@@ -289,7 +288,6 @@ export class Example32Component implements OnInit {
         filter: {
           model: Filters.inputText,
           // placeholder: '🔎︎ search product',
-          type: FieldType.string,
           queryField: 'product.itemName',
         }
       },
@@ -299,7 +297,7 @@ export class Example32Component implements OnInit {
         exportCustomFormatter: Formatters.complex, // without the Editing cell Formatter
         dataKey: 'code',
         labelKey: 'name',
-        type: FieldType.object,
+        type: 'object',
         sortComparer: SortComparers.objectString,
         filterable: true,
         sortable: true,
@@ -311,7 +309,7 @@ export class Example32Component implements OnInit {
         },
         filter: {
           model: Filters.inputText,
-          type: FieldType.string,
+          type: 'string',
           queryField: 'origin.name',
         }
       },

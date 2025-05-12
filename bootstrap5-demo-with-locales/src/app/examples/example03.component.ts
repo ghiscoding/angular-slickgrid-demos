@@ -7,7 +7,6 @@ import {
   Editors,
   EditorArguments,
   EditorValidator,
-  FieldType,
   Filters,
   Formatter,
   Formatters,
@@ -150,12 +149,11 @@ export class Example3Component implements OnInit {
         minWidth: 100,
         filterable: true,
         sortable: true,
-        type: FieldType.string,
         editor: {
           model: Editors.longText,
           required: true,
           maxLength: 12,
-          editorOptions: {
+          options: {
             // you can change textarea cols,rows (defaults to 40,4)
             cols: 42,
             rows: 5,
@@ -182,7 +180,6 @@ export class Example3Component implements OnInit {
         minWidth: 70,
         filterable: true,
         sortable: true,
-        type: FieldType.string,
         editor: {
           model: CustomInputEditor,
           // model: Editors.text,
@@ -201,14 +198,14 @@ export class Example3Component implements OnInit {
         filterable: true,
         sortable: true,
         formatter: Formatters.complexObject,
-        type: FieldType.number,
+        type: 'number',
         exportWithFormatter: true,
-        filter: { model: Filters.slider, filterOptions: { hideSliderNumber: false } },
+        filter: { model: Filters.slider, options: { hideSliderNumber: false } },
         editor: {
           model: Editors.slider,
           minValue: 0,
           maxValue: 100,
-          // editorOptions: { hideSliderNumber: true },
+          // options: { hideSliderNumber: true },
         },
         /*
         editor: {
@@ -232,7 +229,7 @@ export class Example3Component implements OnInit {
         minWidth: 100,
         filterable: true,
         formatter: Formatters.multiple,
-        type: FieldType.number,
+        type: 'number',
         editor: {
           model: Editors.singleSelect,
 
@@ -260,7 +257,7 @@ export class Example3Component implements OnInit {
           //   console.log(args);
           //   return updatedCollection.filter((col) => args.dataContext.id % 2 ? col.value < 50 : col.value >= 50);
           // },
-          editorOptions: {
+          options: {
             maxHeight: 400
           } as MultipleSelectOption
         },
@@ -286,7 +283,7 @@ export class Example3Component implements OnInit {
         },
         exportWithFormatter: true,
         sortable: true,
-        type: FieldType.date,
+        type: 'date',
         editor: {
           model: Editors.date,
         },
@@ -300,15 +297,15 @@ export class Example3Component implements OnInit {
         filter: { model: Filters.compoundDate },
         formatter: Formatters.dateIso,
         exportWithFormatter: true,
-        type: FieldType.date,              // dataset cell input format
-        // outputType: FieldType.dateUs,   // date picker format
-        saveOutputType: FieldType.dateUtc, // save output date formattype: FieldType.date,
+        type: 'date',              // dataset cell input format
+        // outputType: 'dateUs',   // date picker format
+        saveOutputType: 'dateUtc', // save output date formattype: 'date',
         editor: {
           model: Editors.date,
-          // override any of the calendar picker options through "editorOptions"
+          // override any of the calendar picker options through "options"
           // please note that there's no TSlint on this property since it's generic for any filter, so make sure you entered the correct filter option(s)
-          editorOptions: {
-            range: { min: 'today' },
+          options: {
+            displayDateMin: 'today',
 
             // if we want to preload the date picker with a different date,
             // we could do it by assigning settings.seleted.dates
@@ -331,7 +328,7 @@ export class Example3Component implements OnInit {
           // We can use the autocomplete through 3 ways "collection", "collectionAsync" or with your own autocomplete options
           // use your own autocomplete options, instead of fetch-jsonp, use http
           // here we use fetch-jsonp just because I'm not sure how to configure http with JSONP and CORS
-          editorOptions: {
+          options: {
             forceUserInput: true,
             minLength: 3,
             fetch: (searchText: string, updateCallback: (items: false | any[]) => void) => {
@@ -355,7 +352,7 @@ export class Example3Component implements OnInit {
 
           // OR use the autocomplete through 3 ways "collection", "collectionAsync" or with your own autocomplete options
           // use your own autocomplete options, instead of fetch-jsonp, use HttpClient or FetchClient
-          filterOptions: {
+          options: {
             minLength: 3,
             fetch: (searchText: string, updateCallback: (items: false | any[]) => void) => {
               fetchJsonp<string[]>(`http://gd.geobytes.com/AutoCompleteCity?q=${searchText}`)
@@ -371,7 +368,7 @@ export class Example3Component implements OnInit {
         exportWithFormatter: true,
         dataKey: 'code',
         labelKey: 'name',
-        type: FieldType.object,
+        type: 'object',
         sortComparer: SortComparers.objectString, // this sorter requires the dataKey and assume that obj1[dataKey] will be a string so it can sort it that way
         filterable: true,
         sortable: true,
@@ -405,7 +402,7 @@ export class Example3Component implements OnInit {
         field: 'effortDriven',
         minWidth: 70,
         filterable: true,
-        type: FieldType.boolean,
+        type: 'boolean',
         filter: {
           model: Filters.singleSelect,
           collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
@@ -424,7 +421,6 @@ export class Example3Component implements OnInit {
         exportWithFormatter: true,
         sanitizeDataExport: true,
         sortable: true,
-        type: FieldType.string,
         editor: {
           placeholder: 'choose option',
           collectionAsync: this.http.get<{ value: string; label: string; }[]>(URL_SAMPLE_COLLECTION_DATA),

@@ -7,7 +7,6 @@ import {
   Aggregators,
   Column,
   decimalFormatted,
-  FieldType,
   Filters,
   findItemInTreeStructure,
   Formatter,
@@ -55,12 +54,12 @@ export class Example28Component implements OnInit {
     this.columnDefinitions = [
       {
         id: 'file', name: 'Files', field: 'file',
-        type: FieldType.string, width: 150, formatter: this.treeFormatter,
+        width: 150, formatter: this.treeFormatter,
         filterable: true, sortable: true,
       },
       {
         id: 'dateModified', name: 'Date Modified', field: 'dateModified',
-        formatter: Formatters.dateIso, type: FieldType.dateUtc, outputType: FieldType.dateIso, minWidth: 90,
+        formatter: Formatters.dateIso, type: 'dateUtc', outputType: 'dateIso', minWidth: 90,
         exportWithFormatter: true, filterable: true, filter: { model: Filters.compoundDate }
       },
       {
@@ -69,7 +68,7 @@ export class Example28Component implements OnInit {
       },
       {
         id: 'size', name: 'Size', field: 'size', minWidth: 90,
-        type: FieldType.number, exportWithFormatter: true,
+        type: 'number', exportWithFormatter: true,
         excelExportOptions: { autoDetectCellFormat: false },
         filterable: true, filter: { model: Filters.compoundInputNumber },
 

@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import {
   AngularGridInstance,
   Column,
-  FieldType,
   Filters,
   GridOption,
   GridStateChange,
@@ -71,7 +70,6 @@ export class Example5Component implements OnInit {
     this.columnDefinitions = [
       {
         id: 'name', name: 'Name', field: 'name', sortable: true,
-        type: FieldType.string,
         filterable: true,
         filter: {
           model: Filters.compoundInput,

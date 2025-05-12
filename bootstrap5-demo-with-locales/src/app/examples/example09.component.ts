@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, ExtensionName, FieldType, Filters, Formatters, GridOption } from 'angular-slickgrid';
+import { AngularGridInstance, Column, ExtensionName, Filters, Formatters, GridOption } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './example09.component.html',
@@ -30,19 +30,19 @@ export class Example9Component implements OnInit {
 
   ngOnInit(): void {
     this.columnDefinitions = [
-      { id: 'title', name: 'Title', field: 'title', filterable: true, type: FieldType.string },
-      { id: 'duration', name: 'Duration', field: 'duration', sortable: true, filterable: true, type: FieldType.string },
+      { id: 'title', name: 'Title', field: 'title', filterable: true },
+      { id: 'duration', name: 'Duration', field: 'duration', sortable: true, filterable: true },
       {
         id: 'percentComplete', name: '% Complete', field: 'percentComplete', sortable: true, filterable: true,
-        type: FieldType.number,
+        type: 'number',
         formatter: Formatters.percentCompleteBar,
-        filter: { model: Filters.compoundSlider, filterOptions: { hideSliderNumber: false } }
+        filter: { model: Filters.compoundSlider, options: { hideSliderNumber: false } }
       },
-      { id: 'start', name: 'Start', field: 'start', filterable: true, type: FieldType.string },
-      { id: 'finish', name: 'Finish', field: 'finish', filterable: true, type: FieldType.string },
+      { id: 'start', name: 'Start', field: 'start', filterable: true },
+      { id: 'finish', name: 'Finish', field: 'finish', filterable: true },
       {
         id: 'effort-driven', name: 'Completed', field: 'effortDriven', maxWidth: 80, formatter: Formatters.checkmarkMaterial,
-        type: FieldType.boolean,
+        type: 'boolean',
         minWidth: 100,
         sortable: true,
         filterable: true,

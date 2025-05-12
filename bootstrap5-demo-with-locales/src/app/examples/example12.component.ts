@@ -5,8 +5,6 @@ import {
   AngularGridInstance,
   Column,
   DelimiterType,
-  FieldType,
-  FileType,
   Filters,
   Formatter,
   Formatters,
@@ -53,12 +51,12 @@ export class Example12Component implements OnInit {
       },
       {
         id: 'start', name: 'Début', field: 'start', minWidth: 100,
-        formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, exportWithFormatter: true,
+        formatter: Formatters.dateIso, outputType: 'dateIso', type: 'date', exportWithFormatter: true,
         filterable: true, filter: { model: Filters.compoundDate }
       },
       {
         id: 'finish', name: 'Fin', field: 'finish',
-        formatter: Formatters.dateIso, outputType: FieldType.dateIso, type: FieldType.date, exportWithFormatter: true,
+        formatter: Formatters.dateIso, outputType: 'dateIso', type: 'date', exportWithFormatter: true,
         minWidth: 100, filterable: true, filter: { model: Filters.compoundDate }
       },
       {
@@ -192,7 +190,7 @@ export class Example12Component implements OnInit {
   exportToExcel() {
     this.excelExportService.exportToExcel({
       filename: 'Export',
-      format: FileType.xlsx
+      format: 'xlsx'
     });
   }
 
@@ -200,7 +198,7 @@ export class Example12Component implements OnInit {
     this.textExportService.exportToFile({
       delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,
       filename: 'myExport',
-      format: (type === 'csv') ? FileType.csv : FileType.txt
+      format: (type === 'csv') ? 'csv' : 'txt'
     });
   }
 

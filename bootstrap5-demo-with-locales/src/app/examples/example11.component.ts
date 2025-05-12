@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, Editors, FieldType, Formatters, GridOption, GridService, OnEventArgs, SlickDataView, SlickGrid } from 'angular-slickgrid';
+import { AngularGridInstance, Column, Editors, Formatters, GridOption, GridService, OnEventArgs, SlickDataView, SlickGrid } from 'angular-slickgrid';
 
 @Component({
   styles: ['.duration-bg { background-color: #e9d4f1 !important }'],
@@ -78,7 +78,6 @@ export class Example11Component implements OnInit {
       {
         id: 'title', name: 'Title', field: 'title',
         sortable: true,
-        type: FieldType.string,
         editor: {
           model: Editors.longText
         }
@@ -86,7 +85,7 @@ export class Example11Component implements OnInit {
       {
         id: 'duration', name: 'Duration (days)', field: 'duration',
         sortable: true,
-        type: FieldType.number,
+        type: 'number',
         editor: {
           model: Editors.text
         },
@@ -98,7 +97,7 @@ export class Example11Component implements OnInit {
       {
         id: 'complete', name: '% Complete', field: 'percentComplete',
         formatter: Formatters.percentCompleteBar,
-        type: FieldType.number,
+        type: 'number',
         editor: {
           model: Editors.integer
         }
@@ -107,7 +106,7 @@ export class Example11Component implements OnInit {
         id: 'start', name: 'Start', field: 'start',
         formatter: Formatters.dateIso,
         sortable: true,
-        type: FieldType.date,
+        type: 'date',
         /*
         editor: {
           model: Editors.date
@@ -117,12 +116,12 @@ export class Example11Component implements OnInit {
       {
         id: 'finish', name: 'Finish', field: 'finish',
         formatter: Formatters.dateIso, sortable: true,
-        type: FieldType.date
+        type: 'date'
       },
       {
         id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven',
         formatter: Formatters.checkmarkMaterial,
-        type: FieldType.number,
+        type: 'number',
         editor: {
           model: Editors.checkbox
         }

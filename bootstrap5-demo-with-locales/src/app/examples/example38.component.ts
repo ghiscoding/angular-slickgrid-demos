@@ -5,7 +5,6 @@ import {
   Aggregators,
   AngularGridInstance,
   Column,
-  FieldType,
   Filters,
   GridOption,
   Grouping,
@@ -55,7 +54,6 @@ export class Example38Component implements OnInit {
     this.columnDefinitions = [
       {
         id: 'name', name: 'Name', field: 'name', sortable: true,
-        type: FieldType.string,
         filterable: true,
         filter: { model: Filters.compoundInput }
       },
