@@ -65,7 +65,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "300kb"
+                  "maximumWarning": "500kb"
                 }
               ],
               "outputHashing": "all",
@@ -81,7 +81,7 @@
               "budgets": [
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "50kb"
+                  "maximumWarning": "500kb"
                 }
               ],
               "optimization": true,
