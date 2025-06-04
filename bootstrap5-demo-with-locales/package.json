@@ -2,6 +2,22 @@
   "name": "test-slickgrid",
   "version": "1.0.0",
   "license": "MIT",
+  "keywords": [
+    "react",
+    "datagrid",
+    "datatable",
+    "plugin",
+    "slickgrid"
+  ],
+  "homepage": "https://github.com/ghiscoding/slickgrid-universal/tree/master/frameworks/angular-slickgrid",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghiscoding/slickgrid-universal.git",
+    "directory": "frameworks/angular-slickgrid"
+  },
+  "bugs": {
+    "url": "https://github.com/ghiscoding/slickgrid-universal/issues"
+  },
   "scripts": {
     "ng": "ng",
     "dev": "ng serve --port 4400",
