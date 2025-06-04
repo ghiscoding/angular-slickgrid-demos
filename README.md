@@ -1,5 +1,5 @@
 # Angular-Slickgrid Demos
-## Multiple Demos of the [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid) library
+## Multiple Demos of the [Angular-Slickgrid](https://github.com/ghiscoding/slickgrid-universal/tree/master/frameworks/angular-slickgrid) library
 
 ### Installation
 Choose the theme and feature you want, they are separated into 2 themes (with Bootstrap 5) and there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other demos are all with `ngx-translate` (dynamically switch language on the fly).
