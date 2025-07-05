@@ -36,6 +36,7 @@ export const localeFrench = {
   TEXT_NOT_CONTAINS: 'Ne contient pas',
   TEXT_NOT_EQUAL_TO: 'Non égal à',
   TEXT_OK: 'Terminé',
+  TEXT_OPTIONS: 'Options',
   TEXT_REMOVE_FILTER: 'Supprimer le filtre',
   TEXT_REMOVE_SORT: 'Supprimer le tri',
   TEXT_SAVE: 'Sauvegarder',

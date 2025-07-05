@@ -35,6 +35,7 @@ export const localeEnglish = {
   TEXT_NOT_CONTAINS: 'Not contains',
   TEXT_NOT_EQUAL_TO: 'Not equal to',
   TEXT_OK: 'OK',
+  TEXT_OPTIONS: 'Options',
   TEXT_REMOVE_FILTER: 'Remove Filter',
   TEXT_REMOVE_SORT: 'Remove Sort',
   TEXT_SAVE: 'Save',
