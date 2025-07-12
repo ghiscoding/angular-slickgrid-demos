@@ -51,7 +51,6 @@
     "ngx-bootstrap": "^19.0.2",
     "rxjs": "^7.8.2",
     "stream-browserify": "^3.0.0",
-    "text-encoding-utf-8": "^1.0.2",
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
