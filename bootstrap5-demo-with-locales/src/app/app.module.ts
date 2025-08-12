@@ -55,6 +55,7 @@ import { Example42Component } from './examples/example42.component';
 import { Example43Component } from './examples/example43.component';
 import { Example44Component } from './examples/example44.component';
 import { Example45Component } from './examples/example45.component';
+import { Example46Component } from './examples/example46.component';
 import { EditorNgSelectComponent } from './examples/editor-ng-select.component';
 import { FilterNgSelectComponent } from './examples/filter-ng-select.component';
 import { Example45DetailComponent } from './examples/example45-detail.component';
@@ -135,6 +136,7 @@ export class DummyTranslateService {
     Example44Component,
     Example45Component,
     Example45DetailComponent,
+    Example46Component,
     FilterNgSelectComponent,
     HomeComponent,
     RowDetailPreloadComponent,
