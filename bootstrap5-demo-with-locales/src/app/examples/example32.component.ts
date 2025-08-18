@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, type OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 
@@ -18,7 +18,7 @@ import {
   type SlickGrid,
   SlickGlobalEditorLock,
   type VanillaCalendarOption,
-  type SearchTerm
+  type SearchTerm,
 } from 'angular-slickgrid';
 
 const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
@@ -49,13 +49,13 @@ function checkItemIsEditable(dataContext: any, columnDef: Column, grid: SlickGri
 const customEditableInputFormatter: Formatter = (_row, _cell, value, columnDef, _dataContext, grid) => {
   const gridOptions = grid && grid.getOptions && grid.getOptions();
   const isEditableLine = gridOptions.editable && columnDef.editor;
-  value = (value === null || value === undefined) ? '' : value;
+  value = value === null || value === undefined ? '' : value;
   return isEditableLine ? { text: value, addClasses: 'editable-field', toolTip: 'Click to Edit' } : value;
 };
 
 // you can create custom validator to pass to an inline editor
 const myCustomTitleValidator = (value: any) => {
-  if ((value === null || value === undefined || !value.length)) {
+  if (value === null || value === undefined || !value.length) {
     // we will only check if the field is supplied when it's an inline editing
     return { valid: false, msg: 'This is a required field.' };
   } else if (!/^(task\s\d+)*$/i.test(value)) {
@@ -71,15 +71,13 @@ const myCustomTitleValidator = (value: any) => {
   standalone: false,
 })
 export class Example32Component implements OnInit {
-  title = 'Example 31: Columns Resize by Content';
-  subTitle = `The grid below uses the optional resize by cell content (with a fixed 950px for demo purposes), you can click on the 2 buttons to see the difference. The "autosizeColumns" is really the default option used by Angular-SlickGrid, the resize by cell content is optional because it requires to read the first thousand rows and do extra width calculation.`;
-
   angularGrid!: AngularGridInstance;
   gridOptions!: GridOption;
   columnDefinitions: Column[] = [];
   dataset: any[] = [];
   editQueue: any[] = [];
   editedItems: any = {};
+  hideSubTitle = false;
   isUsingDefaultResize = false;
   isGridEditable = true;
   isMassSelectionDisabled = true;
@@ -106,7 +104,11 @@ export class Example32Component implements OnInit {
   defineGrid() {
     this.columnDefinitions = [
       {
-        id: 'title', name: 'Title', field: 'title', sortable: true, minWidth: 65,
+        id: 'title',
+        name: 'Title',
+        field: 'title',
+        sortable: true,
+        minWidth: 65,
         // you can adjust the resize calculation via multiple options
         resizeExtraWidthPadding: 4,
         resizeCharWidthInPx: 7.6,
@@ -158,55 +160,87 @@ export class Example32Component implements OnInit {
           },
         },
         editor: {
-          model: Editors.longText, required: true, alwaysSaveOnEnterKey: true,
+          model: Editors.longText,
+          required: true,
+          alwaysSaveOnEnterKey: true,
           maxLength: 12,
           options: {
             cols: 45,
             rows: 6,
             buttonTexts: {
               cancel: 'Close',
-              save: 'Done'
-            }
+              save: 'Done',
+            },
           } as LongTextEditorOption,
           validator: myCustomTitleValidator,
         },
       },
       {
-        id: 'duration', name: 'Duration', field: 'duration', sortable: true, filterable: true, minWidth: 65,
-        type: 'number', columnGroup: 'Common Factor',
+        id: 'duration',
+        name: 'Duration',
+        field: 'duration',
+        sortable: true,
+        filterable: true,
+        minWidth: 65,
+        type: 'number',
+        columnGroup: 'Common Factor',
         formatter: (_row, _cell, value) => {
           if (value === null || value === undefined || value === '') {
             return '';
           }
           return value > 1 ? `${value} days` : `${value} day`;
         },
-        editor: { model: Editors.float, decimal: 2, valueStep: 1, minValue: 0, maxValue: 10000, alwaysSaveOnEnterKey: true, required: true },
+        editor: {
+          model: Editors.float,
+          decimal: 2,
+          valueStep: 1,
+          minValue: 0,
+          maxValue: 10000,
+          alwaysSaveOnEnterKey: true,
+          required: true,
+        },
       },
       {
-        id: 'cost', name: 'Cost', field: 'cost', minWidth: 65,
-        sortable: true, filterable: true, type: 'number', columnGroup: 'Analysis',
+        id: 'cost',
+        name: 'Cost',
+        field: 'cost',
+        minWidth: 65,
+        sortable: true,
+        filterable: true,
+        type: 'number',
+        columnGroup: 'Analysis',
         filter: { model: Filters.compoundInputNumber },
         formatter: Formatters.dollar,
       },
       {
-        id: 'percentComplete', name: '% Complete', field: 'percentComplete', minWidth: 100,
+        id: 'percentComplete',
+        name: '% Complete',
+        field: 'percentComplete',
+        minWidth: 100,
         type: 'number',
-        sortable: true, filterable: true, columnGroup: 'Analysis',
+        sortable: true,
+        filterable: true,
+        columnGroup: 'Analysis',
         filter: { model: Filters.compoundSlider, operator: '>=' },
         editor: {
           model: Editors.slider,
-          minValue: 0, maxValue: 100,
+          minValue: 0,
+          maxValue: 100,
         },
       },
       {
-        id: 'complexity', name: 'Complexity', field: 'complexity',
+        id: 'complexity',
+        name: 'Complexity',
+        field: 'complexity',
         resizeCalcWidthRatio: 0.82, // default calc ratio is 1 or 0.95 for field type of string
-        sortable: true, filterable: true, columnGroup: 'Analysis',
+        sortable: true,
+        filterable: true,
+        columnGroup: 'Analysis',
         formatter: (_row, _cell, value) => this.complexityLevelList[value]?.label,
         exportCustomFormatter: (_row, _cell, value) => this.complexityLevelList[value]?.label,
         filter: {
           model: Filters.multipleSelect,
-          collection: this.complexityLevelList
+          collection: this.complexityLevelList,
         },
         editor: {
           model: Editors.singleSelect,
@@ -214,47 +248,75 @@ export class Example32Component implements OnInit {
         },
       },
       {
-        id: 'start', name: 'Start', field: 'start', sortable: true,
-        formatter: Formatters.dateUs, columnGroup: 'Period',
+        id: 'start',
+        name: 'Start',
+        field: 'start',
+        sortable: true,
+        formatter: Formatters.dateUs,
+        columnGroup: 'Period',
         exportCustomFormatter: Formatters.dateUs,
-        type: 'date', outputType: 'dateUs', saveOutputType: 'dateUtc',
-        filterable: true, filter: { model: Filters.compoundDate },
+        type: 'date',
+        outputType: 'dateUs',
+        saveOutputType: 'dateUtc',
+        filterable: true,
+        filter: { model: Filters.compoundDate },
         editor: { model: Editors.date, params: { hideClearButton: false } },
       },
       {
-        id: 'completed', name: 'Completed', field: 'completed', width: 80, minWidth: 75, maxWidth: 100,
-        cssClass: 'text-center', columnGroup: 'Period',
+        id: 'completed',
+        name: 'Completed',
+        field: 'completed',
+        width: 80,
+        minWidth: 75,
+        maxWidth: 100,
+        cssClass: 'text-center',
+        columnGroup: 'Period',
         formatter: Formatters.checkmarkMaterial,
         exportWithFormatter: false,
-        filterable: true, sortable: true,
+        filterable: true,
+        sortable: true,
         filter: {
-          collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
-          model: Filters.singleSelect
+          collection: [
+            { value: '', label: '' },
+            { value: true, label: 'True' },
+            { value: false, label: 'False' },
+          ],
+          model: Filters.singleSelect,
         },
-        editor: { model: Editors.checkbox, },
+        editor: { model: Editors.checkbox },
         // editor: { model: Editors.singleSelect, collection: [{ value: true, label: 'Yes' }, { value: false, label: 'No' }], },
       },
       {
-        id: 'finish', name: 'Finish', field: 'finish', sortable: true,
-        formatter: Formatters.dateUs, columnGroup: 'Period',
-        type: 'date', outputType: 'dateUs', saveOutputType: 'dateUtc',
-        filterable: true, filter: { model: Filters.compoundDate },
+        id: 'finish',
+        name: 'Finish',
+        field: 'finish',
+        sortable: true,
+        formatter: Formatters.dateUs,
+        columnGroup: 'Period',
+        type: 'date',
+        outputType: 'dateUs',
+        saveOutputType: 'dateUtc',
+        filterable: true,
+        filter: { model: Filters.compoundDate },
         exportCustomFormatter: Formatters.dateUs,
         editor: {
           model: Editors.date,
           options: { displayDateMin: 'today' } as VanillaCalendarOption,
           validator: (value, args) => {
             const dataContext = args && args.item;
-            if (dataContext && (dataContext.completed && !value)) {
+            if (dataContext && dataContext.completed && !value) {
               return { valid: false, msg: 'You must provide a "Finish" date when "Completed" is checked.' };
             }
             return { valid: true, msg: '' };
-          }
+          },
         },
       },
       {
-        id: 'product', name: 'Product', field: 'product',
-        filterable: true, columnGroup: 'Item',
+        id: 'product',
+        name: 'Product',
+        field: 'product',
+        filterable: true,
+        columnGroup: 'Item',
         minWidth: 100,
         resizeCharWidthInPx: 8,
         exportWithFormatter: true,
@@ -274,7 +336,7 @@ export class Example32Component implements OnInit {
             fetch: (searchTerm: string, callback: (items: false | any[]) => void) => {
               // const items = require('c://TEMP/items.json');
               const products = this.mockProducts();
-              callback(products.filter(product => product.itemName.toLowerCase().includes(searchTerm.toLowerCase())));
+              callback(products.filter((product) => product.itemName.toLowerCase().includes(searchTerm.toLowerCase())));
             },
             renderItem: {
               // layout: 'twoRows',
@@ -289,11 +351,14 @@ export class Example32Component implements OnInit {
           model: Filters.inputText,
           // placeholder: '🔎︎ search product',
           queryField: 'product.itemName',
-        }
+        },
       },
       {
-        id: 'origin', name: 'Country of Origin', field: 'origin',
-        formatter: Formatters.complexObject, columnGroup: 'Item',
+        id: 'origin',
+        name: 'Country of Origin',
+        field: 'origin',
+        formatter: Formatters.complexObject,
+        columnGroup: 'Item',
         exportCustomFormatter: Formatters.complex, // without the Editing cell Formatter
         dataKey: 'code',
         labelKey: 'name',
@@ -309,14 +374,19 @@ export class Example32Component implements OnInit {
         },
         filter: {
           model: Filters.inputText,
-          type: 'string',
           queryField: 'origin.name',
-        }
+        },
       },
       {
-        id: 'action', name: 'Action', field: 'action', width: 70, minWidth: 70, maxWidth: 70,
+        id: 'action',
+        name: 'Action',
+        field: 'action',
+        width: 70,
+        minWidth: 70,
+        maxWidth: 70,
         excludeFromExport: true,
-        formatter: () => `<div class="button-style margin-auto" style="width: 35px;"><span class="mdi mdi-chevron-down text-primary"></span></div>`,
+        formatter: () =>
+          `<div class="button-style margin-auto" style="width: 35px;"><span class="mdi mdi-chevron-down text-primary"></span></div>`,
         cellMenu: {
           hideCloseButton: false,
           commandTitle: 'Commands',
@@ -330,8 +400,12 @@ export class Example32Component implements OnInit {
             },
             'divider',
             {
-              command: 'delete-row', title: 'Delete Row', positionOrder: 64,
-              iconCssClass: 'mdi mdi-close color-danger', cssClass: 'red', textCssClass: 'text-italic color-danger-light',
+              command: 'delete-row',
+              title: 'Delete Row',
+              positionOrder: 64,
+              iconCssClass: 'mdi mdi-close color-danger',
+              cssClass: 'red',
+              textCssClass: 'text-italic color-danger-light',
               // only show command to 'Delete Row' when the task is not completed
               itemVisibilityOverride: (args) => {
                 return !args.dataContext?.completed;
@@ -342,12 +416,72 @@ export class Example32Component implements OnInit {
                 if (confirm(`Do you really want to delete row (${row + 1}) with "${dataContext.title}"`)) {
                   this.angularGrid.gridService.deleteItemById(dataContext.id);
                 }
-              }
+              },
             },
           ],
-        }
+        },
       },
     ];
+
+    // add custom Header Menu to all columns except "Action"
+    this.columnDefinitions.forEach((col) => {
+      col.header = {
+        menu: {
+          commandItems: [
+            { command: '', divider: true, positionOrder: 98 },
+            {
+              // we can also have multiple nested sub-menus
+              command: 'custom-actions',
+              title: 'Hello',
+              positionOrder: 99,
+              commandItems: [
+                { command: 'hello-world', title: 'Hello World' },
+                { command: 'hello-slickgrid', title: 'Hello SlickGrid' },
+                {
+                  command: 'sub-menu',
+                  title: `Let's play`,
+                  cssClass: 'green',
+                  subMenuTitle: 'choose your game',
+                  subMenuTitleCssClass: 'text-italic salmon',
+                  commandItems: [
+                    { command: 'sport-badminton', title: 'Badminton' },
+                    { command: 'sport-tennis', title: 'Tennis' },
+                    { command: 'sport-racquetball', title: 'Racquetball' },
+                    { command: 'sport-squash', title: 'Squash' },
+                  ],
+                },
+              ],
+            },
+            {
+              command: 'feedback',
+              title: 'Feedback',
+              positionOrder: 100,
+              commandItems: [
+                {
+                  command: 'request-update',
+                  title: 'Request update from supplier',
+                  iconCssClass: 'mdi mdi-star',
+                  tooltip: 'this will automatically send an alert to the shipping team to contact the user for an update',
+                },
+                'divider',
+                {
+                  command: 'sub-menu',
+                  title: 'Contact Us',
+                  iconCssClass: 'mdi mdi-account',
+                  subMenuTitle: 'contact us...',
+                  subMenuTitleCssClass: 'italic',
+                  commandItems: [
+                    { command: 'contact-email', title: 'Email us', iconCssClass: 'mdi mdi-pencil-outline' },
+                    { command: 'contact-chat', title: 'Chat with us', iconCssClass: 'mdi mdi-message-text-outline' },
+                    { command: 'contact-meeting', title: 'Book an appointment', iconCssClass: 'mdi mdi-coffee' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      };
+    });
 
     this.gridOptions = {
       editable: true,
@@ -357,13 +491,13 @@ export class Example32Component implements OnInit {
       autoCommitEdit: true,
       autoResize: {
         container: '#smaller-container',
-        rightPadding: 10
+        rightPadding: 10,
       },
       enableAutoResize: true,
       enablePagination: true,
       pagination: {
         pageSize: 10,
-        pageSizes: [10, 200, 500, 5000]
+        pageSizes: [10, 200, 500, 5000],
       },
 
       // resizing by cell content is opt-in
@@ -382,7 +516,7 @@ export class Example32Component implements OnInit {
 
       enableExcelExport: true,
       excelExportOptions: {
-        exportWithFormatter: false
+        exportWithFormatter: false,
       },
       externalResources: [new ExcelExportService()],
       enableFiltering: true,
@@ -394,7 +528,7 @@ export class Example32Component implements OnInit {
       },
       rowSelectionOptions: {
         // True (Single Selection), False (Multiple Selections)
-        selectActiveRow: false
+        selectActiveRow: false,
       },
       createPreHeaderPanel: true,
       showPreHeaderPanel: true,
@@ -402,7 +536,9 @@ export class Example32Component implements OnInit {
       rowHeight: 33,
       headerRowHeight: 35,
       editCommandHandler: (item, column, editCommand) => {
-        const prevSerializedValues = Array.isArray(editCommand.prevSerializedValue) ? editCommand.prevSerializedValue : [editCommand.prevSerializedValue];
+        const prevSerializedValues = Array.isArray(editCommand.prevSerializedValue)
+          ? editCommand.prevSerializedValue
+          : [editCommand.prevSerializedValue];
         const serializedValues = Array.isArray(editCommand.serializedValue) ? editCommand.serializedValue : [editCommand.serializedValue];
         const editorColumns = this.columnDefinitions.filter((col) => col.editor !== undefined);
 
@@ -437,11 +573,11 @@ export class Example32Component implements OnInit {
     for (let i = 0; i < count; i++) {
       const randomItemId = Math.floor(Math.random() * this.mockProducts().length);
       const randomYear = 2000 + Math.floor(Math.random() * 10);
-      const randomFinishYear = (new Date().getFullYear()) + Math.floor(Math.random() * 10); // use only years not lower than 3 years ago
+      const randomFinishYear = new Date().getFullYear() + Math.floor(Math.random() * 10); // use only years not lower than 3 years ago
       const randomMonth = Math.floor(Math.random() * 11);
-      const randomDay = Math.floor((Math.random() * 29));
-      const randomTime = Math.floor((Math.random() * 59));
-      const randomFinish = new Date(randomFinishYear, (randomMonth + 1), randomDay, randomTime, randomTime, randomTime);
+      const randomDay = Math.floor(Math.random() * 29);
+      const randomTime = Math.floor(Math.random() * 59);
+      const randomFinish = new Date(randomFinishYear, randomMonth + 1, randomDay, randomTime, randomTime, randomTime);
       const randomPercentComplete = Math.floor(Math.random() * 100) + 15; // make it over 15 for E2E testing purposes
       const percentCompletion = randomPercentComplete > 100 ? (i > 5 ? 100 : 88) : randomPercentComplete; // don't use 100 unless it's over index 5, for E2E testing purposes
       const isCompleted = percentCompletion === 100;
@@ -456,11 +592,11 @@ export class Example32Component implements OnInit {
         },
         complexity: i % 3 ? 0 : 2,
         start: new Date(randomYear, randomMonth, randomDay, randomDay, randomTime, randomTime, randomTime),
-        finish: (isCompleted || (i % 3 === 0 && (randomFinish > new Date() && i > 3)) ? (isCompleted ? new Date() : randomFinish) : ''), // make sure the random date is earlier than today and it's index is bigger than 3
-        cost: (i % 33 === 0) ? null : Math.round(Math.random() * 10000) / 100,
-        completed: (isCompleted || (i % 3 === 0 && (randomFinish > new Date() && i > 3))),
-        product: { id: this.mockProducts()[randomItemId]?.id, itemName: this.mockProducts()[randomItemId]?.itemName, },
-        origin: (i % 2) ? { code: 'CA', name: 'Canada' } : { code: 'US', name: 'United States' },
+        finish: isCompleted || (i % 3 === 0 && randomFinish > new Date() && i > 3) ? (isCompleted ? new Date() : randomFinish) : '', // make sure the random date is earlier than today and it's index is bigger than 3
+        cost: i % 33 === 0 ? null : Math.round(Math.random() * 10000) / 100,
+        completed: isCompleted || (i % 3 === 0 && randomFinish > new Date() && i > 3),
+        product: { id: this.mockProducts()[randomItemId]?.id, itemName: this.mockProducts()[randomItemId]?.itemName },
+        origin: i % 2 ? { code: 'CA', name: 'Canada' } : { code: 'US', name: 'United States' },
       };
 
       if (!(i % 8)) {
@@ -512,7 +648,7 @@ export class Example32Component implements OnInit {
   handleDefaultResizeColumns() {
     // just for demo purposes, set it back to its original width
     const columns = this.angularGrid.slickGrid.getColumns() as Column[];
-    columns.forEach(col => col.width = col.originalWidth);
+    columns.forEach((col) => (col.width = col.originalWidth));
     this.angularGrid.slickGrid.setColumns(columns);
     this.angularGrid.slickGrid.autosizeColumns();
     this.isUsingDefaultResize = true;
@@ -622,7 +758,6 @@ export class Example32Component implements OnInit {
       }
       this.angularGrid.slickGrid.invalidate();
 
-
       // optionally open the last cell editor associated
       if (showLastEditor) {
         this.angularGrid?.slickGrid.gotoCell(lastEditCommand.row, lastEditCommand.cell, false);
@@ -670,7 +805,7 @@ export class Example32Component implements OnInit {
         id: 2,
         itemName: 'Awesome Wooden Mouse',
         itemNameTranslated: 'super old mouse',
-        listPrice: 15.00,
+        listPrice: 15.0,
         itemTypeName: 'I',
         image: 'https://i.imgur.com/RaVJuLr.jpg',
         icon: `mdi ${this.getRandomIcon(2)}`,
@@ -787,7 +922,7 @@ export class Example32Component implements OnInit {
       'mdi-table-refresh',
       'mdi-undo',
     ];
-    const randomNumber = Math.floor((Math.random() * icons.length - 1));
+    const randomNumber = Math.floor(Math.random() * icons.length - 1);
     return icons[iconIndex ?? randomNumber];
   }
 
@@ -827,5 +962,12 @@ export class Example32Component implements OnInit {
           <div class="autocomplete-bottom-left">${item.itemNameTranslated}</div>
           <span class="autocomplete-bottom-right">Type: <b>${item.itemTypeName === 'I' ? 'Item' : item.itemTypeName === 'C' ? 'PdCat' : 'Cat'}</b></span>
         </div>`;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

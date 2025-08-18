@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, type OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 
@@ -77,6 +77,7 @@ export class Example32Component implements OnInit {
   dataset: any[] = [];
   editQueue: any[] = [];
   editedItems: any = {};
+  hideSubTitle = false;
   isUsingDefaultResize = false;
   isGridEditable = true;
   isMassSelectionDisabled = true;
@@ -421,6 +422,66 @@ export class Example32Component implements OnInit {
         },
       },
     ];
+
+    // add custom Header Menu to all columns except "Action"
+    this.columnDefinitions.forEach((col) => {
+      col.header = {
+        menu: {
+          commandItems: [
+            { command: '', divider: true, positionOrder: 98 },
+            {
+              // we can also have multiple nested sub-menus
+              command: 'custom-actions',
+              title: 'Hello',
+              positionOrder: 99,
+              commandItems: [
+                { command: 'hello-world', title: 'Hello World' },
+                { command: 'hello-slickgrid', title: 'Hello SlickGrid' },
+                {
+                  command: 'sub-menu',
+                  title: `Let's play`,
+                  cssClass: 'green',
+                  subMenuTitle: 'choose your game',
+                  subMenuTitleCssClass: 'text-italic salmon',
+                  commandItems: [
+                    { command: 'sport-badminton', title: 'Badminton' },
+                    { command: 'sport-tennis', title: 'Tennis' },
+                    { command: 'sport-racquetball', title: 'Racquetball' },
+                    { command: 'sport-squash', title: 'Squash' },
+                  ],
+                },
+              ],
+            },
+            {
+              command: 'feedback',
+              title: 'Feedback',
+              positionOrder: 100,
+              commandItems: [
+                {
+                  command: 'request-update',
+                  title: 'Request update from supplier',
+                  iconCssClass: 'mdi mdi-star',
+                  tooltip: 'this will automatically send an alert to the shipping team to contact the user for an update',
+                },
+                'divider',
+                {
+                  command: 'sub-menu',
+                  title: 'Contact Us',
+                  iconCssClass: 'mdi mdi-account',
+                  subMenuTitle: 'contact us...',
+                  subMenuTitleCssClass: 'italic',
+                  commandItems: [
+                    { command: 'contact-email', title: 'Email us', iconCssClass: 'mdi mdi-pencil-outline' },
+                    { command: 'contact-chat', title: 'Chat with us', iconCssClass: 'mdi mdi-message-text-outline' },
+                    { command: 'contact-meeting', title: 'Book an appointment', iconCssClass: 'mdi mdi-coffee' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      };
+    });
 
     this.gridOptions = {
       editable: true,
@@ -901,5 +962,12 @@ export class Example32Component implements OnInit {
           <div class="autocomplete-bottom-left">${item.itemNameTranslated}</div>
           <span class="autocomplete-bottom-right">Type: <b>${item.itemTypeName === 'I' ? 'Item' : item.itemTypeName === 'C' ? 'PdCat' : 'Cat'}</b></span>
         </div>`;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }
