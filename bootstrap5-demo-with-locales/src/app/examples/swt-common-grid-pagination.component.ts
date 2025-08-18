@@ -40,7 +40,7 @@ import { GridOption } from 'angular-slickgrid';
           <ul class="pagination">
             <li class="page-item" [ngClass]="pageNumber === pageCount ? 'disabled' : ''">
               <a
-                class="page-link icon-seek-next text-center mdi-chevron-down mdi-rotate-90"
+                class="page-link icon-seek-next text-center mdi-chevron-down"
                 aria-label="Next"
                 (click)="changeToNextPage($event)"
               >
