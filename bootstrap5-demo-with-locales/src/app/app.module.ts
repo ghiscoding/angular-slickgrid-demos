@@ -63,6 +63,7 @@ import { HomeComponent } from './examples/home.component';
 import { CustomPagerComponent } from './examples/grid-custom-pager.component';
 import { RowDetailPreloadComponent } from './examples/rowdetail-preload.component';
 import { Example19RowDetailComponent } from './examples/example19-rowdetail.component';
+import { Example47RowDetailComponent } from './examples/example47-rowdetail.component';
 
 import { SwtCommonGridTestComponent } from './examples/swt-common-grid-test.component';
 import { SwtCommonGridPaginationComponent } from './examples/swt-common-grid-pagination.component';
@@ -137,6 +138,7 @@ export class DummyTranslateService {
     Example45Component,
     Example45DetailComponent,
     Example46Component,
+    Example47RowDetailComponent,
     FilterNgSelectComponent,
     HomeComponent,
     RowDetailPreloadComponent,
