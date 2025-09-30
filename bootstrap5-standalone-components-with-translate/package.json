@@ -1,0 +1,81 @@
+{
+  "name": "test-slickgrid",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "datagrid",
+    "datatable",
+    "plugin",
+    "slickgrid"
+  ],
+  "homepage": "https://github.com/ghiscoding/slickgrid-universal/tree/master/frameworks/angular-slickgrid",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghiscoding/slickgrid-universal.git",
+    "directory": "frameworks/angular-slickgrid"
+  },
+  "bugs": {
+    "url": "https://github.com/ghiscoding/slickgrid-universal/issues"
+  },
+  "scripts": {
+    "ng": "ng",
+    "dev": "ng serve --port 4500",
+    "build": "ng build --configuration=production",
+    "test": "ng test",
+    "lint": "eslint .",
+    "e2e": "ng e2e"
+  },
+  "private": false,
+  "dependencies": {
+    "@angular/animations": "^19.2.15",
+    "@angular/common": "^19.2.15",
+    "@angular/compiler": "^19.2.15",
+    "@angular/core": "^19.2.15",
+    "@angular/forms": "^19.2.15",
+    "@angular/platform-browser": "^19.2.15",
+    "@angular/platform-browser-dynamic": "^19.2.15",
+    "@angular/router": "^19.2.15",
+    "@formkit/tempo": "^0.1.2",
+    "@ng-select/ng-select": "^14.9.0",
+    "@ngx-translate/core": "^16.0.4",
+    "@ngx-translate/http-loader": "^16.0.1",
+    "@slickgrid-universal/composite-editor-component": "^9.9.0",
+    "@slickgrid-universal/custom-tooltip-plugin": "^9.9.0",
+    "@slickgrid-universal/excel-export": "^9.9.0",
+    "@slickgrid-universal/graphql": "^9.9.0",
+    "@slickgrid-universal/odata": "^9.9.0",
+    "@slickgrid-universal/text-export": "^9.9.0",
+    "angular-slickgrid": "^9.9.0",
+    "bootstrap": "^5.3.8",
+    "custom-event-polyfill": "^1.0.7",
+    "dompurify": "^3.2.7",
+    "ngx-bootstrap": "^19.0.2",
+    "rxjs": "^7.8.2",
+    "stream-browserify": "^3.0.0",
+    "zone.js": "~0.15.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.17",
+    "@angular-eslint/builder": "^19.8.1",
+    "@angular-eslint/eslint-plugin": "^19.8.1",
+    "@angular-eslint/eslint-plugin-template": "^19.8.1",
+    "@angular-eslint/schematics": "^19.8.1",
+    "@angular-eslint/template-parser": "^19.8.1",
+    "@angular/cli": "^19.2.17",
+    "@angular/compiler-cli": "^19.2.15",
+    "@angular/language-service": "^19.2.15",
+    "@faker-js/faker": "^10.0.0",
+    "@fnando/sparkline": "^0.3.10",
+    "@popperjs/core": "^2.11.8",
+    "@types/fnando__sparkline": "^0.3.7",
+    "@types/node": "^24.5.2",
+    "angular-eslint": "^19.8.1",
+    "eslint": "^9.36.0",
+    "eslint-plugin-n": "^17.23.1",
+    "sass": "^1.93.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.44.0"
+  }
+}
