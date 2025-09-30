@@ -15,7 +15,7 @@
       "type": "shell",
       "command": "yarn dev",
       "options": {
-        "cwd": "${workspaceFolder}/bootstrap5-standalone-components-with-translate",
+        "cwd": "${workspaceFolder}/bootstrap5-standalone-with-translate",
       },
       "problemMatcher": []
     },
@@ -42,7 +42,7 @@
       "type": "shell",
       "command": "yarn build",
       "options": {
-        "cwd": "${workspaceFolder}/bootstrap5-standalone-components-with-translate",
+        "cwd": "${workspaceFolder}/bootstrap5-standalone-with-translate",
       },
       "problemMatcher": []
     },

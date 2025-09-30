@@ -51,7 +51,7 @@ _**Note** This is the same as the `bootstrap5-demo-with-translate` with the exce
 ##### Install and Start Demo
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap5-standalone-components-with-translate
+cd bootstrap5-standalone-with-translate
 npm install # OR yarn install
 npm start # OR yarn start
 ```
