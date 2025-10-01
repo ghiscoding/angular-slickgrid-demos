@@ -30,7 +30,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 24
-          cache: 'yarn'
 
       - run: node --version
       - run: npm --version
