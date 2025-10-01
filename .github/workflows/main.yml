@@ -19,8 +19,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        node: [22]
 
     steps:
       - name: Clone repository
@@ -31,7 +29,8 @@ jobs:
       - name: Set Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 24
+          cache: 'yarn'
 
       - run: node --version
       - run: npm --version
