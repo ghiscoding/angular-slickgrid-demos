@@ -6,7 +6,7 @@
         style="font-size: 18px"
         target="_blank"
         href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/example17.component.ts"
-      >
+        >
         <span class="mdi mdi-link mdi-v-align-sub"></span> code
       </a>
     </span>
@@ -15,17 +15,19 @@
       type="button"
       data-test="toggle-subtitle"
       (click)="toggleSubTitle()"
-    >
+      >
       <span class="mdi mdi-information-outline" title="Toggle example sub-title details"></span>
     </button>
   </h2>
 
-  <div *ngIf="showSubTitle" class="subtitle">
-    Allow creating a grid dynamically by importing an external CSV or Excel file. This script demo will read the CSV file and will
-    consider the first row as the column header and create the column definitions accordingly, while the next few rows will be
-    considered the dataset. Note that this example is demoing a CSV file import but in your application you could easily implemnt
-    an Excel file uploading.
-  </div>
+  @if (showSubTitle) {
+    <div class="subtitle">
+      Allow creating a grid dynamically by importing an external CSV or Excel file. This script demo will read the CSV file and will
+      consider the first row as the column header and create the column definitions accordingly, while the next few rows will be
+      considered the dataset. Note that this example is demoing a CSV file import but in your application you could easily implemnt
+      an Excel file uploading.
+    </div>
+  }
 
   <div>A default CSV file can be download <a id="template-dl" [href]="templateUrl">here</a>.</div>
 
@@ -38,25 +40,26 @@
         data-test="file-upload-input"
         [(ngModel)]="uploadFileRef"
         (input)="handleFileImport($event)"
-      />
+        />
+      </div>
+      <span class="mx-3">or</span>
+      <div>
+        <button id="uploadBtn" data-test="static-data-btn" class="btn btn-outline-secondary" (click)="handleDefaultCsv()">
+          Use default CSV data
+        </button>
+        <button class="btn btn-outline-secondary" (click)="destroyGrid()">Destroy Grid</button>
+      </div>
     </div>
-    <span class="mx-3">or</span>
-    <div>
-      <button id="uploadBtn" data-test="static-data-btn" class="btn btn-outline-secondary" (click)="handleDefaultCsv()">
-        Use default CSV data
-      </button>
-      <button class="btn btn-outline-secondary" (click)="destroyGrid()">Destroy Grid</button>
-    </div>
+
+    <hr />
+
+    @if (gridCreated) {
+      <angular-slickgrid
+        gridId="grid17"
+        [columns]="columnDefinitions"
+        [options]="gridOptions"
+        [dataset]="dataset"
+        >
+      </angular-slickgrid>
+    }
   </div>
-
-  <hr />
-
-  <angular-slickgrid
-    *ngIf="gridCreated"
-    gridId="grid17"
-    [columns]="columnDefinitions"
-    [options]="gridOptions"
-    [dataset]="dataset"
-  >
-  </angular-slickgrid>
-</div>
