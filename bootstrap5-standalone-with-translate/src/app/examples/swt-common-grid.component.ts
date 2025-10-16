@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2, inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2, inject, input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import type {
   AngularGridInstance,
@@ -60,8 +60,8 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
   private logger: Logger;
   private defaultPageSize = 20;
 
-  @Input() gridHeight = 100;
-  @Input() gridWidth = 600;
+  readonly gridHeight = input(100);
+  readonly gridWidth = input(600);
 
   gridHeightString!: string;
   gridWidthString!: string;
