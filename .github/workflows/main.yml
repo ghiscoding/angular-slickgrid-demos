@@ -36,12 +36,12 @@ jobs:
 
       - name: Install npm/yarn dependencies
         run: |
-          cd bootstrap5-demo-with-locales
+          cd bootstrap5-demo-with-translate
           yarn install
 
       - name: Website Prod Build (GitHub demo site)
         run: |
-          cd bootstrap5-demo-with-locales
+          cd bootstrap5-demo-with-translate
           yarn build
 
       # always deploy (re-publish) GitHub demo page with a Prod build
@@ -50,4 +50,4 @@ jobs:
         if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./bootstrap5-demo-with-locales/dist
+          publish_dir: ./bootstrap5-demo-with-translate/dist
