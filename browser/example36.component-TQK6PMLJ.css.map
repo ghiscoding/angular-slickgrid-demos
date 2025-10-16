@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/examples/example36.component.scss"],
-  "sourcesContent": ["input[type=number].narrow {\n  height: 32px;\n  width: 50px;\n  border: 1px solid #c0c0c0;\n  border-radius: 3px;\n}\n\n#grid36 {\n  .slick-row:not(.slick-group) >.cell-unselectable {\n    background: #ececec !important;\n    font-weight: bold;\n  }\n\n  .text-sub-total {\n    font-style: italic;\n    color: rgb(33, 80, 115) !important;\n  }\n  .text-taxes {\n    font-style: italic;\n    color: rgb(198, 89, 17);\n  }\n  .text-total {\n    font-weight: bold;\n    color: rgb(0, 90, 158);\n  }\n}"],
-  "mappings": "AAAA,KAAA,CAAA,YAAA,CAAA,OACE,OAAA,KACA,MAAA,KACA,OAAA,IAAA,MAAA,QAHF,cAIE,IAIA,CAAA,OAAA,CAAA,SAAA,KAAA,CAAA,YAAA,CAAA,CAAA,kBACE,WAAA,kBACA,YAAA,IAGF,CALA,OAKA,CAAA,eACE,WAAA,OACA,MAAA,kBAEF,CATA,OASA,CAAA,WACE,WAAA,OACA,MAAA,QAEF,CAbA,OAaA,CAAA,WACE,YAAA,IACA,MAAA",
-  "names": []
-}

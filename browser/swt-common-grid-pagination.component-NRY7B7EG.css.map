@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;7b8166c07803f03fbf8238158723ced34a4335f8a7979a2304e4a7f215b9ace8;/home/runner/work/angular-slickgrid-demos/angular-slickgrid-demos/bootstrap5-demo-with-translate/src/app/examples/swt-common-grid-pagination.component.ts"],
-  "sourcesContent": ["\n      .page-spin {\n        border: none;\n        height: 32px;\n        background-color: transparent;\n        cursor: default;\n        animation: mdi-sync mdi-spin infinite linear !important;\n      }\n      .page-spin:hover {\n        background-color: transparent;\n      }\n    "],
-  "mappings": "AACM,CAAC,UACC,OAAQ,KACR,OAAQ,KACR,iBAAkB,YAClB,OAAQ,QACR,UAAW,SAAS,SAAS,SAAS,gBACxC,CACA,CAPC,SAOS,OACR,iBAAkB,WACpB",
-  "names": []
-}

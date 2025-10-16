@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/examples/example46.component.scss"],
-  "sourcesContent": ["// @use '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-salesforce.scss';\n\n// .slick-tree-load-fail {\n//   --slick-icon-tree-load-fail-sup-left: 23px;\n// }\n.display-inline-block {\n  display: inline-block;\n}\n"],
-  "mappings": "AAKA,CAAA,qBACE,QAAA",
-  "names": []
-}

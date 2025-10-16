@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/examples/example41.component.scss"],
-  "sourcesContent": [".drag-message {\n  position: absolute;\n  display: inline-block;\n  padding: 4px 10px;\n  background: #e0e0e0;\n  border: 1px solid gray;\n  z-index: 99999;\n  border-radius: 8px;\n  box-shadow: 2px 2px 6px silver;\n}\n\n.grid-header {\n  display: flex;\n  align-items: center;\n  box-sizing: border-box;\n  font-weight: bold;\n  height: 35px;\n  padding-left: 8px;\n  width: 100%;\n}\n\n.recycle-bin {\n  background: transparent;\n  cursor: default;\n  width: 120px;\n  border: 2px solid #e4e4e4;\n  background: beige;\n  padding: 4px;\n  font-size: 12pt;\n  font-weight: bold;\n  color: black;\n  text-align: center;\n  border-radius: 10px;\n\n  &.drag-dropzone {\n    border: 2px dashed pink;\n  }\n  &.drag-hover {\n    background: pink;\n    cursor: crosshair;\n  }\n}\n"],
-  "mappings": "AAAA,CAAA,aACE,SAAA,SACA,QAAA,aAFF,QAGE,IAAA,KACA,WAAA,QACA,OAAA,IAAA,MAAA,KACA,QAAA,MANF,cAOE,IACA,WAAA,IAAA,IAAA,IAAA,OAGF,CAAA,YACE,QAAA,KACA,YAAA,OACA,WAAA,WACA,YAAA,IACA,OAAA,KACA,aAAA,IACA,MAAA,KAGF,CAAA,YACE,WAAA,YACA,OAAA,QACA,MAAA,MACA,OAAA,IAAA,MAAA,QACA,WAAA,MA1BF,QA2BE,IACA,UAAA,KACA,YAAA,IACA,MAAA,KACA,WAAA,OA/BF,cAgCE,KAEA,CAbF,WAaE,CAAA,cACE,OAAA,IAAA,OAAA,KAEF,CAhBF,WAgBE,CAAA,WACE,WAAA,KACA,OAAA",
-  "names": []
-}

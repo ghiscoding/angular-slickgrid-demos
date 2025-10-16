@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;aa48e2e9e801fb55769967722ebceca22d166ea362fcc665b484a99490c1edfc;/home/runner/work/angular-slickgrid-demos/angular-slickgrid-demos/bootstrap5-demo-with-translate/src/app/examples/example19-rowdetail.component.ts"],
-  "sourcesContent": [".detail-label { display: inline-flex; align-items: center; gap: 4px; padding: 4px; }"],
-  "mappings": "AAAA,CAAC,aAAe,QAAS,YAAa,YAAa,OAAQ,IAAK,IAAhE,QAA8E,GAAK",
-  "names": []
-}

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;486a914284ea2d1759a0975416da454fb5e246ee3de3bd9d35545d98ea93a61d;/home/runner/work/angular-slickgrid-demos/angular-slickgrid-demos/bootstrap5-demo-with-translate/src/app/examples/example45-detail.component.ts"],
-  "sourcesContent": [".innergrid { --slick-header-menu-display: inline-block; }"],
-  "mappings": "AAAA,CAAC,UAAY,6BAA6B,YAAc",
-  "names": []
-}

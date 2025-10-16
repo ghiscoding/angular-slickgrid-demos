@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/examples/example30.component.scss"],
-  "sourcesContent": ["$slick-button-border-color: #ababab !default;\n\n.editable-field {\n  // box-shadow: inset 0 0 0 1px lightblue !important;\n  background-color: rgba(227, 240, 251, 0.569) !important;\n}\n.slick-dark-mode .editable-field {\n  background-color: rgb(105 123 145 / 57%) !important\n}\n.unsaved-editable-field {\n  background-color: #fbfdd1 !important;\n}\n.slick-dark-mode .unsaved-editable-field {\n  background-color: rgba(255, 183, 50, 0.8) !important;\n  color: white;\n}\n\n.slick-dark-mode {\n  --bs-btn-color: #bebebe;\n}\n"],
-  "mappings": "AAEA,CAAA,eAEE,iBAAA,oBAEF,CAAA,gBAAA,CAJA,eAKE,iBAAA,oBAEF,CAAA,uBACE,iBAAA,kBAEF,CANA,gBAMA,CAHA,uBAIE,iBAAA,oBACA,MAAA,KAGF,CAXA,gBAYE,gBAAA",
-  "names": []
-}

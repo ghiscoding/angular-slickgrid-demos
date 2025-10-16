@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/examples/example07.component.scss"],
-  "sourcesContent": ["/* 1st grid */\n#grid7-1 {\n  --slick-header-button-float: right;\n}\n\n/* 2nd grid */\n#grid7-2 {\n  --slick-header-button-margin: 4px 0 50px 0;\n  --slick-header-button-float: left;\n}"],
-  "mappings": "AACA,CAAA,QACE,6BAAA,MAIF,CAAA,QACE,8BAAA,IAAA,EAAA,KAAA,EACA,6BAAA",
-  "names": []
-}
