@@ -2,7 +2,7 @@ import { GridOdataService, OdataServiceApi, OdataOption } from '@slickgrid-unive
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularGridInstance, Column, Filters, GridOption, GridStateChange, Metrics, OperatorType, Pagination, AngularSlickgridModule } from 'angular-slickgrid';
-import { NgIf, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 const defaultPageSize = 20;
 const sampleDataRoot = 'assets/data';
@@ -12,10 +12,9 @@ const PERCENT_HTML_ESCAPED = '%25';
 @Component({
     templateUrl: './example05.component.html',
     imports: [
-        NgIf,
-        AngularSlickgridModule,
-        DatePipe,
-    ],
+    AngularSlickgridModule,
+    DatePipe
+],
 })
 export class Example5Component implements OnInit {
   angularGrid!: AngularGridInstance;

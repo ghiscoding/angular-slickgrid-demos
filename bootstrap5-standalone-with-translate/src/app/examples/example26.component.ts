@@ -8,7 +8,7 @@ import { CustomAngularComponentFilter } from './custom-angularComponentFilter';
 import { CustomTitleFormatterComponent } from './custom-titleFormatter.component';
 import { FilterNgSelectComponent } from './filter-ng-select.component';
 import { CustomButtonFormatterComponent } from './custom-buttonFormatter.component';
-import { NgIf, JsonPipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 
 const NB_ITEMS = 100;
 
@@ -18,10 +18,9 @@ const NB_ITEMS = 100;
     encapsulation: ViewEncapsulation.None,
     providers: [AngularUtilService],
     imports: [
-        NgIf,
-        AngularSlickgridModule,
-        JsonPipe,
-    ],
+    AngularSlickgridModule,
+    JsonPipe
+],
 })
 export class Example26Component implements OnInit {
   private _commandQueue: any[] = [];

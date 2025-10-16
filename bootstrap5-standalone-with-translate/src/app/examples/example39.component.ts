@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 
 import { AngularGridInstance, Column, Filters, GridOption, Metrics, MultipleSelectOption, OnRowCountChangedEventArgs, unsubscribeAllObservables, AngularSlickgridModule } from 'angular-slickgrid';
 import { FormsModule } from '@angular/forms';
-import { NgIf, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 const sampleDataRoot = 'assets/data';
 
 const GRAPHQL_QUERY_DATASET_NAME = 'users';
@@ -21,11 +21,10 @@ function unescapeAndLowerCase(val: string) {
     encapsulation: ViewEncapsulation.None,
     templateUrl: './example39.component.html',
     imports: [
-        FormsModule,
-        NgIf,
-        AngularSlickgridModule,
-        DatePipe,
-    ],
+    FormsModule,
+    AngularSlickgridModule,
+    DatePipe
+],
 })
 export class Example39Component implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];

@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 import { CustomInputEditor } from './custom-inputEditor';
 import { CustomInputFilter } from './custom-inputFilter';
 import fetchJsonp from './jsonp';
-import { NgIf, JsonPipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 
 const NB_ITEMS = 100;
 const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_100_numbers.json';
@@ -45,10 +45,9 @@ const taskFormatter: Formatter = (_row, _cell, value) => {
 @Component({
     templateUrl: './example03.component.html',
     imports: [
-        NgIf,
-        AngularSlickgridModule,
-        JsonPipe,
-    ],
+    AngularSlickgridModule,
+    JsonPipe
+],
 })
 export class Example3Component implements OnInit {
   private _commandQueue: any = [];

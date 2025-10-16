@@ -6,7 +6,7 @@ import { CustomInputFilter } from './custom-inputFilter';
 import { AngularGridInstance, Column, Filters, Formatter, Formatters, GridOption, GridStateChange, Metrics, type MultipleSelectOption, OperatorType, SliderRangeOption, unsubscribeAllObservables, AngularSlickgridModule } from 'angular-slickgrid';
 import { addDay, format } from '@formkit/tempo';
 import { Subscription } from 'rxjs';
-import { NgIf, NgFor, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 const NB_ITEMS = 1500;
@@ -26,12 +26,10 @@ const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataCont
 @Component({
     templateUrl: './example23.component.html',
     imports: [
-        NgIf,
-        FormsModule,
-        NgFor,
-        AngularSlickgridModule,
-        DatePipe,
-    ],
+    FormsModule,
+    AngularSlickgridModule,
+    DatePipe
+],
 })
 export class Example23Component implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];

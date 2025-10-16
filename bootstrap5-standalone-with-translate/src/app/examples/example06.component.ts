@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { AngularGridInstance, Column, CursorPageInfo, Filters, Formatters, GridOption, GridStateChange, Metrics, type MultipleSelectOption, OperatorType, unsubscribeAllObservables, AngularSlickgridModule } from 'angular-slickgrid';
 import { FormsModule } from '@angular/forms';
-import { NgIf, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 const defaultPageSize = 20;
 const GRAPHQL_QUERY_DATASET_NAME = 'users';
@@ -15,11 +15,10 @@ const FAKE_SERVER_DELAY = 250;
 @Component({
     templateUrl: './example06.component.html',
     imports: [
-        FormsModule,
-        NgIf,
-        AngularSlickgridModule,
-        DatePipe,
-    ],
+    FormsModule,
+    AngularSlickgridModule,
+    DatePipe
+],
 })
 export class Example6Component implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];

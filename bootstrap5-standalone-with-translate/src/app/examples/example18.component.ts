@@ -4,15 +4,14 @@ import { TextExportService } from '@slickgrid-universal/text-export';
 
 import { AngularGridInstance, Aggregators, Column, DelimiterType, Editors, Filters, Formatters, GridOption, Grouping, GroupingGetterFunction, GroupTotalFormatters, SortDirectionNumber, SortComparers, AngularSlickgridModule } from 'angular-slickgrid';
 import { FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+
 
 @Component({
     templateUrl: './example18.component.html',
     imports: [
-        FormsModule,
-        NgFor,
-        AngularSlickgridModule,
-    ],
+    FormsModule,
+    AngularSlickgridModule
+],
 })
 export class Example18Component implements OnInit, OnDestroy {
   private _darkMode = false;

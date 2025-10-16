@@ -3,7 +3,7 @@ import { AngularGridInstance, Column, Editors, Filters, Formatters, GridOption, 
 import { Example19RowDetailComponent } from './example19-rowdetail.component';
 import { RowDetailPreloadComponent } from './rowdetail-preload.component';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+
 
 const FAKE_SERVER_DELAY = 250;
 const NB_ITEMS = 1000;
@@ -11,10 +11,9 @@ const NB_ITEMS = 1000;
 @Component({
     templateUrl: './example19.component.html',
     imports: [
-        FormsModule,
-        NgIf,
-        AngularSlickgridModule,
-    ],
+    FormsModule,
+    AngularSlickgridModule
+],
 })
 export class Example19Component implements OnDestroy, OnInit {
   private _darkMode = false;
