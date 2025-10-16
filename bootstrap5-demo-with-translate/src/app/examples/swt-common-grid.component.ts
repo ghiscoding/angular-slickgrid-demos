@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2, inject, input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef, Renderer2, inject, input, output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import type {
   AngularGridInstance,
@@ -87,9 +87,9 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
   options!: BackendServiceOption;
   pagination?: Pagination;
 
-  @Output() onFilterChanged: EventEmitter<FilterChangedArgs> = new EventEmitter<FilterChangedArgs>();
-  @Output() onPaginationChanged: EventEmitter<PaginationChangedArgs> = new EventEmitter<PaginationChangedArgs>();
-  @Output() onSortChanged: EventEmitter<any> = new EventEmitter<any>();
+  readonly onFilterChanged = output<FilterChangedArgs>();
+  readonly onPaginationChanged = output<PaginationChangedArgs>();
+  readonly onSortChanged = output<any>();
 
   sortedGridColumn = '';
   currentPage = 1;
