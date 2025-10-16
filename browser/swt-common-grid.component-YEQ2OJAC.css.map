@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;3da3f25a561b92a81e6a4a6fdd12571fd7fd49e0fd74499dc7f0fc5f435a4ed4;/home/runner/work/angular-slickgrid-demos/angular-slickgrid-demos/bootstrap5-demo-with-translate/src/app/examples/swt-common-grid.component.ts"],
+  "sourcesContent": ["\n      :host ::ng-deep .gridPane {\n        width: 100% !important;\n      }\n      :host ::ng-deep .slickgrid-container {\n        width: 100% !important;\n      }\n    "],
+  "mappings": "AACM,MAAM,UAAU,CAAC,SACf,MAAO,cACT,CACA,MAAM,UAAU,CAAC,oBACf,MAAO,cACT",
+  "names": []
+}

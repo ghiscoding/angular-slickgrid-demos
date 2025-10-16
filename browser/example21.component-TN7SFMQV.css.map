@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example21.component.scss"],
+  "sourcesContent": ["// sort indication will show behind Grid Menu since we don't have scroll,\n// we can offset these icons to fix that\n#grid21 {\n    .slick-header-column:last-child {\n        .slick-header-menu-button,\n        .slick-resizable-handle,\n        .slick-sort-indicator,\n        .slick-sort-indicator-numbered {\n            margin-right: 18px; // grid menu icon width\n        }\n    }\n}\n\n.duration-bg {\n    background-color: #e9d4f1 !important;\n}\n"],
+  "mappings": "AAIQ,CAAA,OAAA,CAAA,mBAAA,YAAA,CAAA,yBAAA,CAAA,OAAA,CAAA,mBAAA,YAAA,CAAA,uBAAA,CAAA,OAAA,CAAA,mBAAA,YAAA,CAAA,qBAAA,CAAA,OAAA,CAAA,mBAAA,YAAA,CAAA,8BAII,aAAA,KAKZ,CAAA,YACI,iBAAA",
+  "names": []
+}

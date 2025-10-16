@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example25.component.scss"],
+  "sourcesContent": ["// @use '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-bootstrap.scss' with (\n//   $slick-preheader-font-size: 18px,\n//   $slick-preheader-border-right: 1px solid lightgrey,\n// );\n\n.alert {\n  padding: 8px;\n}\n"],
+  "mappings": "AAKA,CAAA,MAAA,QACE",
+  "names": []
+}

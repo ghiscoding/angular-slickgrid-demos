@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example35.component.scss"],
+  "sourcesContent": [":root {\n  // turn on/off the following variables to see the difference in styling\n\n  // --slick-row-based-edit-editmode-bgcolor: rgb(82, 235, 158);\n  // --slick-row-based-edit-editmode-hover-bgcolor: cyan;\n  // --slick-row-based-edit-unsaved-cell-bgcolor: rgb(190, 114, 127);\n  // --slick-row-based-edit-editmode-active-bgcolor: rgb(82, 235, 158);\n  // --slick-row-based-edit-editmode-active-hover-bgcolor: cyan;\n}\n\n.alert {\n  padding: 8px;\n  margin-bottom: 10px\n}\n\n.status-container {\n  min-height: 50px;\n}\n"],
+  "mappings": "AAUA,CAAA,MAAA,QACE,IACA,cAAA,KAGF,CAAA,iBACE,WAAA",
+  "names": []
+}

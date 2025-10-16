@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example27.component.scss"],
+  "sourcesContent": ["/* make sure to add the @use the SlickGrid Theme AFTER the variables changes */\n// @use '@slickgrid-universal/common/dist/styles/sass/slickgrid-theme-material.lite.scss';\n\n#grid27 {\n  .slick-cell {\n    display: inline-flex;\n    align-items: center;\n    gap: 4px;\n  }\n}\n"],
+  "mappings": "AAIE,CAAA,OAAA,CAAA,WACE,QAAA,YACA,YAAA,OACA,IAAA",
+  "names": []
+}

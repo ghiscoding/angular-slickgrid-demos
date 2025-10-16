@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;dc741e542cda216209bec5c8c92bca01dd61c5059b7fcdf2b5d1141971cff6d6;/home/runner/work/angular-slickgrid-demos/angular-slickgrid-demos/bootstrap5-demo-with-translate/src/app/examples/example10.component.ts"],
+  "sourcesContent": [".col-sm-1{ max-width: 70px }"],
+  "mappings": "AAAA,CAAC,SAAU,UAAW,IAAK",
+  "names": []
+}

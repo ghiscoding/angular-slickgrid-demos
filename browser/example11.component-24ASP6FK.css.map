@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;7cba96a02b8e55b34f2eda028f1078f77afac375c28461b620e670176f22fa0f;/home/runner/work/angular-slickgrid-demos/angular-slickgrid-demos/bootstrap5-demo-with-translate/src/app/examples/example11.component.ts"],
+  "sourcesContent": [".duration-bg { background-color: #e9d4f1 !important }"],
+  "mappings": "AAAA,CAAC,YAAc,iBAAkB,iBAAmB",
+  "names": []
+}

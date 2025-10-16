@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;c450accbe2560a8558ca2e373687fb0c7e27e00da51b7825bdae1e2ce4616cd4;/home/runner/work/angular-slickgrid-demos/angular-slickgrid-demos/bootstrap5-demo-with-translate/src/app/examples/example17.component.ts"],
+  "sourcesContent": [".file-upload { max-width: 300px; }"],
+  "mappings": "AAAA,CAAC,YAAc,UAAW,KAAO",
+  "names": []
+}

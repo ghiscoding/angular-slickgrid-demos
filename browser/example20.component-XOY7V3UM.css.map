@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example20.component.scss"],
+  "sourcesContent": ["/** You can change the pinned/frozen border styling through this css override */\n\n.slick-row .slick-cell.frozen:last-child,\n.slick-headerrow-column.frozen:last-child,\n.slick-footerrow-column.frozen:last-child {\n  border-right: 1px solid #969696 !important;\n}\n\n.slick-pane-bottom {\n  border-top: 1px solid #969696 !important;\n}\n"],
+  "mappings": "AAEA,CAAA,UAAA,CAAA,UAAA,CAAA,MAAA,YAAA,CAAA,sBAAA,CAAA,MAAA,YAAA,CAAA,sBAAA,CAAA,MAAA,YAGE,aAAA,IAAA,MAAA,kBAGF,CAAA,kBACE,WAAA,IAAA,MAAA",
+  "names": []
+}
