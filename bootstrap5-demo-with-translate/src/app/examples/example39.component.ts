@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { GraphqlService, type GraphqlPaginatedResult, type GraphqlServiceApi } from '@slickgrid-universal/graphql';
@@ -30,6 +30,10 @@ function unescapeAndLowerCase(val: string) {
   standalone: false,
 })
 export class Example39Component implements OnInit, OnDestroy {
+  private readonly cd = inject(ChangeDetectorRef);
+  private http = inject(HttpClient);
+  private translate = inject(TranslateService);
+
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   backendService!: GraphqlService;
@@ -44,11 +48,7 @@ export class Example39Component implements OnInit, OnDestroy {
   status = { text: 'processing...', class: 'alert alert-danger' };
   serverWaitDelay = FAKE_SERVER_DELAY; // server simulation with default of 250ms but 50ms for Cypress tests
 
-  constructor(
-    private readonly cd: ChangeDetectorRef,
-    private http: HttpClient,
-    private translate: TranslateService
-  ) {
+  constructor() {
     this.backendService = new GraphqlService();
     // always start with English for Cypress E2E tests to be consistent
     const defaultLang = 'en';

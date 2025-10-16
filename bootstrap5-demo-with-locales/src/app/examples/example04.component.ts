@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import {
@@ -26,6 +26,8 @@ const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_500_numbers.json';
   standalone: false,
 })
 export class Example4Component implements OnInit {
+  private http = inject(HttpClient);
+
   title = 'Example 4: Client Side Sort/Filter';
   subTitle = `
     Sort/Filter on client side only using SlickGrid DataView (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/column-functionalities/sorting" target="_blank">Wiki docs</a>)
@@ -55,8 +57,6 @@ export class Example4Component implements OnInit {
   gridOptions!: GridOption;
   dataset!: any[];
   metrics!: Metrics;
-
-  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.columnDefinitions = [

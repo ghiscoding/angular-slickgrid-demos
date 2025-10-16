@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
@@ -85,6 +85,8 @@ const myCustomTitleValidator = (value: any, args: any) => {
   standalone: false,
 })
 export class Example30Component implements OnDestroy, OnInit {
+  private http = inject(HttpClient);
+
   private _darkMode = false;
   title = 'Example 30: Composite Editor Modal';
   subTitle = `Composite Editor allows you to Create, Clone, Edit, Mass Update & Mass Selection Changes inside a nice Modal Window.
@@ -110,7 +112,7 @@ export class Example30Component implements OnDestroy, OnInit {
     { value: 4, label: 'Very Complex' },
   ];
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.compositeEditorInstance = new SlickCompositeEditorComponent();
   }
 

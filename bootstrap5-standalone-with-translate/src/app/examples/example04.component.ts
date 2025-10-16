@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,16 +20,14 @@ const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_500_numbers.json';
 ],
 })
 export class Example4Component implements OnInit {
+  private http = inject(HttpClient);
+  private translate = inject(TranslateService);
+
   angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
   metrics!: Metrics;
-
-  constructor(
-    private http: HttpClient,
-    private translate: TranslateService
-  ) { }
 
   ngOnInit(): void {
     this.columnDefinitions = [

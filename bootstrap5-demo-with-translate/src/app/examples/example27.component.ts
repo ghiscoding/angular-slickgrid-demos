@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 
 import {
@@ -21,6 +21,8 @@ const NB_ITEMS = 500;
   standalone: false,
 })
 export class Example27Component implements OnInit {
+  private cdref = inject(ChangeDetectorRef);
+
   angularGrid!: AngularGridInstance;
   dataViewObj: any;
   gridObj: any;
@@ -31,8 +33,6 @@ export class Example27Component implements OnInit {
   isLargeDataset = false;
   hasNoExpandCollapseChanged = true;
   treeToggleItems: TreeToggledItem[] = [];
-
-  constructor(private cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     // define the grid options & columns and then create the grid itself

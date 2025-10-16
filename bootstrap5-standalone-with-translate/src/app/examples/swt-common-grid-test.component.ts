@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { SwtCommonGridComponent } from './swt-common-grid.component';
@@ -17,6 +17,8 @@ import { Logger } from './swt-logger.service';
     imports: [SwtCommonGridPaginationComponent, SwtCommonGridComponent],
 })
 export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
+  private httpClient = inject(HttpClient);
+
   testurl = 'http://127.0.0.1:8080/grid!display.do?';
   currentUrl = this.testurl;
 
@@ -25,7 +27,7 @@ export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
 
   private logger: Logger;
 
-  constructor(private httpClient: HttpClient) {
+  constructor() {
     this.logger = new Logger('test', undefined);
   }
 

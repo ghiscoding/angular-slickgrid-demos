@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GraphqlService, GraphqlResult, GraphqlServiceApi } from '@slickgrid-universal/graphql';
 
@@ -28,6 +28,8 @@ export interface Country {
     imports: [AngularSlickgridModule],
 })
 export class Example25Component implements OnInit {
+  private http = inject(HttpClient);
+
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
@@ -38,8 +40,6 @@ export class Example25Component implements OnInit {
   processing = true;
   status = { text: 'processing...', class: 'alert alert-danger' };
   isDataLoaded = false;
-
-  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.columnDefinitions = [

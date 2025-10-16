@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GraphqlService, GraphqlResult, GraphqlServiceApi, } from '@slickgrid-universal/graphql';
 
@@ -37,6 +37,8 @@ export interface Country {
   standalone: false,
 })
 export class Example25Component implements OnInit {
+  private http = inject(HttpClient);
+
   title = 'Example 25: GraphQL Basic API without Pagination';
   subTitle = `
   Use basic GraphQL query with any external public APIs (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/backend-services/graphql" target="_blank">Wiki docs</a>).
@@ -61,8 +63,6 @@ export class Example25Component implements OnInit {
   processing = true;
   status = { text: 'processing...', class: 'alert alert-danger' };
   isDataLoaded = false;
-
-  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.columnDefinitions = [

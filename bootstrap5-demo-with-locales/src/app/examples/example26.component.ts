@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 
 import {
   AngularGridInstance,
@@ -29,6 +29,8 @@ const NB_ITEMS = 100;
   standalone: false,
 })
 export class Example26Component implements OnInit {
+  private angularUtilService = inject(AngularUtilService);
+
   title = 'Example 26: Use of Angular Components';
   subTitle = `
   <h3>Filters, Editors, AsyncPostRender with Angular Components</h3>
@@ -67,8 +69,6 @@ export class Example26Component implements OnInit {
     { id: '2', name: 'Pierre' },
     { id: '3', name: 'Paul' },
   ];
-
-  constructor(private angularUtilService: AngularUtilService) { }
 
   ngOnInit(): void {
     this.prepareGrid();

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,8 @@ const NB_ITEMS = 20;
     imports: [AngularSlickgridModule],
 })
 export class Example35Component implements OnInit {
+  private translate = inject(TranslateService);
+
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   gridOptions!: GridOption;
@@ -25,7 +27,7 @@ export class Example35Component implements OnInit {
   statusClass = 'alert alert-light';
   statusStyle = 'display: none';
 
-  constructor(private translate: TranslateService) {
+  constructor() {
     // always start with English for Cypress E2E tests to be consistent
     const defaultLang = 'en';
     this.translate.use(defaultLang);

@@ -1,5 +1,5 @@
 import { GraphqlService, GraphqlPaginatedResult, GraphqlServiceApi, GraphqlServiceOption, } from '@slickgrid-universal/graphql';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { addDay, format as tempoFormat } from '@formkit/tempo';
 import {
   AngularGridInstance,
@@ -24,6 +24,8 @@ const FAKE_SERVER_DELAY = 250;
   standalone: false,
 })
 export class Example6Component implements OnInit {
+  private readonly cd = inject(ChangeDetectorRef);
+
   title = 'Example 6: Grid connected to Backend Server with GraphQL';
   subTitle = `
     Sorting/Paging connected to a Backend GraphQL Service (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/backend-services/graphql" target="_blank">Wiki docs</a>).
@@ -52,9 +54,7 @@ export class Example6Component implements OnInit {
   graphqlQuery = '';
   processing = true;
   status = { text: 'processing...', class: 'alert alert-danger' };
-  serverWaitDelay = FAKE_SERVER_DELAY; // server simulation with default of 250ms but 50ms for Cypress tests
-
-  constructor(private readonly cd: ChangeDetectorRef) { }
+  serverWaitDelay = FAKE_SERVER_DELAY;
 
   ngOnInit(): void {
     this.columnDefinitions = [

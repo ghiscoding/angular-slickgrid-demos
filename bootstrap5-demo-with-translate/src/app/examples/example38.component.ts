@@ -1,5 +1,5 @@
 import { GridOdataService, type OdataServiceApi } from '@slickgrid-universal/odata';
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   Aggregators,
@@ -24,6 +24,9 @@ const PERCENT_HTML_ESCAPED = '%25';
   standalone: false,
 })
 export class Example38Component implements OnInit {
+  private readonly cd = inject(ChangeDetectorRef);
+  private http = inject(HttpClient);
+
   angularGrid!: AngularGridInstance;
   backendService: GridOdataService;
   columnDefinitions!: Column[];
@@ -38,10 +41,7 @@ export class Example38Component implements OnInit {
   errorStatusClass = 'hidden';
   status = { text: 'processing...', class: 'alert alert-danger' };
 
-  constructor(
-    private readonly cd: ChangeDetectorRef,
-    private http: HttpClient
-  ) {
+  constructor() {
     this.backendService = new GridOdataService();
   }
 

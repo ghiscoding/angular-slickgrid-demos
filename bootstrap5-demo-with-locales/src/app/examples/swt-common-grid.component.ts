@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, EventEmitter, Output, ViewChild, ElementRef, Renderer2, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import type {
   AngularGridInstance,
@@ -50,6 +50,10 @@ const DEFAULT_FILTER_TYPING_DEBOUNCE = 750;
   standalone: false,
 })
 export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendService {
+  private httpClient = inject(HttpClient);
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
+
   private logger: Logger;
   private defaultPageSize = 20;
 
@@ -152,11 +156,9 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
    * @param resizer
    * @param httpClient
    */
-  constructor(
-    private httpClient: HttpClient,
-    private el: ElementRef,
-    private renderer: Renderer2
-  ) {
+  constructor() {
+    const httpClient = this.httpClient;
+
     this.logger = new Logger('grid', httpClient);
 
     this.logger.info('method [constructor] - START/END');

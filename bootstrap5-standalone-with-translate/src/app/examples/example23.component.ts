@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
@@ -32,6 +32,8 @@ const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataCont
 ],
 })
 export class Example23Component implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -46,7 +48,7 @@ export class Example23Component implements OnInit, OnDestroy {
   ];
   selectedPredefinedFilter!: { value: string; label: string };
 
-  constructor(private translate: TranslateService) {
+  constructor() {
     // always start with English for Cypress E2E tests to be consistent
     const defaultLang = 'en';
     this.translate.use(defaultLang);

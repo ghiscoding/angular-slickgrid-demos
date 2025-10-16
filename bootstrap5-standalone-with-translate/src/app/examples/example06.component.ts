@@ -1,5 +1,5 @@
 import { GraphqlService, GraphqlPaginatedResult, GraphqlServiceApi, GraphqlServiceOption } from '@slickgrid-universal/graphql';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
 import { addDay, format as tempoFormat } from '@formkit/tempo';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -21,6 +21,9 @@ const FAKE_SERVER_DELAY = 250;
 ],
 })
 export class Example6Component implements OnInit, OnDestroy {
+  private readonly cd = inject(ChangeDetectorRef);
+  private translate = inject(TranslateService);
+
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -35,10 +38,7 @@ export class Example6Component implements OnInit, OnDestroy {
   selectedLanguage: string;
   serverWaitDelay = FAKE_SERVER_DELAY; // server simulation with default of 250ms but 50ms for Cypress tests
 
-  constructor(
-    private readonly cd: ChangeDetectorRef,
-    private translate: TranslateService
-  ) {
+  constructor() {
     // always start with English for Cypress E2E tests to be consistent
     const defaultLang = 'en';
     this.translate.use(defaultLang);

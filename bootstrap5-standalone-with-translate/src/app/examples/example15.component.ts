@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { format as tempoFormat } from '@formkit/tempo';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -16,6 +16,8 @@ const NB_ITEMS = 500;
     imports: [AngularSlickgridModule],
 })
 export class Example15Component implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -23,7 +25,7 @@ export class Example15Component implements OnInit, OnDestroy {
   dataset!: any[];
   selectedLanguage: string;
 
-  constructor(private translate: TranslateService) {
+  constructor() {
     this.selectedLanguage = this.translate.getDefaultLang();
   }
 
