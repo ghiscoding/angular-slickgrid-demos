@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { Subscription } from 'rxjs';
@@ -64,6 +64,8 @@ const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataCont
   standalone: false,
 })
 export class Example24Component implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+
   private _darkModeGrid = false;
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
@@ -72,7 +74,7 @@ export class Example24Component implements OnInit, OnDestroy {
   dataset!: any[];
   selectedLanguage: string;
 
-  constructor(private translate: TranslateService) {
+  constructor() {
     // always start with English for Cypress E2E tests to be consistent
     const defaultLang = 'en';
     this.translate.use(defaultLang);

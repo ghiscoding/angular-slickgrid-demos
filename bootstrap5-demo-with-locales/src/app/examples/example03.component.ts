@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   AngularGridInstance,
@@ -63,6 +63,8 @@ const taskFormatter: Formatter = (_row, _cell, value) => {
   standalone: false,
 })
 export class Example3Component implements OnInit {
+  private http = inject(HttpClient);
+
   title = 'Example 3: Editors / Delete';
   subTitle = `
   Grid with Inline Editors and onCellClick actions (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/column-functionalities/editors" target="_blank">Wiki docs</a>).
@@ -94,8 +96,6 @@ export class Example3Component implements OnInit {
   updatedObject: any;
   selectedLanguage = 'en';
   duplicateTitleHeaderCount = 1;
-
-  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.prepareGrid();

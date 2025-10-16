@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { type Column, type GridOption, toCamelCase, AngularSlickgridModule } from 'angular-slickgrid';
-import { NgIf } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 const sampleDataRoot = 'assets/data';
@@ -11,12 +11,13 @@ const sampleDataRoot = 'assets/data';
     encapsulation: ViewEncapsulation.None,
     templateUrl: './example17.component.html',
     imports: [
-        NgIf,
-        FormsModule,
-        AngularSlickgridModule,
-    ],
+    FormsModule,
+    AngularSlickgridModule
+],
 })
 export class Example17Component {
+  private readonly cd = inject(ChangeDetectorRef);
+
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset: any[] = [];
@@ -24,8 +25,6 @@ export class Example17Component {
   showSubTitle = true;
   uploadFileRef = '';
   templateUrl = `${sampleDataRoot}/users.csv`;
-
-  constructor(private readonly cd: ChangeDetectorRef) { }
 
   handleFileImport(event: any) {
     const file = event.target.files[0];

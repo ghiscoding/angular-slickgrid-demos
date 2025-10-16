@@ -1,8 +1,8 @@
 import { GridOdataService, OdataServiceApi, OdataOption } from '@slickgrid-universal/odata';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularGridInstance, Column, Filters, GridOption, GridStateChange, Metrics, OperatorType, Pagination, AngularSlickgridModule } from 'angular-slickgrid';
-import { NgIf, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 const defaultPageSize = 20;
 const sampleDataRoot = 'assets/data';
@@ -12,12 +12,14 @@ const PERCENT_HTML_ESCAPED = '%25';
 @Component({
     templateUrl: './example05.component.html',
     imports: [
-        NgIf,
-        AngularSlickgridModule,
-        DatePipe,
-    ],
+    AngularSlickgridModule,
+    DatePipe
+],
 })
 export class Example5Component implements OnInit {
+  private readonly cd = inject(ChangeDetectorRef);
+  private http = inject(HttpClient);
+
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
@@ -34,11 +36,6 @@ export class Example5Component implements OnInit {
   errorStatus = '';
   isPageErrorTest = false;
   status = { text: 'processing...', class: 'alert alert-danger' };
-
-  constructor(
-    private readonly cd: ChangeDetectorRef,
-    private http: HttpClient
-  ) { }
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;

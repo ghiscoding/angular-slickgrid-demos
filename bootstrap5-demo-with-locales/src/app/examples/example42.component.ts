@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   AngularGridInstance,
   AngularUtilService,
@@ -24,6 +24,8 @@ function randomBetween(min: number, max: number): number {
   standalone: false,
 })
 export class Example42Component implements OnInit {
+  protected readonly angularUtilService = inject(AngularUtilService);
+
   pageSize = 50;
   columnDefinitions: Column[] = [];
   gridContainerElm!: HTMLDivElement;
@@ -31,8 +33,6 @@ export class Example42Component implements OnInit {
   dataset: any[] = [];
   paginationPosition: 'bottom' | 'top' = 'top';
   angularGrid!: AngularGridInstance;
-
-  constructor(protected readonly angularUtilService: AngularUtilService) { }
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;

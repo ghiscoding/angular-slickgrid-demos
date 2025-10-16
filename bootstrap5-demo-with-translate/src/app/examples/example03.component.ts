@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import {
@@ -65,6 +65,9 @@ const taskFormatter: Formatter = (_row, _cell, value) => {
   standalone: false,
 })
 export class Example3Component implements OnInit {
+  private http = inject(HttpClient);
+  private translate = inject(TranslateService);
+
   private _commandQueue: any = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -76,11 +79,6 @@ export class Example3Component implements OnInit {
   updatedObject: any;
   selectedLanguage = 'en';
   duplicateTitleHeaderCount = 1;
-
-  constructor(
-    private http: HttpClient,
-    private translate: TranslateService
-  ) { }
 
   ngOnInit() {
     this.prepareGrid();

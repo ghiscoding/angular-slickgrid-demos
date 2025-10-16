@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 
 import { AngularGridInstance, Column, Filters, Formatters, GridOption, GridStateChange } from 'angular-slickgrid';
 
@@ -8,6 +8,8 @@ import { AngularGridInstance, Column, Filters, Formatters, GridOption, GridState
   standalone: false,
 })
 export class Example10Component implements OnInit {
+  private cd = inject(ChangeDetectorRef);
+
   angularGrid1!: AngularGridInstance;
   angularGrid2!: AngularGridInstance;
   columnDefinitions1!: Column[];
@@ -22,8 +24,6 @@ export class Example10Component implements OnInit {
   selectedTitles = '';
   selectedTitle = '';
   selectedGrid2IDs!: number[];
-
-  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.prepareGrid();

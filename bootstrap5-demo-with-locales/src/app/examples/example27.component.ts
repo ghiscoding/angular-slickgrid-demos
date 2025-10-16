@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 
 import {
@@ -21,6 +21,8 @@ const NB_ITEMS = 500;
   standalone: false,
 })
 export class Example27Component implements OnInit {
+  private cdref = inject(ChangeDetectorRef);
+
   title = 'Example 27: Tree Data <small> <span class="mdi mdi-file-tree mdi-27px"></span> (from a flat dataset with <code>parentId</code> references - <a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/tree-data-grid" target="_blank">Wiki</a>)</small>';
   subTitle = `<ul>
     <li>It is assumed that your dataset will have Parent/Child references AND also Tree Level (indent) property.</li>
@@ -40,8 +42,6 @@ export class Example27Component implements OnInit {
   isLargeDataset = false;
   hasNoExpandCollapseChanged = true;
   treeToggleItems: TreeToggledItem[] = [];
-
-  constructor(private cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     // define the grid options & columns and then create the grid itself

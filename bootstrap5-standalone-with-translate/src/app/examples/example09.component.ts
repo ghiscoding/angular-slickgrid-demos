@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { AngularGridInstance, Column, ExtensionName, Filters, Formatters, GridOption, type SliderOption, unsubscribeAllObservables, AngularSlickgridModule } from 'angular-slickgrid';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
     imports: [AngularSlickgridModule],
 })
 export class Example9Component implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -17,7 +19,7 @@ export class Example9Component implements OnInit, OnDestroy {
   dataset!: any[];
   selectedLanguage: string;
 
-  constructor(private translate: TranslateService) {
+  constructor() {
     // always start with English for Cypress E2E tests to be consistent
     const defaultLang = 'en';
     this.translate.use(defaultLang);

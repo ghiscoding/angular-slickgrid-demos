@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { AngularGridInstance, Column, GridOption, Filters } from 'angular-slickgrid';
@@ -10,6 +10,8 @@ const URL_CUSTOMERS = 'assets/data/customers_100.json';
   standalone: false,
 })
 export class Example22Component implements OnInit {
+  private http = inject(HttpClient);
+
   title = 'Example 22: Grids in Bootstrap Tabs';
   subTitle = `This example demonstrate the creation of multiple grids in Bootstrap Tabs
    <ol>
@@ -24,8 +26,6 @@ export class Example22Component implements OnInit {
   gridOptions2!: GridOption;
   dataset1!: any[];
   dataset2!: any[];
-
-  constructor(private http: HttpClient) { }
 
   angularGrid2Ready(angularGrid: AngularGridInstance) {
     this.angularGrid2 = angularGrid;

@@ -1,5 +1,5 @@
 import { GridOdataService, OdataServiceApi, OdataOption } from '@slickgrid-universal/odata';
-import { ChangeDetectorRef, Component, OnInit, } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
   AngularGridInstance,
@@ -22,6 +22,9 @@ const PERCENT_HTML_ESCAPED = '%25';
   standalone: false,
 })
 export class Example5Component implements OnInit {
+  private readonly cd = inject(ChangeDetectorRef);
+  private http = inject(HttpClient);
+
   title = 'Example 5: Grid connected to Backend Server with OData';
   subTitle = `
     Sorting/Paging connected to a Backend OData Service (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/backend-services/odata" target="_blank">Docs</a>).
@@ -59,8 +62,6 @@ export class Example5Component implements OnInit {
   errorStatus = '';
   isPageErrorTest = false;
   status = { text: 'processing...', class: 'alert alert-danger' };
-
-  constructor(private readonly cd: ChangeDetectorRef, private http: HttpClient) { }
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;

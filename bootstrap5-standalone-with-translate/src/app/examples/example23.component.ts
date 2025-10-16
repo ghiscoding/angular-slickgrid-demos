@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
@@ -6,7 +6,7 @@ import { CustomInputFilter } from './custom-inputFilter';
 import { AngularGridInstance, Column, Filters, Formatter, Formatters, GridOption, GridStateChange, Metrics, type MultipleSelectOption, OperatorType, SliderRangeOption, unsubscribeAllObservables, AngularSlickgridModule } from 'angular-slickgrid';
 import { addDay, format } from '@formkit/tempo';
 import { Subscription } from 'rxjs';
-import { NgIf, NgFor, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 const NB_ITEMS = 1500;
@@ -26,14 +26,14 @@ const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataCont
 @Component({
     templateUrl: './example23.component.html',
     imports: [
-        NgIf,
-        FormsModule,
-        NgFor,
-        AngularSlickgridModule,
-        DatePipe,
-    ],
+    FormsModule,
+    AngularSlickgridModule,
+    DatePipe
+],
 })
 export class Example23Component implements OnInit, OnDestroy {
+  private translate = inject(TranslateService);
+
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -48,7 +48,7 @@ export class Example23Component implements OnInit, OnDestroy {
   ];
   selectedPredefinedFilter!: { value: string; label: string };
 
-  constructor(private translate: TranslateService) {
+  constructor() {
     // always start with English for Cypress E2E tests to be consistent
     const defaultLang = 'en';
     this.translate.use(defaultLang);

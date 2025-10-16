@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { AngularGridInstance, Column, GridOption, Filters, AngularSlickgridModule } from 'angular-slickgrid';
@@ -15,6 +15,8 @@ const URL_CUSTOMERS = 'assets/data/customers_100.json';
     ],
 })
 export class Example22Component implements OnInit {
+  private http = inject(HttpClient);
+
   angularGrid2!: AngularGridInstance;
   columnDefinitions1!: Column[];
   columnDefinitions2!: Column[];
@@ -22,8 +24,6 @@ export class Example22Component implements OnInit {
   gridOptions2!: GridOption;
   dataset1!: any[];
   dataset2!: any[];
-
-  constructor(private http: HttpClient) { }
 
   angularGrid2Ready(angularGrid: AngularGridInstance) {
     this.angularGrid2 = angularGrid;

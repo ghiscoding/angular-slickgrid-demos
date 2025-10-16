@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AngularGridInstance, AngularUtilService, Column, Editors, Filters, Formatters, GridOption, type MultipleSelectOption, OnEventArgs, SlickGlobalEditorLock, type SliderOption, AngularSlickgridModule } from 'angular-slickgrid';
@@ -8,7 +8,7 @@ import { CustomAngularComponentFilter } from './custom-angularComponentFilter';
 import { CustomTitleFormatterComponent } from './custom-titleFormatter.component';
 import { FilterNgSelectComponent } from './filter-ng-select.component';
 import { CustomButtonFormatterComponent } from './custom-buttonFormatter.component';
-import { NgIf, JsonPipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 
 const NB_ITEMS = 100;
 
@@ -18,12 +18,14 @@ const NB_ITEMS = 100;
     encapsulation: ViewEncapsulation.None,
     providers: [AngularUtilService],
     imports: [
-        NgIf,
-        AngularSlickgridModule,
-        JsonPipe,
-    ],
+    AngularSlickgridModule,
+    JsonPipe
+],
 })
 export class Example26Component implements OnInit {
+  private angularUtilService = inject(AngularUtilService);
+  private translate = inject(TranslateService);
+
   private _commandQueue: any[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
@@ -40,11 +42,6 @@ export class Example26Component implements OnInit {
     { id: '2', name: 'Pierre' },
     { id: '3', name: 'Paul' },
   ];
-
-  constructor(
-    private angularUtilService: AngularUtilService,
-    private translate: TranslateService
-  ) { }
 
   ngOnInit(): void {
     this.prepareGrid();

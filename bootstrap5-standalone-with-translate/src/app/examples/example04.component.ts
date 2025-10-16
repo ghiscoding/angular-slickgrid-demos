@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { TranslateService } from '@ngx-translate/core';
 import { AngularGridInstance, Column, Filters, Formatters, GridOption, GridStateChange, Metrics, type MultipleSelectOption, OperatorType, type VanillaCalendarOption, AngularSlickgridModule } from 'angular-slickgrid';
 import { CustomInputFilter } from './custom-inputFilter';
-import { NgIf, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 function randomBetween(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -15,22 +15,19 @@ const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_500_numbers.json';
 @Component({
     templateUrl: './example04.component.html',
     imports: [
-        NgIf,
-        AngularSlickgridModule,
-        DatePipe,
-    ],
+    AngularSlickgridModule,
+    DatePipe
+],
 })
 export class Example4Component implements OnInit {
+  private http = inject(HttpClient);
+  private translate = inject(TranslateService);
+
   angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
   metrics!: Metrics;
-
-  constructor(
-    private http: HttpClient,
-    private translate: TranslateService
-  ) { }
 
   ngOnInit(): void {
     this.columnDefinitions = [

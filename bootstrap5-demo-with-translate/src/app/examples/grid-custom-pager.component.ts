@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, inject } from '@angular/core';
 import type {
   BasePaginationComponent,
   PaginationMetadata,
@@ -15,6 +15,8 @@ import type {
   standalone: false,
 })
 export class CustomPagerComponent implements BasePaginationComponent {
+  protected readonly elm = inject(ElementRef);
+
   protected _paginationElement!: HTMLDivElement;
   protected _subscriptions: Subscription[] = [];
   protected _gridContainerElm?: HTMLElement;
@@ -22,8 +24,6 @@ export class CustomPagerComponent implements BasePaginationComponent {
   protected _paginationService!: PaginationService;
   protected _pubSubService!: PubSubService;
   currentPagination = {} as PaginationMetadata;
-
-  constructor(protected readonly elm: ElementRef) {}
 
   init(grid: SlickGrid, paginationService: PaginationService, pubSubService: PubSubService) {
     this._grid = grid;

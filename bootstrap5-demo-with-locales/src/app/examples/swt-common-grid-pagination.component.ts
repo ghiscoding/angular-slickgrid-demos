@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, inject } from '@angular/core';
 import { SwtCommonGridComponent } from './swt-common-grid.component';
 import { Logger } from './swt-logger.service';
 import { HttpClient } from '@angular/common/http';
@@ -80,6 +80,8 @@ import { GridOption } from 'angular-slickgrid';
   standalone: false,
 })
 export class SwtCommonGridPaginationComponent implements OnInit {
+  private httpClient = inject(HttpClient);
+
   private logger: Logger;
 
   @Input() pageCount = 1;
@@ -104,7 +106,9 @@ export class SwtCommonGridPaginationComponent implements OnInit {
     return this._gridPaginationOptions;
   }
 
-  constructor(private httpClient: HttpClient) {
+  constructor() {
+    const httpClient = this.httpClient;
+
     this.logger = new Logger('grid-pagination', httpClient);
     this.logger.info('method [constructor] - START/END');
   }

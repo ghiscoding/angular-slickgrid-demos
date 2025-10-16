@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 
 import {
   AngularGridInstance,
@@ -15,6 +15,8 @@ import {
   standalone: false,
 })
 export class Example10Component implements OnInit {
+  private cd = inject(ChangeDetectorRef);
+
   title = 'Example 10: Multiple Grids with Row Selection';
   subTitle = `
     Row selection, single or multi-select (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/row-selection" target="_blank">Wiki docs</a>).
@@ -40,8 +42,6 @@ export class Example10Component implements OnInit {
   selectedTitles = '';
   selectedTitle = '';
   selectedGrid2IDs!: number[];
-
-  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.prepareGrid();
