@@ -20,7 +20,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "dev": "ng serve --port 4500",
+    "dev": "ng serve --port 4600",
     "build": "ng build --configuration=production",
     "test": "ng test",
     "lint": "eslint .",
