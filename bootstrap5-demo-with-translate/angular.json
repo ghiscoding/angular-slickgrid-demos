@@ -12,7 +12,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist"
+              "base": "dist",
+              "browser": ""
             },
             "index": "src/index.html",
             "tsConfig": "src/tsconfig.app.json",
@@ -61,22 +62,6 @@
             "browser": "src/main.ts"
           },
           "configurations": {
-            "development": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "500kb"
-                }
-              ],
-              "outputHashing": "all",
-              "extractLicenses": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
-                }
-              ]
-            },
             "production": {
               "budgets": [
                 {
@@ -86,7 +71,8 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "aot": false,
+              "sourceMap": false,
+              "namedChunks": false,
               "extractLicenses": true,
               "fileReplacements": [
                 {
