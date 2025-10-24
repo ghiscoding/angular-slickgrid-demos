@@ -1,4 +1,4 @@
-# Angular-Slickgrid Demos
+# [![Angular](https://avatars.githubusercontent.com/u/139426?s=50&v=4)](https://angular.io/) Angular-Slickgrid Demos
 ## Multiple Demos of the [Angular-Slickgrid](https://github.com/ghiscoding/slickgrid-universal/tree/master/frameworks/angular-slickgrid) library
 
 ### Installation
