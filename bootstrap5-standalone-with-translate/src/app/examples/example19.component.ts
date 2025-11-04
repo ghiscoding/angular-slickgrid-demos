@@ -9,11 +9,11 @@ const FAKE_SERVER_DELAY = 250;
 const NB_ITEMS = 1000;
 
 @Component({
-    templateUrl: './example19.component.html',
-    imports: [
+  templateUrl: './example19.component.html',
+  imports: [
     FormsModule,
     AngularSlickgridModule
-],
+  ],
 })
 export class Example19Component implements OnDestroy, OnInit {
   private _darkMode = false;
@@ -278,7 +278,7 @@ export class Example19Component implements OnDestroy, OnInit {
 
     // fill the template on async delay
     return new Promise((resolve) => {
-      window.setTimeout(() => {
+      setTimeout(() => {
         const itemDetail = item;
 
         // let's add some extra properties to our item for a better async simulation

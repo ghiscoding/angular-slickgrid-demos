@@ -10,10 +10,10 @@ const FAKE_SERVER_DELAY = 250;
 const NB_ITEMS = 995;
 
 @Component({
-    styleUrls: ['example45.component.scss'],
-    templateUrl: './example45.component.html',
-    encapsulation: ViewEncapsulation.None,
-    imports: [FormsModule, AngularSlickgridModule],
+  styleUrls: ['example45.component.scss'],
+  templateUrl: './example45.component.html',
+  encapsulation: ViewEncapsulation.None,
+  imports: [FormsModule, AngularSlickgridModule],
 })
 export class Example45Component implements OnDestroy, OnInit {
   private _darkMode = false;
@@ -215,7 +215,7 @@ export class Example45Component implements OnDestroy, OnInit {
 
     // fill the template on async delay
     return new Promise((resolve) => {
-      window.setTimeout(() => {
+      setTimeout(() => {
         const itemDetail = item;
         itemDetail.orderData = orderData;
         itemDetail.isUsingInnerGridStatePresets = this.isUsingInnerGridStatePresets;
