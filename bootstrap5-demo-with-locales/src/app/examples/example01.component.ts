@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Column, GridOption, Formatters, AngularGridInstance } from 'angular-slickgrid';
+import { Component, type OnDestroy, type OnInit } from '@angular/core';
+import { Formatters, type AngularGridInstance, type Column, type GridOption } from 'angular-slickgrid';
 import { zeroPadding } from './utilities';
 
 const NB_ITEMS = 995;
@@ -20,6 +20,9 @@ export class Example1Component implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.prepareGrid();
+    // mock some data (different in each dataset)
+    this.dataset1 = this.mockData(NB_ITEMS);
+    this.dataset2 = this.mockData(NB_ITEMS);
   }
 
   ngOnDestroy() {
@@ -42,7 +45,7 @@ export class Example1Component implements OnDestroy, OnInit {
       { id: '%', name: '% Complete', field: 'percentComplete', sortable: true },
       { id: 'start', name: 'Start', field: 'start', formatter: Formatters.dateIso },
       { id: 'finish', name: 'Finish', field: 'finish', formatter: Formatters.dateIso },
-      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', sortable: true }
+      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', sortable: true },
     ];
     this._darkModeGrid1 = this.isBrowserDarkModeEnabled();
     this.gridOptions1 = {
@@ -63,14 +66,10 @@ export class Example1Component implements OnDestroy, OnInit {
         enablePagination: true,
         pagination: {
           pageSizes: [5, 10, 20, 25, 50],
-          pageSize: 5
+          pageSize: 5,
         },
-      }
+      },
     };
-
-    // mock some data (different in each dataset)
-    this.dataset1 = this.mockData(NB_ITEMS);
-    this.dataset2 = this.mockData(NB_ITEMS);
   }
 
   mockData(count: number) {
@@ -79,7 +78,7 @@ export class Example1Component implements OnDestroy, OnInit {
     for (let i = 0; i < count; i++) {
       const randomYear = 2000 + Math.floor(Math.random() * 10);
       const randomMonth = Math.floor(Math.random() * 11);
-      const randomDay = Math.floor((Math.random() * 29));
+      const randomDay = Math.floor(Math.random() * 29);
       const randomPercent = Math.round(Math.random() * 100);
 
       mockDataset[i] = {
@@ -89,7 +88,7 @@ export class Example1Component implements OnDestroy, OnInit {
         percentComplete: randomPercent,
         start: `${zeroPadding(randomYear)}-${zeroPadding(randomMonth + 1)}-${zeroPadding(randomDay)}`,
         finish: `${zeroPadding(randomYear + 1)}-${zeroPadding(randomMonth + 1)}-${zeroPadding(randomDay)}`,
-        effortDriven: (i % 5 === 0)
+        effortDriven: i % 5 === 0,
       };
     }
 

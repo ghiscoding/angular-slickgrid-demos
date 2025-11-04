@@ -4,8 +4,8 @@ import { AngularGridInstance, Column, Editors, GridOption, OnCellChangeEventArgs
 const NB_ITEMS = 100;
 
 @Component({
-    templateUrl: './example37.component.html',
-    imports: [AngularSlickgridModule],
+  templateUrl: './example37.component.html',
+  imports: [AngularSlickgridModule],
 })
 export class Example37Component implements OnDestroy, OnInit {
   private _darkMode = false;
@@ -13,6 +13,7 @@ export class Example37Component implements OnDestroy, OnInit {
   gridOptions!: GridOption;
   dataset!: any[];
   angularGrid!: AngularGridInstance;
+  hideSubTitle = false;
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
@@ -119,5 +120,11 @@ export class Example37Component implements OnDestroy, OnInit {
     if (columnElement) {
       columnElement.textContent = `Sum: ${total}`;
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
   }
 }

@@ -9,13 +9,13 @@ const CARET_HTML_ESCAPED = '%5E';
 const PERCENT_HTML_ESCAPED = '%25';
 
 @Component({
-    styleUrls: ['./example38.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    templateUrl: './example38.component.html',
-    imports: [
+  styleUrls: ['./example38.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  templateUrl: './example38.component.html',
+  imports: [
     AngularSlickgridModule,
     DatePipe
-],
+  ],
 })
 export class Example38Component implements OnInit {
   private readonly cd = inject(ChangeDetectorRef);
@@ -33,6 +33,7 @@ export class Example38Component implements OnInit {
   processing = false;
   errorStatus = '';
   errorStatusClass = 'hidden';
+  hideSubTitle = false;
   status = { text: 'processing...', class: 'alert alert-danger' };
 
   constructor() {
@@ -410,5 +411,11 @@ export class Example38Component implements OnInit {
 
   setSortingDynamically() {
     this.angularGrid?.sortService.updateSorting([{ columnId: 'name', direction: 'DESC' }]);
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
   }
 }

@@ -1,13 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Column, GridOption, Formatters, AngularGridInstance, AngularSlickgridModule } from 'angular-slickgrid';
-
+import { Component, type OnDestroy, type OnInit } from '@angular/core';
+import { AngularSlickgridModule, Formatters, type AngularGridInstance, type Column, type GridOption } from 'angular-slickgrid';
 import { zeroPadding } from './utilities';
 
 const NB_ITEMS = 995;
 
 @Component({
-    templateUrl: './example01.component.html',
-    imports: [AngularSlickgridModule],
+  templateUrl: './example01.component.html',
+  imports: [AngularSlickgridModule],
 })
 export class Example1Component implements OnDestroy, OnInit {
   private _darkModeGrid1 = false;
@@ -21,6 +20,9 @@ export class Example1Component implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.prepareGrid();
+    // mock some data (different in each dataset)
+    this.dataset1 = this.mockData(NB_ITEMS);
+    this.dataset2 = this.mockData(NB_ITEMS);
   }
 
   ngOnDestroy() {
@@ -68,10 +70,6 @@ export class Example1Component implements OnDestroy, OnInit {
         },
       },
     };
-
-    // mock some data (different in each dataset)
-    this.dataset1 = this.mockData(NB_ITEMS);
-    this.dataset2 = this.mockData(NB_ITEMS);
   }
 
   mockData(count: number) {

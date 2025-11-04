@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewEncapsulation, } from '@angular/core';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
 import {
-  AngularGridInstance,
-  Column,
   Editors,
   Formatters,
-  GridOption,
+  isDefined,
   SlickGlobalEditorLock,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
 } from 'angular-slickgrid';
 
 @Component({
@@ -22,6 +23,7 @@ export class Example41Component implements OnInit {
   dragHelper?: HTMLElement;
   dragRows: number[] = [];
   dragMode = '';
+  hideSubTitle = false;
 
   ngOnInit(): void {
     this.defineGrids();
@@ -47,8 +49,8 @@ export class Example41Component implements OnInit {
         field: 'name',
         width: 300,
         cssClass: 'cell-title',
-        editor: { model: Editors.Text, },
-        validator: this.requiredFieldValidator
+        editor: { model: Editors.text },
+        validator: this.requiredFieldValidator,
       },
       {
         id: 'complete',
@@ -59,7 +61,7 @@ export class Example41Component implements OnInit {
         cannotTriggerInsert: true,
         formatter: Formatters.checkmarkMaterial,
         editor: { model: Editors.Checkbox },
-      }
+      },
     ];
 
     this.gridOptions = {
@@ -72,7 +74,7 @@ export class Example41Component implements OnInit {
       enableRowMoveManager: true,
       rowSelectionOptions: {
         // True (Single Selection), False (Multiple Selections)
-        selectActiveRow: false
+        selectActiveRow: false,
       },
       rowMoveManager: {
         columnIndexPosition: 0,
@@ -93,11 +95,11 @@ export class Example41Component implements OnInit {
       { id: 0, name: 'Make a list', complete: true },
       { id: 1, name: 'Check it twice', complete: false },
       { id: 2, name: `Find out who's naughty`, complete: false },
-      { id: 3, name: `Find out who's nice`, complete: false }
+      { id: 3, name: `Find out who's nice`, complete: false },
     ];
   }
 
-  onBeforeMoveRows(e: MouseEvent | TouchEvent, data: { rows: number[]; insertBefore: number; }) {
+  onBeforeMoveRows(e: MouseEvent | TouchEvent, data: { rows: number[]; insertBefore: number }) {
     for (const dataRow of data.rows) {
       // no point in moving before or after itself
       if (dataRow === data.insertBefore || dataRow === data.insertBefore - 1) {
@@ -108,7 +110,7 @@ export class Example41Component implements OnInit {
     return true;
   }
 
-  onMoveRows(_e: MouseEvent | TouchEvent, args: { rows: number[]; insertBefore: number; }) {
+  onMoveRows(_e: MouseEvent | TouchEvent, args: { rows: number[]; insertBefore: number }) {
     const extractedRows: any[] = [];
     const rows = args.rows;
     const insertBefore = args.insertBefore;
@@ -169,7 +171,7 @@ export class Example41Component implements OnInit {
 
     let selectedRows: number[] = this.angularGrid.slickGrid?.getSelectedRows() || [];
 
-    if (!selectedRows.length || selectedRows.findIndex(row => row === row) === -1) {
+    if (!selectedRows.length || selectedRows.findIndex((row) => row === row) === -1) {
       selectedRows = [row];
       this.angularGrid.slickGrid?.setSelectedRows(selectedRows);
     }
@@ -206,13 +208,13 @@ export class Example41Component implements OnInit {
   }
 
   handleOnDragEnd(e: CustomEvent, args: any) {
-    if (this.dragMode != 'recycle') {
+    if (this.dragMode !== 'recycle') {
       return;
     }
     this.dragHelper?.remove();
     document.querySelector<HTMLDivElement>('#dropzone')?.classList.remove('drag-dropzone', 'drag-hover');
 
-    if (this.dragMode != 'recycle' || args.target.id !== 'dropzone') {
+    if (this.dragMode !== 'recycle' || args.target.id !== 'dropzone') {
       return;
     }
 
@@ -227,10 +229,17 @@ export class Example41Component implements OnInit {
   }
 
   requiredFieldValidator(value: any) {
-    if (value == null || value == undefined || !value.length) {
+    if (isDefined(value)) {
       return { valid: false, msg: 'This is a required field' };
     } else {
       return { valid: true, msg: null };
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

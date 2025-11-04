@@ -25,6 +25,7 @@ export class Example35Component implements OnInit {
   columnDefinitions!: Column[];
   dataset!: any[];
   fetchResult = '';
+  hideSubTitle = false;
   statusClass = 'alert alert-light';
   statusStyle = 'display: none';
 
@@ -229,6 +230,12 @@ export class Example35Component implements OnInit {
     };
     this.angularGrid.slickGrid.setOptions(gridOptions);
     this.gridOptions = this.angularGrid.slickGrid.getOptions() as GridOption;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
   }
 }
 

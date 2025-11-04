@@ -5,14 +5,17 @@
       <a
         style="font-size: 18px"
         target="_blank"
-        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/grid-infinite-odata.component.ts"
-        >
+        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/example38.component.ts"
+      >
         <span class="mdi mdi-link-variant"></span> code
       </a>
     </span>
+    <button class="ms-2 btn btn-outline-secondary btn-sm btn-icon" type="button" data-test="toggle-subtitle" (click)="toggleSubTitle()">
+      <span class="mdi mdi-information-outline" title="Toggle example sub-title details"></span>
+    </button>
   </h2>
 
-  <h6 class="title is-6 italic content">
+  <h6 class="subtitle is-6 italic content">
     <ul>
       <li>
         Infinite scrolling allows the grid to lazy-load rows from the server when reaching the scroll bottom (end) position. In its simplest
@@ -68,7 +71,7 @@
         data-test="clear-filters-sorting"
         (click)="clearAllFiltersAndSorts()"
         title="Clear all Filters & Sorts"
-        >
+      >
         <i class="mdi mdi-filter-remove-outline"></i>
         Clear all Filter & Sorts
       </button>
@@ -78,7 +81,9 @@
       <button class="btn btn-outline-secondary btn-sm btn-icon" data-test="set-dynamic-sorting" (click)="setSortingDynamically()">
         Set Sorting Dynamically
       </button>
-      <button class="btn btn-outline-secondary btn-sm btn-icon" data-test="group-by-gender" (click)="groupByGender()">Group by Gender</button>
+      <button class="btn btn-outline-secondary btn-sm btn-icon" data-test="group-by-gender" (click)="groupByGender()">
+        Group by Gender
+      </button>
 
       @if (metrics) {
         <div class="mt-2" style="margin: 10px 0px">
@@ -103,6 +108,6 @@
     [dataset]="dataset"
     (onAngularGridCreated)="angularGridReady($event.detail)"
     (onRowCountChanged)="refreshMetrics($event.detail.args)"
-    >
+  >
   </angular-slickgrid>
 </div>

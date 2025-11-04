@@ -13,6 +13,7 @@ export class Example37Component implements OnDestroy, OnInit {
   gridOptions!: GridOption;
   dataset!: any[];
   angularGrid!: AngularGridInstance;
+  hideSubTitle = false;
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
@@ -119,5 +120,12 @@ export class Example37Component implements OnDestroy, OnInit {
     if (columnElement) {
       columnElement.textContent = `Sum: ${total}`;
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

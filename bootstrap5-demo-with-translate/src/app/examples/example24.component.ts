@@ -71,6 +71,7 @@ export class Example24Component implements OnInit, OnDestroy {
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
+  hideSubTitle = false;
   dataset!: any[];
   selectedLanguage: string;
 
@@ -639,5 +640,12 @@ export class Example24Component implements OnInit, OnDestroy {
       document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
     }
     this.angularGrid.slickGrid?.setOptions({ darkMode: this._darkModeGrid });
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

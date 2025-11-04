@@ -1,5 +1,13 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, Editors, Formatters, GridOption, SlickGlobalEditorLock } from 'angular-slickgrid';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
+import {
+  Editors,
+  Formatters,
+  isDefined,
+  SlickGlobalEditorLock,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+} from 'angular-slickgrid';
 
 @Component({
   templateUrl: './example41.component.html',
@@ -15,6 +23,7 @@ export class Example41Component implements OnInit {
   dragHelper?: HTMLElement;
   dragRows: number[] = [];
   dragMode = '';
+  hideSubTitle = false;
 
   ngOnInit(): void {
     this.defineGrids();
@@ -40,7 +49,7 @@ export class Example41Component implements OnInit {
         field: 'name',
         width: 300,
         cssClass: 'cell-title',
-        editor: { model: Editors.Text },
+        editor: { model: Editors.text },
         validator: this.requiredFieldValidator,
       },
       {
@@ -199,13 +208,13 @@ export class Example41Component implements OnInit {
   }
 
   handleOnDragEnd(e: CustomEvent, args: any) {
-    if (this.dragMode != 'recycle') {
+    if (this.dragMode !== 'recycle') {
       return;
     }
     this.dragHelper?.remove();
     document.querySelector<HTMLDivElement>('#dropzone')?.classList.remove('drag-dropzone', 'drag-hover');
 
-    if (this.dragMode != 'recycle' || args.target.id !== 'dropzone') {
+    if (this.dragMode !== 'recycle' || args.target.id !== 'dropzone') {
       return;
     }
 
@@ -220,10 +229,17 @@ export class Example41Component implements OnInit {
   }
 
   requiredFieldValidator(value: any) {
-    if (value == null || value == undefined || !value.length) {
+    if (isDefined(value)) {
       return { valid: false, msg: 'This is a required field' };
     } else {
       return { valid: true, msg: null };
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

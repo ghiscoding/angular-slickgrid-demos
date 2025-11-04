@@ -8,10 +8,10 @@ import { AngularGridInstance, Column, Editors, Formatters, GridOption, AngularSl
 const NB_ITEMS = 20;
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./example35.component.scss'],
-    templateUrl: './example35.component.html',
-    imports: [AngularSlickgridModule],
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./example35.component.scss'],
+  templateUrl: './example35.component.html',
+  imports: [AngularSlickgridModule],
 })
 export class Example35Component implements OnInit {
   private translate = inject(TranslateService);
@@ -24,6 +24,7 @@ export class Example35Component implements OnInit {
   selectedLanguage = '';
   selectedLanguageFile = '';
   fetchResult = '';
+  hideSubTitle = false;
   statusClass = 'alert alert-light';
   statusStyle = 'display: none';
 
@@ -250,6 +251,12 @@ export class Example35Component implements OnInit {
         this.selectedLanguage = nextLanguage;
       })
     );
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
   }
 }
 

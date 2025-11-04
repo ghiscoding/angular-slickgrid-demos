@@ -9,6 +9,9 @@
       <span class="mdi mdi-link-variant"></span> code
     </a>
   </span>
+  <button class="ms-2 btn btn-outline-secondary btn-sm btn-icon" type="button" data-test="toggle-subtitle" (click)="toggleSubTitle()">
+    <span class="mdi mdi-information-outline" title="Toggle example sub-title details"></span>
+  </button>
 </h2>
 
 <div class="subtitle">
@@ -49,26 +52,24 @@
 
 <section>
   <div class="row mb-4">
-      <div class="col-sm-8">
-        <button
-          class="btn btn-outline-secondary btn-sm btn-icon"
-          data-test="single-multi-toggle"
-          (click)="toggleSingleMultiRowEdit()"
-        >
-          Toggle Single/Multi Row Edit
-        </button>
-      </div>
+    <div class="col-sm-8">
+      <button class="btn btn-outline-secondary btn-sm btn-icon" data-test="single-multi-toggle" (click)="toggleSingleMultiRowEdit()">
+        Toggle Single/Multi Row Edit
+      </button>
+    </div>
 
-      <div class="col-sm-4" [class]="statusClass">
-        <strong>Status: </strong>
-        <span data-test="fetch-result" [textContent]="fetchResult"></span>
-      </div>
+    <div class="col-sm-4" [class]="statusClass">
+      <strong>Status: </strong>
+      <span data-test="fetch-result" [textContent]="fetchResult"></span>
+    </div>
   </div>
 </section>
 
-<angular-slickgrid gridId="grid35"
-    [columns]="columnDefinitions"
-    [options]="gridOptions"
-    [dataset]="dataset"
-    (onAngularGridCreated)="angularGridReady($event.detail)">
+<angular-slickgrid
+  gridId="grid35"
+  [columns]="columnDefinitions"
+  [options]="gridOptions"
+  [dataset]="dataset"
+  (onAngularGridCreated)="angularGridReady($event.detail)"
+>
 </angular-slickgrid>

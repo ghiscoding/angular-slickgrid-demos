@@ -5,8 +5,8 @@
       <a
         style="font-size: 18px"
         target="_blank"
-        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/grid-infinite-json.component.ts"
-        >
+        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/example40.component.ts"
+      >
         <span class="mdi mdi-link-variant"></span> code
       </a>
     </span>
@@ -35,7 +35,7 @@
         data-test="clear-filters-sorting"
         (click)="clearAllFiltersAndSorts()"
         title="Clear all Filters & Sorts"
-        >
+      >
         <span class="mdi mdi-close"></span>
         <span>Clear all Filter & Sorts</span>
       </button>
@@ -45,7 +45,9 @@
       <button class="btn btn-outline-secondary btn-sm btn-icon" data-test="set-dynamic-sorting" (click)="setSortingDynamically()">
         Set Sorting Dynamically
       </button>
-      <button class="btn btn-outline-secondary btn-sm btn-icon" data-test="group-by-duration" (click)="groupByDuration()">Group by Duration</button>
+      <button class="btn btn-outline-secondary btn-sm btn-icon" data-test="group-by-duration" (click)="groupByDuration()">
+        Group by Duration
+      </button>
 
       <label class="ml-4">Reset Dataset <code>onSort</code>:</label>
       <button class="btn btn-outline-secondary btn-sm btn-icon" data-test="onsort-on" (click)="onSortReset(true)">ON</button>
@@ -73,6 +75,6 @@
     (onSort)="handleOnSort()"
     (onScroll)="handleOnScroll($event.detail.args)"
     (onRowCountChanged)="handleOnRowCountChanged($event.detail.args)"
-    >
+  >
   </angular-slickgrid>
 </div>

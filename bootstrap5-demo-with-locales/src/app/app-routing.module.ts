@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, provideRouter } from '@angular/router';
-
-import { HomeComponent } from './examples/home.component';
+import { provideRouter, RouterModule, type Routes } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Example1Component } from './examples/example01.component';
 import { Example2Component } from './examples/example02.component';
 import { Example3Component } from './examples/example03.component';
@@ -48,8 +47,10 @@ import { Example44Component } from './examples/example44.component';
 import { Example45Component } from './examples/example45.component';
 import { Example46Component } from './examples/example46.component';
 import { Example47Component } from './examples/example47.component';
+import { Example48Component } from './examples/example48.component';
+import { Example49Component } from './examples/example49.component';
+import { HomeComponent } from './examples/home.component';
 import { SwtCommonGridTestComponent } from './examples/swt-common-grid-test.component';
-
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -100,15 +101,15 @@ const routes: Routes = [
   { path: 'example45', component: Example45Component },
   { path: 'example46', component: Example46Component },
   { path: 'example47', component: Example47Component },
+  { path: 'example48', component: Example48Component },
+  { path: 'example49', component: Example49Component },
   { path: '', redirectTo: '/example34', pathMatch: 'full' },
   { path: '**', redirectTo: '/example34', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { useHash: true }),
-  ],
-  exports: [RouterModule,],
+  imports: [RouterModule.forRoot(routes, { useHash: true }), TranslateModule],
+  exports: [RouterModule, TranslateModule],
   providers: [provideRouter(routes)],
 })
 export class AppRoutingRoutingModule { }

@@ -53,38 +53,12 @@ const taskFormatter: Formatter = (_row, _cell, value) => {
   standalone: false,
 })
 export class Example24Component implements OnInit, OnDestroy {
-  title = 'Example 24: Cell Menu & Context Menu Plugins';
-  subTitle = `Add Cell Menu and Context Menu
-    <ul>
-      <li>This example demonstrates 2 SlickGrid plugins</li>
-      <ol>
-      <li>Using the <b>Slick.Plugins.CellMenu</b> plugin, often used for an Action Menu(s), 1 or more per grid
-      (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/cell-menu" target="_blank">Wiki docs</a>).
-    </li>
-    <li>Using the <b>Slick.Plugins.ContextMenu</b> plugin, shown after a mouse right+click, only 1 per grid.
-    (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/context-menu" target="_blank">Wiki docs</a>).
-    </li>
-      </ol>
-      <li>It will also "autoAdjustDrop" (bottom/top) and "autoAlignSide" (left/right) by default but could be turned off</li>
-      <li>Both plugins have 2 sections, 1st section can have an array of Options (to change value of a field) and 2nd section an array of Commands (execute a command)</li>
-      <li>There are 2 ways to execute a Command/Option</li>
-      <ol>
-        <li>via onCommand/onOptionSelected (use a switch/case to parse command/option and do something with it)</li>
-        <li>via action callback (that can be defined on each command/option)</li>
-      </ol>
-      <li>Use override callback functions to change the properties of show/hide, enable/disable the menu or certain item(s) from the list</li>
-      <ol>
-        <li>These callbacks are: "menuUsabilityOverride", "itemVisibilityOverride", "itemUsabilityOverride"</li>
-        <li>... e.g. in the demo, the "Action" Cell Menu is only available when Priority is set to "High" via "menuUsabilityOverride"</li>
-        <li>... e.g. in the demo, the Context Menu is only available on the first 20 Tasks via "menuUsabilityOverride"</li>
-      </ol>
-    </ul>`;
-
   private _darkModeGrid = false;
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
@@ -519,5 +493,11 @@ export class Example24Component implements OnInit, OnDestroy {
       document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
     }
     this.angularGrid.slickGrid?.setOptions({ darkMode: this._darkModeGrid });
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
   }
 }
