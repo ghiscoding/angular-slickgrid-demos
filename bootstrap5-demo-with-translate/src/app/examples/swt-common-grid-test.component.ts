@@ -1,11 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { SwtCommonGridComponent } from './swt-common-grid.component';
+import { Component, inject, ViewChild, type AfterViewInit, type OnInit } from '@angular/core';
+import type { FilterChangedArgs, PaginationChangedArgs } from 'angular-slickgrid';
 import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
-import { FilterChangedArgs, PaginationChangedArgs } from 'angular-slickgrid';
-
+import { SwtCommonGridComponent } from './swt-common-grid.component';
 import { Logger } from './swt-logger.service';
+
 /**
  * Main test Component
  *

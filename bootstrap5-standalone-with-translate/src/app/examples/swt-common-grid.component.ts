@@ -1,23 +1,24 @@
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef, Renderer2, inject, input, output } from '@angular/core';
+import { Component, ElementRef, inject, input, Input, output, Renderer2, ViewChild, type AfterViewInit, type OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import type {
-  AngularGridInstance,
-  AngularSlickgridComponent,
-  Column,
-  GridOption,
-  BackendService,
-  BackendServiceOption,
-  FilterChangedArgs,
-  PaginationChangedArgs,
-  Pagination,
-  SlickDataView,
-} from 'angular-slickgrid';
 import { TranslateService } from '@ngx-translate/core';
+import {
+  type AngularGridInstance,
+  AngularSlickgridModule,
+  type AngularSlickgridComponent,
+  type BackendService,
+  type BackendServiceOption,
+  type Column,
+  type FilterChangedArgs,
+  type GridOption,
+  type Pagination,
+  type PaginationChangedArgs,
+  type SlickDataView,
+} from 'angular-slickgrid';
+
+import { type SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
 import { Logger } from './swt-logger.service';
-import { SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
-import { AngularSlickgridModule } from 'angular-slickgrid';
 
 /**
  * Custom wrapper of angular-slickgrid components, allows easily interacting with SwtCommonGridPaginationComponent
@@ -29,8 +30,8 @@ let timer: any;
 const DEFAULT_FILTER_TYPING_DEBOUNCE = 750;
 
 @Component({
-    selector: 'swt-common-grid',
-    template: `<angular-slickgrid
+  selector: 'swt-common-grid',
+  template: `<angular-slickgrid
     gridId="common-grid"
     #angularSlickGrid
     (onAngularGridCreated)="gridReady($event.detail)"
@@ -39,8 +40,8 @@ const DEFAULT_FILTER_TYPING_DEBOUNCE = 750;
     [dataset]="dataset"
   >
   </angular-slickgrid>`,
-    styles: [
-        `
+  styles: [
+    `
       :host ::ng-deep .gridPane {
         width: 100% !important;
       }
@@ -48,8 +49,8 @@ const DEFAULT_FILTER_TYPING_DEBOUNCE = 750;
         width: 100% !important;
       }
     `,
-    ],
-    imports: [AngularSlickgridModule],
+  ],
+  imports: [AngularSlickgridModule],
 })
 export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendService {
   private httpClient = inject(HttpClient);
@@ -161,7 +162,6 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
    */
   constructor() {
     const httpClient = this.httpClient;
-
     this.logger = new Logger('grid', httpClient);
 
     this.logger.info('method [constructor] - START/END');
@@ -300,7 +300,6 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
     // this.gridObj.setSortColumns([{'columnId':'excludeType','sortAsc':true}]);
 
     // this.gridObj.invalidate();
-    // this.gridObj.render();
   }
 
   get gridData(): any {

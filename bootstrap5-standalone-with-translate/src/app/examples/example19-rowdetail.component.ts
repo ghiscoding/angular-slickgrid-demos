@@ -1,29 +1,32 @@
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { SlickDataView, SlickGrid } from 'angular-slickgrid';
-import { Example19Component } from './example19.component';
 import { FormsModule } from '@angular/forms';
-import { DecimalPipe, DatePipe } from '@angular/common';
+import type { SlickDataView, SlickGrid } from 'angular-slickgrid';
+import type { Example19Component } from './example19.component';
+
+interface ItemDetail {
+  rowId: string;
+  duration: number;
+  percentComplete: number;
+  reporter: string;
+  start: Date;
+  finish: Date;
+  effortDriven: boolean;
+  assignee: string;
+  title: string;
+}
 
 @Component({
-    styles: ['.detail-label { display: inline-flex; align-items: center; gap: 4px; padding: 4px; }', 'label { font-weight: 600; }'],
-    templateUrl: './example19-rowdetail.component.html',
-    imports: [
-        FormsModule,
-        DecimalPipe,
-        DatePipe,
-    ],
+  styles: ['.detail-label { display: inline-flex; align-items: center; gap: 4px; padding: 4px; }', 'label { font-weight: 600; }'],
+  templateUrl: './example19-rowdetail.component.html',
+  imports: [
+    FormsModule,
+    DecimalPipe,
+    DatePipe,
+  ],
 })
 export class Example19RowDetailComponent {
-  model!: {
-    duration: Date;
-    percentComplete: number;
-    reporter: string;
-    start: Date;
-    finish: Date;
-    effortDriven: boolean;
-    assignee: string;
-    title: string;
-  };
+  model: ItemDetail = {} as ItemDetail;
 
   // you also have access to the following objects (it must match the exact property names shown below)
   addon: any; // row detail addon instance
@@ -34,7 +37,7 @@ export class Example19RowDetailComponent {
   // NOTE that you MUST provide it through the "parentRef" property in your "rowDetail" grid options
   parentRef!: Example19Component;
 
-  alertAssignee(name: string) {
+  alertAssignee(name?: string) {
     if (typeof name === 'string') {
       alert(`Assignee on this task is: ${name.toUpperCase()}`);
     } else {
@@ -42,7 +45,7 @@ export class Example19RowDetailComponent {
     }
   }
 
-  deleteRow(model: any) {
+  deleteRow(model: ItemDetail) {
     if (confirm(`Are you sure that you want to delete ${model.title}?`)) {
       // you first need to collapse all rows (via the 3rd party addon instance)
       this.addon.collapseAll();
@@ -54,7 +57,7 @@ export class Example19RowDetailComponent {
     }
   }
 
-  callParentMethod(model: any) {
+  callParentMethod(model: ItemDetail) {
     this.parentRef.showFlashMessage(`We just called Parent Method from the Row Detail Child Component on ${model.title}`);
   }
 }

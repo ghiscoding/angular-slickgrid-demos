@@ -1,24 +1,24 @@
-import { Component, type OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, inject, ViewEncapsulation, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-
 import {
-  type AngularGridInstance,
-  type Column,
-  type GridOption,
-  Filters,
-  type Formatter,
-  type LongTextEditorOption,
+  AngularSlickgridModule,
   Editors,
-  Formatters,
-  type AutocompleterOption,
-  type EditCommand,
+  Filters,
   formatNumber,
-  SortComparers,
-  type SlickGrid,
+  Formatters,
   SlickGlobalEditorLock,
-  type VanillaCalendarOption,
+  SortComparers,
+  type AngularGridInstance,
+  type AutocompleterOption,
+  type Column,
+  type EditCommand,
+  type Formatter,
+  type GridOption,
+  type LongTextEditorOption,
   type SearchTerm,
+  type SlickGrid,
+  type VanillaCalendarOption,
 } from 'angular-slickgrid';
 
 const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
@@ -72,7 +72,6 @@ const myCustomTitleValidator = (value: any) => {
 })
 export class Example32Component implements OnInit {
   private http = inject(HttpClient);
-
   angularGrid!: AngularGridInstance;
   gridOptions!: GridOption;
   columnDefinitions: Column[] = [];
@@ -303,7 +302,7 @@ export class Example32Component implements OnInit {
           model: Editors.date,
           options: { displayDateMin: 'today' } as VanillaCalendarOption,
           validator: (value, args) => {
-            const dataContext = args && args.item;
+            const dataContext = args?.item;
             if (dataContext && dataContext.completed && !value) {
               return { valid: false, msg: 'You must provide a "Finish" date when "Completed" is checked.' };
             }
@@ -744,6 +743,14 @@ export class Example32Component implements OnInit {
     this.removeAllUnsavedStylingFromCell();
     this.editQueue = [];
     this.editedItems = {};
+  }
+
+  toggleAutoEdit(state: boolean) {
+    this.angularGrid.slickGrid?.setOptions({ autoEdit: state });
+  }
+
+  toggleAutoEditByKeypress(state: boolean) {
+    this.angularGrid.slickGrid?.setOptions({ autoEditByKeypress: state });
   }
 
   undoLastEdit(showLastEditor = false) {

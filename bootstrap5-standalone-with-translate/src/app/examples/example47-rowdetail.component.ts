@@ -1,14 +1,13 @@
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import type { SlickDataView, SlickGrid } from 'angular-slickgrid';
-
 import type { Example47Component } from './example47.component';
 import { showToast } from './utilities';
-import { FormsModule } from '@angular/forms';
-import { DecimalPipe, DatePipe } from '@angular/common';
 
 interface ItemDetail {
   id: number;
-  duration: Date;
+  duration: number;
   percentComplete: number;
   reporter: string;
   start: Date;
@@ -19,13 +18,9 @@ interface ItemDetail {
 }
 
 @Component({
-    styles: ['.detail-label { display: inline-flex; align-items: center; gap: 4px; padding: 4px; }', 'label { font-weight: 600; }'],
-    templateUrl: './example47-rowdetail.component.html',
-    imports: [
-        FormsModule,
-        DecimalPipe,
-        DatePipe,
-    ],
+  styles: ['.detail-label { display: inline-flex; align-items: center; gap: 4px; padding: 4px; }', 'label { font-weight: 600; }'],
+  templateUrl: './example47-rowdetail.component.html',
+  imports: [FormsModule, DecimalPipe, DatePipe],
 })
 export class Example47RowDetailComponent {
   model!: ItemDetail;
@@ -39,7 +34,7 @@ export class Example47RowDetailComponent {
   // NOTE that you MUST provide it through the "parentRef" property in your "rowDetail" grid options
   parentRef!: Example47Component;
 
-  alertAssignee(name: string) {
+  alertAssignee(name?: string) {
     if (typeof name === 'string') {
       alert(`Assignee on this task is: ${name.toUpperCase()}`);
     } else {
