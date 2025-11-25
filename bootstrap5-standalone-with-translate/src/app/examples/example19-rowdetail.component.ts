@@ -19,11 +19,7 @@ interface ItemDetail {
 @Component({
   styles: ['.detail-label { display: inline-flex; align-items: center; gap: 4px; padding: 4px; }', 'label { font-weight: 600; }'],
   templateUrl: './example19-rowdetail.component.html',
-  imports: [
-    FormsModule,
-    DecimalPipe,
-    DatePipe,
-  ],
+  imports: [DatePipe, DecimalPipe, FormsModule],
 })
 export class Example19RowDetailComponent {
   model: ItemDetail = {} as ItemDetail;

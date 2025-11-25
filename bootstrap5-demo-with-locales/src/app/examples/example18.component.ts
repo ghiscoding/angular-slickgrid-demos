@@ -1,22 +1,23 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, type OnDestroy, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { TextExportService } from '@slickgrid-universal/text-export';
-
 import {
-  AngularGridInstance,
   Aggregators,
-  Column,
   DelimiterType,
   Editors,
   Filters,
   Formatters,
-  GridOption,
-  Grouping,
-  GroupingGetterFunction,
   GroupTotalFormatters,
-  SortDirectionNumber,
   SortComparers,
+  SortDirectionNumber,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type Grouping,
+  type GroupingGetterFunction,
 } from 'angular-slickgrid';
+
+const NB_ITEMS = 10_000;
 
 @Component({
   templateUrl: './example18.component.html',
@@ -24,22 +25,6 @@ import {
 })
 export class Example18Component implements OnInit, OnDestroy {
   private _darkMode = false;
-  title = 'Example 18: Draggable Grouping & Aggregators';
-  subTitle = `
-      <ul>
-        <li><a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/grouping-and-aggregators" target="_blank">Wiki docs</a></li>
-        <li>This example shows 3 ways of grouping</li>
-        <ol>
-          <li>Drag any Column Header on the top placeholder to group by that column (support moti-columns grouping by adding more columns to the drop area).</li>
-          <li>Use buttons and defined functions to group by wichever field you want</li>
-          <li>Use the Select dropdown to group, the position of the Selects represent the grouping level</li>
-        </ol>
-        <li>Fully dynamic and interactive multi-level grouping with filtering and aggregates ovor 50'000 items</li>
-        <li>Each grouping level can have its own aggregates (over child rows, child groups, or all descendant rows)..</li>
-        <li>Use "Aggregators" and "GroupTotalFormatters" directly from Angular-Slickgrid</li>
-      </ul>
-    `;
-
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   dataset!: any[];
@@ -48,6 +33,7 @@ export class Example18Component implements OnInit, OnDestroy {
   durationOrderByCount = false;
   gridObj: any;
   gridOptions!: GridOption;
+  hideSubTitle = false;
   processing = false;
   selectedGroupingFields: Array<string | GroupingGetterFunction> = ['', '', ''];
   excelExportService = new ExcelExportService();
@@ -55,7 +41,7 @@ export class Example18Component implements OnInit, OnDestroy {
 
   constructor() {
     // define the grid options & columns and then create the grid itself
-    this.loadData(500);
+    this.loadData(NB_ITEMS);
     this.defineGrid();
   }
 
@@ -79,23 +65,28 @@ export class Example18Component implements OnInit, OnDestroy {
   defineGrid() {
     this.columnDefinitions = [
       {
-        id: 'title', name: 'Title', field: 'title', columnGroup: 'Common Factor',
-        width: 70, minWidth: 50,
+        id: 'title',
+        name: 'Title',
+        field: 'title',
+        columnGroup: 'Common Factor',
+        width: 70,
+        minWidth: 50,
         cssClass: 'cell-title',
         filterable: true,
         sortable: true,
         grouping: {
           getter: 'title',
           formatter: (g) => `Title: ${g.value}  <span class="text-primary">(${g.count} items)</span>`,
-          aggregators: [
-            new Aggregators.Sum('cost')
-          ],
+          aggregators: [new Aggregators.Sum('cost')],
           aggregateCollapsed: false,
-          collapsed: false
-        }
+          collapsed: false,
+        },
       },
       {
-        id: 'duration', name: 'Duration', field: 'duration', columnGroup: 'Common Factor',
+        id: 'duration',
+        name: 'Duration',
+        field: 'duration',
+        columnGroup: 'Common Factor',
         width: 70,
         sortable: true,
         filterable: true,
@@ -112,20 +103,20 @@ export class Example18Component implements OnInit, OnDestroy {
         groupTotalsFormatter: GroupTotalFormatters.sumTotals,
         grouping: {
           getter: 'duration',
-          formatter: (g) => `Duration: ${g.value}  <span class="text-primary">(${g.count} items)</span>`,
+          formatter: (g) => `Duration: ${g.value} <span class="text-primary">(${g.count} items)</span>`,
           comparer: (a, b) => {
-            return this.durationOrderByCount ? (a.count - b.count) : SortComparers.numeric(a.value, b.value, SortDirectionNumber.asc);
+            return this.durationOrderByCount ? a.count - b.count : SortComparers.numeric(a.value, b.value, SortDirectionNumber.asc);
           },
-          aggregators: [
-            new Aggregators.Sum('duration'),
-            new Aggregators.Sum('cost')
-          ],
+          aggregators: [new Aggregators.Sum('duration'), new Aggregators.Sum('cost')],
           aggregateCollapsed: false,
-          collapsed: false
-        }
+          collapsed: false,
+        },
       },
       {
-        id: 'start', name: 'Start', field: 'start', columnGroup: 'Period',
+        id: 'start',
+        name: 'Start',
+        field: 'start',
+        columnGroup: 'Period',
         minWidth: 60,
         sortable: true,
         filterable: true,
@@ -137,15 +128,16 @@ export class Example18Component implements OnInit, OnDestroy {
         grouping: {
           getter: 'start',
           formatter: (g) => `Start: ${g.value}  <span class="text-primary">(${g.count} items)</span>`,
-          aggregators: [
-            new Aggregators.Sum('cost')
-          ],
+          aggregators: [new Aggregators.Sum('cost')],
           aggregateCollapsed: false,
-          collapsed: false
-        }
+          collapsed: false,
+        },
       },
       {
-        id: 'finish', name: 'Finish', field: 'finish', columnGroup: 'Period',
+        id: 'finish',
+        name: 'Finish',
+        field: 'finish',
+        columnGroup: 'Period',
         minWidth: 60,
         sortable: true,
         filterable: true,
@@ -157,15 +149,16 @@ export class Example18Component implements OnInit, OnDestroy {
         grouping: {
           getter: 'finish',
           formatter: (g) => `Finish: ${g.value} <span class="text-primary">(${g.count} items)</span>`,
-          aggregators: [
-            new Aggregators.Sum('cost')
-          ],
+          aggregators: [new Aggregators.Sum('cost')],
           aggregateCollapsed: false,
-          collapsed: false
-        }
+          collapsed: false,
+        },
       },
       {
-        id: 'cost', name: 'Cost', field: 'cost', columnGroup: 'Analysis',
+        id: 'cost',
+        name: 'Cost',
+        field: 'cost',
+        columnGroup: 'Analysis',
         width: 90,
         sortable: true,
         filterable: true,
@@ -176,16 +169,18 @@ export class Example18Component implements OnInit, OnDestroy {
         grouping: {
           getter: 'cost',
           formatter: (g) => `Cost: ${g.value} <span class="text-primary">(${g.count} items)</span>`,
-          aggregators: [
-            new Aggregators.Sum('cost')
-          ],
+          aggregators: [new Aggregators.Sum('cost')],
           aggregateCollapsed: true,
-          collapsed: true
-        }
+          collapsed: true,
+        },
       },
       {
-        id: 'percentComplete', name: '% Complete', field: 'percentComplete', columnGroup: 'Analysis',
-        minWidth: 70, width: 90,
+        id: 'percentComplete',
+        name: '% Complete',
+        field: 'percentComplete',
+        columnGroup: 'Analysis',
+        minWidth: 70,
+        width: 90,
         formatter: Formatters.percentCompleteBar,
         type: 'number',
         filterable: true,
@@ -195,41 +190,45 @@ export class Example18Component implements OnInit, OnDestroy {
         grouping: {
           getter: 'percentComplete',
           formatter: (g) => `% Complete: ${g.value}  <span class="text-primary">(${g.count} items)</span>`,
-          aggregators: [
-            new Aggregators.Sum('cost')
-          ],
+          aggregators: [new Aggregators.Sum('cost')],
           aggregateCollapsed: false,
-          collapsed: false
+          collapsed: false,
         },
-        params: { groupFormatterPrefix: '<i>Avg</i>: ' }
+        params: { groupFormatterPrefix: '<i>Avg</i>: ' },
       },
       {
-        id: 'effortDriven', name: 'Effort-Driven', field: 'effortDriven', columnGroup: 'Analysis',
-        width: 80, minWidth: 20, maxWidth: 100,
+        id: 'effortDriven',
+        name: 'Effort-Driven',
+        field: 'effortDriven',
+        columnGroup: 'Analysis',
+        width: 80,
+        minWidth: 20,
+        maxWidth: 100,
         cssClass: 'cell-effort-driven',
         sortable: true,
         filterable: true,
         filter: {
-          collection: [{ value: '', label: '' }, { value: true, label: 'True' }, { value: false, label: 'False' }],
-          model: Filters.singleSelect
+          collection: [
+            { value: '', label: '' },
+            { value: true, label: 'True' },
+            { value: false, label: 'False' },
+          ],
+          model: Filters.singleSelect,
         },
         formatter: Formatters.checkmarkMaterial,
         grouping: {
           getter: 'effortDriven',
           formatter: (g) => `Effort-Driven: ${g.value ? 'True' : 'False'} <span class="text-primary">(${g.count} items)</span>`,
-          aggregators: [
-            new Aggregators.Sum('duration'),
-            new Aggregators.Sum('cost')
-          ],
-          collapsed: false
-        }
-      }
+          aggregators: [new Aggregators.Sum('duration'), new Aggregators.Sum('cost')],
+          collapsed: false,
+        },
+      },
     ];
 
     this.gridOptions = {
       autoResize: {
         container: '#demo-container',
-        rightPadding: 10
+        rightPadding: 10,
       },
       enableDraggableGrouping: true,
       autoEdit: true, // true single click (false for double-click)
@@ -254,7 +253,7 @@ export class Example18Component implements OnInit, OnDestroy {
       // filterTypingDebounce: 250,
       enableSorting: true,
       textExportOptions: {
-        sanitizeDataExport: true
+        sanitizeDataExport: true,
       },
       gridMenu: {
         onCommand: (e, args) => {
@@ -267,11 +266,12 @@ export class Example18Component implements OnInit, OnDestroy {
       draggableGrouping: {
         dropPlaceHolderText: 'Drop a column header here to group by the column',
         // groupIconCssClass: 'mdi mdi-drag-vertical',
-        deleteIconCssClass: 'mdi mdi-close text-color-danger',
+        deleteIconCssClass: 'mdi mdi-close color-danger',
         sortAscIconCssClass: 'mdi mdi-arrow-up',
         sortDescIconCssClass: 'mdi mdi-arrow-down',
         onGroupChanged: (e, args) => this.onGroupChanged(args),
-        onExtensionRegistered: (extension) => this.draggableGroupingPlugin = extension,
+        onExtensionRegistered: (extension) => (this.draggableGroupingPlugin = extension),
+        initialGroupBy: ['duration'],
       },
       darkMode: this._darkMode,
       enableTextExport: true,
@@ -289,7 +289,7 @@ export class Example18Component implements OnInit, OnDestroy {
     for (let i = 0; i < rowCount; i++) {
       const randomYear = 2000 + Math.floor(Math.random() * 10);
       const randomMonth = Math.floor(Math.random() * 11);
-      const randomDay = Math.floor((Math.random() * 29));
+      const randomDay = Math.floor(Math.random() * 29);
       const randomPercent = Math.round(Math.random() * 100);
       const randomCost = Math.round(Math.random() * 10000) / 100;
 
@@ -301,9 +301,9 @@ export class Example18Component implements OnInit, OnDestroy {
         percentComplete: randomPercent,
         percentCompleteNumber: randomPercent,
         start: new Date(randomYear, randomMonth, randomDay),
-        finish: new Date(randomYear, (randomMonth + 1), randomDay),
-        cost: (i % 33 === 0) ? -randomCost : randomCost,
-        effortDriven: (i % 5 === 0)
+        finish: new Date(randomYear, randomMonth + 1, randomDay),
+        cost: i % 33 === 0 ? -randomCost : randomCost,
+        effortDriven: i % 5 === 0,
       };
     }
     this.dataset = tmpData;
@@ -322,7 +322,7 @@ export class Example18Component implements OnInit, OnDestroy {
   }
 
   clearGroupingSelects() {
-    this.selectedGroupingFields.forEach((g, i) => this.selectedGroupingFields[i] = '');
+    this.selectedGroupingFields.forEach((g, i) => (this.selectedGroupingFields[i] = ''));
   }
 
   collapseAllGroups() {
@@ -336,15 +336,15 @@ export class Example18Component implements OnInit, OnDestroy {
   exportToExcel() {
     this.excelExportService.exportToExcel({
       filename: 'Export',
-      format: 'xlsx'
+      format: 'xlsx',
     });
   }
 
   exportToCsv(type = 'csv') {
     this.textExportService.exportToFile({
-      delimiter: (type === 'csv') ? DelimiterType.comma : DelimiterType.tab,
+      delimiter: type === 'csv' ? DelimiterType.comma : DelimiterType.tab,
       filename: 'myExport',
-      format: (type === 'csv') ? 'csv' : 'txt'
+      format: type === 'csv' ? 'csv' : 'txt',
     });
   }
 
@@ -384,14 +384,14 @@ export class Example18Component implements OnInit, OnDestroy {
     }
   }
 
-  onGroupChanged(change: { caller?: string; groupColumns: Grouping[]; }) {
+  onGroupChanged(change: { caller?: string; groupColumns: Grouping[] }) {
     // the "caller" property might not be in the SlickGrid core lib yet, reference PR https://github.com/6pac/SlickGrid/pull/303
-    const caller = change && change.caller || [];
-    const groups = change && change.groupColumns || [];
+    const caller = (change && change.caller) || [];
+    const groups = (change && change.groupColumns) || [];
 
     if (Array.isArray(this.selectedGroupingFields) && Array.isArray(groups) && groups.length > 0) {
       // update all Group By select dropdown
-      this.selectedGroupingFields.forEach((g, i) => this.selectedGroupingFields[i] = groups[i] && groups[i].getter || '');
+      this.selectedGroupingFields.forEach((g, i) => (this.selectedGroupingFields[i] = (groups[i] && groups[i].getter) || ''));
     } else if (groups.length === 0 && caller === 'remove-group') {
       this.clearGroupingSelects();
     }
@@ -444,5 +444,12 @@ export class Example18Component implements OnInit, OnDestroy {
       document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
       document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

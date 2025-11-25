@@ -1,17 +1,32 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, type OnDestroy, type OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { TextExportService } from '@slickgrid-universal/text-export';
+import {
+  Aggregators,
+  AngularSlickgridModule,
+  DelimiterType,
+  Editors,
+  Filters,
+  Formatters,
+  GroupTotalFormatters,
+  SortComparers,
+  SortDirectionNumber,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type Grouping,
+  type GroupingGetterFunction,
+} from 'angular-slickgrid';
 
-import { AngularGridInstance, Aggregators, Column, DelimiterType, Editors, Filters, Formatters, GridOption, Grouping, GroupingGetterFunction, GroupTotalFormatters, SortDirectionNumber, SortComparers, AngularSlickgridModule } from 'angular-slickgrid';
-import { FormsModule } from '@angular/forms';
-
+const NB_ITEMS = 10_000;
 
 @Component({
-    templateUrl: './example18.component.html',
-    imports: [
+  templateUrl: './example18.component.html',
+  imports: [
     FormsModule,
     AngularSlickgridModule
-],
+  ],
 })
 export class Example18Component implements OnInit, OnDestroy {
   private _darkMode = false;
@@ -23,6 +38,7 @@ export class Example18Component implements OnInit, OnDestroy {
   durationOrderByCount = false;
   gridObj: any;
   gridOptions!: GridOption;
+  hideSubTitle = false;
   processing = false;
   selectedGroupingFields: Array<string | GroupingGetterFunction> = ['', '', ''];
   excelExportService = new ExcelExportService();
@@ -30,7 +46,7 @@ export class Example18Component implements OnInit, OnDestroy {
 
   constructor() {
     // define the grid options & columns and then create the grid itself
-    this.loadData(500);
+    this.loadData(NB_ITEMS);
     this.defineGrid();
   }
 
@@ -92,7 +108,7 @@ export class Example18Component implements OnInit, OnDestroy {
         groupTotalsFormatter: GroupTotalFormatters.sumTotals,
         grouping: {
           getter: 'duration',
-          formatter: (g) => `Duration: ${g.value}  <span class="text-primary">(${g.count} items)</span>`,
+          formatter: (g) => `Duration: ${g.value} <span class="text-primary">(${g.count} items)</span>`,
           comparer: (a, b) => {
             return this.durationOrderByCount ? a.count - b.count : SortComparers.numeric(a.value, b.value, SortDirectionNumber.asc);
           },
@@ -255,11 +271,12 @@ export class Example18Component implements OnInit, OnDestroy {
       draggableGrouping: {
         dropPlaceHolderText: 'Drop a column header here to group by the column',
         // groupIconCssClass: 'mdi mdi-drag-vertical',
-        deleteIconCssClass: 'mdi mdi-close text-color-danger',
+        deleteIconCssClass: 'mdi mdi-close color-danger',
         sortAscIconCssClass: 'mdi mdi-arrow-up',
         sortDescIconCssClass: 'mdi mdi-arrow-down',
         onGroupChanged: (e, args) => this.onGroupChanged(args),
         onExtensionRegistered: (extension) => (this.draggableGroupingPlugin = extension),
+        initialGroupBy: ['duration'],
       },
       darkMode: this._darkMode,
       enableTextExport: true,
@@ -432,5 +449,12 @@ export class Example18Component implements OnInit, OnDestroy {
       document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
       document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

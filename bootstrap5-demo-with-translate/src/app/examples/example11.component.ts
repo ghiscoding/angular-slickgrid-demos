@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
 import {
-  AngularGridInstance,
-  Column,
   Editors,
   Formatters,
-  GridOption,
-  GridService,
-  OnEventArgs,
-  SlickDataView,
-  SlickGrid,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type GridService,
+  type OnEventArgs,
+  type SlickDataView,
+  type SlickGrid,
 } from 'angular-slickgrid';
 
 @Component({
@@ -25,6 +25,7 @@ export class Example11Component implements OnInit {
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset: any[];
+  hideSubTitle = false;
   updatedObject: any;
 
   constructor() {
@@ -43,7 +44,6 @@ export class Example11Component implements OnInit {
     /*
     this.dataView.getItemMetadata = this.updateItemMetadataForDurationOver50(this.dataView.getItemMetadata);
     this.grid.invalidate();
-    this.grid.render();
     */
   }
 
@@ -214,7 +214,6 @@ export class Example11Component implements OnInit {
 
     // also re-render the grid for the styling to be applied right away
     this.grid.invalidate();
-    this.grid.render();
 
     // or use the Angular-SlickGrid GridService
     // this.gridService.renderGrid();
@@ -272,5 +271,12 @@ export class Example11Component implements OnInit {
 
   scrollGridTop() {
     this.angularGrid.slickGrid.navigateTop();
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

@@ -1,15 +1,16 @@
-import { GridOdataService, OdataServiceApi, OdataOption } from '@slickgrid-universal/odata';
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef, Component, inject, type OnInit } from '@angular/core';
+import { GridOdataService, type OdataOption, type OdataServiceApi } from '@slickgrid-universal/odata';
 import {
-  AngularGridInstance,
-  Column,
   Filters,
-  GridOption,
-  GridStateChange,
-  Metrics,
   OperatorType,
-  Pagination,
+  PaginationMetadata,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type GridStateChange,
+  type Metrics,
+  type Pagination,
 } from 'angular-slickgrid';
 
 const defaultPageSize = 20;
@@ -25,31 +26,11 @@ export class Example5Component implements OnInit {
   private readonly cd = inject(ChangeDetectorRef);
   private http = inject(HttpClient);
 
-  title = 'Example 5: Grid connected to Backend Server with OData';
-  subTitle = `
-    Sorting/Paging connected to a Backend OData Service (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/backend-services/odata" target="_blank">Docs</a>).
-    <br/>
-    <ul class="small">
-      <li>Only "Name" field is sortable for the demo (because we use JSON files), however "multiColumnSort: true" is also supported</li>
-      <li>This example also demos the Grid State feature, open the console log to see the changes</li>
-      <li>String column also support operator (>, >=, <, <=, <>, !=, =, ==, *)</li>
-      <ul>
-        <li>The (*) can be used as startsWith (ex.: "abc*" => startsWith "abc") / endsWith (ex.: "*xyz" => endsWith "xyz")</li>
-        <li>The other operators can be used on column type number for example: ">=100" (bigger or equal than 100)</li>
-      </ul>
-      <li>OData Service could be replaced by other Service type in the future (GraphQL or whichever you provide)</li>
-      <li>You can also preload a grid with certain "presets" like Filters / Sorters / Pagination <a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/grid-state-and-preset" target="_blank">Docs - Grid Preset</a>
-      <li><span class="text-danger">NOTE:</span> For demo purposes, the last column (filter & sort) will always throw an
-        error and its only purpose is to demo what would happen when you encounter a backend server error
-        (the UI should rollback to previous state before you did the action).
-        Also changing Page Size to 50,000 will also throw which again is for demo purposes.
-      </li>
-    </ul>
-  `;
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset = [];
+  hideSubTitle = false;
   metrics!: Metrics;
   paginationOptions!: Pagination;
 
@@ -70,7 +51,10 @@ export class Example5Component implements OnInit {
   ngOnInit(): void {
     this.columnDefinitions = [
       {
-        id: 'name', name: 'Name', field: 'name', sortable: true,
+        id: 'name',
+        name: 'Name',
+        field: 'name',
+        sortable: true,
         filterable: true,
         filter: {
           model: Filters.compoundInput,
@@ -82,14 +66,22 @@ export class Example5Component implements OnInit {
             { operator: 'a*', desc: 'Starts With' },
             { operator: 'Custom', desc: 'SQL Like' },
           ],
-        }
+        },
       },
       {
-        id: 'gender', name: 'Gender', field: 'gender', filterable: true, sortable: true,
+        id: 'gender',
+        name: 'Gender',
+        field: 'gender',
+        filterable: true,
+        sortable: true,
         filter: {
           model: Filters.singleSelect,
-          collection: [{ value: '', label: '' }, { value: 'male', label: 'male' }, { value: 'female', label: 'female' }]
-        }
+          collection: [
+            { value: '', label: '' },
+            { value: 'male', label: 'male' },
+            { value: 'female', label: 'female' },
+          ],
+        },
       },
       { id: 'company', name: 'Company', field: 'company', filterable: true, sortable: true },
       { id: 'category_name', name: 'Category', field: 'category/name', filterable: true, sortable: true },
@@ -99,16 +91,16 @@ export class Example5Component implements OnInit {
       enableAutoResize: true,
       autoResize: {
         container: '#demo-container',
-        rightPadding: 10
+        rightPadding: 10,
       },
       checkboxSelector: {
         // you can toggle these 2 properties to show the "select all" checkbox in different location
         hideInFilterHeaderRow: false,
-        hideInColumnTitleRow: true
+        hideInColumnTitleRow: true,
       },
       compoundOperatorAltTexts: {
         // where '=' is any of the `OperatorString` type shown above
-        text: { 'Custom': { operatorAlt: '%%', descAlt: 'SQL Like' } },
+        text: { Custom: { operatorAlt: '%%', descAlt: 'SQL Like' } },
       },
       enableCellNavigation: true,
       enableFiltering: true,
@@ -118,18 +110,16 @@ export class Example5Component implements OnInit {
       pagination: {
         pageSizes: [10, 20, 50, 100, 500, 50000],
         pageSize: defaultPageSize,
-        totalItems: 0
+        totalItems: 0,
       },
       presets: {
         // you can also type operator as string, e.g.: operator: 'EQ'
-        filters: [
-          { columnId: 'gender', searchTerms: ['male'], operator: OperatorType.equal },
-        ],
+        filters: [{ columnId: 'gender', searchTerms: ['male'], operator: OperatorType.equal }],
         sorters: [
           // direction can be written as 'asc' (uppercase or lowercase) and/or use the SortDirection type
-          { columnId: 'name', direction: 'asc' }
+          { columnId: 'name', direction: 'asc' },
         ],
-        pagination: { pageNumber: 2, pageSize: defaultPageSize }
+        pagination: { pageNumber: 2, pageSize: defaultPageSize },
       },
       backendServiceApi: {
         service: new GridOdataService(),
@@ -141,13 +131,13 @@ export class Example5Component implements OnInit {
             if (columnFilterOperator === OperatorType.custom && columnDef?.id === 'name') {
               let matchesSearch = searchValues[0].replace(/\*/g, '.*');
               matchesSearch = matchesSearch.slice(0, 1) + CARET_HTML_ESCAPED + matchesSearch.slice(1);
-              matchesSearch = matchesSearch.slice(0, -1) + '$\'';
+              matchesSearch = matchesSearch.slice(0, -1) + "$'";
 
               return `matchesPattern(${fieldName}, ${matchesSearch})`;
             }
             return;
           },
-          version: this.odataVersion        // defaults to 2, the query string is slightly different between OData 2 and 4
+          version: this.odataVersion, // defaults to 2, the query string is slightly different between OData 2 and 4
         },
         onError: (error: Error) => {
           this.errorStatus = error.message;
@@ -163,8 +153,8 @@ export class Example5Component implements OnInit {
           this.displaySpinner(false);
           this.getCustomerCallback(response);
           this.cd.detectChanges();
-        }
-      } as OdataServiceApi
+        },
+      } as OdataServiceApi,
     };
   }
 
@@ -173,9 +163,7 @@ export class Example5Component implements OnInit {
     if (isError) {
       this.status = { text: 'ERROR!!!', class: 'alert alert-danger' };
     } else {
-      this.status = (isProcessing)
-        ? { text: 'loading', class: 'alert alert-warning' }
-        : { text: 'finished', class: 'alert alert-success' };
+      this.status = isProcessing ? { text: 'loading', class: 'alert alert-warning' } : { text: 'finished', class: 'alert alert-success' };
     }
     this.cd.detectChanges();
   }
@@ -185,7 +173,7 @@ export class Example5Component implements OnInit {
     // however we need to force Angular to do a dirty check, doing a clone object will do just that
     let totalItemCount: number = data['totalRecordCount']; // you can use "totalRecordCount" or any name or "odata.count" when "enableCount" is set
     if (this.isCountEnabled) {
-      totalItemCount = (this.odataVersion === 4) ? data['@odata.count'] : data['d']['__count'];
+      totalItemCount = this.odataVersion === 4 ? data['@odata.count'] : data['d']['__count'];
     }
     if (this.metrics) {
       this.metrics.totalItemCount = totalItemCount;
@@ -220,9 +208,7 @@ export class Example5Component implements OnInit {
   }
 
   setSortingDynamically() {
-    this.angularGrid.sortService.updateSorting([
-      { columnId: 'name', direction: 'DESC' },
-    ]);
+    this.angularGrid.sortService.updateSorting([{ columnId: 'name', direction: 'DESC' }]);
   }
 
   /** This function is only here to mock a WebAPI call (since we are using a JSON file for the demo)
@@ -245,13 +231,13 @@ export class Example5Component implements OnInit {
 
       for (const param of queryParams) {
         if (param.includes('$top=')) {
-          top = +(param.substring('$top='.length));
+          top = +param.substring('$top='.length);
           if (top === 50000) {
             throw new Error('Server timed out retrieving 50,000 rows');
           }
         }
         if (param.includes('$skip=')) {
-          skip = +(param.substring('$skip='.length));
+          skip = +param.substring('$skip='.length);
         }
         if (param.includes('$orderby=')) {
           orderBy = param.substring('$orderby='.length);
@@ -311,7 +297,7 @@ export class Example5Component implements OnInit {
         throw new Error('Server could not sort using the field "Company"');
       }
 
-      this.http.get(`${sampleDataRoot}/customers_100.json`).subscribe(response => {
+      this.http.get(`${sampleDataRoot}/customers_100.json`).subscribe((response) => {
         let data = response as any[];
 
         // Sort the data
@@ -347,7 +333,7 @@ export class Example5Component implements OnInit {
         if (columnFilters) {
           for (const columnId in columnFilters) {
             if (columnId in columnFilters) {
-              filteredData = filteredData.filter(column => {
+              filteredData = filteredData.filter((column) => {
                 const filterType = (columnFilters as any)[columnId].type;
                 const searchTerm = (columnFilters as any)[columnId].term;
                 let colId = columnId;
@@ -367,17 +353,28 @@ export class Example5Component implements OnInit {
                   const [term1, term2] = Array.isArray(searchTerm) ? searchTerm : [searchTerm];
 
                   switch (filterType) {
-                    case 'eq': return filterTerm.toLowerCase() === term1;
-                    case 'ne': return filterTerm.toLowerCase() !== term1;
-                    case 'le': return filterTerm.toLowerCase() <= term1;
-                    case 'lt': return filterTerm.toLowerCase() < term1;
-                    case 'gt': return filterTerm.toLowerCase() > term1;
-                    case 'ge': return filterTerm.toLowerCase() >= term1;
-                    case 'ends': return filterTerm.toLowerCase().endsWith(term1);
-                    case 'starts': return filterTerm.toLowerCase().startsWith(term1);
-                    case 'starts+ends': return filterTerm.toLowerCase().startsWith(term1) && filterTerm.toLowerCase().endsWith(term2);
-                    case 'substring': return filterTerm.toLowerCase().includes(term1);
-                    case 'matchespattern': return new RegExp((term1 as string).replaceAll(PERCENT_HTML_ESCAPED, '.*'), 'i').test(filterTerm);
+                    case 'eq':
+                      return filterTerm.toLowerCase() === term1;
+                    case 'ne':
+                      return filterTerm.toLowerCase() !== term1;
+                    case 'le':
+                      return filterTerm.toLowerCase() <= term1;
+                    case 'lt':
+                      return filterTerm.toLowerCase() < term1;
+                    case 'gt':
+                      return filterTerm.toLowerCase() > term1;
+                    case 'ge':
+                      return filterTerm.toLowerCase() >= term1;
+                    case 'ends':
+                      return filterTerm.toLowerCase().endsWith(term1);
+                    case 'starts':
+                      return filterTerm.toLowerCase().startsWith(term1);
+                    case 'starts+ends':
+                      return filterTerm.toLowerCase().startsWith(term1) && filterTerm.toLowerCase().endsWith(term2);
+                    case 'substring':
+                      return filterTerm.toLowerCase().includes(term1);
+                    case 'matchespattern':
+                      return new RegExp((term1 as string).replaceAll(PERCENT_HTML_ESCAPED, '.*'), 'i').test(filterTerm);
                   }
                 }
               });
@@ -443,7 +440,7 @@ export class Example5Component implements OnInit {
     return true;
   }
 
-  handleOnBeforePaginationChange(_e: Event) {
+  handleOnBeforePaginationChange(_e: CustomEvent<PaginationMetadata>) {
     // e.preventDefault();
     // return false;
     return true;
@@ -482,5 +479,12 @@ export class Example5Component implements OnInit {
     odataService.updateOptions(options);
     odataService.clearFilters();
     this.angularGrid?.filterService.clearFilters();
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

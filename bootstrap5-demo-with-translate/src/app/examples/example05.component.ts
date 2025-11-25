@@ -1,7 +1,17 @@
-import { GridOdataService, OdataServiceApi, OdataOption } from '@slickgrid-universal/odata';
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularGridInstance, Column, Filters, GridOption, GridStateChange, Metrics, OperatorType, Pagination } from 'angular-slickgrid';
+import { ChangeDetectorRef, Component, inject, type OnInit } from '@angular/core';
+import { GridOdataService, type OdataOption, type OdataServiceApi } from '@slickgrid-universal/odata';
+import {
+  Filters,
+  OperatorType,
+  PaginationMetadata,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type GridStateChange,
+  type Metrics,
+  type Pagination,
+} from 'angular-slickgrid';
 
 const defaultPageSize = 20;
 const sampleDataRoot = 'assets/data';
@@ -20,6 +30,7 @@ export class Example5Component implements OnInit {
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset = [];
+  hideSubTitle = false;
   metrics!: Metrics;
   paginationOptions!: Pagination;
 
@@ -429,7 +440,7 @@ export class Example5Component implements OnInit {
     return true;
   }
 
-  handleOnBeforePaginationChange(_e: Event) {
+  handleOnBeforePaginationChange(_e: CustomEvent<PaginationMetadata>) {
     // e.preventDefault();
     // return false;
     return true;
@@ -468,5 +479,12 @@ export class Example5Component implements OnInit {
     odataService.updateOptions(options);
     odataService.clearFilters();
     this.angularGrid?.filterService.clearFilters();
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

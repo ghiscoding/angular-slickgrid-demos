@@ -1,10 +1,31 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
+import { Component, inject, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
 import { SlickCompositeEditor, SlickCompositeEditorComponent } from '@slickgrid-universal/composite-editor-component';
-
-import { AngularGridInstance, type AutocompleterOption, Column, CompositeEditorModalType, EditCommand, Editors, Filters, formatNumber, Formatter, Formatters, GridOption, GridStateChange, LongTextEditorOption, OnCompositeEditorChangeEventArgs, SlickGlobalEditorLock, SlickGrid, SortComparers, type VanillaCalendarOption, AngularSlickgridModule } from 'angular-slickgrid';
+import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import {
+  AngularSlickgridModule,
+  Editors,
+  Filters,
+  formatNumber,
+  Formatters,
+  SlickGlobalEditorLock,
+  SortComparers,
+  type AngularGridInstance,
+  type AutocompleterOption,
+  type Column,
+  type CompositeEditorModalType,
+  type EditCommand,
+  type Formatter,
+  type GridOption,
+  type GridStateChange,
+  type LongTextEditorOption,
+  type MultipleSelectOption,
+  type OnCompositeEditorChangeEventArgs,
+  type SlickGrid,
+  type SliderOption,
+  type VanillaCalendarOption,
+} from 'angular-slickgrid';
 
 const NB_ITEMS = 500;
 const URL_COUNTRIES_COLLECTION = 'assets/data/countries.json';
@@ -70,7 +91,6 @@ const myCustomTitleValidator = (value: any, args: any) => {
 })
 export class Example30Component implements OnDestroy, OnInit {
   private http = inject(HttpClient);
-
   private _darkMode = false;
   angularGrid!: AngularGridInstance;
   compositeEditorInstance!: SlickCompositeEditorComponent;
@@ -79,11 +99,11 @@ export class Example30Component implements OnDestroy, OnInit {
   dataset: any[] = [];
   editQueue: any[] = [];
   editedItems: any = {};
+  hideSubTitle = false;
   isGridEditable = true;
   isCompositeDisabled = false;
   isMassSelectionDisabled = true;
   cellCssStyleQueue: string[] = [];
-  hideSubTitle = false;
   complexityLevelList = [
     { value: 0, label: 'Very Simple' },
     { value: 1, label: 'Simple' },
@@ -127,6 +147,7 @@ export class Example30Component implements OnDestroy, OnInit {
         editor: {
           model: Editors.longText,
           massUpdate: false,
+          compositeEditorFormOrder: 0, // you can use this option to always keep same order and make this the 1st input
           required: true,
           alwaysSaveOnEnterKey: true,
           maxLength: 12,
@@ -158,6 +179,7 @@ export class Example30Component implements OnDestroy, OnInit {
         },
         editor: {
           model: Editors.float,
+          compositeEditorFormOrder: 2, // inverse order of Duration & Percent Complete in the form
           massUpdate: true,
           decimal: 2,
           valueStep: 1,
@@ -193,6 +215,7 @@ export class Example30Component implements OnDestroy, OnInit {
         editor: {
           model: Editors.slider,
           massUpdate: true,
+          compositeEditorFormOrder: 1, // inverse order of Duration & Percent Complete in the form
           minValue: 0,
           maxValue: 100,
         },
@@ -237,6 +260,7 @@ export class Example30Component implements OnDestroy, OnInit {
         filter: {
           model: Filters.multipleSelect,
           collection: this.complexityLevelList,
+          options: { showClear: true } as MultipleSelectOption,
         },
         editor: {
           model: Editors.singleSelect,
@@ -258,7 +282,7 @@ export class Example30Component implements OnDestroy, OnInit {
         saveOutputType: 'dateUtc',
         filterable: true,
         filter: { model: Filters.compoundDate },
-        editor: { model: Editors.date, massUpdate: true, options: { hideClearButton: false } as VanillaCalendarOption },
+        editor: { model: Editors.date, massUpdate: true, options: { hideClearButton: false } as SliderOption },
       },
       {
         id: 'completed',
@@ -267,12 +291,12 @@ export class Example30Component implements OnDestroy, OnInit {
         width: 80,
         minWidth: 75,
         maxWidth: 100,
-        cssClass: 'text-center',
+        sortable: true,
+        filterable: true,
         columnGroup: 'Period',
+        cssClass: 'text-center',
         formatter: Formatters.checkmarkMaterial,
         exportWithFormatter: false,
-        filterable: true,
-        sortable: true,
         filter: {
           collection: [
             { value: '', label: '' },
@@ -280,6 +304,7 @@ export class Example30Component implements OnDestroy, OnInit {
             { value: false, label: 'False' },
           ],
           model: Filters.singleSelect,
+          options: { showClear: true } as MultipleSelectOption,
         },
         editor: { model: Editors.checkbox, massUpdate: true },
         // editor: { model: Editors.singleSelect, collection: [{ value: true, label: 'Yes' }, { value: false, label: 'No' }], },
@@ -301,18 +326,18 @@ export class Example30Component implements OnDestroy, OnInit {
         editor: {
           model: Editors.date,
           options: {
-            displayDateMin: 'today',
+            displayDateMin: 'today', // set minimum date as today
 
             // if we want to preload the date picker with a different date,
-            // we could do it by assigning settings.seleted.dates
+            // we could do it by assigning `selectedDates: []`
             // NOTE: vanilla-calendar doesn't automatically focus the picker to the year/month and you need to do it yourself
-            // selectedDates: ['2021-06-04'],
-            // selectedMonth: 6 - 1, // Note: JS Date month (only) is zero index based, so June is 6-1 => 5
-            // selectedYear: 2021
+            //  selectedDates: ['2021-06-04'],
+            //  selectedMonth: 6 - 1, // Note: JS Date month (only) is zero index based, so June is 6-1 => 5
+            //  selectedYear: 2021
           } as VanillaCalendarOption,
           massUpdate: true,
           validator: (value, args) => {
-            const dataContext = args && args.item;
+            const dataContext = args?.item;
             if (dataContext && dataContext.completed && !value) {
               return { valid: false, msg: 'You must provide a "Finish" date when "Completed" is checked.' };
             }
@@ -358,6 +383,7 @@ export class Example30Component implements OnDestroy, OnInit {
         filter: {
           model: Filters.inputText,
           // placeholder: '🔎︎ search product',
+          type: 'string',
           queryField: 'product.itemName',
         },
       },
@@ -384,6 +410,7 @@ export class Example30Component implements OnDestroy, OnInit {
         },
         filter: {
           model: Filters.inputText,
+          type: 'string',
           queryField: 'origin.name',
         },
       },

@@ -1,15 +1,14 @@
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, ViewEncapsulation, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-
 import {
-  AngularGridInstance,
-  Column,
   Filters,
   Formatters,
-  GridOption,
-  GridStateChange,
-  TreeToggledItem,
-  TreeToggleStateChange,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type GridStateChange,
+  type TreeToggledItem,
+  type TreeToggleStateChange,
 } from 'angular-slickgrid';
 
 const NB_ITEMS = 500;
@@ -22,7 +21,6 @@ const NB_ITEMS = 500;
 })
 export class Example27Component implements OnInit {
   private cdref = inject(ChangeDetectorRef);
-
   angularGrid!: AngularGridInstance;
   dataViewObj: any;
   gridObj: any;
@@ -30,6 +28,7 @@ export class Example27Component implements OnInit {
   columnDefinitions!: Column[];
   dataset!: any[];
   loadingClass = '';
+  hideSubTitle = false;
   isLargeDataset = false;
   hasNoExpandCollapseChanged = true;
   treeToggleItems: TreeToggledItem[] = [];
@@ -252,7 +251,7 @@ export class Example27Component implements OnInit {
 
   showSpinner() {
     if (this.isLargeDataset) {
-      this.loadingClass = 'mdi mdi-load mdi-spin-1s mdi-24px';
+      this.loadingClass = 'mdi mdi-load mdi-spin-1s font-24px';
     }
   }
 
@@ -365,5 +364,12 @@ export class Example27Component implements OnInit {
 
   reapplyToggledItems() {
     this.angularGrid.treeDataService.applyToggledItemStateChanges(this.treeToggleItems);
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

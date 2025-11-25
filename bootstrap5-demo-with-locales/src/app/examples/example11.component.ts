@@ -1,5 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, Editors, Formatters, GridOption, GridService, OnEventArgs, SlickDataView, SlickGrid } from 'angular-slickgrid';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
+import {
+  Editors,
+  Formatters,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type GridService,
+  type OnEventArgs,
+  type SlickDataView,
+  type SlickGrid,
+} from 'angular-slickgrid';
 
 @Component({
   styles: ['.duration-bg { background-color: #e9d4f1 !important }'],
@@ -8,26 +18,6 @@ import { AngularGridInstance, Column, Editors, Formatters, GridOption, GridServi
   standalone: false,
 })
 export class Example11Component implements OnInit {
-  title = 'Example 11: Add / Update / Highlight a Datagrid Item';
-  subTitle = `
-  Add / Update / Hightlight an Item from the Datagrid (<a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/add-update-highlight" target="_blank">Wiki docs</a>).
-  <ul>
-    <li><b>Note:</b> this demo is <b>only</b> on the datagrid (client) side, you still need to deal with the backend yourself</li>
-    <li>Adding an item, will always be showing as the 1st item in the grid because that is the best visual place to add it</li>
-    <li>Add/Update an item requires a valid Slickgrid Selection Model, you have 2 choices to deal with this:</li>
-    <ul><li>You can enable "enableCheckboxSelector" or "enableRowSelection" to True</li></ul>
-    <li>Click on any of the buttons below to test this out</li>
-    <li>You can change the highlighted color &amp; animation by changing the <a href="https://github.com/ghiscoding/slickgrid-universal/blob/master/packages/common/src/styles/_variables.scss" target="_blank">SASS Variables</a>:</li>
-    <ul>
-      <li>"$row-highlight-background-color" or "$row-highlight-fade-animation"</li>
-    </ul>
-    <li>You can also add CSS class(es) on the fly (or on page load) on rows with certain criteria, (e.g. click on last button)</li>
-    <ul>
-      <li>Example, click on button "Highlight Rows with Duration over 50" to see row styling changing. <a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/dynamic-item-metadata" target="_blank">Wiki doc</a></li>
-    </ul>
-  </ul>
-  `;
-
   angularGrid!: AngularGridInstance;
   grid!: SlickGrid;
   gridService!: GridService;
@@ -35,6 +25,7 @@ export class Example11Component implements OnInit {
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset: any[];
+  hideSubTitle = false;
   updatedObject: any;
 
   constructor() {
@@ -53,7 +44,6 @@ export class Example11Component implements OnInit {
     /*
     this.dataView.getItemMetadata = this.updateItemMetadataForDurationOver50(this.dataView.getItemMetadata);
     this.grid.invalidate();
-    this.grid.render();
     */
   }
 
@@ -73,37 +63,45 @@ export class Example11Component implements OnInit {
           if (confirm('Are you sure?')) {
             this.angularGrid.gridService.deleteItemById(args.dataContext.id);
           }
-        }
+        },
       },
       {
-        id: 'title', name: 'Title', field: 'title',
+        id: 'title',
+        name: 'Title',
+        field: 'title',
         sortable: true,
         editor: {
-          model: Editors.longText
-        }
+          model: Editors.longText,
+        },
       },
       {
-        id: 'duration', name: 'Duration (days)', field: 'duration',
+        id: 'duration',
+        name: 'Duration (days)',
+        field: 'duration',
         sortable: true,
         type: 'number',
         editor: {
-          model: Editors.text
+          model: Editors.text,
         },
         onCellChange: (e: Event, args: OnEventArgs) => {
           alert('onCellChange directly attached to the column definition');
           console.log(args);
-        }
+        },
       },
       {
-        id: 'complete', name: '% Complete', field: 'percentComplete',
+        id: 'complete',
+        name: '% Complete',
+        field: 'percentComplete',
         formatter: Formatters.percentCompleteBar,
         type: 'number',
         editor: {
-          model: Editors.integer
-        }
+          model: Editors.integer,
+        },
       },
       {
-        id: 'start', name: 'Start', field: 'start',
+        id: 'start',
+        name: 'Start',
+        field: 'start',
         formatter: Formatters.dateIso,
         sortable: true,
         type: 'date',
@@ -114,30 +112,35 @@ export class Example11Component implements OnInit {
         */
       },
       {
-        id: 'finish', name: 'Finish', field: 'finish',
-        formatter: Formatters.dateIso, sortable: true,
-        type: 'date'
+        id: 'finish',
+        name: 'Finish',
+        field: 'finish',
+        formatter: Formatters.dateIso,
+        sortable: true,
+        type: 'date',
       },
       {
-        id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven',
+        id: 'effort-driven',
+        name: 'Effort Driven',
+        field: 'effortDriven',
         formatter: Formatters.checkmarkMaterial,
         type: 'number',
         editor: {
-          model: Editors.checkbox
-        }
-      }
+          model: Editors.checkbox,
+        },
+      },
     ];
 
     this.gridOptions = {
       asyncEditorLoading: false,
       autoResize: {
         container: '#demo-container',
-        rightPadding: 10
+        rightPadding: 10,
       },
       editable: true,
       enableColumnPicker: true,
       enableCellNavigation: true,
-      enableRowSelection: true
+      enableRowSelection: true,
     };
   }
 
@@ -147,7 +150,7 @@ export class Example11Component implements OnInit {
     for (let i = 0; i < itemCount; i++) {
       const randomYear = 2000 + Math.floor(Math.random() * 10);
       const randomMonth = Math.floor(Math.random() * 11);
-      const randomDay = Math.floor((Math.random() * 29));
+      const randomDay = Math.floor(Math.random() * 29);
       const randomPercent = Math.round(Math.random() * 100);
       mockedDataset[i] = {
         id: i,
@@ -156,8 +159,8 @@ export class Example11Component implements OnInit {
         percentComplete: randomPercent,
         percentCompleteNumber: randomPercent,
         start: new Date(randomYear, randomMonth, randomDay),
-        finish: new Date(randomYear, (randomMonth + 1), randomDay),
-        effortDriven: (i % 5 === 0)
+        finish: new Date(randomYear, randomMonth + 1, randomDay),
+        effortDriven: i % 5 === 0,
       };
     }
     return mockedDataset;
@@ -185,7 +188,7 @@ export class Example11Component implements OnInit {
     const newId = highestId + incrementIdByHowMany;
     const randomYear = 2000 + Math.floor(Math.random() * 10);
     const randomMonth = Math.floor(Math.random() * 11);
-    const randomDay = Math.floor((Math.random() * 29));
+    const randomDay = Math.floor(Math.random() * 29);
     const randomPercent = Math.round(Math.random() * 100);
 
     return {
@@ -195,8 +198,8 @@ export class Example11Component implements OnInit {
       percentComplete: randomPercent,
       percentCompleteNumber: randomPercent,
       start: new Date(randomYear, randomMonth, randomDay),
-      finish: new Date(randomYear, (randomMonth + 2), randomDay),
-      effortDriven: true
+      finish: new Date(randomYear, randomMonth + 2, randomDay),
+      effortDriven: true,
     };
   }
 
@@ -211,7 +214,6 @@ export class Example11Component implements OnInit {
 
     // also re-render the grid for the styling to be applied right away
     this.grid.invalidate();
-    this.grid.render();
 
     // or use the Angular-SlickGrid GridService
     // this.gridService.renderGrid();
@@ -227,7 +229,7 @@ export class Example11Component implements OnInit {
     return (rowNumber: number) => {
       const item = this.dataView.getItem(rowNumber);
       let meta = {
-        cssClasses: ''
+        cssClasses: '',
       };
       if (typeof previousItemMetadata === 'object') {
         meta = previousItemMetadata(rowNumber);
@@ -269,5 +271,12 @@ export class Example11Component implements OnInit {
 
   scrollGridTop() {
     this.angularGrid.slickGrid.navigateTop();
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

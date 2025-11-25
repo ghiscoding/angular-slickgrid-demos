@@ -2,19 +2,23 @@
   <h2>
     Example 27: Tree Data
     <small>
-      <span class="mdi mdi-file-tree mdi-27px"></span> (from a flat dataset with <code>parentId</code> references -
+      <span class="mdi mdi-file-tree font-27px"></span> (from a flat dataset with <code>parentId</code> references -
       <a href="https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/tree-data-grid" target="_blank">Wiki</a>)</small
     >
     <span class="float-end">
       <a
         style="font-size: 18px"
         target="_blank"
-        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/grid-tree-data-parent-child.component.ts"
+        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/example27.component.ts"
       >
         <span class="mdi mdi-link mdi-v-align-sub"></span> code
       </a>
     </span>
+    <button class="ms-2 btn btn-outline-secondary btn-sm btn-icon" type="button" data-test="toggle-subtitle" (click)="toggleSubTitle()">
+      <span class="mdi mdi-information-outline" title="Toggle example sub-title details"></span>
+    </button>
   </h2>
+
   <div class="subtitle">
     <ul>
       <li>It is assumed that your dataset will have Parent/Child references AND also Tree Level (indent) property.</li>
@@ -34,7 +38,7 @@
   <div class="row" style="margin-bottom: 4px">
     <div class="col-md-12">
       <button class="btn btn-outline-secondary btn-xs btn-icon" data-test="add-500-rows-btn" (click)="loadData(500)">500 rows</button>
-      <button class="btn btn-outline-secondary btn-xs btn-icon" data-test="add-50k-rows-btn" (click)="loadData(25000)">25k rows</button>
+      <button class="btn btn-outline-secondary btn-xs btn-icon" data-test="add-75k-rows-btn" (click)="loadData(75000)">75k rows</button>
       <button (click)="dynamicallyChangeFilter()" class="btn btn-outline-secondary btn-xs btn-icon" data-test="change-filter-dynamically">
         <span class="mdi mdi-filter-outline"></span>
         <span>Dynamically Change Filter (% complete &lt; 40)</span>
@@ -128,8 +132,6 @@
     (onFilterCleared)="hideSpinner()"
     (onBeforeSortChange)="showSpinner()"
     (onSortChanged)="hideSpinner()"
-    (onBeforeToggleTreeCollapse)="showSpinner()"
-    (onToggle-tree-collapsed)="hideSpinner()"
     (onTreeFullToggleStart)="showSpinner()"
     (onTreeFullToggleEnd)="handleOnTreeFullToggleEnd($event.detail)"
     (onTreeItemToggled)="handleOnTreeItemToggled($event.detail)"
