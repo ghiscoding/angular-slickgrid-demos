@@ -22,6 +22,7 @@
     "ng": "ng",
     "dev": "ng serve --port 4600",
     "build": "ng build --configuration=production",
+    "preview": "vite preview --port=4600",
     "test": "ng test",
     "lint": "eslint .",
     "e2e": "ng e2e"
