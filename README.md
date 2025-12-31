@@ -76,3 +76,12 @@ npm start # OR yarn start
 ```bash
 npm run build # OR yarn run build
 ```
+---
+
+## Contributing
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a new branch
+   ```bash
+   git checkout -b docs/readme-improvements
