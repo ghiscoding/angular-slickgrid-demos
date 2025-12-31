@@ -1,4 +1,4 @@
-import { Component, type OnDestroy, type OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, type AfterViewInit, type OnDestroy, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { TextExportService } from '@slickgrid-universal/text-export';
@@ -23,12 +23,10 @@ const NB_ITEMS = 10_000;
 
 @Component({
   templateUrl: './example18.component.html',
-  imports: [
-    FormsModule,
-    AngularSlickgridModule
-  ],
+  imports: [AngularSlickgridModule, FormsModule],
 })
-export class Example18Component implements OnInit, OnDestroy {
+export class Example18Component implements AfterViewInit, OnInit, OnDestroy {
+  private readonly cd = inject(ChangeDetectorRef);
   private _darkMode = false;
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -58,6 +56,10 @@ export class Example18Component implements OnInit, OnDestroy {
   ngOnDestroy() {
     document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
     document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
+  }
+
+  ngAfterViewInit() {
+    this.cd.detectChanges();
   }
 
   angularGridReady(angularGrid: AngularGridInstance) {

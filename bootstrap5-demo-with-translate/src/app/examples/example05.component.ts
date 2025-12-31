@@ -25,7 +25,6 @@ const PERCENT_HTML_ESCAPED = '%25';
 export class Example5Component implements OnInit {
   private readonly cd = inject(ChangeDetectorRef);
   private http = inject(HttpClient);
-
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;

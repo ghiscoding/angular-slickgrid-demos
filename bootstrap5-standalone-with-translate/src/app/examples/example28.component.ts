@@ -1,14 +1,27 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ExcelExportService } from '@slickgrid-universal/excel-export';
-
-import { addWhiteSpaces, AngularGridInstance, Aggregators, Column, decimalFormatted, Filters, findItemInTreeStructure, Formatter, Formatters, GridOption, isNumber, SlickDataView, AngularSlickgridModule } from 'angular-slickgrid';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import {
+  addWhiteSpaces,
+  Aggregators,
+  AngularSlickgridModule,
+  decimalFormatted,
+  Filters,
+  findItemInTreeStructure,
+  Formatters,
+  isNumber,
+  type AngularGridInstance,
+  type Column,
+  type Formatter,
+  type GridOption,
+  type SlickDataView,
+} from 'angular-slickgrid';
 
 @Component({
-    templateUrl: './example28.component.html',
-    styleUrls: ['example28.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    imports: [FormsModule, AngularSlickgridModule],
+  templateUrl: './example28.component.html',
+  styleUrls: ['example28.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  imports: [AngularSlickgridModule, FormsModule],
 })
 export class Example28Component implements OnInit {
   angularGrid!: AngularGridInstance;
@@ -17,6 +30,7 @@ export class Example28Component implements OnInit {
   gridOptions!: GridOption;
   columnDefinitions!: Column[];
   datasetHierarchical: any[] = [];
+  hideSubTitle = false;
   isExcludingChildWhenFiltering = false;
   isAutoApproveParentItemWhenTreeColumnIsValid = true;
   isAutoRecalcTotalsOnFilterChange = false;
@@ -137,6 +151,7 @@ export class Example28Component implements OnInit {
         columnId: 'file',
         childrenPropName: 'files',
         excludeChildrenWhenFilteringTree: this.isExcludingChildWhenFiltering, // defaults to false
+        // initiallyCollapsed: true,
 
         // skip any other filter criteria(s) if the column holding the Tree (file) passes its own filter criteria
         // (e.g. filtering with "Files = music AND Size > 7", the row "Music" and children will only show up when this flag is enabled
@@ -437,5 +452,12 @@ export class Example28Component implements OnInit {
         ],
       },
     ];
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

@@ -1,7 +1,17 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { AngularGridInstance, AngularUtilService, Column, Filters, Formatters, GridOption, MultipleSelectOption, SliderRangeOption, AngularSlickgridModule } from 'angular-slickgrid';
-import { CustomPagerComponent } from './grid-custom-pager.component';
+import { Component, inject, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+  AngularSlickgridModule,
+  AngularUtilService,
+  Filters,
+  Formatters,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type MultipleSelectOption,
+  type SliderRangeOption,
+} from 'angular-slickgrid';
+import { CustomPagerComponent } from './grid-custom-pager.component';
 
 const NB_ITEMS = 5000;
 
@@ -10,20 +20,20 @@ function randomBetween(min: number, max: number): number {
 }
 
 @Component({
-    templateUrl: './example42.component.html',
-    providers: [AngularUtilService],
-    imports: [FormsModule, AngularSlickgridModule],
+  templateUrl: './example42.component.html',
+  providers: [AngularUtilService],
+  imports: [AngularSlickgridModule, FormsModule],
 })
 export class Example42Component implements OnInit {
   protected readonly angularUtilService = inject(AngularUtilService);
-
-  pageSize = 50;
+  angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
+  dataset: any[] = [];
   gridContainerElm!: HTMLDivElement;
   gridOptions!: GridOption;
-  dataset: any[] = [];
+  hideSubTitle = false;
+  pageSize = 50;
   paginationPosition: 'bottom' | 'top' = 'top';
-  angularGrid!: AngularGridInstance;
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
@@ -191,5 +201,12 @@ export class Example42Component implements OnInit {
     this.paginationPosition = this.paginationPosition === 'top' ? 'bottom' : 'top';
     (this.angularGrid.paginationComponent as CustomPagerComponent)?.disposeElement();
     (this.angularGrid.paginationComponent as CustomPagerComponent)?.renderPagination(gridContainerElm, this.paginationPosition);
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

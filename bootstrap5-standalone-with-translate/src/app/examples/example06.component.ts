@@ -1,11 +1,29 @@
-import { GraphqlService, GraphqlPaginatedResult, GraphqlServiceApi, GraphqlServiceOption } from '@slickgrid-universal/graphql';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
+import { DatePipe, } from '@angular/common';
+import { ChangeDetectorRef, Component, inject, type OnDestroy, type OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { addDay, format as tempoFormat } from '@formkit/tempo';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
-import { AngularGridInstance, Column, CursorPageInfo, Filters, Formatters, GridOption, GridStateChange, Metrics, type MultipleSelectOption, OperatorType, unsubscribeAllObservables, AngularSlickgridModule } from 'angular-slickgrid';
-import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import {
+  GraphqlService,
+  type GraphqlPaginatedResult,
+  type GraphqlServiceApi,
+  type GraphqlServiceOption,
+} from '@slickgrid-universal/graphql';
+import type { Subscription } from 'rxjs';
+import {
+  AngularSlickgridModule,
+  Filters,
+  Formatters,
+  OperatorType,
+  unsubscribeAllObservables,
+  type AngularGridInstance,
+  type Column,
+  type CursorPageInfo,
+  type GridOption,
+  type GridStateChange,
+  type Metrics,
+  type MultipleSelectOption,
+} from 'angular-slickgrid';
 
 const defaultPageSize = 20;
 const GRAPHQL_QUERY_DATASET_NAME = 'users';
@@ -13,24 +31,19 @@ const LOCAL_STORAGE_KEY = 'gridStateGraphql';
 const FAKE_SERVER_DELAY = 250;
 
 @Component({
-    templateUrl: './example06.component.html',
-    imports: [
-    FormsModule,
-    AngularSlickgridModule,
-    DatePipe
-],
+  templateUrl: './example06.component.html',
+  imports: [AngularSlickgridModule, DatePipe, FormsModule],
 })
 export class Example6Component implements OnInit, OnDestroy {
   private readonly cd = inject(ChangeDetectorRef);
   private translate = inject(TranslateService);
-
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset = [];
   metrics!: Metrics;
-
+  hideSubTitle = false;
   isWithCursor = false;
   graphqlQuery = '';
   processing = true;
@@ -436,5 +449,12 @@ export class Example6Component implements OnInit, OnDestroy {
         this.selectedLanguage = nextLanguage;
       })
     );
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

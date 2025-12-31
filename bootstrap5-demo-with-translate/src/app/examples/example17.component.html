@@ -5,8 +5,8 @@
       <a
         style="font-size: 18px"
         target="_blank"
-        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/grid18.component.ts"
-        >
+        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/example17.component.ts"
+      >
         <span class="mdi mdi-link mdi-v-align-sub"></span> code
       </a>
     </span>
@@ -15,13 +15,11 @@
     </button>
   </h2>
 
-  @if (showSubTitle) {
-    <div class="subtitle">
-      Allow creating a grid dynamically by importing an external CSV or Excel file. This script demo will read the CSV file and will consider
-      the first row as the column header and create the column definitions accordingly, while the next few rows will be considered the
-      dataset. Note that this example is demoing a CSV file import but in your application you could easily implemnt an Excel file uploading.
-    </div>
-  }
+  <div class="subtitle">
+    Allow creating a grid dynamically by importing an external CSV or Excel file. This script demo will read the CSV file and will consider
+    the first row as the column header and create the column definitions accordingly, while the next few rows will be considered the
+    dataset. Note that this example is demoing a CSV file import but in your application you could easily implemnt an Excel file uploading.
+  </div>
 
   <div>A default CSV file can be download <a id="template-dl" [href]="templateUrl">here</a>.</div>
 
@@ -34,7 +32,7 @@
         data-test="file-upload-input"
         [(ngModel)]="uploadFileRef"
         (input)="handleFileImport($event)"
-        />
+      />
     </div>
     <span class="mx-3">or</span>
     <div>
@@ -47,8 +45,13 @@
 
   <hr />
 
-  @if (gridCreated) {
-    <angular-slickgrid gridId="grid17" [columns]="columnDefinitions" [options]="gridOptions" [dataset]="dataset">
-    </angular-slickgrid>
-  }
+  <angular-slickgrid
+    *ngIf="gridCreated"
+    gridId="grid17"
+    [columns]="columnDefinitions"
+    [options]="gridOptions"
+    [dataset]="dataset"
+    (onAngularGridCreated)="angularGridReady($event.detail)"
+  >
+  </angular-slickgrid>
 </div>

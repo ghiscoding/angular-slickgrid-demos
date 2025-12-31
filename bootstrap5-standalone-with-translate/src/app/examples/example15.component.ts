@@ -1,8 +1,19 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, inject, type OnDestroy, type OnInit } from '@angular/core';
 import { format as tempoFormat } from '@formkit/tempo';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
-import { AngularGridInstance, Column, Filters, Formatters, GridOption, GridState, GridStateChange, type MultipleSelectOption, unsubscribeAllObservables, AngularSlickgridModule } from 'angular-slickgrid';
+import type { Subscription } from 'rxjs';
+import {
+  AngularSlickgridModule,
+  Filters,
+  Formatters,
+  unsubscribeAllObservables,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type GridState,
+  type GridStateChange,
+  type MultipleSelectOption,
+} from 'angular-slickgrid';
 
 function randomBetween(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -12,17 +23,17 @@ const LOCAL_STORAGE_KEY = 'gridState';
 const NB_ITEMS = 500;
 
 @Component({
-    templateUrl: './example15.component.html',
-    imports: [AngularSlickgridModule],
+  templateUrl: './example15.component.html',
+  imports: [AngularSlickgridModule],
 })
 export class Example15Component implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
-
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
   selectedLanguage: string;
 
   constructor() {
@@ -292,5 +303,12 @@ export class Example15Component implements OnInit, OnDestroy {
         { columnId: 'complete', direction: 'ASC' },
       ],
     } as GridState;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

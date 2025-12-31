@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Column, GridOption, Formatters } from 'angular-slickgrid';
+import { Component, type OnInit } from '@angular/core';
+import { Formatters, type AngularGridInstance, type Column, type GridOption } from 'angular-slickgrid';
 
 const NB_ITEMS = 995;
 
@@ -24,9 +24,15 @@ export class CustomFooterComponent {
   standalone: false,
 })
 export class Example29Component implements OnInit {
+  angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
+
+  angularGridReady(angularGrid: AngularGridInstance) {
+    this.angularGrid = angularGrid;
+  }
 
   ngOnInit(): void {
     this.columnDefinitions = [
@@ -68,5 +74,12 @@ export class Example29Component implements OnInit {
     }
 
     return mockDataset;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

@@ -1,21 +1,20 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef, Component, inject, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { GraphqlService, type GraphqlPaginatedResult, type GraphqlServiceApi } from '@slickgrid-universal/graphql';
-import { Subscription } from 'rxjs';
-
+import { type Subscription } from 'rxjs';
 import {
-  AngularGridInstance,
-  Column,
   Filters,
-  GridOption,
-  Metrics,
-  MultipleSelectOption,
-  OnRowCountChangedEventArgs,
   unsubscribeAllObservables,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type Metrics,
+  type MultipleSelectOption,
+  type OnRowCountChangedEventArgs,
 } from 'angular-slickgrid';
-const sampleDataRoot = 'assets/data';
 
+const sampleDataRoot = 'assets/data';
 const GRAPHQL_QUERY_DATASET_NAME = 'users';
 const FAKE_SERVER_DELAY = 250;
 
@@ -33,13 +32,13 @@ export class Example39Component implements OnInit, OnDestroy {
   private readonly cd = inject(ChangeDetectorRef);
   private http = inject(HttpClient);
   private translate = inject(TranslateService);
-
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   backendService!: GraphqlService;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset: any[] = [];
+  hideSubTitle = false;
   metrics!: Partial<Metrics>;
   tagDataClass = '';
   graphqlQuery = '...';
@@ -367,5 +366,12 @@ export class Example39Component implements OnInit, OnDestroy {
     );
     // we could also force a query since we provide a Locale and it changed
     this.getCustomerApiCall(this.backendService.buildQuery() || '');
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

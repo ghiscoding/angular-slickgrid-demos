@@ -1,22 +1,16 @@
-import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { AngularGridInstance, Column, GridOption, Filters, AngularSlickgridModule } from 'angular-slickgrid';
-import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
+import { Component, inject, type OnInit } from '@angular/core';
+import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { AngularSlickgridModule, Filters, type AngularGridInstance, type Column, type GridOption } from 'angular-slickgrid';
 
 const URL_CUSTOMERS = 'assets/data/customers_100.json';
 
 @Component({
-    templateUrl: './example22.component.html',
-    imports: [
-        TabsetComponent,
-        TabDirective,
-        AngularSlickgridModule,
-    ],
+  templateUrl: './example22.component.html',
+  imports: [AngularSlickgridModule, TabsetComponent, TabDirective],
 })
 export class Example22Component implements OnInit {
   private http = inject(HttpClient);
-
   angularGrid2!: AngularGridInstance;
   columnDefinitions1!: Column[];
   columnDefinitions2!: Column[];
@@ -24,6 +18,7 @@ export class Example22Component implements OnInit {
   gridOptions2!: GridOption;
   dataset1!: any[];
   dataset2!: any[];
+  hideSubTitle = false;
 
   angularGrid2Ready(angularGrid: AngularGridInstance) {
     this.angularGrid2 = angularGrid;
@@ -118,5 +113,12 @@ export class Example22Component implements OnInit {
 
   resizeGrid2() {
     this.angularGrid2.resizerService.resizeGrid(10);
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid2.resizerService.resizeGrid(0);
   }
 }

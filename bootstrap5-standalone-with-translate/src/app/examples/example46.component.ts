@@ -1,10 +1,17 @@
-import { Component, type OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { TextExportService } from '@slickgrid-universal/text-export';
-import { AngularGridInstance, Column, Filters, Formatter, Formatters, GridOption, AngularSlickgridModule } from 'angular-slickgrid';
-
+import {
+  AngularSlickgridModule,
+  Filters,
+  Formatters,
+  type AngularGridInstance,
+  type Column,
+  type Formatter,
+  type GridOption,
+} from 'angular-slickgrid';
 import { showToast } from './utilities';
-import { FormsModule } from '@angular/forms';
 
 interface Chapter {
   id: string;
@@ -31,10 +38,10 @@ const coloredTextFormatter: Formatter = (_row: number, _cell: number, val: any, 
 };
 
 @Component({
-    templateUrl: './example46.component.html',
-    styleUrls: ['example46.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    imports: [FormsModule, AngularSlickgridModule],
+  templateUrl: './example46.component.html',
+  styleUrls: ['example46.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  imports: [AngularSlickgridModule, FormsModule],
 })
 export class Example46Component implements OnInit {
   angularGrid!: AngularGridInstance;

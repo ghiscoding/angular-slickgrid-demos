@@ -1,5 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AngularGridInstance, Column, Editors, Filters, Formatters, GridOption, SlickRowDetailView } from 'angular-slickgrid';
+import { Component, type OnDestroy, type OnInit } from '@angular/core';
+import {
+  Editors,
+  Filters,
+  Formatters,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type SlickRowDetailView,
+} from 'angular-slickgrid';
 import { Example19RowDetailComponent } from './example19-rowdetail.component';
 import { RowDetailPreloadComponent } from './rowdetail-preload.component';
 

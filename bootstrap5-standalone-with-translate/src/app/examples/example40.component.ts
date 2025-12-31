@@ -1,18 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { type AngularGridInstance, Aggregators, type Column, Filters, Formatters, type GridOption, type Grouping, type Metrics, type OnRowCountChangedEventArgs, SortComparers, SortDirectionNumber, AngularSlickgridModule } from 'angular-slickgrid';
-
-import { randomNumber } from './utilities';
 import { DatePipe } from '@angular/common';
+import { Component, type OnInit } from '@angular/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import {
+  Aggregators,
+  AngularSlickgridModule,
+  Filters,
+  Formatters,
+  SortComparers,
+  SortDirectionNumber,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type Grouping,
+  type Metrics,
+  type OnRowCountChangedEventArgs,
+} from 'angular-slickgrid';
+import { randomNumber } from './utilities';
 
 const FETCH_SIZE = 50;
 
 @Component({
-    templateUrl: './example40.component.html',
-    imports: [
-    AngularSlickgridModule,
-    DatePipe
-],
+  templateUrl: './example40.component.html',
+  imports: [AngularSlickgridModule, DatePipe],
 })
 export class Example40Component implements OnInit {
   angularGrid!: AngularGridInstance;

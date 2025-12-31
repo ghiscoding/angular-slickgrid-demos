@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularGridInstance, Column, Formatter, Formatters, GridOption, AngularSlickgridModule } from 'angular-slickgrid';
+import { Component, type OnInit } from '@angular/core';
+import { AngularSlickgridModule, Formatters, type AngularGridInstance, type Column, type Formatter, type GridOption } from 'angular-slickgrid';
 
 interface DataItem {
   id: number;
@@ -31,14 +31,15 @@ const customEnableButtonFormatter: Formatter<DataItem> = (_row: number, _cell: n
 };
 
 @Component({
-    templateUrl: './example02.component.html',
-    imports: [AngularSlickgridModule],
+  templateUrl: './example02.component.html',
+  imports: [AngularSlickgridModule],
 })
 export class Example2Component implements OnInit {
+  angularGrid!: AngularGridInstance;
   columnDefinitions: Column<DataItem>[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
-  angularGrid!: AngularGridInstance;
+  hideSubTitle = false;
   resizerPaused = false;
 
   angularGridReady(angularGrid: AngularGridInstance) {
@@ -214,5 +215,12 @@ export class Example2Component implements OnInit {
         this.angularGrid.gridService.updateItemById(item.id, item, { highlightRow: false });
       }, 250);
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

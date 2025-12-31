@@ -1,8 +1,14 @@
-import { Component, type OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { TextExportService } from '@slickgrid-universal/text-export';
-import { AngularGridInstance, Column, Filters, Formatter, Formatters, GridOption } from 'angular-slickgrid';
-
+import {
+  Filters,
+  Formatters,
+  type AngularGridInstance,
+  type Column,
+  type Formatter,
+  type GridOption,
+} from 'angular-slickgrid';
 import { showToast } from './utilities';
 
 interface Chapter {

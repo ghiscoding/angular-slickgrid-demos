@@ -5,14 +5,17 @@
       <a
         style="font-size: 18px"
         target="_blank"
-        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/grid-infinite-graphql.component.ts"
-        >
+        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/example39.component.ts"
+      >
         <span class="mdi mdi-link-variant"></span> code
       </a>
     </span>
+    <button class="ms-2 btn btn-outline-secondary btn-sm btn-icon" type="button" data-test="toggle-subtitle" (click)="toggleSubTitle()">
+      <span class="mdi mdi-information-outline" title="Toggle example sub-title details"></span>
+    </button>
   </h2>
 
-  <h6 class="title is-6 italic content">
+  <h6 class="subtitle is-6 italic content">
     <ul>
       <li>
         Infinite scrolling allows the grid to lazy-load rows from the server when reaching the scroll bottom (end) position. In its simplest
@@ -51,7 +54,7 @@
             data-test="clear-filters-sorting"
             (click)="clearAllFiltersAndSorts()"
             title="Clear all Filters & Sorts"
-            >
+          >
             <i class="mdi mdi-filter-remove-outline"></i>
             Clear all Filter & Sorts
           </button>
@@ -63,7 +66,7 @@
             style="width: 55px"
             [(ngModel)]="serverWaitDelay"
             title="input a fake timer delay to simulate slow server response"
-            />
+          />
         </div>
       </div>
       <div class="row mt-1">
@@ -109,6 +112,6 @@
     [dataset]="dataset"
     (onAngularGridCreated)="angularGridReady($event.detail)"
     (onRowCountChanged)="refreshMetrics($event.detail.args)"
-    >
+  >
   </angular-slickgrid>
 </div>

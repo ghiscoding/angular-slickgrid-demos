@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
-import { AngularGridInstance, Column, GridOption } from 'angular-slickgrid';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
+import { type AngularGridInstance, type Column, type GridOption } from 'angular-slickgrid';
 
 // create a custom Formatter to highlight negative values in red
 let columns1WithHighlightingById: any = {};
@@ -21,6 +20,7 @@ export class Example7Component implements OnInit {
   dataset2: any[] = [];
   angularGrid1!: AngularGridInstance;
   angularGrid2!: AngularGridInstance;
+  hideSubTitle = false;
 
   constructor() {
     columns1WithHighlightingById = {};
@@ -212,5 +212,12 @@ export class Example7Component implements OnInit {
       }
     }
     return mockDataset;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid2.resizerService.resizeGrid(0);
   }
 }

@@ -1,8 +1,19 @@
-import { GridOdataService, type OdataServiceApi } from '@slickgrid-universal/odata';
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Aggregators, AngularGridInstance, Column, Filters, GridOption, Grouping, Metrics, OnRowCountChangedEventArgs, SortComparers, AngularSlickgridModule } from 'angular-slickgrid';
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef, Component, inject, ViewEncapsulation, type OnInit } from '@angular/core';
+import { GridOdataService, type OdataServiceApi } from '@slickgrid-universal/odata';
+import {
+  Aggregators,
+  AngularSlickgridModule,
+  Filters,
+  SortComparers,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type Grouping,
+  type Metrics,
+  type OnRowCountChangedEventArgs,
+} from 'angular-slickgrid';
 
 const sampleDataRoot = 'assets/data';
 const CARET_HTML_ESCAPED = '%5E';
@@ -12,20 +23,17 @@ const PERCENT_HTML_ESCAPED = '%25';
   styleUrls: ['./example38.component.scss'],
   encapsulation: ViewEncapsulation.None,
   templateUrl: './example38.component.html',
-  imports: [
-    AngularSlickgridModule,
-    DatePipe
-  ],
+  imports: [AngularSlickgridModule, DatePipe],
 })
 export class Example38Component implements OnInit {
   private readonly cd = inject(ChangeDetectorRef);
   private http = inject(HttpClient);
-
   angularGrid!: AngularGridInstance;
   backendService: GridOdataService;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset: any[] = [];
+  hideSubTitle = false;
   isPageErrorTest = false;
   metrics!: Partial<Metrics>;
   tagDataClass = '';
@@ -33,7 +41,6 @@ export class Example38Component implements OnInit {
   processing = false;
   errorStatus = '';
   errorStatusClass = 'hidden';
-  hideSubTitle = false;
   status = { text: 'processing...', class: 'alert alert-danger' };
 
   constructor() {
@@ -417,5 +424,6 @@ export class Example38Component implements OnInit {
     this.hideSubTitle = !this.hideSubTitle;
     const action = this.hideSubTitle ? 'add' : 'remove';
     document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

@@ -1,17 +1,17 @@
 import { Component, type OnDestroy, type OnInit } from '@angular/core';
 import {
   Aggregators,
-  type AngularGridInstance,
-  type Column,
   Editors,
   Filters,
   Formatters,
-  type GridOption,
-  Grouping,
   GroupTotalFormatters,
-  type SlickRowDetailView,
   SortComparers,
   SortDirectionNumber,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type Grouping,
+  type SlickRowDetailView,
 } from 'angular-slickgrid';
 import { Example47RowDetailComponent } from './example47-rowdetail.component';
 import { RowDetailPreloadComponent } from './rowdetail-preload.component';

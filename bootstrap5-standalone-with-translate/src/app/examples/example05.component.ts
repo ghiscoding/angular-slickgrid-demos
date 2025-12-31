@@ -22,15 +22,11 @@ const PERCENT_HTML_ESCAPED = '%25';
 
 @Component({
   templateUrl: './example05.component.html',
-  imports: [
-    AngularSlickgridModule,
-    DatePipe
-  ],
+  imports: [AngularSlickgridModule, DatePipe],
 })
 export class Example5Component implements OnInit {
   private readonly cd = inject(ChangeDetectorRef);
   private http = inject(HttpClient);
-
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;

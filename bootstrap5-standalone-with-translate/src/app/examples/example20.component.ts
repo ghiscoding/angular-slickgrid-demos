@@ -1,12 +1,23 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, ColumnEditorDualInput, Editors, formatNumber, Formatters, Filters, GridOption, SlickEventHandler, AngularSlickgridModule } from 'angular-slickgrid';
+import { Component, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+  AngularSlickgridModule,
+  Editors,
+  Filters,
+  formatNumber,
+  Formatters,
+  SlickEventHandler,
+  type AngularGridInstance,
+  type Column,
+  type ColumnEditorDualInput,
+  type GridOption,
+} from 'angular-slickgrid';
 
 @Component({
-    templateUrl: './example20.component.html',
-    styleUrls: ['./example20.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    imports: [FormsModule, AngularSlickgridModule],
+  templateUrl: './example20.component.html',
+  styleUrls: ['./example20.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  imports: [AngularSlickgridModule, FormsModule],
 })
 export class Example20Component implements OnInit, OnDestroy {
   angularGrid!: AngularGridInstance;
@@ -15,6 +26,7 @@ export class Example20Component implements OnInit, OnDestroy {
   dataset!: any[];
   frozenColumnCount = 2;
   frozenRowCount = 3;
+  hideSubTitle = false;
   isFrozenBottom = false;
   gridObj: any;
   slickEventHandler: any;
@@ -328,5 +340,12 @@ export class Example20Component implements OnInit, OnDestroy {
       });
       this.isFrozenBottom = !this.isFrozenBottom; // toggle the variable
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

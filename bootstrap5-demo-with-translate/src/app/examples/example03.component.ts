@@ -1,31 +1,31 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, inject, type OnInit } from '@angular/core';
 import {
-  AngularGridInstance,
-  AutocompleterOption,
-  Column,
   Editors,
-  EditorArguments,
-  EditorValidator,
   Filters,
-  Formatter,
   Formatters,
-  GridOption,
-  LongTextEditorOption,
-  type MultipleSelectOption,
-  OnEventArgs,
   OperatorType,
-  SortComparers,
   SlickGlobalEditorLock,
+  SortComparers,
+  type AngularGridInstance,
+  type AutocompleterOption,
+  type Column,
+  type EditorArguments,
+  type EditorValidator,
+  type Formatter,
+  type GridOption,
+  type LongTextEditorOption,
+  type MultipleSelectOption,
+  type OnEventArgs,
+  type SlickGrid,
   type SliderOption,
   type VanillaCalendarOption,
 } from 'angular-slickgrid';
 import { Subject } from 'rxjs';
-
 import { CustomInputEditor } from './custom-inputEditor';
 import { CustomInputFilter } from './custom-inputFilter';
 import fetchJsonp from './jsonp';
+import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 const NB_ITEMS = 100;
 const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_100_numbers.json';
@@ -67,13 +67,13 @@ const taskFormatter: Formatter = (_row, _cell, value) => {
 export class Example3Component implements OnInit {
   private http = inject(HttpClient);
   private translate = inject(TranslateService);
-
   private _commandQueue: any = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset!: any[];
-  gridObj: any;
+  gridObj: SlickGrid | undefined;
+  hideSubTitle = false;
   isAutoEdit = true;
   alertWarning: any;
   updatedObject: any;
@@ -627,7 +627,7 @@ export class Example3Component implements OnInit {
 
   changeAutoCommit() {
     this.gridOptions.autoCommitEdit = !this.gridOptions.autoCommitEdit;
-    this.gridObj.setOptions({
+    this.gridObj?.setOptions({
       autoCommitEdit: this.gridOptions.autoCommitEdit,
     });
     return true;
@@ -677,7 +677,7 @@ export class Example3Component implements OnInit {
 
   setAutoEdit(isAutoEdit: boolean) {
     this.isAutoEdit = isAutoEdit;
-    this.gridObj.setOptions({ autoEdit: isAutoEdit }); // change the grid option dynamically
+    this.gridObj?.setOptions({ autoEdit: isAutoEdit }); // change the grid option dynamically
     return true;
   }
 
@@ -686,7 +686,14 @@ export class Example3Component implements OnInit {
     // const item = this.angularGrid.dataView.getItem(command.row);
     if (command && SlickGlobalEditorLock.cancelCurrentEdit()) {
       command.undo();
-      this.gridObj.gotoCell(command.row, command.cell, false);
+      this.gridObj?.gotoCell(command.row, command.cell, false);
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

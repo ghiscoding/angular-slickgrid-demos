@@ -1,20 +1,19 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, inject, type OnDestroy, type OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { TextExportService } from '@slickgrid-universal/text-export';
-import { Subscription } from 'rxjs';
-
+import type { Subscription } from 'rxjs';
 import {
-  AngularGridInstance,
-  Column,
   DelimiterType,
   Filters,
-  Formatter,
   Formatters,
-  GridOption,
-  GridStateChange,
-  type SliderOption,
   unsubscribeAllObservables,
+  type AngularGridInstance,
+  type Column,
+  type Formatter,
+  type GridOption,
+  type GridStateChange,
+  type SliderOption,
 } from 'angular-slickgrid';
 
 const NB_ITEMS = 1500;
@@ -33,7 +32,6 @@ const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataCont
 })
 export class Example12Component implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
-
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -42,6 +40,7 @@ export class Example12Component implements OnInit, OnDestroy {
   selectedLanguage: string;
   duplicateTitleHeaderCount = 1;
   gridObj: any;
+  hideSubTitle = false;
   excelExportService = new ExcelExportService();
   textExportService = new TextExportService();
 
@@ -315,5 +314,12 @@ export class Example12Component implements OnInit, OnDestroy {
         this.selectedLanguage = nextLanguage;
       })
     );
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

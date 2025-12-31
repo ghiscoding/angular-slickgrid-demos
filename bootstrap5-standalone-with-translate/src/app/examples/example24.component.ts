@@ -1,11 +1,21 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { Subscription } from 'rxjs';
+import type { Subscription } from 'rxjs';
+import {
+  AngularSlickgridModule,
+  ExtensionName,
+  Filters,
+  Formatters,
+  unsubscribeAllObservables,
+  type AngularGridInstance,
+  type Column,
+  type ContextMenu,
+  type Formatter,
+  type GridOption,
+} from 'angular-slickgrid';
 
-import { AngularGridInstance, Column, ContextMenu, ExtensionName, Filters, Formatter, Formatters, GridOption, unsubscribeAllObservables, AngularSlickgridModule } from 'angular-slickgrid';
-
-const actionFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
+const actionFormatter: Formatter = (_row, _cell, _value, _columnDef, dataContext) => {
   if (dataContext.priority === 3) {
     // option 3 is High
     return `<div class="cell-menu-dropdown-outline">Action<i class="mdi mdi-chevron-down"></i></div>`;
@@ -635,5 +645,6 @@ export class Example24Component implements OnInit, OnDestroy {
     this.hideSubTitle = !this.hideSubTitle;
     const action = this.hideSubTitle ? 'add' : 'remove';
     document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

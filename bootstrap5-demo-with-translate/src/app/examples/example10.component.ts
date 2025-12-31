@@ -1,6 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-
-import { AngularGridInstance, Column, Filters, Formatters, GridOption, GridStateChange } from 'angular-slickgrid';
+import { ChangeDetectorRef, Component, inject, type OnInit } from '@angular/core';
+import {
+  Filters,
+  Formatters,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type GridStateChange,
+} from 'angular-slickgrid';
 
 @Component({
   templateUrl: './example10.component.html',
@@ -9,7 +15,6 @@ import { AngularGridInstance, Column, Filters, Formatters, GridOption, GridState
 })
 export class Example10Component implements OnInit {
   private cd = inject(ChangeDetectorRef);
-
   angularGrid1!: AngularGridInstance;
   angularGrid2!: AngularGridInstance;
   columnDefinitions1!: Column[];
@@ -20,6 +25,7 @@ export class Example10Component implements OnInit {
   dataset2!: any[];
   gridObj1!: any;
   gridObj2!: any;
+  hideSubTitle = false;
   isGrid2WithPagination = true;
   selectedTitles = '';
   selectedTitle = '';
@@ -305,5 +311,12 @@ export class Example10Component implements OnInit {
         return item.title || '';
       });
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid2.resizerService.resizeGrid(0);
   }
 }

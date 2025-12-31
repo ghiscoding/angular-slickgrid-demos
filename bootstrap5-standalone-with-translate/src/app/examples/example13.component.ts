@@ -1,12 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import { TextExportService } from '@slickgrid-universal/text-export';
+import {
+  Aggregators,
+  AngularSlickgridModule,
+  DelimiterType,
+  Filters,
+  Formatters,
+  GroupTotalFormatters,
+  SortComparers,
+  SortDirectionNumber,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type Grouping,
+} from 'angular-slickgrid';
 
-import { AngularGridInstance, Aggregators, Column, DelimiterType, Filters, Formatters, GridOption, Grouping, GroupTotalFormatters, SortDirectionNumber, SortComparers, AngularSlickgridModule } from 'angular-slickgrid';
+const NB_ITEMS = 5000;
 
 @Component({
-    templateUrl: './example13.component.html',
-    imports: [AngularSlickgridModule],
+  templateUrl: './example13.component.html',
+  imports: [AngularSlickgridModule],
 })
 export class Example13Component implements OnInit {
   angularGrid!: AngularGridInstance;
@@ -15,6 +29,7 @@ export class Example13Component implements OnInit {
   dataset!: any[];
   gridObj: any;
   dataviewObj: any;
+  hideSubTitle = false;
   processing = false;
   excelExportService = new ExcelExportService();
   textExportService = new TextExportService();
@@ -205,13 +220,14 @@ export class Example13Component implements OnInit {
       },
     };
 
-    this.loadData(500);
+    this.loadData(NB_ITEMS);
   }
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
     this.gridObj = angularGrid.slickGrid;
     this.dataviewObj = angularGrid.dataView;
+    this.groupByDuration(); // group by duration on page load
   }
 
   loadData(rowCount: number) {
@@ -306,7 +322,7 @@ export class Example13Component implements OnInit {
     this.dataviewObj.setGrouping([
       {
         getter: 'duration',
-        formatter: (g) => `Duration: ${g.value}  <span style="color:green">(${g.count} items)</span>`,
+        formatter: (g) => `Duration: ${g.value} <span style="color:green">(${g.count} items)</span>`,
         aggregators: [new Aggregators.Sum('duration'), new Aggregators.Sum('cost')],
         aggregateCollapsed: true,
         lazyTotalsCalculation: true,
@@ -333,7 +349,7 @@ export class Example13Component implements OnInit {
     this.dataviewObj.setGrouping([
       {
         getter: 'duration',
-        formatter: (g) => `Duration: ${g.value}  <span style="color:green">(${g.count} items)</span>`,
+        formatter: (g) => `Duration: ${g.value} <span style="color:green">(${g.count} items)</span>`,
         aggregators: [new Aggregators.Sum('duration'), new Aggregators.Sum('cost')],
         aggregateCollapsed: true,
         lazyTotalsCalculation: true,
@@ -354,5 +370,12 @@ export class Example13Component implements OnInit {
       },
     ] as Grouping[]);
     this.gridObj.invalidate(); // invalidate all rows and re-render
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

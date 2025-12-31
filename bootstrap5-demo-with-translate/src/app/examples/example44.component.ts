@@ -1,6 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { AngularGridInstance, Column, Formatter, GridOption, type ItemMetadata } from 'angular-slickgrid';
+import {
+  type AngularGridInstance,
+  type Column,
+  type Formatter,
+  type GridOption,
+  type ItemMetadata,
+} from 'angular-slickgrid';
 
 const rowCellValueFormatter: Formatter = (row, cell, value) =>
   `<div class="cellValue">${value.toFixed(2)}</div><div class="valueComment">${row}.${cell}</div>`;
@@ -371,5 +377,12 @@ export class Example44Component implements OnInit {
     // const args = event.detail && event.detail.args;
     this.angularGrid.slickGrid?.scrollRowToTop(this.scrollToRow);
     return false;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

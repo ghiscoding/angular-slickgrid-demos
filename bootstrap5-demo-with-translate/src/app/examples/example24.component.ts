@@ -1,21 +1,20 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { Subscription } from 'rxjs';
-
+import type { Subscription } from 'rxjs';
 import {
-  AngularGridInstance,
-  Column,
-  ContextMenu,
   ExtensionName,
   Filters,
-  Formatter,
   Formatters,
-  GridOption,
   unsubscribeAllObservables,
+  type AngularGridInstance,
+  type Column,
+  type ContextMenu,
+  type Formatter,
+  type GridOption,
 } from 'angular-slickgrid';
 
-const actionFormatter: Formatter = (row, cell, value, columnDef, dataContext) => {
+const actionFormatter: Formatter = (_row, _cell, _value, _columnDef, dataContext) => {
   if (dataContext.priority === 3) {
     // option 3 is High
     return `<div class="cell-menu-dropdown-outline">Action<i class="mdi mdi-chevron-down"></i></div>`;
@@ -65,14 +64,13 @@ const taskTranslateFormatter: Formatter = (row, cell, value, columnDef, dataCont
 })
 export class Example24Component implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
-
   private _darkModeGrid = false;
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
-  hideSubTitle = false;
   dataset!: any[];
+  hideSubTitle = false;
   selectedLanguage: string;
 
   constructor() {

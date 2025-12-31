@@ -1,21 +1,21 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {
-  Aggregator,
-  Aggregators,
-  AngularGridInstance,
-  Column,
-  Editors,
-  ExcelCellValueParserArgs,
-  ExcelGroupValueParserArgs,
-  Formatter,
-  Formatters,
-  GridOption,
-  GroupTotalFormatters,
-  Grouping,
-  SlickGrid,
-  SlickGroupTotals,
-} from 'angular-slickgrid';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import {
+  Aggregators,
+  Editors,
+  Formatters,
+  GroupTotalFormatters,
+  type Aggregator,
+  type AngularGridInstance,
+  type Column,
+  type ExcelCellValueParserArgs,
+  type ExcelGroupValueParserArgs,
+  type Formatter,
+  type GridOption,
+  type Grouping,
+  type SlickGrid,
+  type SlickGroupTotals,
+} from 'angular-slickgrid';
 
 interface GroceryItem {
   id: number;
@@ -105,6 +105,7 @@ export class Example36Component implements OnInit {
   dataset: GroceryItem[] = [];
   angularGrid!: AngularGridInstance;
   excelExportService: ExcelExportService;
+  hideSubTitle = false;
   isDataGrouped = false;
   taxRate = 7.5;
 
@@ -500,5 +501,12 @@ export class Example36Component implements OnInit {
     } as Grouping);
 
     this.angularGrid?.dataView?.refresh();
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

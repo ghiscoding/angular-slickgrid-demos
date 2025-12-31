@@ -1,16 +1,21 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, Formatters, GridOption, OperatorString, SlickDataView, SlickGrid, AngularSlickgridModule } from 'angular-slickgrid';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import {
+  AngularSlickgridModule,
+  Formatters,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type OperatorString,
+  type SlickDataView,
+  type SlickGrid,
+} from 'angular-slickgrid';
 
 @Component({
-    encapsulation: ViewEncapsulation.None,
-    styleUrls: ['./example21.component.scss'],
-    templateUrl: './example21.component.html',
-    imports: [
-    FormsModule,
-    AngularSlickgridModule
-],
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./example21.component.scss'],
+  templateUrl: './example21.component.html',
+  imports: [AngularSlickgridModule, FormsModule],
 })
 export class Example21Component implements OnInit {
   angularGrid!: AngularGridInstance;
@@ -19,6 +24,7 @@ export class Example21Component implements OnInit {
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
   operatorList: OperatorString[] = ['=', '<', '<=', '>', '>=', '<>', 'StartsWith', 'EndsWith'];
   selectedOperator = '=';
   searchValue = '';
@@ -141,5 +147,12 @@ export class Example21Component implements OnInit {
       operator: this.selectedOperator as OperatorString,
       searchTerms: [this.searchValue || ''],
     });
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

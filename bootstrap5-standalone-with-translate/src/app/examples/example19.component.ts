@@ -1,19 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AngularGridInstance, Column, Editors, Filters, Formatters, GridOption, SlickRowDetailView, AngularSlickgridModule } from 'angular-slickgrid';
+import { Component, type OnDestroy, type OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {
+  AngularSlickgridModule,
+  Editors,
+  Filters,
+  Formatters,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type SlickRowDetailView,
+} from 'angular-slickgrid';
 import { Example19RowDetailComponent } from './example19-rowdetail.component';
 import { RowDetailPreloadComponent } from './rowdetail-preload.component';
-import { FormsModule } from '@angular/forms';
-
 
 const FAKE_SERVER_DELAY = 250;
 const NB_ITEMS = 1000;
 
 @Component({
   templateUrl: './example19.component.html',
-  imports: [
-    FormsModule,
-    AngularSlickgridModule
-  ],
+  imports: [AngularSlickgridModule, FormsModule],
 })
 export class Example19Component implements OnDestroy, OnInit {
   private _darkMode = false;

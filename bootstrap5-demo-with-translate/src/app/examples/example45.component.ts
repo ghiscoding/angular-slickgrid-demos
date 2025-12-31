@@ -1,8 +1,7 @@
+import { Component, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
 import { faker } from '@faker-js/faker';
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, GridOption, SlickRowDetailView } from 'angular-slickgrid';
-
-import { type Distributor, Example45DetailComponent, type OrderData } from './example45-detail.component';
+import { type AngularGridInstance, type Column, type GridOption, type SlickRowDetailView } from 'angular-slickgrid';
+import { Example45DetailComponent, type Distributor, type OrderData } from './example45-detail.component';
 import { RowDetailPreloadComponent } from './rowdetail-preload.component';
 
 const FAKE_SERVER_DELAY = 250;
@@ -239,5 +238,12 @@ export class Example45Component implements OnDestroy, OnInit {
       document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
       document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

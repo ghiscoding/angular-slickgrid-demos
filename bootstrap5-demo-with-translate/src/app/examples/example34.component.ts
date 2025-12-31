@@ -1,17 +1,17 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
 import { faker } from '@faker-js/faker';
 import sparkline from '@fnando/sparkline';
 import {
   Aggregators,
-  AngularGridInstance,
-  Column,
   createDomElement,
   deepCopy,
   Filters,
-  Formatter,
   Formatters,
-  GridOption,
   GroupTotalFormatters,
+  type AngularGridInstance,
+  type Column,
+  type Formatter,
+  type GridOption,
 } from 'angular-slickgrid';
 
 const NB_ROWS = 200;
@@ -37,7 +37,7 @@ const priceFormatter: Formatter = (_cell, _row, value, _col, dataContext) => {
 };
 
 const transactionTypeFormatter: Formatter = (_row, _cell, value: string) =>
-  `<div class="d-inline-flex align-items-center"><span class="me-1 mdi mdi-16px mdi-${value === 'Buy' ? 'plus' : 'minus'}-circle ${value === 'Buy' ? 'text-info' : 'text-warning'}"></span> ${value}</div>`;
+  `<div class="d-inline-flex align-items-center"><span class="me-1 mdi font-16px mdi-${value === 'Buy' ? 'plus' : 'minus'}-circle ${value === 'Buy' ? 'text-info' : 'text-warning'}"></span> ${value}</div>`;
 
 const historicSparklineFormatter: Formatter = (_row, _cell, _value: string, _col, dataContext) => {
   if (dataContext.historic.length < 2) {
@@ -86,6 +86,7 @@ export class Example34Component implements OnDestroy, OnInit {
   gridOptions!: GridOption;
   columnDefinitions: Column[] = [];
   dataset: any[] = [];
+  hideSubTitle = false;
   isFullScreen = false;
   highlightDuration = 150;
   itemCount = 200;
@@ -430,5 +431,12 @@ export class Example34Component implements OnDestroy, OnInit {
   private randomNumber(min: number, max: number, floor = true) {
     const number = Math.random() * (max - min + 1) + min;
     return floor ? Math.floor(number) : number;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

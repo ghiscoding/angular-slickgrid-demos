@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-
-import { AngularGridInstance, Column, ExtensionName, Filters, Formatters, GridOption, OnEventArgs } from 'angular-slickgrid';
+import { Component, type OnInit } from '@angular/core';
+import {
+  ExtensionName,
+  Filters,
+  Formatters,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type OnEventArgs,
+} from 'angular-slickgrid';
 
 @Component({
   templateUrl: './example16.component.html',
@@ -11,6 +18,7 @@ export class Example16Component implements OnInit {
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
 
   angularGridReady(angularGrid: AngularGridInstance) {
     this.angularGrid = angularGrid;
@@ -273,5 +281,12 @@ export class Example16Component implements OnInit {
 
   toggleSorting() {
     this.angularGrid.sortService.toggleSortFunctionality();
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

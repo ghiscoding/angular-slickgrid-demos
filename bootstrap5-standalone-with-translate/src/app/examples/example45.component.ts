@@ -1,10 +1,9 @@
-import { faker } from '@faker-js/faker';
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, GridOption, SlickRowDetailView, AngularSlickgridModule } from 'angular-slickgrid';
-
-import { type Distributor, Example45DetailComponent, type OrderData } from './example45-detail.component';
-import { RowDetailPreloadComponent } from './rowdetail-preload.component';
+import { Component, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { faker } from '@faker-js/faker';
+import { AngularSlickgridModule, type AngularGridInstance, type Column, type GridOption, type SlickRowDetailView } from 'angular-slickgrid';
+import { Example45DetailComponent, type Distributor, type OrderData } from './example45-detail.component';
+import { RowDetailPreloadComponent } from './rowdetail-preload.component';
 
 const FAKE_SERVER_DELAY = 250;
 const NB_ITEMS = 995;
@@ -13,7 +12,7 @@ const NB_ITEMS = 995;
   styleUrls: ['example45.component.scss'],
   templateUrl: './example45.component.html',
   encapsulation: ViewEncapsulation.None,
-  imports: [FormsModule, AngularSlickgridModule],
+  imports: [AngularSlickgridModule, FormsModule],
 })
 export class Example45Component implements OnDestroy, OnInit {
   private _darkMode = false;
@@ -240,5 +239,12 @@ export class Example45Component implements OnDestroy, OnInit {
       document.querySelector('.panel-wm-content')!.classList.remove('dark-mode');
       document.querySelector<HTMLDivElement>('#demo-container')!.dataset.bsTheme = 'light';
     }
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

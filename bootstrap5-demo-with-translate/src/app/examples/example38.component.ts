@@ -1,16 +1,16 @@
-import { GridOdataService, type OdataServiceApi } from '@slickgrid-universal/odata';
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef, Component, inject, ViewEncapsulation, type OnInit } from '@angular/core';
+import { GridOdataService, type OdataServiceApi } from '@slickgrid-universal/odata';
 import {
   Aggregators,
-  AngularGridInstance,
-  Column,
   Filters,
-  GridOption,
-  Grouping,
-  Metrics,
-  OnRowCountChangedEventArgs,
   SortComparers,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type Grouping,
+  type Metrics,
+  type OnRowCountChangedEventArgs,
 } from 'angular-slickgrid';
 
 const sampleDataRoot = 'assets/data';
@@ -26,7 +26,6 @@ const PERCENT_HTML_ESCAPED = '%25';
 export class Example38Component implements OnInit {
   private readonly cd = inject(ChangeDetectorRef);
   private http = inject(HttpClient);
-
   angularGrid!: AngularGridInstance;
   backendService: GridOdataService;
   columnDefinitions!: Column[];

@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AngularGridInstance, Column, Editors, GridOption, type ItemMetadata } from 'angular-slickgrid';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import { Editors, type AngularGridInstance, type Column, type GridOption, type ItemMetadata } from 'angular-slickgrid';
 
 @Component({
   styleUrls: ['example43.component.scss'],
@@ -445,5 +445,12 @@ export class Example43Component implements OnInit {
     this.metadata = newMetadata;
     this.angularGrid.slickGrid.remapAllColumnsRowSpan();
     this.angularGrid.slickGrid.invalidate();
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

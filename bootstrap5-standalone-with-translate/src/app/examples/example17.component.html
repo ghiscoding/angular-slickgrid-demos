@@ -5,8 +5,8 @@
       <a
         style="font-size: 18px"
         target="_blank"
-        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/grid18.component.ts"
-        >
+        href="https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/example17.component.ts"
+      >
         <span class="mdi mdi-link mdi-v-align-sub"></span> code
       </a>
     </span>
@@ -15,7 +15,7 @@
     </button>
   </h2>
 
-  @if (showSubTitle) {
+  @if (!hideSubTitle) {
     <div class="subtitle">
       Allow creating a grid dynamically by importing an external CSV or Excel file. This script demo will read the CSV file and will consider
       the first row as the column header and create the column definitions accordingly, while the next few rows will be considered the
@@ -34,7 +34,7 @@
         data-test="file-upload-input"
         [(ngModel)]="uploadFileRef"
         (input)="handleFileImport($event)"
-        />
+      />
     </div>
     <span class="mx-3">or</span>
     <div>

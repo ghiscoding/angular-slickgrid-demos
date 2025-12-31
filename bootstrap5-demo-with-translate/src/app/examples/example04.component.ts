@@ -1,17 +1,17 @@
-import { Component, OnInit, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import { Component, inject, type OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import {
-  AngularGridInstance,
-  Column,
   Filters,
   Formatters,
-  GridOption,
-  GridStateChange,
-  Metrics,
-  type MultipleSelectOption,
   OperatorType,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type GridStateChange,
+  type Metrics,
+  type MultipleSelectOption,
   type VanillaCalendarOption,
 } from 'angular-slickgrid';
 import { CustomInputFilter } from './custom-inputFilter';
@@ -29,11 +29,11 @@ const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_500_numbers.json';
 export class Example4Component implements OnInit {
   private http = inject(HttpClient);
   private translate = inject(TranslateService);
-
   angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
   metrics!: Metrics;
 
   ngOnInit(): void {
@@ -320,5 +320,12 @@ export class Example4Component implements OnInit {
 
   scrollGridTop() {
     this.angularGrid.slickGrid.navigateTop();
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

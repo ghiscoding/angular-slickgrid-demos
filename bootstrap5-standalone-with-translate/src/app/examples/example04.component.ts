@@ -1,10 +1,22 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { TranslateService } from '@ngx-translate/core';
-import { AngularGridInstance, Column, Filters, Formatters, GridOption, GridStateChange, Metrics, type MultipleSelectOption, OperatorType, type VanillaCalendarOption, AngularSlickgridModule } from 'angular-slickgrid';
-import { CustomInputFilter } from './custom-inputFilter';
 import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, type OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import {
+  AngularSlickgridModule,
+  Filters,
+  Formatters,
+  OperatorType,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type GridStateChange,
+  type Metrics,
+  type MultipleSelectOption,
+  type VanillaCalendarOption,
+} from 'angular-slickgrid';
+import { CustomInputFilter } from './custom-inputFilter';
 
 function randomBetween(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -13,20 +25,17 @@ const NB_ITEMS = 10500;
 const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_500_numbers.json';
 
 @Component({
-    templateUrl: './example04.component.html',
-    imports: [
-    AngularSlickgridModule,
-    DatePipe
-],
+  templateUrl: './example04.component.html',
+  imports: [AngularSlickgridModule, DatePipe],
 })
 export class Example4Component implements OnInit {
   private http = inject(HttpClient);
   private translate = inject(TranslateService);
-
   angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
   metrics!: Metrics;
 
   ngOnInit(): void {
@@ -313,5 +322,12 @@ export class Example4Component implements OnInit {
 
   scrollGridTop() {
     this.angularGrid.slickGrid.navigateTop();
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

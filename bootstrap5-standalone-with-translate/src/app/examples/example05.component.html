@@ -46,13 +46,13 @@
         </ul>
       </div>
     </div>
-   <div class="col-sm-3">
-        @if (errorStatus) {
-          <div class="alert alert-danger" data-test="error-status">
-            <em><strong>Backend Error:</strong> <span [innerHTML]="errorStatus"></span></em>
-          </div>
-        }
-      </div>
+    <div class="col-sm-3">
+      @if (errorStatus) {
+        <div class="alert alert-danger" data-test="error-status">
+          <em><strong>Backend Error:</strong> <span [innerHTML]="errorStatus"></span></em>
+        </div>
+      }
+    </div>
   </div>
 
   <div class="row">
@@ -79,7 +79,7 @@
       <button class="btn btn-outline-secondary btn-sm btn-icon" data-test="set-dynamic-sorting" (click)="setSortingDynamically()">
         Set Sorting Dynamically
       </button>
-     <br>
+      <br>
       @if (metrics) {
         <span>
           <b>Metrics:</b> {{metrics.endTime | date: "yyyy-MM-dd hh:mm aaaaa'm'"}} | {{metrics.executionTime}}ms

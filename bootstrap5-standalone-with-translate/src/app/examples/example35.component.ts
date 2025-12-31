@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation, type OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
-import { Subscription } from 'rxjs';
-
-import { AngularGridInstance, Column, Editors, Formatters, GridOption, AngularSlickgridModule } from 'angular-slickgrid';
+import type { Subscription } from 'rxjs';
+import { AngularSlickgridModule, Editors, Formatters, type AngularGridInstance, type Column, type GridOption } from 'angular-slickgrid';
 
 const NB_ITEMS = 20;
 
@@ -15,16 +14,15 @@ const NB_ITEMS = 20;
 })
 export class Example35Component implements OnInit {
   private translate = inject(TranslateService);
-
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   gridOptions!: GridOption;
   columnDefinitions!: Column[];
   dataset!: any[];
+  hideSubTitle = false;
   selectedLanguage = '';
   selectedLanguageFile = '';
   fetchResult = '';
-  hideSubTitle = false;
   statusClass = 'alert alert-light';
   statusStyle = 'display: none';
 
@@ -257,6 +255,7 @@ export class Example35Component implements OnInit {
     this.hideSubTitle = !this.hideSubTitle;
     const action = this.hideSubTitle ? 'add' : 'remove';
     document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }
 

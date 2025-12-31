@@ -1,16 +1,16 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import type { Subscription } from 'rxjs';
 import {
-  AngularGridInstance,
-  Column,
   ExtensionName,
   Filters,
   Formatters,
-  GridOption,
-  type SliderOption,
   unsubscribeAllObservables,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type SliderOption,
 } from 'angular-slickgrid';
-import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './example09.component.html',
@@ -20,12 +20,12 @@ import { Subscription } from 'rxjs';
 })
 export class Example9Component implements OnInit, OnDestroy {
   private translate = inject(TranslateService);
-
   private subscriptions: Subscription[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
   selectedLanguage: string;
 
   constructor() {
@@ -300,5 +300,12 @@ export class Example9Component implements OnInit, OnDestroy {
       }
     }
     return true;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

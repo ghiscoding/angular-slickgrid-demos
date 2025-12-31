@@ -1,9 +1,24 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { AngularGridInstance, Column, EditCommand, Editors, Filters, Formatter, Formatters, GridOption, MenuCommandItemCallbackArgs, type MultipleSelectOption, OperatorType, SlickGrid, type VanillaCalendarOption, AngularSlickgridModule } from 'angular-slickgrid';
-import { FormsModule } from '@angular/forms';
-import { NgClass } from '@angular/common';
+import {
+  AngularSlickgridModule,
+  Editors,
+  Filters,
+  Formatters,
+  OperatorType,
+  type AngularGridInstance,
+  type Column,
+  type EditCommand,
+  type Formatter,
+  type GridOption,
+  type MenuCommandItemCallbackArgs,
+  type MultipleSelectOption,
+  type SlickGrid,
+  type VanillaCalendarOption,
+} from 'angular-slickgrid';
 
 const NB_ITEMS = 1000;
 
@@ -11,11 +26,7 @@ const NB_ITEMS = 1000;
   templateUrl: './example33.component.html',
   styleUrls: ['./example33.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [
-    FormsModule,
-    NgClass,
-    AngularSlickgridModule,
-  ],
+  imports: [AngularSlickgridModule, FormsModule, NgClass],
 })
 export class Example33Component implements OnInit {
   angularGrid!: AngularGridInstance;
@@ -23,9 +34,9 @@ export class Example33Component implements OnInit {
   editCommandQueue: EditCommand[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
   serverApiDelay = 500;
   showLazyLoading = false;
-  hideSubTitle = false;
 
   ngOnInit(): void {
     this.initializeGrid();

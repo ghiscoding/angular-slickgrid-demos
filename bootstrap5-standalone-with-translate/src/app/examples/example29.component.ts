@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Column, GridOption, Formatters, AngularSlickgridModule } from 'angular-slickgrid';
-
+import { Component, type OnInit } from '@angular/core';
+import { AngularSlickgridModule, Formatters, type AngularGridInstance, type Column, type GridOption } from 'angular-slickgrid';
 
 const NB_ITEMS = 995;
 
 @Component({
-    template: `<button (click)="clickMe()">I'm a button from an Angular component (click me)</button>
-    @if (clickedTimes) {
-      <div>You've clicked me {{ clickedTimes }} time(s)</div>
-    }`,
-    selector: 'custom-footer',
-    imports: [],
+  template: `<button (click)="clickMe()">I'm a button from an Angular component (click me)</button>
+  @if (clickedTimes) {
+    <div>You've clicked me {{ clickedTimes }} time(s)</div>
+  }`,
+  selector: 'custom-footer',
+  imports: [],
 })
 export class CustomFooterComponent {
   clickedTimes = 0;
@@ -21,13 +20,19 @@ export class CustomFooterComponent {
 }
 
 @Component({
-    templateUrl: './example29.component.html',
-    imports: [AngularSlickgridModule, CustomFooterComponent],
+  templateUrl: './example29.component.html',
+  imports: [AngularSlickgridModule, CustomFooterComponent],
 })
 export class Example29Component implements OnInit {
+  angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
+  hideSubTitle = false;
+
+  angularGridReady(angularGrid: AngularGridInstance) {
+    this.angularGrid = angularGrid;
+  }
 
   ngOnInit(): void {
     this.columnDefinitions = [
@@ -69,5 +74,12 @@ export class Example29Component implements OnInit {
     }
 
     return mockDataset;
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

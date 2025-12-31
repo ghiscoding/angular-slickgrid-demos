@@ -1,5 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AngularGridInstance, Column, Editors, GridOption, OnCellChangeEventArgs } from 'angular-slickgrid';
+import { Component, type OnDestroy, type OnInit } from '@angular/core';
+import {
+  Editors,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type OnCellChangeEventArgs,
+} from 'angular-slickgrid';
 
 const NB_ITEMS = 100;
 
@@ -9,10 +15,10 @@ const NB_ITEMS = 100;
 })
 export class Example37Component implements OnDestroy, OnInit {
   private _darkMode = false;
+  angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
-  angularGrid!: AngularGridInstance;
   hideSubTitle = false;
 
   angularGridReady(angularGrid: AngularGridInstance) {

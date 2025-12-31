@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-
-import { AngularGridInstance, Column, GridOption, ItemMetadata, AngularSlickgridModule } from 'angular-slickgrid';
+import { AngularSlickgridModule, type AngularGridInstance, type Column, type GridOption, type ItemMetadata } from 'angular-slickgrid';
 
 @Component({
-    templateUrl: './example14.component.html',
-    styleUrls: ['./example14.component.scss'],
-    imports: [AngularSlickgridModule],
+  templateUrl: './example14.component.html',
+  styleUrls: ['./example14.component.scss'],
+  imports: [AngularSlickgridModule],
 })
 export class Example14Component implements OnInit {
   angularGrid2!: AngularGridInstance;
@@ -17,6 +16,7 @@ export class Example14Component implements OnInit {
   gridOptions2!: GridOption;
   dataset1: any[] = [];
   dataset2: any[] = [];
+  hideSubTitle = false;
 
   ngOnInit(): void {
     this.prepareGrid1();
@@ -152,5 +152,12 @@ export class Example14Component implements OnInit {
         },
       },
     };
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid2.resizerService.resizeGrid(0);
   }
 }

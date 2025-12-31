@@ -1,25 +1,25 @@
-import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation, type OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
+import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
 import {
-  AngularGridInstance,
   AngularUtilService,
-  Column,
   Editors,
   Filters,
   Formatters,
-  GridOption,
-  type MultipleSelectOption,
-  OnEventArgs,
   SlickGlobalEditorLock,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type MultipleSelectOption,
+  type OnEventArgs,
   type SliderOption,
 } from 'angular-slickgrid';
-import { EditorNgSelectComponent } from './editor-ng-select.component';
 import { CustomAngularComponentEditor } from './custom-angularComponentEditor';
 import { CustomAngularComponentFilter } from './custom-angularComponentFilter';
-import { CustomTitleFormatterComponent } from './custom-titleFormatter.component';
-import { FilterNgSelectComponent } from './filter-ng-select.component';
 import { CustomButtonFormatterComponent } from './custom-buttonFormatter.component';
+import { CustomTitleFormatterComponent } from './custom-titleFormatter.component';
+import { EditorNgSelectComponent } from './editor-ng-select.component';
+import { FilterNgSelectComponent } from './filter-ng-select.component';
 
 const NB_ITEMS = 100;
 
@@ -33,13 +33,13 @@ const NB_ITEMS = 100;
 export class Example26Component implements OnInit {
   private angularUtilService = inject(AngularUtilService);
   private translate = inject(TranslateService);
-
   private _commandQueue: any[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
   dataset!: any[];
   gridObj: any;
+  hideSubTitle = false;
   isAutoEdit = true;
   alertWarning: any;
   updatedObject: any;
@@ -275,6 +275,7 @@ export class Example26Component implements OnInit {
         this._commandQueue.push(editCommand);
         editCommand.execute();
       },
+      externalResources: [new SlickCustomTooltip()],
       i18n: this.translate,
       params: {
         angularUtilService: this.angularUtilService, // provide the service to all at once (Editor, Filter, AsyncPostRender)
@@ -377,5 +378,12 @@ export class Example26Component implements OnInit {
   deleteCell(rowNumber: number) {
     const item = this.angularGrid.dataView.getItem(rowNumber);
     this.angularGrid.gridService.deleteItemById(item.id);
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }

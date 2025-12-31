@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import {
-  type AngularGridInstance,
   Aggregators,
-  type Column,
   Filters,
   Formatters,
+  SortComparers,
+  SortDirectionNumber,
+  type AngularGridInstance,
+  type Column,
   type GridOption,
   type Grouping,
   type Metrics,
   type OnRowCountChangedEventArgs,
-  SortComparers,
-  SortDirectionNumber,
 } from 'angular-slickgrid';
-
 import { randomNumber } from './utilities';
 
 const FETCH_SIZE = 50;

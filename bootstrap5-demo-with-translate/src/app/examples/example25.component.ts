@@ -1,18 +1,17 @@
-import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GraphqlService, GraphqlResult, GraphqlServiceApi } from '@slickgrid-universal/graphql';
-
+import { Component, inject, ViewEncapsulation, type OnInit } from '@angular/core';
+import { GraphqlService, type GraphqlResult, type GraphqlServiceApi } from '@slickgrid-universal/graphql';
+import type { Observable } from 'rxjs';
 import {
-  AngularGridInstance,
-  Column,
   Filters,
   Formatters,
-  GridOption,
-  Metrics,
-  type MultipleSelectOption,
   OperatorType,
+  type AngularGridInstance,
+  type Column,
+  type GridOption,
+  type Metrics,
+  type MultipleSelectOption,
 } from 'angular-slickgrid';
-import { Observable } from 'rxjs';
 
 const COUNTRIES_API = 'https://countries.trevorblades.com/';
 
@@ -38,11 +37,11 @@ export interface Country {
 })
 export class Example25Component implements OnInit {
   private http = inject(HttpClient);
-
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
   gridOptions!: GridOption;
   dataset = [];
+  hideSubTitle = false;
   metrics!: Metrics;
 
   graphqlQuery = '';
@@ -251,5 +250,12 @@ export class Example25Component implements OnInit {
   getLanguages(): Observable<GraphqlResult<{ code: string; name: string; native: string }>> {
     const languageQuery = `query { languages { code, name, native  }}`;
     return this.http.post<GraphqlResult<{ code: string; name: string; native: string }>>(COUNTRIES_API, { query: languageQuery });
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid.resizerService.resizeGrid(0);
   }
 }
