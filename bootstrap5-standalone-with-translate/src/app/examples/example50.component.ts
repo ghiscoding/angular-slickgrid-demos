@@ -6,7 +6,6 @@ import {
   type Column,
   type GridOption,
   type OnClickEventArgs,
-  type RowSelectionModelOption,
 } from 'angular-slickgrid';
 
 export interface Customer {
@@ -68,7 +67,8 @@ export class Example50Component implements OnInit {
       enableHybridSelection: true,
       rowSelectionOptions: {
         selectionType: 'row',
-      } as RowSelectionModelOption,
+        selectActiveRow: true,
+      },
     };
 
     this.columnDefinitions2 = [
