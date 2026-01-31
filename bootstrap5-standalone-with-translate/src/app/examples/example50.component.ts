@@ -67,7 +67,6 @@ export class Example50Component implements OnInit {
       enableHybridSelection: true,
       rowSelectionOptions: {
         selectionType: 'row',
-        selectActiveRow: true,
       },
     };
 

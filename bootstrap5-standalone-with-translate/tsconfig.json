@@ -20,7 +20,8 @@
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
-    "compilationMode": "partial",
+    "compilationMode": "full",
+    "enableIvy": true,
     "preserveWhitespaces": true,
     "strictMetadataEmit": true,
     "strictTemplates": true,

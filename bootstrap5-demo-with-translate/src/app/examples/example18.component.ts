@@ -1,5 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component, inject, type OnDestroy, type OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, type AfterViewInit, type OnDestroy, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
+import { PdfExportService } from '@slickgrid-universal/pdf-export';
 import { TextExportService } from '@slickgrid-universal/text-export';
 import {
   Aggregators,
@@ -24,7 +25,7 @@ const NB_ITEMS = 10_000;
   standalone: false,
 })
 export class Example18Component implements AfterViewInit, OnInit, OnDestroy {
-  private cd = inject(ChangeDetectorRef);
+  private readonly cd = inject(ChangeDetectorRef);
   private _darkMode = false;
   angularGrid!: AngularGridInstance;
   columnDefinitions!: Column[];
@@ -38,6 +39,7 @@ export class Example18Component implements AfterViewInit, OnInit, OnDestroy {
   processing = false;
   selectedGroupingFields: Array<string | GroupingGetterFunction> = ['', '', ''];
   excelExportService = new ExcelExportService();
+  pdfExportService = new PdfExportService();
   textExportService = new TextExportService();
 
   constructor() {
@@ -282,7 +284,12 @@ export class Example18Component implements AfterViewInit, OnInit, OnDestroy {
       enableTextExport: true,
       enableExcelExport: true,
       excelExportOptions: { sanitizeDataExport: true },
-      externalResources: [this.excelExportService, this.textExportService],
+      externalResources: [this.excelExportService, this.pdfExportService, this.textExportService],
+      enablePdfExport: true,
+      pdfExportOptions: {
+        repeatHeadersOnEachPage: true, // defaults to true
+        documentTitle: 'Grouping Grid',
+      },
     };
 
     this.loadData(500);
@@ -342,6 +349,12 @@ export class Example18Component implements AfterViewInit, OnInit, OnDestroy {
     this.excelExportService.exportToExcel({
       filename: 'Export',
       format: 'xlsx',
+    });
+  }
+
+  exportToPdf() {
+    this.pdfExportService.exportToPdf({
+      filename: 'Export',
     });
   }
 

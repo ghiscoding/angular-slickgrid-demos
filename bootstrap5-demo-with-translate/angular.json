@@ -20,10 +20,7 @@
             "polyfills": [
               "zone.js"
             ],
-            "allowedCommonJsDependencies": [
-              "@fnando/sparkline",
-              "stream"
-            ],
+            "allowedCommonJsDependencies": ["@fnando/sparkline", "core-js", "html2canvas", "raf", "rgbcolor"],
             "assets": [
               "src/assets",
               "src/favicon.ico",
@@ -71,6 +68,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
+              "aot": true,
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,

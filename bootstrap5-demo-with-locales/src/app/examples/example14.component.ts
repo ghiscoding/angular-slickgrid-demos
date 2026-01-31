@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, type OnInit } from '@angular/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-
-import { AngularGridInstance, Column, GridOption, ItemMetadata } from 'angular-slickgrid';
+import { PdfExportService } from '@slickgrid-universal/pdf-export';
+import { type AngularGridInstance, type Column, type GridOption, type ItemMetadata } from 'angular-slickgrid';
 
 @Component({
   templateUrl: './example14.component.html',
@@ -9,18 +9,6 @@ import { AngularGridInstance, Column, GridOption, ItemMetadata } from 'angular-s
   standalone: false,
 })
 export class Example14Component implements OnInit {
-  title = 'Example 14: Column Span & Header Grouping';
-  subTitle = `
-  This example demonstrates how to easily span a row over multiple columns & how to group header titles.
-  <ul>
-    <li>Note that you can add Sort but remember that it will sort by the data which the row contains, even if the data is visually hidden by colspan it will still sort it</li>
-    <li>
-      Header Grouping spanning accross multiple columns is working but has some UI issues on window resize.
-      If anyone can fix it, probably some CSS issues, please let us know.
-    </li>
-  </ul>
-  `;
-
   angularGrid2!: AngularGridInstance;
   gridObj2: any;
   columnDefinitions1!: Column[];
@@ -29,6 +17,7 @@ export class Example14Component implements OnInit {
   gridOptions2!: GridOption;
   dataset1: any[] = [];
   dataset2: any[] = [];
+  hideSubTitle = false;
 
   ngOnInit(): void {
     this.prepareGrid1();
@@ -47,7 +36,7 @@ export class Example14Component implements OnInit {
       { id: 'start', name: 'Start', field: 'start', columnGroup: 'Period' },
       { id: 'finish', name: 'Finish', field: 'finish', columnGroup: 'Period' },
       { id: '%', name: '% Complete', field: 'percentComplete', selectable: false, columnGroup: 'Analysis' },
-      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', type: 'boolean', columnGroup: 'Analysis' }
+      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', type: 'boolean', columnGroup: 'Analysis' },
     ];
 
     this.gridOptions1 = {
@@ -66,13 +55,14 @@ export class Example14Component implements OnInit {
         },
       },
       gridMenu: {
-        iconButtonContainer: 'preheader' // we can display the grid menu icon in either the preheader or in the column header (default)
+        iconButtonContainer: 'preheader', // we can display the grid menu icon in either the preheader or in the column header (default)
       },
+      enablePdfExport: true,
       enableExcelExport: true,
       excelExportOptions: {
-        exportWithFormatter: false
+        exportWithFormatter: false,
       },
-      externalResources: [new ExcelExportService()],
+      externalResources: [new ExcelExportService(), new PdfExportService()],
     };
 
     this.dataset1 = this.getData(500);
@@ -80,13 +70,22 @@ export class Example14Component implements OnInit {
 
   prepareGrid2() {
     this.columnDefinitions2 = [
-      { id: 'sel', name: '#', field: 'num', behavior: 'select', cssClass: 'cell-selection', width: 40, resizable: false, selectable: false },
+      {
+        id: 'sel',
+        name: '#',
+        field: 'num',
+        behavior: 'select',
+        cssClass: 'cell-selection',
+        width: 40,
+        resizable: false,
+        selectable: false,
+      },
       { id: 'title', name: 'Title', field: 'title', sortable: true, columnGroup: 'Common Factor' },
       { id: 'duration', name: 'Duration', field: 'duration', columnGroup: 'Common Factor' },
       { id: 'start', name: 'Start', field: 'start', columnGroup: 'Period' },
       { id: 'finish', name: 'Finish', field: 'finish', columnGroup: 'Period' },
       { id: '%', name: '% Complete', field: 'percentComplete', selectable: false, columnGroup: 'Analysis' },
-      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', type: 'boolean', columnGroup: 'Analysis' }
+      { id: 'effort-driven', name: 'Effort Driven', field: 'effortDriven', type: 'boolean', columnGroup: 'Analysis' },
     ];
 
     this.gridOptions2 = {
@@ -100,11 +99,12 @@ export class Example14Component implements OnInit {
       frozenColumn: 2,
       gridMenu: { hideClearFrozenColumnsCommand: false },
       headerMenu: { hideFreezeColumnsCommand: false },
+      enablePdfExport: true,
       enableExcelExport: true,
       excelExportOptions: {
-        exportWithFormatter: false
+        exportWithFormatter: false,
       },
-      externalResources: [new ExcelExportService()],
+      externalResources: [new ExcelExportService(), new PdfExportService()],
     };
 
     this.dataset2 = this.getData(500);
@@ -122,7 +122,7 @@ export class Example14Component implements OnInit {
         percentComplete: Math.round(Math.random() * 100),
         start: '01/01/2009',
         finish: '01/05/2009',
-        effortDriven: (i % 5 === 0)
+        effortDriven: i % 5 === 0,
       };
     }
     return mockDataset;
@@ -143,17 +143,24 @@ export class Example14Component implements OnInit {
       return {
         columns: {
           duration: {
-            colspan: 3 // "duration" will span over 3 columns
-          }
-        }
+            colspan: 3, // "duration" will span over 3 columns
+          },
+        },
       };
     }
     return {
       columns: {
         0: {
-          colspan: '*' // starting at column index 0, we will span accross all column (*)
-        }
-      }
+          colspan: '*', // starting at column index 0, we will span accross all column (*)
+        },
+      },
     };
+  }
+
+  toggleSubTitle() {
+    this.hideSubTitle = !this.hideSubTitle;
+    const action = this.hideSubTitle ? 'add' : 'remove';
+    document.querySelector('.subtitle')?.classList[action]('hidden');
+    this.angularGrid2.resizerService.resizeGrid(0);
   }
 }

@@ -19,10 +19,7 @@
             "polyfills": [
               "zone.js"
             ],
-            "allowedCommonJsDependencies": [
-              "@fnando/sparkline",
-              "stream"
-            ],
+            "allowedCommonJsDependencies": ["@fnando/sparkline", "core-js", "html2canvas", "raf", "rgbcolor"],
             "assets": [
               "src/assets",
               "src/favicon.ico",
@@ -69,6 +66,7 @@
                 }
               ],
               "outputHashing": "all",
+              "aot": true,
               "extractLicenses": true,
               "fileReplacements": [
                 {
@@ -86,7 +84,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "aot": false,
+              "aot": true,
               "extractLicenses": true,
               "fileReplacements": [
                 {

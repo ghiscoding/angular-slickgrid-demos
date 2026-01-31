@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 // the appendTo="body" (necessary for SlickGrid filter) requires the body to be position relative like so
 // <body style="position: relative">
 @Component({
-    template: ` <ng-select
+  template: ` <ng-select
     class="custom no-style-select"
     [items]="collection"
     bindValue="id"
@@ -20,17 +20,17 @@ import { FormsModule } from '@angular/forms';
       {{ item?.name }}
     </ng-template>
   </ng-select>`,
-    imports: [
-        NgSelectComponent,
-        FormsModule,
-        NgLabelTemplateDirective,
-        NgOptionTemplateDirective,
-    ],
+  imports: [
+    NgSelectComponent,
+    FormsModule,
+    NgLabelTemplateDirective,
+    NgOptionTemplateDirective,
+  ],
 })
 export class FilterNgSelectComponent {
   selectedId = '';
   selectedItem: any;
-  collection?: any[]; // this will be filled by the collection of your column definition
+  collection: any[] = []; // this will be filled by the collection of your column definition
   onItemChanged = new Subject<any>(); // object
 
   onChange(item: any) {
