@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, inject, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
-import { AngularSlickgridModule, toCamelCase, type AngularGridInstance, type Column, type GridOption } from 'angular-slickgrid';
+import { AngularSlickgridComponent, toCamelCase, type AngularGridInstance, type Column, type GridOption } from 'angular-slickgrid';
 
 const sampleDataRoot = 'assets/data';
 
@@ -9,10 +9,9 @@ const sampleDataRoot = 'assets/data';
   styles: ['.file-upload { max-width: 300px; }'],
   encapsulation: ViewEncapsulation.None,
   templateUrl: './example17.component.html',
-  imports: [AngularSlickgridModule, FormsModule],
+  imports: [AngularSlickgridComponent, FormsModule],
 })
 export class Example17Component {
-  private readonly cd = inject(ChangeDetectorRef);
   angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
   gridOptions!: GridOption;
@@ -51,7 +50,6 @@ export class Example17Component {
   dynamicallyCreateGrid(csvContent: string) {
     // dispose of any previous grid before creating a new one
     this.gridCreated = false;
-    this.cd.detectChanges();
 
     const dataRows = csvContent?.split('\n');
     const colDefs: Column[] = [];
@@ -103,7 +101,6 @@ export class Example17Component {
     this.dataset = outputData;
     this.columnDefinitions = colDefs;
     this.gridCreated = true;
-    this.cd.detectChanges();
   }
 
   toggleSubTitle() {

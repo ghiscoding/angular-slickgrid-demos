@@ -1,15 +1,15 @@
-import { ComponentRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import type { ComponentRef } from '@angular/core';
+import type { Subscription } from 'rxjs';
 import {
   AngularUtilService,
-  Column,
-  ColumnEditor,
-  Editor,
-  EditorValidator,
-  EditorValidationResult,
-  GridOption,
-  SlickGrid,
   unsubscribeAllObservables,
+  type Column,
+  type ColumnEditor,
+  type Editor,
+  type EditorValidationResult,
+  type EditorValidator,
+  type GridOption,
+  type SlickGrid,
 } from 'angular-slickgrid';
 
 /*
@@ -32,7 +32,7 @@ export class CustomAngularComponentEditor implements Editor {
   grid: SlickGrid;
 
   constructor(private args: any) {
-    this.grid = args && args.grid;
+    this.grid = args?.grid;
     this.init();
   }
 
@@ -156,8 +156,8 @@ export class CustomAngularComponentEditor implements Editor {
 
   loadValue(item: any) {
     const itemObject = item && item[this.columnDef.field];
-    this.componentRef.instance.selectedId = (itemObject && itemObject.id) || '';
-    this.componentRef.instance.selectedItem = itemObject && itemObject;
+    this.componentRef.instance.selectedId = itemObject?.id ?? '';
+    this.componentRef.instance.selectedItem = itemObject;
   }
 
   serializeValue(): any {

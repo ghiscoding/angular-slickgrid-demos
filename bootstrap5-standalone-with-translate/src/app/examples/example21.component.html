@@ -51,7 +51,7 @@
         name="selectedOperator"
         [(ngModel)]="selectedOperator"
         (ngModelChange)="updateFilter()"
-        >
+      >
         @for (operator of operatorList; track operator) {
           <option [ngValue]="operator">{{ operator }}</option>
         }

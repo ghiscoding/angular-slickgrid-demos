@@ -1,9 +1,9 @@
-import { JsonPipe, } from '@angular/common';
-import { Component, inject, ViewEncapsulation, type OnInit } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { Component, ViewEncapsulation, type OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
 import {
-  AngularSlickgridModule,
+  AngularSlickgridComponent,
   AngularUtilService,
   Editors,
   Filters,
@@ -30,11 +30,9 @@ const NB_ITEMS = 100;
   styleUrls: ['./example26.component.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [AngularUtilService],
-  imports: [AngularSlickgridModule, JsonPipe],
+  imports: [AngularSlickgridComponent, JsonPipe],
 })
 export class Example26Component implements OnInit {
-  private angularUtilService = inject(AngularUtilService);
-  private translate = inject(TranslateService);
   private _commandQueue: any[] = [];
   angularGrid!: AngularGridInstance;
   columnDefinitions: Column[] = [];
@@ -52,6 +50,11 @@ export class Example26Component implements OnInit {
     { id: '2', name: 'Pierre' },
     { id: '3', name: 'Paul' },
   ];
+
+  constructor(
+    private angularUtilService: AngularUtilService,
+    private translate: TranslateService
+  ) { }
 
   ngOnInit(): void {
     this.prepareGrid();

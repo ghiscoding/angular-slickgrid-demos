@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { NgSelectComponent, NgLabelTemplateDirective, NgOptionTemplateDirective } from '@ng-select/ng-select';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import { type SearchTerm } from '@slickgrid-universal/common';
+import { Subject } from 'rxjs';
 
 // the appendTo="body" (necessary for SlickGrid filter) requires the body to be position relative like so
 // <body style="position: relative">
@@ -14,27 +15,23 @@ import { FormsModule } from '@angular/forms';
     appendTo="body"
     [clearable]="false"
     (change)="onChange($event)"
-    [(ngModel)]="selectedId"
+    [(ngModel)]="selectedIds"
+    [multiple]="true"
   >
     <ng-template ng-label-tmp ng-option-tmp let-item="item">
-      {{ item?.name }}
+      <span [title]="item?.name">{{ item?.name }}</span>
     </ng-template>
   </ng-select>`,
-  imports: [
-    NgSelectComponent,
-    FormsModule,
-    NgLabelTemplateDirective,
-    NgOptionTemplateDirective,
-  ],
+  imports: [NgSelectComponent, FormsModule, NgLabelTemplateDirective, NgOptionTemplateDirective],
 })
-export class FilterNgSelectComponent {
-  selectedId = '';
-  selectedItem: any;
+export class FilterNgSelectComponent<T = any> {
+  selectedIds = signal<SearchTerm[]>([]);
+  selectedItems = signal<T[]>([]);
   collection: any[] = []; // this will be filled by the collection of your column definition
   onItemChanged = new Subject<any>(); // object
 
-  onChange(item: any) {
-    this.selectedItem = item;
-    this.onItemChanged.next(item);
+  onChange(items: any) {
+    this.selectedItems.set(items);
+    this.onItemChanged.next(items);
   }
 }

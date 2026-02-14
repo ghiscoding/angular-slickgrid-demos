@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Subject } from 'rxjs';
-import { NgSelectComponent, NgLabelTemplateDirective, NgOptionTemplateDirective } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
+import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import { Subject } from 'rxjs';
 
 // the appendTo="body" (necessary for SlickGrid filter) requires the body to be position relative like so
 // <body style="position: relative">
@@ -21,12 +21,7 @@ import { FormsModule } from '@angular/forms';
       {{ item?.name }}
     </ng-template>
   </ng-select>`,
-  imports: [
-    NgSelectComponent,
-    FormsModule,
-    NgLabelTemplateDirective,
-    NgOptionTemplateDirective,
-  ],
+  imports: [NgSelectComponent, FormsModule, NgLabelTemplateDirective, NgOptionTemplateDirective],
 })
 export class EditorNgSelectComponent {
   selectedId = '';

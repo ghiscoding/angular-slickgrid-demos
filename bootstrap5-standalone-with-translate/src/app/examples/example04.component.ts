@@ -4,10 +4,9 @@ import { Component, inject, type OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import {
-  AngularSlickgridModule,
+  AngularSlickgridComponent,
   Filters,
   Formatters,
-  OperatorType,
   type AngularGridInstance,
   type Column,
   type GridOption,
@@ -26,7 +25,7 @@ const URL_SAMPLE_COLLECTION_DATA = 'assets/data/collection_500_numbers.json';
 
 @Component({
   templateUrl: './example04.component.html',
-  imports: [AngularSlickgridModule, DatePipe],
+  imports: [AngularSlickgridComponent, DatePipe],
 })
 export class Example4Component implements OnInit {
   private http = inject(HttpClient);
@@ -77,12 +76,12 @@ export class Example4Component implements OnInit {
           collectionFilterBy: [
             {
               property: 'value',
-              operator: OperatorType.notEqual,
+              operator: '!=',
               value: 360,
             },
             {
               property: 'value',
-              operator: OperatorType.notEqual,
+              operator: '!=',
               value: 365,
             },
           ],
@@ -304,12 +303,12 @@ export class Example4Component implements OnInit {
   }
 
   refreshMetrics(e: Event, args: any) {
-    if (args && args.current >= 0) {
+    if (args?.current >= 0) {
       setTimeout(() => {
         this.metrics = {
           startTime: new Date(),
           endTime: new Date(),
-          itemCount: (args && args.current) || 0,
+          itemCount: args?.current || 0,
           totalItemCount: this.dataset.length || 0,
         };
       });

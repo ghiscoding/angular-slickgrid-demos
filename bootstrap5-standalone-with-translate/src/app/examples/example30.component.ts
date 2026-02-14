@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, type OnDestroy, type OnInit } from '@angular/core';
 import { SlickCompositeEditor, SlickCompositeEditorComponent } from '@slickgrid-universal/composite-editor-component';
 import { SlickCustomTooltip } from '@slickgrid-universal/custom-tooltip-plugin';
 import { ExcelExportService } from '@slickgrid-universal/excel-export';
 import {
-  AngularSlickgridModule,
+  AngularSlickgridComponent,
   Editors,
   Filters,
   formatNumber,
@@ -87,10 +87,9 @@ const myCustomTitleValidator = (value: any, args: any) => {
   templateUrl: './example30.component.html',
   styleUrls: ['./example30.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  imports: [AngularSlickgridModule],
+  imports: [AngularSlickgridComponent],
 })
 export class Example30Component implements OnDestroy, OnInit {
-  private http = inject(HttpClient);
   private _darkMode = false;
   angularGrid!: AngularGridInstance;
   compositeEditorInstance!: SlickCompositeEditorComponent;
@@ -112,7 +111,7 @@ export class Example30Component implements OnDestroy, OnInit {
     { value: 4, label: 'Very Complex' },
   ];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.compositeEditorInstance = new SlickCompositeEditorComponent();
   }
 
@@ -494,7 +493,7 @@ export class Example30Component implements OnDestroy, OnInit {
       },
       externalResources: [new ExcelExportService(), new SlickCustomTooltip(), this.compositeEditorInstance],
       enableFiltering: true,
-      rowSelectionOptions: {
+      selectionOptions: {
         // True (Single Selection), False (Multiple Selections)
         selectActiveRow: false,
       },
@@ -502,7 +501,7 @@ export class Example30Component implements OnDestroy, OnInit {
       showPreHeaderPanel: true,
       preHeaderPanelHeight: 28,
       enableCheckboxSelector: true,
-      enableRowSelection: true,
+      enableSelection: true,
       multiSelect: false,
       checkboxSelector: {
         hideInFilterHeaderRow: false,
