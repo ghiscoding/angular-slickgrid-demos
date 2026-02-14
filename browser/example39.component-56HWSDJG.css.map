@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/examples/example39.component.scss"],
-  "sourcesContent": [".demo39 {\n  .badge {\n    display: none;\n    &.fully-loaded {\n      display: inline-flex;\n    }\n  }\n}"],
-  "mappings": "AACE,CAAA,OAAA,CAAA,MACE,QAAA,KACA,CAFF,OAEE,CAFF,KAEE,CAAA,aACE,QAAA",
-  "names": []
-}
