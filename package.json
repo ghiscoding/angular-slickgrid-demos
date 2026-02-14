@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "cd bootstrap5-standalone-single-locale && yarn install && yarn run dev"
+    "dev": "cd standalone-single-locale && yarn install && yarn run dev"
   },
   "private": false,
   "dependencies": {}

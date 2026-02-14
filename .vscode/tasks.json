@@ -2,56 +2,38 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Start Bootstrap 5 Demo Page",
+      "label": "Start - Standalone Components Demo",
       "type": "shell",
       "command": "yarn dev",
       "options": {
-        "cwd": "${workspaceFolder}/bootstrap5-demo-with-translate",
+        "cwd": "${workspaceFolder}/standalone-with-translate",
       },
       "problemMatcher": []
     },
     {
-      "label": "Start Bootstrap 5 Standalone Components Demo",
+      "label": "Build - Standalone Components Demo",
+      "type": "shell",
+      "command": "yarn build",
+      "options": {
+        "cwd": "${workspaceFolder}/standalone-with-translate",
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Start - Standalone Components Demo (with Custom Locales)",
       "type": "shell",
       "command": "yarn dev",
       "options": {
-        "cwd": "${workspaceFolder}/bootstrap5-standalone-with-translate",
+        "cwd": "${workspaceFolder}/standalone-single-locale",
       },
       "problemMatcher": []
     },
     {
-      "label": "Start Bootstrap 5 Demo Page (with Custom Locales)",
-      "type": "shell",
-      "command": "yarn dev",
-      "options": {
-        "cwd": "${workspaceFolder}/bootstrap5-demo-with-locales",
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Build Bootstrap 5 Demo Page",
+      "label": "Build - Standalone Demo Page (with Custom Locales)",
       "type": "shell",
       "command": "yarn build",
       "options": {
-        "cwd": "${workspaceFolder}/bootstrap5-demo-with-translate",
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Build Bootstrap 5 Standalone Components Demo",
-      "type": "shell",
-      "command": "yarn build",
-      "options": {
-        "cwd": "${workspaceFolder}/bootstrap5-standalone-with-translate",
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Build Bootstrap 5 Demo Page (with Custom Locales)",
-      "type": "shell",
-      "command": "yarn build",
-      "options": {
-        "cwd": "${workspaceFolder}/bootstrap5-demo-with-locales",
+        "cwd": "${workspaceFolder}/standalone-single-locale",
       },
       "problemMatcher": []
     }
