@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { Component, ElementRef, inject, input, Input, output, Renderer2, ViewChild, type AfterViewInit, type OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, EventEmitter, inject, Input, Output, ViewChild, type AfterViewInit, type OnInit } from '@angular/core';
 import {
+  AngularSlickgridComponent,
   type AngularGridInstance,
-  AngularSlickgridModule,
-  type AngularSlickgridComponent,
   type BackendService,
   type BackendServiceOption,
   type Column,
@@ -16,7 +14,6 @@ import {
   type PaginationChangedArgs,
   type SlickDataView,
 } from 'angular-slickgrid';
-
 import { type SwtCommonGridPaginationComponent } from './swt-common-grid-pagination.component';
 import { Logger } from './swt-logger.service';
 
@@ -50,19 +47,15 @@ const DEFAULT_FILTER_TYPING_DEBOUNCE = 750;
       }
     `,
   ],
-  imports: [AngularSlickgridModule],
+  imports: [AngularSlickgridComponent],
 })
 export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendService {
-  private httpClient = inject(HttpClient);
-  private translate = inject(TranslateService);
-  private el = inject(ElementRef);
-  private renderer = inject(Renderer2);
-
   private logger: Logger;
   private defaultPageSize = 20;
+  private http = inject(HttpClient);
 
-  readonly gridHeight = input(100);
-  readonly gridWidth = input(600);
+  @Input() gridHeight = 100;
+  @Input() gridWidth = 600;
 
   gridHeightString!: string;
   gridWidthString!: string;
@@ -89,9 +82,9 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
   options!: BackendServiceOption;
   pagination?: Pagination;
 
-  readonly onFilterChanged = output<FilterChangedArgs>();
-  readonly onPaginationChanged = output<PaginationChangedArgs>();
-  readonly onSortChanged = output<any>();
+  @Output() onFilterChanged: EventEmitter<FilterChangedArgs> = new EventEmitter<FilterChangedArgs>();
+  @Output() onPaginationChanged: EventEmitter<PaginationChangedArgs> = new EventEmitter<PaginationChangedArgs>();
+  @Output() onSortChanged: EventEmitter<any> = new EventEmitter<any>();
 
   sortedGridColumn = '';
   currentPage = 1;
@@ -115,7 +108,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
     gridHeight: 200,
     enableColumnPicker: true,
     enableCellNavigation: true,
-    enableRowSelection: true,
+    enableSelection: true,
     enableCheckboxSelector: false,
     enableFiltering: true,
     rowHeight: 23,
@@ -161,8 +154,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
    * @param httpClient
    */
   constructor() {
-    const httpClient = this.httpClient;
-    this.logger = new Logger('grid', httpClient);
+    this.logger = new Logger('grid', this.http);
 
     this.logger.info('method [constructor] - START/END');
   }
@@ -292,7 +284,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
     }
 
     this.dataset = dataProvider;
-    this.paginationComponent.processing = false;
+    this.paginationComponent.processing.set(false);
     this.logger.info('method [gridData] - END, all data size=' + (rawData && 'size' in rawData ? rawData.size : 0));
 
     // this.gridObj.setSortColumn('excludeType', true);

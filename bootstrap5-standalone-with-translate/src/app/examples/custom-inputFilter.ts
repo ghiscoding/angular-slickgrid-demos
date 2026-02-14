@@ -1,4 +1,4 @@
-import {
+import type {
   Column,
   ColumnFilter,
   Filter,
@@ -6,7 +6,6 @@ import {
   FilterCallback,
   GridOption,
   OperatorType,
-  OperatorString,
   SearchTerm,
   SlickGrid,
 } from 'angular-slickgrid';
@@ -19,7 +18,7 @@ export class CustomInputFilter implements Filter {
   searchTerms: SearchTerm[] = [];
   columnDef!: Column;
   callback!: FilterCallback;
-  operator: OperatorType | OperatorString = OperatorType.equal;
+  operator: OperatorType = 'EQ';
 
   /** Getter for the Column Filter */
   get columnFilter(): ColumnFilter {
@@ -96,7 +95,8 @@ export class CustomInputFilter implements Filter {
       });
       this.filterElm?.classList.remove('filled');
     } else {
-      value === '' ? this.filterElm?.classList.remove('filled') : this.filterElm?.classList.add('filled');
+      const action = value === '' ? 'remove' : 'add';
+      this.filterElm?.classList[action]('filled');
       this.callback(e, { columnDef: this.columnDef, searchTerms: [value], shouldTriggerQuery: this._shouldTriggerQuery });
     }
     // reset both flags for next use

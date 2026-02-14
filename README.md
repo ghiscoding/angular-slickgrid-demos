@@ -27,33 +27,17 @@ Again the following dependencies are totally **OPTIONAL**
 
 ---
 
-## Bootstrap 5 - with `ngx-translate`
-Common Bootstrap 5 demo using `ngx-translate` to provide the use of multiple languages (locales) which can be switched dynamically (on the fly).
-
-##### Install and Start Demo
-```bash
-git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap5-demo-with-translate
-npm install # OR yarn install
-npm start # OR yarn start
-```
-
-##### Build Demo
-```bash
-npm run build # OR yarn run build
-```
-
 ## Bootstrap 5 - Standalone Components with `ngx-translate`
 Common Bootstrap 5 demo using `ngx-translate` to provide the use of multiple languages (locales) which can be switched dynamically (on the fly).
 
-_**Note** This is the same as the `bootstrap5-demo-with-translate` with the exception that it's using Standalone Components instead of the legacy Module approach._
+_**Note** This is the same as the `bootstrap5-standalone-with-translate` with the exception that it's using Standalone Components instead of the legacy Module approach._
 
 ##### Install and Start Demo
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
 cd bootstrap5-standalone-with-translate
-npm install # OR yarn install
-npm start # OR yarn start
+npm install   # OR yarn install
+npm start     # OR yarn start
 ```
 
 ##### Build Demo
@@ -61,15 +45,15 @@ npm start # OR yarn start
 npm run build # OR yarn run build
 ```
 
-## Bootstrap 5 - with Custom Locales (single locale)
-This is the same as the Bootstrap 5 demo except that it uses custom Locale(s) and does not require (neither use) `ngx-translate` and are with fixed Locale(s) (this means you cannot switch locale on the fly). The Locales that were added for the demo (English/French), can be found under [src/app/locales](/bootstrap5-demo-with-locales/src/app/locales). You can use, and define, your own custom Locales via a TypeScript file.
+## Bootstrap 5 - Standalone Components with Custom Locales (single locale)
+This is the same as the Bootstrap 5 demo except that it uses custom Locale(s) and does not require (neither use) `ngx-translate` and are with fixed Locale(s) (this means you cannot switch locale on the fly). The Locales that were added for the demo (English/French), can be found under [src/app/locales](/bootstrap5-standalone-single-locale/src/app/locales). You can use, and define, your own custom Locales via a TypeScript file.
 
 ##### Install and Start Demo
 ```bash
 git clone https://github.com/ghiscoding/angular-slickgrid-demos
-cd bootstrap5-demo-with-locales
-npm install # OR yarn install
-npm start # OR yarn start
+cd bootstrap5-standalone-single-locale
+npm install   # OR yarn install
+npm start     # OR yarn start
 ```
 
 ##### Build Demo

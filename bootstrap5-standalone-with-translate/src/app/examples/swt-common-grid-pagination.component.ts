@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, inject } from '@angular/core';
-import { SwtCommonGridComponent } from './swt-common-grid.component';
-import { Logger } from './swt-logger.service';
 import { HttpClient } from '@angular/common/http';
-import { GridOption } from 'angular-slickgrid';
-import { NgClass } from '@angular/common';
+import { Component, Input, signal, type OnInit } from '@angular/core';
 import { TranslateDirective } from '@ngx-translate/core';
+import { type GridOption } from 'angular-slickgrid';
+import { type SwtCommonGridComponent } from './swt-common-grid.component';
+import { Logger } from './swt-logger.service';
+
 /**
  * Custom pagination component: It allows editing the page number manually
  *  << < Page [1] of 5 > >>
@@ -12,16 +12,16 @@ import { TranslateDirective } from '@ngx-translate/core';
  * @author Saber Chebka, saber.chebka@gmail.com
  */
 @Component({
-    selector: 'swt-common-grid-pagination',
-    template: `
+  selector: 'swt-common-grid-pagination',
+  template: `
     <div class="slick-pagination">
       <div class="slick-pagination-nav">
         <nav aria-label="Page navigation">
           <ul class="pagination">
-            <li class="page-item" [ngClass]="pageNumber === 1 ? 'disabled' : ''">
+            <li class="page-item" [class]="pageNumber === 1 ? 'disabled' : ''">
               <a class="page-link icon-seek-first mdi mdi-page-first" aria-label="First" (click)="changeToFirstPage($event)"> </a>
             </li>
-            <li class="page-item" [ngClass]="pageNumber === 1 ? 'disabled' : ''">
+            <li class="page-item" [class]="pageNumber === 1 ? 'disabled' : ''">
               <a
                 class="page-link icon-seek-prev mdi mdi-chevron-down mdi-rotate-240"
                 aria-label="Previous"
@@ -34,21 +34,16 @@ import { TranslateDirective } from '@ngx-translate/core';
 
         <div class="slick-page-number">
           <span [translate]="'PAGE'"></span>
-          <input type="text" value="{{ pageNumber }}" size="1" (change)="changeToCurrentPage($event)" />
+          <input type="text" [value]="pageNumber" size="1" (change)="changeToCurrentPage($event)" />
           <span [translate]="'OF'"></span><span> {{ pageCount }}</span>
         </div>
 
         <nav aria-label="Page navigation">
           <ul class="pagination">
-            <li class="page-item" [ngClass]="pageNumber === pageCount ? 'disabled' : ''">
-              <a
-                class="page-link icon-seek-next text-center mdi-chevron-down"
-                aria-label="Next"
-                (click)="changeToNextPage($event)"
-              >
-              </a>
+            <li class="page-item" [class]="pageNumber === pageCount ? 'disabled' : ''">
+              <a class="page-link icon-seek-next text-center mdi-chevron-down" aria-label="Next" (click)="changeToNextPage($event)"> </a>
             </li>
-            <li class="page-item" [ngClass]="pageNumber === pageCount ? 'disabled' : ''">
+            <li class="page-item" [class]="pageNumber === pageCount ? 'disabled' : ''">
               <a class="page-link icon-seek-end mdi mdi-page-last" aria-label="Last" (click)="changeToLastPage($event)"> </a>
             </li>
           </ul>
@@ -56,7 +51,7 @@ import { TranslateDirective } from '@ngx-translate/core';
         <nav>
           <ul class="pagination">
             <li class="">
-              <span [hidden]="!processing" class="page-spin">
+              <span [hidden]="!processing()" class="page-spin">
                 <i class="mdi mdi-sync mdi-spin-1s"></i>
               </span>
             </li>
@@ -65,8 +60,8 @@ import { TranslateDirective } from '@ngx-translate/core';
       </div>
     </div>
   `,
-    styles: [
-        `
+  styles: [
+    `
       .page-spin {
         border: none;
         height: 32px;
@@ -78,19 +73,32 @@ import { TranslateDirective } from '@ngx-translate/core';
         background-color: transparent;
       }
     `,
-    ],
-    imports: [NgClass, TranslateDirective],
+  ],
+  imports: [TranslateDirective],
 })
 export class SwtCommonGridPaginationComponent implements OnInit {
-  private httpClient = inject(HttpClient);
-
   private logger: Logger;
 
-  @Input() pageCount = 1;
-  @Input() pageNumber = 1;
-
+  private _pageCount = signal(1);
+  private _pageNumber = signal(1);
   totalItems = 0;
-  processing = false;
+  processing = signal(false);
+
+  @Input()
+  set pageCount(val: number) {
+    this._pageCount.set(val);
+  }
+  get pageCount() {
+    return this._pageCount();
+  }
+
+  @Input()
+  set pageNumber(val: number) {
+    this._pageNumber.set(val);
+  }
+  get pageNumber() {
+    return this._pageNumber();
+  }
 
   // Reference to the real pagination component
   realPagination = true;
@@ -108,9 +116,7 @@ export class SwtCommonGridPaginationComponent implements OnInit {
     return this._gridPaginationOptions;
   }
 
-  constructor() {
-    const httpClient = this.httpClient;
-
+  constructor(private httpClient: HttpClient) {
     this.logger = new Logger('grid-pagination', httpClient);
     this.logger.info('method [constructor] - START/END');
   }
@@ -121,20 +127,20 @@ export class SwtCommonGridPaginationComponent implements OnInit {
 
   changeToFirstPage(event: any) {
     this.logger.info('method [changeToFirstPage] - START/END');
-    this.pageNumber = 1;
+    this._pageNumber.set(1);
     this.onPageChanged(event, this.pageNumber);
   }
 
   changeToLastPage(event: any) {
     this.logger.info('method [changeToLastPage] - START/END');
-    this.pageNumber = this.pageCount;
+    this._pageNumber.set(this.pageCount);
     this.onPageChanged(event, this.pageNumber);
   }
 
   changeToNextPage(event: any) {
     this.logger.info('method [changeToNextPage] - START/END');
     if (this.pageNumber < this.pageCount) {
-      this.pageNumber++;
+      this._pageNumber.set(this.pageNumber + 1);
       this.onPageChanged(event, this.pageNumber);
     }
   }
@@ -142,20 +148,20 @@ export class SwtCommonGridPaginationComponent implements OnInit {
   changeToPreviousPage(event: any) {
     this.logger.info('method [changeToNextPage] - START/END');
     if (this.pageNumber > 1) {
-      this.pageNumber--;
+      this._pageNumber.set(this.pageNumber - 1);
       this.onPageChanged(event, this.pageNumber);
     }
   }
 
   changeToCurrentPage(event: any) {
     this.logger.info('method [changeToCurrentPage] - START/END');
-    this.pageNumber = event.currentTarget.value;
-    if (this.pageNumber < 1) {
-      this.pageNumber = 1;
-    } else if (this.pageNumber > this.pageCount) {
-      this.pageNumber = this.pageCount;
+    let newPage = Number(event.currentTarget.value);
+    if (newPage < 1) {
+      newPage = 1;
+    } else if (newPage > this.pageCount) {
+      newPage = this.pageCount;
     }
-
+    this._pageNumber.set(newPage);
     this.onPageChanged(event, this.pageNumber);
   }
 

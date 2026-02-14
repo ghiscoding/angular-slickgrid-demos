@@ -4,7 +4,7 @@
  *
  * @author Saber Chebka, saber.chebka@gmail.com
  */
-import { type HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class Logger {
   private _clientLogLevel: LoggerLevel = LoggerLevel.INFO;
@@ -119,7 +119,7 @@ export class Logger {
     if (typeof message === 'object') {
       try {
         message = JSON.stringify(message, null, 2);
-      } catch (e) {
+      } catch (_e) {
         additional = [message, ...additional];
         message = 'circular object in message. ';
       }

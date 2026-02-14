@@ -1,0 +1,73 @@
+{
+  "name": "test-slickgrid",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "datagrid",
+    "datatable",
+    "plugin",
+    "slickgrid"
+  ],
+  "homepage": "https://github.com/ghiscoding/slickgrid-universal/tree/master/frameworks/angular-slickgrid",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghiscoding/slickgrid-universal.git",
+    "directory": "frameworks/angular-slickgrid"
+  },
+  "bugs": {
+    "url": "https://github.com/ghiscoding/slickgrid-universal/issues"
+  },
+  "scripts": {
+    "ng": "ng",
+    "dev": "ng serve --port 4600",
+    "build": "ng build --configuration=production",
+    "preview": "vite preview --port=4600",
+    "test": "ng test",
+    "lint": "eslint .",
+    "e2e": "ng e2e"
+  },
+  "private": false,
+  "dependencies": {
+    "@angular/animations": "^21.1.4",
+    "@angular/common": "^21.1.4",
+    "@angular/compiler": "^21.1.4",
+    "@angular/core": "^21.1.4",
+    "@angular/forms": "^21.1.4",
+    "@angular/platform-browser": "^21.1.4",
+    "@angular/platform-browser-dynamic": "^21.1.4",
+    "@angular/router": "^21.1.4",
+    "@formkit/tempo": "^1.0.0",
+    "@slickgrid-universal/composite-editor-component": "^10.0.0-beta.0",
+    "@slickgrid-universal/custom-tooltip-plugin": "^10.0.0-beta.0",
+    "@slickgrid-universal/excel-export": "^10.0.0-beta.0",
+    "@slickgrid-universal/text-export": "^10.0.0-beta.0",
+    "angular-slickgrid": "^10.0.0-beta.0",
+    "bootstrap": "^5.3.8",
+    "dompurify": "^3.3.1",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^21.1.4",
+    "@angular-eslint/builder": "^21.2.0",
+    "@angular-eslint/eslint-plugin": "^21.2.0",
+    "@angular-eslint/eslint-plugin-template": "^21.2.0",
+    "@angular-eslint/schematics": "^21.2.0",
+    "@angular-eslint/template-parser": "^21.2.0",
+    "@angular/cli": "^21.1.4",
+    "@angular/compiler-cli": "^21.1.4",
+    "@angular/language-service": "^21.1.4",
+    "@faker-js/faker": "^10.3.0",
+    "@fnando/sparkline": "^0.3.10",
+    "@popperjs/core": "^2.11.8",
+    "@types/fnando__sparkline": "^0.3.7",
+    "@types/node": "^25.2.3",
+    "angular-eslint": "^21.2.0",
+    "eslint": "^10.0.0",
+    "eslint-plugin-n": "^17.23.2",
+    "sass": "^1.97.3",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.55.0"
+  }
+}
