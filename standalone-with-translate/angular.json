@@ -12,7 +12,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist"
+              "base": "dist",
+              "browser": ""
             },
             "index": "src/index.html",
             "tsConfig": "src/tsconfig.app.json",
@@ -83,6 +84,8 @@
               "optimization": true,
               "outputHashing": "all",
               "aot": true,
+              "sourceMap": false,
+              "namedChunks": false,
               "extractLicenses": true,
               "fileReplacements": [
                 {
