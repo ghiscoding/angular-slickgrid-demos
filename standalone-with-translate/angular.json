@@ -16,9 +16,7 @@
             },
             "index": "src/index.html",
             "tsConfig": "src/tsconfig.app.json",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "allowedCommonJsDependencies": ["@fnando/sparkline", "core-js", "html2canvas", "raf", "rgbcolor"],
             "assets": [
               "src/assets",
