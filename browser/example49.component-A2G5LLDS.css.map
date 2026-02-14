@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example49.component.scss"],
+  "sourcesContent": ["/** override slick-cell to make it look like Excel sheet */\n.demo49 {\n  --slick-border-color: #d4d4d4;\n  --slick-cell-odd-background-color: #fbfbfb;\n  --slick-cell-border-left: 1px solid var(--slick-border-color);\n  --slick-header-menu-display: none;\n  --slick-header-column-height: 20px;\n  --slick-grid-border-color: #d4d4d4;\n  --slick-cell-selected-color: #d4ebfd;\n  --slick-row-selected-color: #d4ebfd;\n  --slick-text-editor-border: 0px;\n  --slick-text-editor-focus-box-shadow: none;\n\n  .slick-cell.copied {\n    background: blue;\n    background: rgba(0, 0, 255, 0.2);\n    transition: 0.5s background;\n  }\n  .slick-dark-mode {\n    --slick-border-color: #595959;\n    --slick-cell-border-left: 1px solid #595959;\n    --slick-grid-border-color: #434343;\n    --slick-cell-selected-color: #434343;\n    --slick-row-selected-color: #434343;\n    --slick-cell-selected-editable-color: #333333;\n  }\n}\n"],
+  "mappings": "AACA,CAAA,OACE,sBAAA,QACA,mCAAA,QACA,0BAAA,IAAA,MAAA,IAAA,sBACA,6BAAA,KACA,8BAAA,KACA,2BAAA,QACA,6BAAA,QACA,4BAAA,QACA,4BAAA,IACA,sCAAA,KAEA,CAZF,OAYE,CAAA,UAAA,CAAA,OACE,WAAA,KACA,WAAA,MACA,WAAA,IAAA,WAEF,CAjBF,OAiBE,CAAA,gBACE,sBAAA,QACA,0BAAA,IAAA,MAAA,QACA,2BAAA,QACA,6BAAA,QACA,4BAAA,QACA,sCAAA",
+  "names": []
+}

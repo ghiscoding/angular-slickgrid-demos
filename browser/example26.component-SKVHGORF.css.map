@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example26.component.scss"],
+  "sourcesContent": ["h3 {\n  font-style: normal;\n  color: #3d3d3d;\n}\n\n#slickGridContainer-grid22 {\n  /* you can change all filters heights via CSS variable */\n  --slick-header-input-height: 34px;\n\n  .slickgrid-container {\n    .slick-headerrow-column {\n      .ng-input {\n        input {\n          height: 100%;\n        }\n      }\n    }\n  }\n}\n\n.slick-headerrow-column ng-component,\n.ng-select {\n  width: 100%;\n}\n\n.ng-select-focused {\n  box-shadow: 0 0 0 0.25rem #0d6efd40;\n}\n\n.cell-menu-dropdown {\n  border: 1px solid #a3a3a3;\n  border-radius: 5px;\n  display: flex;\n  align-items: center;\n  height: 100%;\n  width: max-content;\n  padding: 0 14px;\n  cursor: pointer;\n  &:hover {\n    background-color: #a3a3a3;\n    color: #ffffff;\n  }\n\n  .mdi-chevron-down {\n    margin-left: 5px;\n  }\n}\n"],
+  "mappings": "AAAA,GACE,WAAA,OACA,MAAA,QAGF,CAAA,0BAEE,6BAAA,KAKM,CAPR,0BAOQ,CAAA,oBAAA,CAAA,uBAAA,CAAA,SAAA,MACE,OAAA,KAOV,CARQ,uBAQR,aAAA,CAAA,UAEE,MAAA,KAGF,CAAA,kBACE,WAAA,EAAA,EAAA,EAAA,OAAA,UAGF,CAAA,mBACE,OAAA,IAAA,MAAA,QA9BF,cA+BE,IACA,QAAA,KACA,YAAA,OACA,OAAA,KACA,MAAA,YAnCF,QAoCE,EAAA,KACA,OAAA,QACA,CATF,kBASE,OACE,iBAAA,QACA,MAAA,KAGF,CAdF,mBAcE,CAAA,iBACE,YAAA",
+  "names": []
+}

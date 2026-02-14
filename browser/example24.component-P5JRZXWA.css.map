@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example24.component.scss"],
+  "sourcesContent": [".bold {\n  font-weight: bold;\n}\n\n.italic {\n  font-style: italic;\n}\n\n.grey {\n  color: grey;\n}\n\n.orange {\n  color: orange;\n}\n\n.red {\n  color: red;\n}\n\n.yellow {\n  color: rgb(255, 235, 52);\n}\n\n.pointer {\n  cursor: pointer;\n}\n\n.cell-menu-dropdown-outline {\n  border: 1px solid #a0a0a0;\n  border-radius: 4px;\n  width: max-content;\n  padding: 2px 14px;\n  cursor: pointer;\n  &:hover:not(.disabled) {\n    background-color: #a3a3a3;\n    color: #ffffff;\n  }\n\n  .mdi-caret-down {\n    margin-left: 5px;\n  }\n}\n\n.disabled {\n  color: #d4d4d4;\n  border: 1px solid #d8d8d8;\n}\n.slick-dark-mode {\n  .disabled {\n    border: 1px solid #616161;\n    color: #686868;\n  }\n}\n\n.row.locale {\n  margin-top: 5px;\n}\n\nspan.cell-menu {\n  margin-left: 15px;\n}\n"],
+  "mappings": "AAAA,CAAA,KACE,YAAA,IAGF,CAAA,OACE,WAAA,OAGF,CAAA,KACE,MAAA,KAGF,CAAA,OACE,MAAA,OAGF,CAAA,IACE,MAAA,IAGF,CAAA,OACE,MAAA,QAGF,CAAA,QACE,OAAA,QAGF,CAAA,2BACE,OAAA,IAAA,MAAA,QA7BF,cA8BE,IACA,MAAA,YA/BF,QAgCE,IAAA,KACA,OAAA,QACA,CANF,0BAME,MAAA,KAAA,CAAA,UACE,iBAAA,QACA,MAAA,KAGF,CAXF,2BAWE,CAAA,eACE,YAAA,IAIJ,CAVE,SAWA,MAAA,QACA,OAAA,IAAA,MAAA,QAGA,CAAA,gBAAA,CAfA,SAgBE,OAAA,IAAA,MAAA,QACA,MAAA,QAIJ,CAAA,GAAA,CAAA,OACE,WAAA,IAGF,IAAA,CAAA,UACE,YAAA",
+  "names": []
+}

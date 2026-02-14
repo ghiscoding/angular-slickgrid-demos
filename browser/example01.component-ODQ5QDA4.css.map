@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["angular:styles/component:css;6ea1ca8b6fa0b7169fc7b0b918194edafa04dda9318ecc9021995ac933f9d98f;/home/runner/work/angular-slickgrid-demos/angular-slickgrid-demos/standalone-single-locale/src/app/examples/example01.component.html"],
-  "sourcesContent": ["\n  :host ::ng-deep .border-bottom-dotted {\n    border-bottom: 3px dotted black;\n  }\n\n  :host ::ng-deep .space-bottom {\n    margin-bottom: 20px;\n  }\n"],
-  "mappings": "AACE,MAAM,UAAU,CAAC,qBACf,cAAe,IAAI,OAAO,KAC5B,CAEA,MAAM,UAAU,CAAC,aACf,cAAe,IACjB",
-  "names": []
-}

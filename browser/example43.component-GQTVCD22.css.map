@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example43.component.scss"],
+  "sourcesContent": ["#grid43 {\n  --slick-border-color: #d4d4d4;\n  // --slick-cell-border-left: 1px solid var(--slick-border-color);\n  --slick-header-menu-display: none;\n  --slick-header-column-height: 20px;\n  --slick-grid-border-color: #d4d4d4;\n  --slick-row-selected-color: #d4ebfd;\n  --slick-cell-active-box-shadow: inset 0 0 0 1px #3ca4ff;\n\n  --slick-row-mouse-hover-box-shadow: 0;\n  --slick-cell-odd-background-color: #fff;\n  --slick-cell-border-right: 1px solid var(--slick-border-color);\n  --slick-cell-border-bottom: 0;\n  --slick-cell-border-top: 1px solid var(--slick-border-color);\n  --slick-header-filter-row-border-bottom: 1px solid var(--slick-border-color);\n  --slick-cell-border-left: 0;\n  --slick-cell-box-shadow: none;\n  --slick-row-mouse-hover-color: #fff;\n  --slick-cell-display: flex;\n\n  .slick-cell.rowspan {\n    // background: white;\n    z-index: 9;\n  }\n  .slick-cell {\n    display: flex;\n    align-items: center;\n    /* justify-content: center; */\n  }\n}\n"],
+  "mappings": "AAAA,CAAA,OACE,sBAAA,QAEA,6BAAA,KACA,8BAAA,KACA,2BAAA,QACA,4BAAA,QACA,gCAAA,MAAA,EAAA,EAAA,EAAA,IAAA,QAEA,oCAAA,EACA,mCAAA,KACA,2BAAA,IAAA,MAAA,IAAA,sBACA,4BAAA,EACA,yBAAA,IAAA,MAAA,IAAA,sBACA,yCAAA,IAAA,MAAA,IAAA,sBACA,0BAAA,EACA,yBAAA,KACA,+BAAA,KACA,sBAAA,KAEA,CApBF,OAoBE,CAAA,UAAA,CAAA,QAEE,QAAA,EAEF,CAxBF,OAwBE,CAJA,WAKE,QAAA,KACA,YAAA",
+  "names": []
+}

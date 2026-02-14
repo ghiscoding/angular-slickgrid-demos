@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/examples/example32.component.scss"],
+  "sourcesContent": ["$slick-button-border-color: #ababab !default;\n\n.editable-field {\n  background-color: rgba(227, 240, 251, 0.569) !important;\n}\n.unsaved-editable-field {\n  background-color: #fbfdd1 !important;\n}\n"],
+  "mappings": "AAEA,CAAA,eACE,iBAAA,oBAEF,CAAA,uBACE,iBAAA",
+  "names": []
+}
