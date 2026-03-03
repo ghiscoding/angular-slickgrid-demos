@@ -10,7 +10,6 @@ on:
       - '**'
 env:
   CI: true
-  PREFERRED_WORKSPACE_MANAGER: yarn
 
 jobs:
   run:
@@ -34,15 +33,15 @@ jobs:
       - run: node --version
       - run: npm --version
 
-      - name: Install npm/yarn dependencies
+      - name: Install npm dependencies
         run: |
           cd standalone-with-translate
-          yarn install
+          npm install
 
       - name: Website Prod Build (GitHub demo site)
         run: |
           cd standalone-with-translate
-          yarn build
+          npm run build
 
       # always deploy (re-publish) GitHub demo page with a Prod build
       - name: Deploy to gh-pages

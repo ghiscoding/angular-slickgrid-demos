@@ -71,7 +71,7 @@
     "@types/fnando__sparkline": "^0.3.7",
     "@types/node": "^25.3.3",
     "angular-eslint": "^21.2.0",
-    "eslint": "^10.0.2",
+    "eslint": "^9.39.3",
     "eslint-plugin-n": "^17.24.0",
     "sass": "^1.97.3",
     "ts-node": "^10.9.2",
