@@ -1,4 +1,4 @@
-body {
+.grid51-container {
   --slick-menu-item-height: 30px;
   --slick-menu-line-height: 30px;
   --slick-column-picker-item-height: 28px;
@@ -23,6 +23,26 @@ body {
   .slick-menu-footer {
     padding: 4px 6px;
     border-top: 1px solid #c0c0c0;
+  }
+}
+
+body {
+  .slick-menu-item.slot-menu-container {
+    --slick-menu-item-height: 40px;
+    --slick-menu-item-hover-border: 1px solid transparent;
+    --slick-menu-item-hover-color: transparent !important;
+
+    .footer-buttons-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
+    }
+
+    .footer-btn {
+      flex: 1;
+      justify-content: center;
+    }
   }
 }
 
