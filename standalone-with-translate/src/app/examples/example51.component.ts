@@ -16,7 +16,7 @@ import {
   type MenuCommandItem,
 } from 'angular-slickgrid';
 
-const NB_ITEMS = 2000;
+const NB_ITEMS = 4000;
 
 interface ReportItem {
   id: number;
