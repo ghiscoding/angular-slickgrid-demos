@@ -2,16 +2,25 @@
 ## Multiple Demos of the [Angular-Slickgrid](https://github.com/ghiscoding/slickgrid-universal/tree/master/frameworks/angular-slickgrid) library
 
 ### Installation
+
 Choose the feature you want, there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other examples are all with `ngx-translate` (dynamically switch language on the fly).
+
+### Stackblitz
+
+Open in Stackblitz
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/ghiscoding/angular-slickgrid-demos)
 
 #### VScode
 If you use Visual Studio Code, you can also run each of the demo through the multiple VSCode Tasks.
 
 ## Important Note
 ### Angular-Slickgrid & Slickgrid-Universal compatibility
+
 For a full compatibility table of Angular-Slickgrid with Slickgrid-Universal, you can consult the [Versions Compatibility Table - Wiki](https://github.com/ghiscoding/Angular-Slickgrid/wiki/Versions-Compatibility-Table)
 
 ### Optional NPM Packages
+
 Please note that some of the npm packages installed in these demos are **optional** and are installed **only** for demo purposes. If you don't need the feature then don't install it (remove it from your `package.json`) and you'll end up with a smaller production build.
 
 Again the following dependencies are totally **OPTIONAL**
