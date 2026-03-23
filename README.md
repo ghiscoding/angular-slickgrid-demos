@@ -9,7 +9,10 @@ Choose the feature you want, there's a demo with Custom Locales (without `ngx-tr
 
 Open in Stackblitz
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/ghiscoding/angular-slickgrid-demos)
+| Stackblitz | Description |
+| ---------- | ----------- |
+| [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/ghiscoding/angular-slickgrid-demos) | with I18N Translate |
+| [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/ghiscoding/angular-slickgrid-demos/tree/master/standalone-single-locale) | Single Locale (_without i18n_) |
 
 #### VScode
 If you use Visual Studio Code, you can also run each of the demo through the multiple VSCode Tasks.
