@@ -38,11 +38,11 @@
     "@angular/platform-browser-dynamic": "^21.2.4",
     "@angular/router": "^21.2.4",
     "@formkit/tempo": "^1.0.0",
-    "@slickgrid-universal/composite-editor-component": "^10.2.0",
-    "@slickgrid-universal/custom-tooltip-plugin": "^10.2.0",
-    "@slickgrid-universal/excel-export": "^10.2.0",
-    "@slickgrid-universal/text-export": "^10.2.0",
-    "angular-slickgrid": "^10.2.0",
+    "@slickgrid-universal/composite-editor-component": "^10.3.0",
+    "@slickgrid-universal/custom-tooltip-plugin": "^10.3.0",
+    "@slickgrid-universal/excel-export": "^10.3.0",
+    "@slickgrid-universal/text-export": "^10.3.0",
+    "angular-slickgrid": "^10.3.0",
     "bootstrap": "^5.3.8",
     "dompurify": "^3.3.3",
     "rxjs": "^7.8.2"
@@ -57,20 +57,20 @@
     "@angular/cli": "^21.2.2",
     "@angular/compiler-cli": "^21.2.4",
     "@angular/language-service": "^21.2.4",
-    "@faker-js/faker": "^10.3.0",
+    "@faker-js/faker": "^10.4.0",
     "@fnando/sparkline": "^0.3.10",
     "@popperjs/core": "^2.11.8",
     "@types/fnando__sparkline": "^0.3.7",
     "@types/node": "^25.5.0",
-    "angular-eslint": "^21.3.0",
+    "angular-eslint": "^21.3.1",
     "eslint": "^9.39.4",
     "eslint-plugin-n": "^17.24.0",
     "sass": "^1.98.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.57.0"
+    "typescript-eslint": "^8.57.2"
   },
   "overrides": {
-    "undici": "^7.24.2"
+    "undici": "^7.24.5"
   }
 }
