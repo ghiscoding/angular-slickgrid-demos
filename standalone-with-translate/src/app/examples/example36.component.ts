@@ -61,7 +61,7 @@ export class CustomSumAggregator implements Aggregator {
   constructor(
     public readonly field: number | string,
     public taxRate: number
-  ) { }
+  ) {}
 
   get type(): string {
     return this._type;

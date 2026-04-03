@@ -147,11 +147,11 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
       this._paginationComponent = value;
       this.gridOptions.backendServiceApi = {
         service: this,
-        preProcess: () => { },
+        preProcess: () => {},
         process: () => {
           return null;
         },
-        postProcess: () => { },
+        postProcess: () => {},
       } as any;
       this._paginationComponent.gridPaginationOptions = this.gridOptions;
       this.angularSlickGrid.createBackendApiInternalPostProcessCallback(this.gridOptions);
@@ -276,7 +276,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
     _colValidationMap = null,
     _checkHeader = false,
     _cboLinked = false
-  ) { }
+  ) {}
 
   set gridData(rawData: any) {
     this.logger.info('method [gridData] - START');
@@ -337,7 +337,7 @@ export class SwtCommonGridComponent implements OnInit, AfterViewInit, BackendSer
     this.pagination = pagination;
   }
 
-  resetPaginationOptions() { }
+  resetPaginationOptions() {}
 
   updateOptions(serviceOptions?: Partial<BackendServiceOption>) {
     this.options = { ...this.options, ...serviceOptions };

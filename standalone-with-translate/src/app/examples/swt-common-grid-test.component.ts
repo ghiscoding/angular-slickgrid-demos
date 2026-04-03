@@ -83,9 +83,9 @@ export class SwtCommonGridTestComponent implements OnInit, AfterViewInit {
   updateGridData() {
     this.currentUrl.set(
       `${this.testurl}` +
-      `&currentPage=${this.commonGrid.currentPage}` +
-      `&selectedSort=${this.commonGrid.sortedGridColumn}` +
-      `&selectedFilter=${this.commonGrid.filteredGridColumns}`
+        `&currentPage=${this.commonGrid.currentPage}` +
+        `&selectedSort=${this.commonGrid.sortedGridColumn}` +
+        `&selectedFilter=${this.commonGrid.filteredGridColumns}`
     );
     // Real HTTP call
     /*this.httpClient.get(this.currentUrl).subscribe(
