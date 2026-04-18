@@ -15,9 +15,10 @@ jobs:
   run:
     name: Node ${{ matrix.node }}
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
+    # This sets the base directory for every 'run' step below
+    defaults:
+      run:
+        working-directory: ./standalone-with-translate
 
     steps:
       - name: Checkout
@@ -35,22 +36,22 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: "pnpm"
+          # Ensure cache looks in the correct folder for pnpm-lock.yaml
+          cache-dependency-path: standalone-with-translate/pnpm-lock.yaml
 
       - run: node --version
       - run: pnpm --version
 
-      - name: Run pnpm install dependencies
-        run: pnpm install
+      - run: pnpm install
 
-      - name: Website Prod Build (GitHub demo site)
-        run: |
-          cd standalone-with-translate
-          pnpm run build
+      - name: Website Prod Build
+        run: pnpm run build # No 'cd' needed anymore
 
-      # always deploy (re-publish) GitHub demo page with a Prod build
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Note: publish_dir is relative to the REPO ROOT,
+          # not the job's working-directory default.
           publish_dir: ./standalone-with-translate/dist
