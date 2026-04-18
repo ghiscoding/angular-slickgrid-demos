@@ -45,6 +45,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unused-vars': ['error', { 'argsIgnorePattern': '^_', 'destructuredArrayIgnorePattern': '^_', caughtErrors: 'none' }],
       '@typescript-eslint/no-explicit-any': 'off',
       'no-case-declarations': 'off',
+      'no-useless-assignment': 'off'
     },
   },
   {
