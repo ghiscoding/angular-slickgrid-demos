@@ -47,6 +47,9 @@ importers:
       '@slickgrid-universal/angular-row-detail-plugin':
         specifier: ^10.5.0
         version: 10.5.0(@angular/common@21.2.9(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.9(@angular/compiler@21.2.9)(rxjs@7.8.2))
+      '@slickgrid-universal/common':
+        specifier: ^10.5.0
+        version: 10.5.0
       '@slickgrid-universal/composite-editor-component':
         specifier: ^10.5.0
         version: 10.5.0

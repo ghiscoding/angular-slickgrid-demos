@@ -35,6 +35,9 @@ importers:
       '@formkit/tempo':
         specifier: ^1.0.0
         version: 1.0.0
+      '@slickgrid-universal/common':
+        specifier: ^10.5.0
+        version: 10.5.0
       '@slickgrid-universal/composite-editor-component':
         specifier: ^10.5.0
         version: 10.5.0

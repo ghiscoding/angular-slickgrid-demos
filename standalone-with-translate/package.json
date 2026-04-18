@@ -46,6 +46,7 @@
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "@slickgrid-universal/angular-row-detail-plugin": "^10.5.0",
+    "@slickgrid-universal/common": "^10.5.0",
     "@slickgrid-universal/composite-editor-component": "^10.5.0",
     "@slickgrid-universal/custom-tooltip-plugin": "^10.5.0",
     "@slickgrid-universal/excel-export": "^10.5.0",
