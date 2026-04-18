@@ -7,7 +7,7 @@ on:
       - master
   pull_request:
     branches:
-      - '**'
+      - "**"
 env:
   CI: true
 
@@ -20,28 +20,32 @@ jobs:
       fail-fast: false
 
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v6
         with:
-          fetch-depth: 3
+          fetch-depth: 0
 
-      - name: Set Node.js version
-        uses: actions/setup-node@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
         with:
-          node-version: 24
+          run_install: false
+
+      - name: Set NodeJS
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          cache: "pnpm"
 
       - run: node --version
-      - run: npm --version
+      - run: pnpm --version
 
-      - name: Install npm dependencies
-        run: |
-          cd standalone-with-translate
-          npm install
+      - name: Run pnpm install dependencies
+        run: pnpm install
 
       - name: Website Prod Build (GitHub demo site)
         run: |
           cd standalone-with-translate
-          npm run build
+          pnpm run build
 
       # always deploy (re-publish) GitHub demo page with a Prod build
       - name: Deploy to gh-pages
