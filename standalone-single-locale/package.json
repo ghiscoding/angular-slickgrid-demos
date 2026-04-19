@@ -28,10 +28,6 @@
     "e2e": "ng e2e"
   },
   "private": false,
-  "engines": {
-    "pnpm": "10.x"
-  },
-  "packageManager": "pnpm@10.28.2",
   "dependencies": {
     "@angular/animations": "^21.2.9",
     "@angular/common": "^21.2.9",
@@ -74,7 +70,7 @@
     "sass": "^1.99.0",
     "ts-node": "^10.9.2",
     "tslib": "^2.8.1",
-    "typescript": "~6.0.3",
+    "typescript": "~5.9.3",
     "typescript-eslint": "^8.58.2"
   },
   "overrides": {

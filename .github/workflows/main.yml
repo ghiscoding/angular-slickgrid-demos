@@ -1,7 +1,5 @@
 name: GitHub Actions
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch on Push and any branches on PR
   push:
     branches:
       - master
@@ -13,9 +11,8 @@ env:
 
 jobs:
   run:
-    name: Node ${{ matrix.node }}
+    name: Build
     runs-on: ubuntu-latest
-    # This sets the base directory for every 'run' step below
     defaults:
       run:
         working-directory: ./standalone-with-translate
@@ -26,32 +23,25 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v5
-        with:
-          run_install: false
-
       - name: Set NodeJS
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.node }}
-          cache: "pnpm"
-          # Ensure cache looks in the correct folder for pnpm-lock.yaml
-          cache-dependency-path: standalone-with-translate/pnpm-lock.yaml
+          node-version: 24
+          cache: "npm"
+          cache-dependency-path: standalone-with-translate/package-lock.json
 
       - run: node --version
-      - run: pnpm --version
+      - run: npm --version
 
-      - run: pnpm install
+      # Use 'npm ci' for faster, reliable builds in CI environments
+      - run: npm ci
 
       - name: Website Prod Build
-        run: pnpm run build # No 'cd' needed anymore
+        run: npm run build
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Note: publish_dir is relative to the REPO ROOT,
-          # not the job's working-directory default.
           publish_dir: ./standalone-with-translate/dist
