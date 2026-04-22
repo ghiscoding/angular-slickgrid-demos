@@ -38,14 +38,14 @@
     "@angular/platform-browser-dynamic": "^21.2.9",
     "@angular/router": "^21.2.9",
     "@formkit/tempo": "^1.0.0",
-    "@slickgrid-universal/common": "^10.5.0",
-    "@slickgrid-universal/composite-editor-component": "^10.5.0",
-    "@slickgrid-universal/custom-tooltip-plugin": "^10.5.0",
-    "@slickgrid-universal/excel-export": "^10.5.0",
-    "@slickgrid-universal/text-export": "^10.5.0",
-    "angular-slickgrid": "^10.5.0",
+    "@slickgrid-universal/common": "^10.5.1",
+    "@slickgrid-universal/composite-editor-component": "^10.5.1",
+    "@slickgrid-universal/custom-tooltip-plugin": "^10.5.1",
+    "@slickgrid-universal/excel-export": "^10.5.1",
+    "@slickgrid-universal/text-export": "^10.5.1",
+    "angular-slickgrid": "^10.5.1",
     "bootstrap": "^5.3.8",
-    "dompurify": "^3.4.0",
+    "dompurify": "^3.4.1",
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
@@ -71,7 +71,7 @@
     "ts-node": "^10.9.2",
     "tslib": "^2.8.1",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.58.2"
+    "typescript-eslint": "^8.59.0"
   },
   "overrides": {
     "undici": "^8.1.0"

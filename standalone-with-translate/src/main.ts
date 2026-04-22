@@ -1,19 +1,28 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { enableProdMode, importProvidersFrom, inject, Injector, provideAppInitializer } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { provideTranslateService, TranslateService } from '@ngx-translate/core';
-import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AngularSlickgridComponent, GridOption } from 'angular-slickgrid';
-import DOMPurify from 'dompurify';
-import { TabsModule } from 'ngx-bootstrap/tabs';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from "@angular/common/http";
+import {
+  enableProdMode,
+  importProvidersFrom,
+  inject,
+  Injector,
+  provideAppInitializer,
+} from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { bootstrapApplication, BrowserModule } from "@angular/platform-browser";
+import { RouterModule } from "@angular/router";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { provideTranslateService, TranslateService } from "@ngx-translate/core";
+import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
+import { AngularSlickgridComponent, GridOption } from "angular-slickgrid";
+import DOMPurify from "dompurify";
+import { TabsModule } from "ngx-bootstrap/tabs";
 
-import { routes } from './app/app-routing.module';
-import { AppComponent } from './app/app.component';
-import { appInitializerFactory } from './app/app.initializer';
-import { environment } from './environments/environment';
+import { routes } from "./app/app-routing.module";
+import { AppComponent } from "./app/app.component";
+import { appInitializerFactory } from "./app/app.initializer";
+import { environment } from "./environments/environment";
 
 if (environment.production) {
   enableProdMode();
@@ -23,26 +32,42 @@ if (environment.production) {
 const gridOptionConfig: GridOption = {
   enableAutoResize: true,
   autoResize: {
-    container: '#demo-container',
+    container: "#demo-container",
     rightPadding: 10,
   },
   // we strongly suggest you add DOMPurify as a sanitizer for security reasons (XSS, etc.)
   // the "level" attribute is used by SlickGrid for Grouping & Tree Data level indentation
-  sanitizer: (dirtyHtml) => DOMPurify.sanitize(dirtyHtml, { ADD_ATTR: ['level'], RETURN_TRUSTED_TYPE: true }),
+  sanitizer: (dirtyHtml) =>
+    DOMPurify.sanitize(dirtyHtml, {
+      ADD_ATTR: ["level"],
+      RETURN_TRUSTED_TYPE: true,
+    }),
 };
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, FormsModule, NgSelectModule, RouterModule.forRoot(routes, { useHash: true }), TabsModule.forRoot()),
+    importProvidersFrom(
+      BrowserModule,
+      FormsModule,
+      NgSelectModule,
+      RouterModule.forRoot(routes, { useHash: true }),
+      TabsModule,
+    ),
     AngularSlickgridComponent,
-    { provide: 'defaultGridOption', useValue: gridOptionConfig },
+    { provide: "defaultGridOption", useValue: gridOptionConfig },
     provideAppInitializer(() => {
-      const initializerFn = appInitializerFactory(inject(TranslateService), inject(Injector));
+      const initializerFn = appInitializerFactory(
+        inject(TranslateService),
+        inject(Injector),
+      );
       return initializerFn();
     }),
     provideTranslateService({
-      fallbackLang: 'en',
-      loader: provideTranslateHttpLoader({ prefix: './assets/i18n/', suffix: '.json' }),
+      fallbackLang: "en",
+      loader: provideTranslateHttpLoader({
+        prefix: "./assets/i18n/",
+        suffix: ".json",
+      }),
     }),
     provideHttpClient(withInterceptorsFromDi()),
   ],
