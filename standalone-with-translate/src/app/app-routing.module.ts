@@ -1,6 +1,5 @@
-import { type Routes } from "@angular/router";
+import { type Routes } from '@angular/router';
 
-// prettier-ignore
 export const routes: Routes = [
   { path: 'home', loadComponent: () => import('./examples/home.component').then((m) => m.HomeComponent) },
   { path: 'example01', loadComponent: () => import('./examples/example01.component').then((m) => m.Example1Component) },
