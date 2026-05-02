@@ -19,9 +19,7 @@ import{c as _i}from"./chunk-N2SQW2F3.js";import{d as Ei}from"./chunk-IP7EACKI.js
         `),u(31,"a",12),l(32," Home "),d(),l(33,`
       `),d(),l(34,`
       `),u(35,"li",11),l(36,`
-        `),u(37,"a",13),l(38,`
-          Documentation
-        `),d(),l(39,`
+        `),u(37,"a",13),l(38," Documentation "),d(),l(39,`
       `),d(),l(40,`
     `),d(),l(41,`
   `),d(),l(42,`
@@ -32,9 +30,7 @@ import{c as _i}from"./chunk-N2SQW2F3.js";import{d as Ei}from"./chunk-IP7EACKI.js
     `),u(48,"section",15),l(49,`
       `),u(50,"ul",16),l(51,`
         `),u(52,"li",17),l(53,`
-          `),u(54,"a",13),l(55,`
-            \u{1F4D8} Documentation
-          `),d(),l(56,`
+          `),u(54,"a",13),l(55," \u{1F4D8} Documentation "),d(),l(56,`
         `),d(),l(57,`
         `),u(58,"li",11),l(59,`
           `),u(60,"a",18),l(61,"1- Basic Grid / 2 Grids"),d(),l(62,`
@@ -85,8 +81,7 @@ import{c as _i}from"./chunk-N2SQW2F3.js";import{d as Ei}from"./chunk-IP7EACKI.js
           `),u(150,"a",18),l(151,"16- Row Move"),d(),l(152,`
         `),d(),l(153,`
         `),u(154,"li",11),l(155,`
-          `),u(156,"a",18),l(157,`17- Create Grid from CSV
-          `),d(),l(158,`
+          `),u(156,"a",18),l(157,"17- Create Grid from CSV "),d(),l(158,`
         `),d(),l(159,`
         `),u(160,"li",11),l(161,`
           `),u(162,"a",18),l(163,"18- Draggable Grouping"),d(),l(164,`
@@ -110,89 +105,58 @@ import{c as _i}from"./chunk-N2SQW2F3.js";import{d as Ei}from"./chunk-IP7EACKI.js
           `),u(198,"a",18),l(199,"24- Cell & Context Menu"),d(),l(200,`
         `),d(),l(201,`
         `),u(202,"li",11),l(203,`
-          `),u(204,"a",18),l(205,`
-            25- GraphQL without Pagination
-          `),d(),l(206,`
+          `),u(204,"a",18),l(205," 25- GraphQL without Pagination "),d(),l(206,`
         `),d(),l(207,`
         `),u(208,"li",11),l(209,`
           `),u(210,"a",18),l(211,"26- Use of Angular Components"),d(),l(212,`
         `),d(),l(213,`
         `),u(214,"li",11),l(215,`
-          `),u(216,"a",18),l(217,`
-            27- Tree Data (Parent/Child)
-          `),d(),l(218,`
+          `),u(216,"a",18),l(217," 27- Tree Data (Parent/Child) "),d(),l(218,`
         `),d(),l(219,`
         `),u(220,"li",11),l(221,`
-          `),u(222,"a",18),l(223,`
-            28- Tree Data (Hierarchical)
-          `),d(),l(224,`
+          `),u(222,"a",18),l(223," 28- Tree Data (Hierarchical) "),d(),l(224,`
         `),d(),l(225,`
         `),u(226,"li",11),l(227,`
-          `),u(228,"a",18),l(229,`
-            29- Custom header & footer templates
-          `),d(),l(230,`
+          `),u(228,"a",18),l(229," 29- Custom header & footer templates "),d(),l(230,`
         `),d(),l(231,`
         `),u(232,"li",11),l(233,`
-          `),u(234,"a",18),l(235,`
-            30- Composite Editor Modal
-          `),d(),l(236,`
+          `),u(234,"a",18),l(235," 30- Composite Editor Modal "),d(),l(236,`
         `),d(),l(237,`
         `),u(238,"li",11),l(239,`
           `),u(240,"a",18),l(241,"31- Backend Server Custom Paging"),d(),l(242,`
         `),d(),l(243,`
         `),u(244,"li",11),l(245,`
-          `),u(246,"a",18),l(247,`
-            32- Resize by Cell Content
-          `),d(),l(248,`
+          `),u(246,"a",18),l(247," 32- Resize by Cell Content "),d(),l(248,`
         `),d(),l(249,`
         `),u(250,"li",11),l(251,`
-          `),u(252,"a",18),l(253,`
-            33- Regular & Custom Tooltip
-          `),d(),l(254,`
+          `),u(252,"a",18),l(253," 33- Regular & Custom Tooltip "),d(),l(254,`
         `),d(),l(255,`
         `),u(256,"li",11),l(257,`
-          `),u(258,"a",18),l(259,`
-            34- Real-Time Trading Platform
-          `),d(),l(260,`
+          `),u(258,"a",18),l(259," 34- Real-Time Trading Platform "),d(),l(260,`
         `),d(),l(261,`
         `),u(262,"li",11),l(263,`
-          `),u(264,"a",18),l(265,`
-            35- Row Based Editing
-          `),d(),l(266,`
+          `),u(264,"a",18),l(265," 35- Row Based Editing "),d(),l(266,`
         `),d(),l(267,`
         `),u(268,"li",11),l(269,`
-          `),u(270,"a",18),l(271,`
-            36- Excel Export Formulas
-          `),d(),l(272,`
+          `),u(270,"a",18),l(271," 36- Excel Export Formulas "),d(),l(272,`
         `),d(),l(273,`
         `),u(274,"li",11),l(275,`
-          `),u(276,"a",18),l(277,`
-            37- Footer Totals Row
-          `),d(),l(278,`
+          `),u(276,"a",18),l(277," 37- Footer Totals Row "),d(),l(278,`
         `),d(),l(279,`
         `),u(280,"li",11),l(281,`
-          `),u(282,"a",18),l(283,`
-            38- Infinite Scroll with OData
-          `),d(),l(284,`
+          `),u(282,"a",18),l(283," 38- Infinite Scroll with OData "),d(),l(284,`
         `),d(),l(285,`
         `),u(286,"li",11),l(287,`
-          `),u(288,"a",18),l(289,`
-            39- Infinite Scroll with GraphQL
-          `),d(),l(290,`
+          `),u(288,"a",18),l(289," 39- Infinite Scroll with GraphQL "),d(),l(290,`
         `),d(),l(291,`
         `),u(292,"li",11),l(293,`
-          `),u(294,"a",18),l(295,`
-            40- Infinite Scroll from JSON data
-          `),d(),l(296,`
+          `),u(294,"a",18),l(295," 40- Infinite Scroll from JSON data "),d(),l(296,`
         `),d(),l(297,`
         `),u(298,"li",11),l(299,`
-          `),u(300,"a",18),l(301,`
-            41- Drag & Drop
-          `),d(),l(302,`
+          `),u(300,"a",18),l(301," 41- Drag & Drop "),d(),l(302,`
         `),d(),l(303,`
         `),u(304,"li",11),l(305,`
-          `),u(306,"a",18),l(307,`42- Custom Pagination
-          `),d(),l(308,`
+          `),u(306,"a",18),l(307,"42- Custom Pagination "),d(),l(308,`
         `),d(),l(309,`
         `),u(310,"li",11),l(311,`
           `),u(312,"a",18),l(313,"43- Colspan/Rowspan (timesheets)"),d(),l(314,`
