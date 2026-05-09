@@ -5,7 +5,7 @@ on:
       - master
   pull_request:
     branches:
-      - "**"
+      - '**'
 env:
   CI: true
 
@@ -27,14 +27,14 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
-          cache: "npm"
+          cache: 'npm'
           cache-dependency-path: standalone-with-translate/package-lock.json
 
       - run: node --version
       - run: npm --version
 
       # Use 'npm ci' for faster, reliable builds in CI environments
-      - run: npm ci
+      - run: npm ci --force
 
       - name: Website Prod Build
         run: npm run build
