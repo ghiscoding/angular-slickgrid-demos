@@ -51,7 +51,7 @@
     "@slickgrid-universal/pdf-export": "^10.7.1",
     "@slickgrid-universal/sql": "^10.7.1",
     "@slickgrid-universal/text-export": "^10.7.1",
-    "angular-slickgrid": "^10.7.0",
+    "angular-slickgrid": "^10.7.1",
     "bootstrap": "^5.3.8",
     "dompurify": "^3.4.3",
     "ngx-bootstrap": "^21.2.0",
