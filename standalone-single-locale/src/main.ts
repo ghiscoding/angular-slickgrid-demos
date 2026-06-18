@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { enableProdMode, importProvidersFrom, } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
@@ -31,6 +31,6 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(BrowserModule, FormsModule, RouterModule.forRoot(routes, { useHash: true })),
     AngularSlickgridComponent,
     { provide: 'defaultGridOption', useValue: gridOptionConfig },
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
   ],
 }).catch((err) => console.log(err));
