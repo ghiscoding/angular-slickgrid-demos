@@ -1,6 +1,7 @@
 import {
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr
 } from "@angular/common/http";
 import {
   enableProdMode,
@@ -69,6 +70,6 @@ bootstrapApplication(AppComponent, {
         suffix: ".json",
       }),
     }),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
   ],
 }).catch((err) => console.log(err));

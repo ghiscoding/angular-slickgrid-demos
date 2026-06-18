@@ -82,7 +82,7 @@
       <br />
       @if (metrics()) {
         <span>
-          <b>Metrics:</b> {{ metrics()?.endTime | date: "yyyy-MM-dd hh:mm aaaaa'm'" }} | {{ metrics()?.executionTime }}ms |
+          <b>Metrics:</b> {{ $safeNavigationMigration(metrics()?.endTime) | date: "yyyy-MM-dd hh:mm aaaaa'm'" }} | {{ metrics()?.executionTime }}ms |
           {{ metrics()?.totalItemCount }} items
         </span>
       }

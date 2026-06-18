@@ -50,42 +50,74 @@ export class Example2Component implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.columnDefinitions = [
-      { id: 'title', name: 'Titre', field: 'id', sortable: true, minWidth: 100, filterable: true, formatter: taskFormatter, params: { useFormatterOuputToFilter: true } },
+      {
+        id: 'title',
+        name: 'Titre',
+        field: 'id',
+        sortable: true,
+        minWidth: 100,
+        filterable: true,
+        formatter: taskFormatter,
+        params: { useFormatterOuputToFilter: true },
+      },
       { id: 'description', name: 'Description', field: 'description', filterable: true, sortable: true, minWidth: 80 },
       {
-        id: 'duration', name: 'Durée (jours)', field: 'duration', sortable: true,
+        id: 'duration',
+        name: 'Durée (jours)',
+        field: 'duration',
+        sortable: true,
         formatter: Formatters.percentCompleteBar,
         minWidth: 100,
         filterable: true,
-        filter: { model: Filters.compoundSlider, operator: '>=' }
+        filter: { model: Filters.compoundSlider, operator: '>=' },
       },
       {
-        id: 'start', name: 'Début', field: 'start', minWidth: 100,
-        formatter: Formatters.dateIso, outputType: 'dateIso', type: 'date', exportWithFormatter: true,
-        filterable: true, filter: { model: Filters.compoundDate }
+        id: 'start',
+        name: 'Début',
+        field: 'start',
+        minWidth: 100,
+        formatter: Formatters.dateIso,
+        outputType: 'dateIso',
+        type: 'date',
+        exportWithFormatter: true,
+        filterable: true,
+        filter: { model: Filters.compoundDate },
       },
       {
-        id: 'finish', name: 'Fin', field: 'finish',
-        formatter: Formatters.dateIso, outputType: 'dateIso', type: 'date', exportWithFormatter: true,
-        minWidth: 100, filterable: true, filter: { model: Filters.compoundDate }
+        id: 'finish',
+        name: 'Fin',
+        field: 'finish',
+        formatter: Formatters.dateIso,
+        outputType: 'dateIso',
+        type: 'date',
+        exportWithFormatter: true,
+        minWidth: 100,
+        filterable: true,
+        filter: { model: Filters.compoundDate },
       },
       {
-        id: 'completedBool', name: 'Complétée', field: 'completedBool', minWidth: 100,
+        id: 'completedBool',
+        name: 'Complétée',
+        field: 'completedBool',
+        minWidth: 100,
         sortable: true,
         formatter: Formatters.checkmarkMaterial,
         exportCustomFormatter: exportBooleanFormatter,
         filterable: true,
         filter: {
-          collection: [{ value: true, label: 'Vrai' }, { value: false, label: 'Faux' }],
+          collection: [
+            { value: true, label: 'Vrai' },
+            { value: false, label: 'Faux' },
+          ],
           model: Filters.multipleSelect,
-        }
-      }
+        },
+      },
     ];
 
     this.gridOptions = {
       autoResize: {
         container: '#demo-container',
-        rightPadding: 10
+        rightPadding: 10,
       },
       // use a Single Custom Locales set
       locale: 'fr', // this helps certain elements to know which locale to use, for example the Date Filter/Editor
@@ -96,7 +128,7 @@ export class Example2Component implements OnInit, OnDestroy {
       checkboxSelector: {
         // you can toggle these 2 properties to show the "select all" checkbox in different location
         hideInFilterHeaderRow: false,
-        hideInColumnTitleRow: true
+        hideInColumnTitleRow: true,
       },
       enableCheckboxSelector: true,
       enableSelection: true,
@@ -121,8 +153,8 @@ export class Example2Component implements OnInit, OnDestroy {
         customExcelHeader: (workbook, sheet) => {
           const stylesheet = workbook.getStyleSheet();
           const aFormatDefn = {
-            'font': { 'size': 12, 'fontName': 'Calibri', 'bold': true, color: 'FF0000FF' }, // every color starts with FF, then regular HTML color
-            'alignment': { 'wrapText': true }
+            font: { size: 12, fontName: 'Calibri', bold: true, color: 'FF0000FF' }, // every color starts with FF, then regular HTML color
+            alignment: { wrapText: true },
           };
           const formatterId = stylesheet.createFormat(aFormatDefn);
           sheet.setRowInstructions(0, { height: 30 }); // change height of row 0
@@ -135,18 +167,18 @@ export class Example2Component implements OnInit, OnDestroy {
           // push data in B1 cell with metadata formatter
           cols.push({ value: 'Titre qui est suffisament long pour être coupé', metadata: { style: formatterId.id } });
           sheet.data.push(cols);
-        }
+        },
       },
       gridMenu: {
-        hideExportCsvCommand: false,           // false by default, so it's optional
-        hideExportTextDelimitedCommand: false  // true by default, so if you want it, you will need to disable the flag
+        hideExportCsvCommand: false, // false by default, so it's optional
+        hideExportTextDelimitedCommand: false, // true by default, so if you want it, you will need to disable the flag
       },
       enableExcelExport: true,
       enableTextExport: true,
       textExportOptions: {
         // set at the grid option level, meaning all column will evaluate the Formatter (when it has a Formatter defined)
         exportWithFormatter: true,
-        sanitizeDataExport: true
+        sanitizeDataExport: true,
       },
       externalResources: [this.excelExportService, this.textExportService],
     };
@@ -183,7 +215,16 @@ export class Example2Component implements OnInit, OnDestroy {
   dynamicallyAddTitleHeader() {
     // you can dynamically add your column to your column definitions
     // and then use the spread operator [...cols] OR slice to force Angular to review the changes
-    const newCol = { id: `title${this.duplicateTitleHeaderCount++}`, field: 'id', name: 'Titre', formatter: taskFormatter, sortable: true, minWidth: 100, filterable: true, params: { useFormatterOuputToFilter: true } };
+    const newCol = {
+      id: `title${this.duplicateTitleHeaderCount++}`,
+      field: 'id',
+      name: 'Titre',
+      formatter: taskFormatter,
+      sortable: true,
+      minWidth: 100,
+      filterable: true,
+      params: { useFormatterOuputToFilter: true },
+    };
     this.columnDefinitions.push(newCol);
     this.columnDefinitions = this.columnDefinitions.slice(); // or use spread operator [...cols]
 
