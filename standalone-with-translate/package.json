@@ -52,7 +52,7 @@
     "@slickgrid-universal/web-mcp": "^10.8.3",
     "angular-slickgrid": "^10.8.3",
     "bootstrap": "^5.3.8",
-    "dompurify": "^3.4.11",
+    "dompurify": "^3.4.12",
     "ngx-bootstrap": "^21.2.1",
     "rxjs": "^7.8.2"
   },
