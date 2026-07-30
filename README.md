@@ -2,8 +2,7 @@
 ## Multiple Demos of the [Angular-Slickgrid](https://github.com/ghiscoding/slickgrid-universal/tree/master/frameworks/angular-slickgrid) library
 
 ### Installation
-
-See below and choose between using a Single/Custom Locale or using the ngx-translate (i18n) lib for multiple locales support, after that you can install any other optional features (package) as shown in the table below. So there are 2 available demos, clone and install the one you want (or use the Stackblitz link below), the first demo is with Custom Locales (without `ngx-translate`, fixed Locales) and the other examples are all with `ngx-translate` (dynamically switch language on the fly).
+Git clone the full demo repo and `npm install` any of the 2 demos described below, then run and enjoy fully working demo.
 
 ### Stackblitz
 
@@ -13,30 +12,6 @@ Open in Stackblitz
 | ---------- | ----------- |
 | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/ghiscoding/angular-slickgrid-demos) | with I18N Translate |
 | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/ghiscoding/angular-slickgrid-demos/tree/master/standalone-single-locale) | Single Locale (_without i18n_) |
-
-#### VScode
-If you use Visual Studio Code, you can also run each of the demo through the multiple VSCode Tasks.
-
-### Optional NPM Packages
-
-Please note that some of the npm packages installed in these demos are **optional** and are installed **only** for demo purposes. If you don't need the feature then don't install it (remove it from your `package.json`) and you'll end up with a smaller production build.
-
-Again the following dependencies are totally **OPTIONAL**
-
-| Package Name | Version | Description |
-| ------------ | ------- | ----------- |
-| [@slickgrid-universal/angular-row-detail-plugin](https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks-plugins/angular-row-detail-plugin) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/angular-row-detail-plugin.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/angular-row-detail-plugin) | Row Detail plugin |
-| [@slickgrid-universal/composite-editor-component](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/composite-editor-component) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/composite-editor-component.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/composite-editor-component) | Composite Editor Modal Component |
-| [@slickgrid-universal/custom-tooltip-plugin](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/custom-tooltip-plugin) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/custom-tooltip-plugin.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/custom-tooltip-plugin) | Custom Tooltip Plugin |
-| [@slickgrid-universal/excel-export](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/excel-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/excel-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/excel-export) | Export to Excel Service (xls/xlsx) |
-| [@slickgrid-universal/pdf-export](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/pdf-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/pdf-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/pdf-export) | Export to PDF Service |
-| [@slickgrid-universal/text-export](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/text-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/text-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/text-export) | Export to Text File Service (csv/txt) |
-| [@slickgrid-universal/graphql](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/graphql) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/graphql.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/graphql) | GraphQL Query Service (support Filter/Sort/Pagination) |
-| [@slickgrid-universal/odata](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/odata) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/odata.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/odata) | OData Query Service (support Filter/Sort/Pagination) |
-| [@slickgrid-universal/sql](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/sql) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/sql.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/sql) | SQL Query Service (support Filter/Sort/Pagination) |
-| [@slickgrid-universal/rxjs-observable](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/rxjs-observable) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/rxjs-observable.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/rxjs-observable) | RxJS Observable Service Wrapper |
-
----
 
 ## Bootstrap 5 - Standalone Components with `ngx-translate`
 Common Bootstrap 5 demo using `ngx-translate` to provide the use of multiple languages (locales) which can be switched dynamically (on the fly).
@@ -69,3 +44,24 @@ npm start     # OR yarn start
 ```bash
 npm run build # OR yarn run build
 ```
+
+---
+
+### Optional NPM Packages
+
+Please note that some of the npm packages installed in these demos are **optional** and are installed **only** for demo purposes. If you don't need the feature then don't install it (remove it from your `package.json`) and you'll end up with a smaller production build.
+
+Again the following dependencies are totally **OPTIONAL**
+
+| Package Name | Version | Description |
+| ------------ | ------- | ----------- |
+| [@slickgrid-universal/angular-row-detail-plugin](https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks-plugins/angular-row-detail-plugin) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/angular-row-detail-plugin.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/angular-row-detail-plugin) | Row Detail plugin |
+| [@slickgrid-universal/composite-editor-component](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/composite-editor-component) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/composite-editor-component.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/composite-editor-component) | Composite Editor Modal Component |
+| [@slickgrid-universal/custom-tooltip-plugin](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/custom-tooltip-plugin) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/custom-tooltip-plugin.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/custom-tooltip-plugin) | Custom Tooltip Plugin |
+| [@slickgrid-universal/excel-export](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/excel-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/excel-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/excel-export) | Export to Excel Service (xls/xlsx) |
+| [@slickgrid-universal/pdf-export](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/pdf-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/pdf-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/pdf-export) | Export to PDF Service |
+| [@slickgrid-universal/text-export](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/text-export) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/text-export.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/text-export) | Export to Text File Service (csv/txt) |
+| [@slickgrid-universal/graphql](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/graphql) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/graphql.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/graphql) | GraphQL Query Service (support Filter/Sort/Pagination) |
+| [@slickgrid-universal/odata](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/odata) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/odata.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/odata) | OData Query Service (support Filter/Sort/Pagination) |
+| [@slickgrid-universal/sql](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/sql) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/sql.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/sql) | SQL Query Service (support Filter/Sort/Pagination) |
+| [@slickgrid-universal/rxjs-observable](https://github.com/ghiscoding/slickgrid-universal/tree/master/packages/rxjs-observable) | [![npm](https://img.shields.io/npm/v/@slickgrid-universal/rxjs-observable.svg?color=forest)](https://www.npmjs.com/package/@slickgrid-universal/rxjs-observable) | RxJS Observable Service Wrapper |
