@@ -3,7 +3,7 @@
 
 ### Installation
 
-Choose the feature you want, there's a demo with Custom Locales (without `ngx-translate`, fixed Locales) and the other examples are all with `ngx-translate` (dynamically switch language on the fly).
+See below and choose between using a Single/Custom Locale or using the ngx-translate (i18n) lib for multiple locales support, after that you can install any other optional features (package) as shown in the table below. So there are 2 available demos, clone and install the one you want (or use the Stackblitz link below), the first demo is with Custom Locales (without `ngx-translate`, fixed Locales) and the other examples are all with `ngx-translate` (dynamically switch language on the fly).
 
 ### Stackblitz
 
