@@ -74,7 +74,7 @@
   "overrides": {
     "@babel/core": "^7.29.7",
     "esbuild": "0.28.1",
-    "undici": "^8.7.0",
+    "undici": "^8.10.0",
     "uuid": "^14.0.1",
     "vite": "^8.1.3"
   }
