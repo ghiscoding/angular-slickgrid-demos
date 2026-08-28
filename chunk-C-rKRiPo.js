@@ -1,0 +1,28 @@
+import{Dt as UE,En as iD,Kn as mp,Tt as Tp,Wn as mi,hr as vp,ln as cy,o as Ac}from"./chunk-06EGdSfW.js";import{H as _W,N as WA,bt as ri}from"./chunk-CAMk6vEo.js";var b=100;var x=(()=>{class a{constructor(){this._darkMode=!1,this.columns=[],this.hideSubTitle=!1}angularGridReady(e){this.angularGrid=e}ngOnInit(){this.prepareGrid(),this.dataset=this.getData(b)}ngOnDestroy(){document.querySelector(`.panel-wm-content`).classList.remove(`dark-mode`),document.querySelector(`#demo-container`).dataset.bsTheme=`light`}prepareGrid(){this.columns=[{id:`selector`,name:``,field:`num`,width:30}];for(let e=0;e<b;e++)this.columns.push({id:e,name:e<26?String.fromCharCode(65+e%26):String.fromCharCode(65+Math.floor(e/26)-1)+String.fromCharCode(65+e%26),field:String(e),minWidth:60,width:60,editor:{model:WA.text}});this.gridOptions={autoResize:{container:`#demo-container`,rightPadding:10},enableCellNavigation:!0,autoEdit:!0,autoCommitEdit:!0,darkMode:this._darkMode,editable:!0,headerRowHeight:35,editorNavigateOnArrows:!0,enableSelection:!0,selectionOptions:{rowSelectColumnIds:[`selector`],selectActiveRow:!0,selectionType:`mixed`},enableExcelCopyBuffer:!0,excelCopyBufferOptions:{copyActiveEditorCell:!0,removeDoubleQuotesOnPaste:!0,replaceNewlinesWith:` `}}}copyDraggedCellRange(e){let l=ri.verticalTargetRange(e.prevSelectedRange,e.selectedRange),n=ri.horizontalTargetRange(e.prevSelectedRange,e.selectedRange),r=ri.cornerTargetRange(e.prevSelectedRange,e.selectedRange);l&&ri.copyCellsToTargetRange(e.prevSelectedRange,l,e.grid),n&&ri.copyCellsToTargetRange(e.prevSelectedRange,n,e.grid),r&&ri.copyCellsToTargetRange(e.prevSelectedRange,r,e.grid)}getData(e){let l=[];for(let n=0;n<e;n++){let r=l[n]={};r.id=n,r.num=n}return l}toggleDarkMode(){this._darkMode=!this._darkMode,this.toggleBodyBackground(),this.angularGrid.slickGrid?.setOptions({darkMode:this._darkMode})}toggleBodyBackground(){this._darkMode?(document.querySelector(`.panel-wm-content`).classList.add(`dark-mode`),document.querySelector(`#demo-container`).dataset.bsTheme=`dark`):(document.querySelector(`.panel-wm-content`).classList.remove(`dark-mode`),document.querySelector(`#demo-container`).dataset.bsTheme=`light`)}toggleSubTitle(){this.hideSubTitle=!this.hideSubTitle;let e=this.hideSubTitle?`add`:`remove`;document.querySelector(`.subtitle`)?.classList[e](`hidden`),this.angularGrid.resizerService.resizeGrid(0)}static{this.ɵfac=function(l){return new(l||a)}}static{this.ɵcmp=UE({type:a,selectors:[[`ng-component`]],decls:39,vars:3,consts:[[1,`demo49`],[1,`float-end`],[`target`,`_blank`,`href`,`https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/example49.component.ts`,2,`font-size`,`18px`],[1,`mdi`,`mdi-link-variant`],[`type`,`button`,`data-test`,`toggle-subtitle`,1,`ms-2`,`btn`,`btn-outline-secondary`,`btn-sm`,`btn-icon`,3,`click`],[`title`,`Toggle example sub-title details`,1,`mdi`,`mdi-information-outline`],[`data-test`,`toggle-dark-mode`,1,`btn`,`btn-outline-secondary`,`btn-sm`,`btn-icon`,3,`click`],[1,`mdi`,`mdi-theme-light-dark`],[1,`subtitle`],[`gridId`,`grid49`,3,`onAngularGridCreated`,`onDragReplaceCells`,`columns`,`options`,`dataset`]],template:function(l,n){l&1&&(mi(0,`div`,0),iD(1,`
+  `),mi(2,`h2`),iD(3,`
+    Example 49: Spreadsheet Drag-Fill
+    `),mi(4,`span`,1),iD(5,`
+      `),mi(6,`a`,2),iD(7,`
+        `),vp(8,`span`,3),iD(9,` code
+      `),Ac(),iD(10,`
+    `),Ac(),iD(11,`
+    `),mi(12,`button`,4),Tp(`click`,function(){return n.toggleSubTitle()}),iD(13,`
+      `),vp(14,`span`,5),iD(15,`
+    `),Ac(),iD(16,`
+    `),mi(17,`button`,6),Tp(`click`,function(){return n.toggleDarkMode()}),iD(18,`
+      `),vp(19,`span`,7),iD(20,`
+      `),mi(21,`span`),iD(22,`Toggle Dark Mode`),Ac(),iD(23,`
+    `),Ac(),iD(24,`
+  `),Ac(),iD(25,`
+
+  `),mi(26,`div`,8),iD(27,`
+    Spreadsheet with drag-fill, hybrid selection model. Type a few values in the grid and then select those cells and use the bottom right
+    drag handle spread the selection and auto-fill the values to other cells. Use `),mi(28,`code`),iD(29,`onDragReplaceCells`),Ac(),iD(30,` event to customize the
+    drag-fill behavior. Use `),mi(31,`code`),iD(32,`{ enableSelection: true, selectionOptions: { selectionType: 'mixed' }}`),Ac(),iD(33,`
+    grid option to enable the new Hybrid Selection Model.
+  `),Ac(),iD(34,`
+
+  `),mi(35,`angular-slickgrid`,9),Tp(`onAngularGridCreated`,function(m){return n.angularGridReady(m.detail)})(`onDragReplaceCells`,function(m){return n.copyDraggedCellRange(m.detail.args)}),iD(36,`
+  `),Ac(),iD(37,`
+`),Ac(),iD(38,`
+`)),l&2&&(cy(35),mp(`columns`,n.columns)(`options`,n.gridOptions)(`dataset`,n.dataset))},dependencies:[_W],styles:[`.demo49[_ngcontent-%COMP%]{--%NS%slick-border-color: #d4d4d4;--%NS%slick-cell-odd-background-color: #fbfbfb;--%NS%slick-cell-border-left: 1px solid var(--%NS%slick-border-color);--%NS%slick-header-menu-display: none;--%NS%slick-header-column-height: 20px;--%NS%slick-grid-border-color: #d4d4d4;--%NS%slick-cell-selected-color: #d4ebfd;--%NS%slick-row-selected-color: #d4ebfd;--%NS%slick-text-editor-border: 0px;--%NS%slick-text-editor-focus-box-shadow: none}.demo49[_ngcontent-%COMP%]   .slick-cell.copied[_ngcontent-%COMP%]{background:#00f;background:#00f3;transition:.5s background}.demo49[_ngcontent-%COMP%]   .slick-dark-mode[_ngcontent-%COMP%]{--%NS%slick-border-color: #595959;--%NS%slick-cell-border-left: 1px solid #595959;--%NS%slick-grid-border-color: #434343;--%NS%slick-cell-selected-color: #434343;--%NS%slick-row-selected-color: #434343;--%NS%slick-cell-selected-editable-color: #333333}`]})}}return a})();export{x as Example49Component};
