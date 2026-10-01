@@ -1,0 +1,76 @@
+import{n as s,t as r}from"./chunk-DarCEgGK.js";import{$ as Mp,Bn as lD,C as Ei,En as iD,K as Ky,Wt as Wp,_t as QI,b as Dp,c as BE,cn as ay,ct as Oc,jt as Tp,kr as zp,qt as Xy,yt as Qp}from"./chunk-CtIlL7jI.js";import{Ot as xz}from"./chunk-C1NeHYCu.js";import{b as zt,c as Dn,d as In,u as Ge,y as qt}from"./main-JBJUR4DQ.js";import{t as qa}from"./chunk-BOXC_zxI.js";import{n as Y,t as B}from"./chunk-CmcTcLb3.js";var M=(()=>{class c{constructor(){this.innerColDefs=[],this.innerDataset=[],this.innerGridId=``,this.innerGridClass=``,this.showGrid=!1}ngOnInit(){this.innerGridId=`innergrid-${this.model.id}`,this.innerGridClass=`row-detail-${this.model.id}`,this.defineGrid(),this.innerDataset=[...this.model.orderData],this.showGrid=!0}ngOnDestroy(){console.log(`destroying row detail`,this.model.id)}angularGridReady(r){this.angularGrid=r}defineGrid(){let r;if(this.model.isUsingInnerGridStatePresets){let o=sessionStorage.getItem(`gridstate_${this.innerGridClass}`);o&&(r=JSON.parse(o))}this.innerColDefs=[{id:`orderId`,field:`orderId`,name:`Order ID`,filterable:!0,sortable:!0},{id:`shipCity`,field:`shipCity`,name:`Ship City`,filterable:!0,sortable:!0},{id:`freight`,field:`freight`,name:`Freight`,filterable:!0,sortable:!0,type:`number`},{id:`shipName`,field:`shipName`,name:`Ship Name`,filterable:!0,sortable:!0}],this.innerGridOptions={autoResize:{container:`.${this.innerGridClass}`,rightPadding:30,minHeight:200},enableFiltering:!0,enableSorting:!0,rowHeight:33,enableCellNavigation:!0,datasetIdPropertyName:`orderId`,presets:r}}handleBeforeGridDestroy(){if(this.model.isUsingInnerGridStatePresets&&this.angularGrid?.gridStateService){let r=this.angularGrid.gridStateService.getCurrentGridState();sessionStorage.setItem(`gridstate_${this.innerGridClass}`,JSON.stringify(r))}}static{this.ɵfac=function(o){return new(o||c)}}static{this.ɵcmp=BE({type:c,selectors:[[`ng-component`]],decls:12,vars:8,consts:[[1,`container-fluid`],[1,`innergrid`,3,`onAngularGridCreated`,`onBeforeGridDestroy`,`gridId`,`columns`,`options`,`dataset`]],template:function(o,t){o&1&&(Ei(0,`div`),iD(1,`
+  `),Ei(2,`h4`),iD(3),Oc(),iD(4,`
+  `),Ei(5,`div`,0),iD(6,`
+    `),Ei(7,`angular-slickgrid`,1),Mp(`onAngularGridCreated`,function(s){return t.angularGridReady(s.detail)})(`onBeforeGridDestroy`,function(){return t.handleBeforeGridDestroy()}),iD(8,`
+    `),Oc(),iD(9,`
+  `),Oc(),iD(10,`
+`),Oc(),iD(11,`
+`)),o&2&&(QI(t.innerGridClass),ay(3),Wp(``,t.model.companyName,` - Order Details (id: `,t.model.id,`)`),ay(4),Dp(`gridId`,t.innerGridId)(`columns`,t.innerColDefs)(`options`,t.innerGridOptions)(`dataset`,t.innerDataset))},dependencies:[xz],styles:[`.innergrid{--%NS%slick-header-menu-display: inline-block}
+`],encapsulation:2})}}return c})();var N=250;var T=995;var L=(()=>{class c{constructor(){this._darkMode=!1,this.columns=[],this.dataset=[],this.detailViewRowCount=9,this.hideSubTitle=!1,this.isUsingInnerGridStatePresets=!1,this.isUsingAutoHeight=!1,this.isKeepingComponentAlive=!1,this.serverWaitDelay=N}get rowDetailInstance(){return this.angularGrid.extensions.rowDetailView?.instance||{}}angularGridReady(r){this.angularGrid=r}ngOnDestroy(){console.log(`destroying row detail component`),document.querySelector(`.panel-wm-content`).classList.remove(`dark-mode`),document.querySelector(`#demo-container`).dataset.bsTheme=`light`}ngOnInit(){this.defineGrid(),this.dataset=this.getData(T)}defineGrid(){this.columns=[{id:`companyId`,name:`ID`,field:`companyId`,cssClass:`text-end`,minWidth:50,maxWidth:50,filterable:!0,sortable:!0,type:`number`},{id:`companyName`,name:`Company Name`,field:`companyName`,width:90,filterable:!0,sortable:!0},{id:`streetAddress`,name:`Street Address`,field:`streetAddress`,minWidth:120,filterable:!0},{id:`city`,name:`City`,field:`city`,minWidth:120,filterable:!0},{id:`zipCode`,name:`Zip Code`,field:`zipCode`,minWidth:120,filterable:!0},{id:`country`,name:`Country`,field:`country`,minWidth:120,filterable:!0}],this.gridOptions={autoResize:{container:`#demo-container`,autoHeight:this.isUsingAutoHeight,bottomPadding:20},autoHeight:!1,enableFiltering:!0,enableRowDetailView:!0,darkMode:this._darkMode,rowHeight:33,externalResources:[B],rowDetailView:{process:r=>this.simulateServerAsyncCall(r),loadOnce:!1,useRowClick:!1,panelRows:this.detailViewRowCount,parentRef:this,preloadComponent:Y,viewComponent:M}}}getData(r){let o=[];for(let t=0;t<r;t++)o[t]={id:t,companyId:t,companyName:qa.company.name(),city:qa.location.city(),streetAddress:qa.location.streetAddress(),zipCode:qa.location.zipCode(`######`),country:qa.location.country(),orderData:[],isUsingInnerGridStatePresets:!1};return o}changeDetailViewRowCount(){if(this.angularGrid?.extensionService){let r=this.rowDetailInstance.getOptions();r?.panelRows&&(r.panelRows=this.detailViewRowCount,this.rowDetailInstance.setOptions(r))}}changeUsingInnerGridStatePresets(){return this.isUsingInnerGridStatePresets=!this.isUsingInnerGridStatePresets,this.closeAllRowDetail(),!0}changeKeepingComponentAlive(){this.isKeepingComponentAlive=!this.isKeepingComponentAlive,this.closeAllRowDetail(),this.gridOptions.rowDetailView&&(this.gridOptions.rowDetailView.keepComponentAlive=this.isKeepingComponentAlive);let r$1=this.rowDetailInstance.getOptions();return this.rowDetailInstance.setOptions(s(r({},r$1),{keepComponentAlive:this.isKeepingComponentAlive})),!0}changeUsingResizerAutoHeight(){return this.isUsingAutoHeight=!this.isUsingAutoHeight,this.angularGrid.slickGrid?.setOptions({autoResize:s(r({},this.gridOptions.autoResize),{autoHeight:this.isUsingAutoHeight})}),this.angularGrid.resizerService.resizeGrid(),!0}closeAllRowDetail(){this.rowDetailInstance?.collapseAll()}redrawAllRowDetail(){this.rowDetailInstance?.redrawAllViewComponents(!0)}simulateServerAsyncCall(r){let o=[];return r.id%3?o=[{orderId:`10261`,shipCity:`Rio de Janeiro`,freight:3.05,shipName:`Que Delícia`},{orderId:`10267`,shipCity:`München`,freight:208.58,shipName:`Frankenversand`},{orderId:`10281`,shipCity:`Madrid`,freight:2.94,shipName:`Romero y tomillo`}]:r.id%4?o=[{orderId:`10251`,shipCity:`Lyon`,freight:41.34,shipName:`Victuailles en stock`},{orderId:`10253`,shipCity:`Rio de Janeiro`,freight:58.17,shipName:`Hanari Carnes`},{orderId:`10256`,shipCity:`Resende`,freight:13.97,shipName:`Wellington Importadora`}]:r.id%5?o=[{orderId:`10265`,shipCity:`Strasbourg`,freight:55.28,shipName:`Blondel père et fils`},{orderId:`10277`,shipCity:`Leipzig`,freight:125.77,shipName:`Morgenstern Gesundkost`},{orderId:`10280`,shipCity:`Luleå`,freight:8.98,shipName:`Berglunds snabbköp`},{orderId:`10295`,shipCity:`Reims`,freight:1.15,shipName:`Vins et alcools Chevalier`}]:r.id%2?o=[{orderId:`10258`,shipCity:`Graz`,freight:140.51,shipName:`Ernst Handel`},{orderId:`10270`,shipCity:`Oulu`,freight:136.54,shipName:`Wartian Herkku`}]:o=[{orderId:`10255`,shipCity:`Genève`,freight:148.33,shipName:`Richter Supermarkt`}],new Promise(t=>{setTimeout(()=>{let a=r;a.orderData=o,a.isUsingInnerGridStatePresets=this.isUsingInnerGridStatePresets,t(a)},this.serverWaitDelay)})}toggleDarkMode(){this._darkMode=!this._darkMode,this.toggleBodyBackground(),this.angularGrid.slickGrid?.setOptions({darkMode:this._darkMode}),this.closeAllRowDetail()}toggleBodyBackground(){this._darkMode?(document.querySelector(`.panel-wm-content`).classList.add(`dark-mode`),document.querySelector(`#demo-container`).dataset.bsTheme=`dark`):(document.querySelector(`.panel-wm-content`).classList.remove(`dark-mode`),document.querySelector(`#demo-container`).dataset.bsTheme=`light`)}toggleSubTitle(){this.hideSubTitle=!this.hideSubTitle;let r=this.hideSubTitle?`add`:`remove`;document.querySelector(`.subtitle`)?.classList[r](`hidden`),this.angularGrid.resizerService.resizeGrid(0)}static{this.ɵfac=function(o){return new(o||c)}}static{this.ɵcmp=BE({type:c,selectors:[[`ng-component`]],decls:88,vars:8,consts:[[`id`,`demo-container`,1,`container-fluid`],[1,`float-end`],[`target`,`_blank`,`href`,`https://github.com/ghiscoding/slickgrid-universal/blob/master/frameworks/angular-slickgrid/src/demos/examples/grid45.component.ts`,2,`font-size`,`18px`],[1,`mdi`,`mdi-link-variant`],[`type`,`button`,`data-test`,`toggle-subtitle`,1,`ms-2`,`btn`,`btn-outline-secondary`,`btn-sm`,`btn-icon`,3,`click`],[`title`,`Toggle example sub-title details`,1,`mdi`,`mdi-information-outline`],[`data-test`,`toggle-dark-mode`,1,`btn`,`btn-outline-secondary`,`btn-sm`,`btn-icon`,3,`click`],[1,`mdi`,`mdi-theme-light-dark`],[1,`subtitle`],[`href`,`https://ghiscoding.gitbook.io/angular-slickgrid/grid-functionalities/row-detail`,`target`,`_blank`],[1,`row`],[1,`col-sm-10`],[`data-test`,`collapse-all-btn`,1,`btn`,`btn-outline-secondary`,`btn-sm`,`btn-icon`,`ms-1`,3,`click`],[`data-test`,`redraw-all-btn`,1,`btn`,`btn-outline-secondary`,`btn-sm`,`btn-icon`,`mx-1`,3,`click`],[1,`d-inline-flex`,`gap-4px`],[`for`,`detailViewRowCount`],[`id`,`detailViewRowCount`,`data-test`,`detail-view-row-count`,`type`,`number`,2,`height`,`22px`,`width`,`40px`,3,`ngModelChange`,`ngModel`],[`data-test`,`set-count-btn`,1,`btn`,`btn-outline-secondary`,`btn-xs`,`btn-icon`,2,`height`,`26px`,3,`click`],[`for`,`serverdelay`,1,`ms-2`],[`id`,`serverdelay`,`type`,`number`,`data-test`,`server-delay`,`title`,`input a fake timer delay to simulate slow server response`,2,`height`,`26px`,`width`,`55px`,3,`ngModelChange`,`ngModel`],[`for`,`useInnerGridStatePresets`,1,`checkbox-inline`,`control-label`,`ms-2`],[`type`,`checkbox`,`id`,`useInnerGridStatePresets`,`data-test`,`use-inner-grid-state-presets`,3,`click`,`checked`],[`title`,`should we use Grid State/Presets to keep the inner grid state whenever Row Details are out and back to viewport and re-rendered`],[`for`,`keepComponentAlive`,1,`checkbox-inline`,`control-label`,`ms-2`],[`type`,`checkbox`,`id`,`keepComponentAlive`,`data-test`,`keep-component-alive`,3,`click`,`checked`],[`title`,`preserve component state (incl. nested grid sort/filters) when row scrolls out of viewport instead of destroying it`],[`for`,`useResizeAutoHeight`,1,`checkbox-inline`,`control-label`,`ms-2`],[`type`,`checkbox`,`id`,`useResizeAutoHeight`,`data-test`,`use-auto-height`,3,`click`,`checked`],[`gridId`,`grid45`,3,`onAngularGridCreated`,`columns`,`options`,`dataset`]],template:function(o,t){o&1&&(Ei(0,`div`,0),iD(1,`
+  `),Ei(2,`h2`),iD(3,`
+    Example 45: Row Detail with inner Grid
+    `),Ei(4,`span`,1),iD(5,`
+      `),Ei(6,`a`,2),iD(7,`
+        `),Tp(8,`span`,3),iD(9,` code
+      `),Oc(),iD(10,`
+    `),Oc(),iD(11,`
+    `),Ei(12,`button`,4),Mp(`click`,function(){return t.toggleSubTitle()}),iD(13,`
+      `),Tp(14,`span`,5),iD(15,`
+    `),Oc(),iD(16,`
+    `),Ei(17,`button`,6),Mp(`click`,function(){return t.toggleDarkMode()}),iD(18,`
+      `),Tp(19,`span`,7),iD(20,`
+      `),Ei(21,`span`),iD(22,`Toggle Dark Mode`),Oc(),iD(23,`
+    `),Oc(),iD(24,`
+  `),Oc(),iD(25,`
+
+  `),Ei(26,`div`,8),iD(27,`
+    Add functionality to show extra information with a Row Detail View, (`),Ei(28,`a`,9),iD(29,`Wiki docs`),Oc(),iD(30,`), we'll use an inner grid inside our Row Detail Component. Note that because SlickGrid uses Virtual Scroll, the rows and row details
+    are often be re-rendered (when row is out of viewport range) and this means unmounting Row Detail Component which indirectly mean that
+    all component states (dynamic elements, forms, ...) will be disposed as well, however you can use Grid State/Presets to reapply previous
+    state whenever the row detail gets re-rendered when back to viewport.
+  `),Oc(),iD(31,`
+
+  `),Ei(32,`div`,10),iD(33,`
+    `),Ei(34,`div`,11),iD(35,`
+      `),Ei(36,`button`,12),Mp(`click`,function(){return t.closeAllRowDetail()}),iD(37,`
+        Close all Row Details
+      `),Oc(),iD(38,`
+      `),Ei(39,`button`,13),Mp(`click`,function(){return t.redrawAllRowDetail()}),iD(40,`
+        Force redraw all Row Details
+      `),Oc(),iD(41,`
+
+      `),Ei(42,`span`,14),iD(43,`
+        `),Ei(44,`label`,15),iD(45,`Detail View Rows Shown: `),Oc(),iD(46,`
+        `),Ei(47,`input`,16),Ky(),Qp(`ngModelChange`,function(s){return lD(t.detailViewRowCount,s)||(t.detailViewRowCount=s),s}),Oc(),iD(48,`
+        `),Ei(49,`button`,17),Mp(`click`,function(){return t.changeDetailViewRowCount()}),iD(50,`
+          Set
+        `),Oc(),iD(51,`
+        `),Ei(52,`label`,18),iD(53,`Server Delay: `),Oc(),iD(54,`
+        `),Ei(55,`input`,19),Ky(),Qp(`ngModelChange`,function(s){return lD(t.serverWaitDelay,s)||(t.serverWaitDelay=s),s}),Oc(),iD(56,`
+        `),Ei(57,`label`,20),iD(58,`
+          `),Ei(59,`input`,21),Mp(`click`,function(){return t.changeUsingInnerGridStatePresets()}),Oc(),iD(60,`
+          `),Ei(61,`span`,22),iD(62,`
+            Use Inner Grid State/Presets
+          `),Oc(),iD(63,`
+        `),Oc(),iD(64,`
+
+        `),Ei(65,`label`,23),iD(66,`
+          `),Ei(67,`input`,24),Mp(`click`,function(){return t.changeKeepingComponentAlive()}),Oc(),iD(68,`
+          `),Ei(69,`span`,25),iD(70,`
+            Keep Component Alive on Scroll
+          `),Oc(),iD(71,`
+        `),Oc(),iD(72,`
+
+        `),Ei(73,`label`,26),iD(74,`
+          `),Ei(75,`input`,27),Mp(`click`,function(){return t.changeUsingResizerAutoHeight()}),Oc(),iD(76,`
+          Use `),Ei(77,`code`),iD(78,`autoResize.autoHeight`),Oc(),iD(79,`
+        `),Oc(),iD(80,`
+      `),Oc(),iD(81,`
+    `),Oc(),iD(82,`
+  `),Oc(),iD(83,`
+
+  `),Ei(84,`angular-slickgrid`,28),Mp(`onAngularGridCreated`,function(s){return t.angularGridReady(s.detail)}),iD(85,`
+  `),Oc(),iD(86,`
+`),Oc(),iD(87,`
+`)),o&2&&(ay(47),zp(`ngModel`,t.detailViewRowCount),Xy(),ay(8),zp(`ngModel`,t.serverWaitDelay),Xy(),ay(4),Dp(`checked`,t.isUsingInnerGridStatePresets),ay(8),Dp(`checked`,t.isKeepingComponentAlive),ay(8),Dp(`checked`,t.isUsingAutoHeight),ay(9),Dp(`columns`,t.columns)(`options`,t.gridOptions)(`dataset`,t.dataset))},dependencies:[xz,In,Ge,zt,Dn,qt],styles:[`#grid45{--%NS%slick-cell-active-box-shadow: inset 0 0 0 1px #e35ddc}#grid45 .slick-row.even .slick-cell.cell-very-high{background-color:#f0ffe0}#grid45 .slick-row.odd .slick-cell.cell-var-span{background-color:#87ceeb}#grid45 .slick-row .slick-cell.rowspan{background-color:#95b7a2;z-index:10}#grid45 .slick-row[data-row="3"] .slick-cell.l3.rowspan{background-color:#95b7a2}#grid45 .slick-row[data-row="2"] .slick-cell.l3.r5{background-color:#ddfffc}#grid45 .slick-row[data-row="0"] .slick-cell.rowspan,#grid45 .slick-row[data-row="8"] .slick-cell.rowspan{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAQ0lEQVQYV2N8/fr1fwY84M6dOwyM+BSBFKioqOBWBFMAsgSrScgKsCpCV4ChCJsCFEW4FMAV4VMAVnT8+PH/IG/iAwDA1DlezHn8bwAAAABJRU5ErkJggg==)}#grid45 .slick-row[data-row="8"] .slick-cell.rowspan:nth-child(4){background:#f0ffe0}#grid45 .slick-row[data-row="12"] .slick-cell.rowspan{background:#bd8b8b}#grid45 .slick-row[data-row="15"] .slick-cell.rowspan{background:#edc12e}#grid45 .slick-row[data-row="85"] .slick-cell.rowspan{background:#8baebd}#grid45 .slick-cell.active{box-shadow:inset 0 0 0 1px #e35ddc}#grid45 .cellValue{float:right;font-size:14px}#grid45 .valueComment{color:#7c8983;font-size:12px;font-style:italic;width:fit-content}
+`],encapsulation:2})}}return c})();export{L as Example45Component};
