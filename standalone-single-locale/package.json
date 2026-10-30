@@ -37,8 +37,6 @@
     "@angular/router": "^22.2.3",
     "@formkit/tempo": "^1.1.0",
     "@slickgrid-universal/common": "^11.0.0-beta.0",
-    "@slickgrid-universal/composite-editor-component": "^11.0.0-beta.0",
-    "@slickgrid-universal/custom-tooltip-plugin": "^11.0.0-beta.0",
     "@slickgrid-universal/excel-export": "^11.0.0-beta.0",
     "@slickgrid-universal/text-export": "^11.0.0-beta.0",
     "angular-slickgrid": "^11.0.0-beta.0",
